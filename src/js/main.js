@@ -2,6 +2,11 @@
 "use strict";
 
 import Modal from "bootstrap/js/dist/modal";
+import dayjs from "dayjs";
+var utc = require("dayjs/plugin/utc");
+var relativeTime = require("dayjs/plugin/relativeTime");
+dayjs.extend(utc);
+dayjs.extend(relativeTime);
 
 import "bootstrap/js/dist/alert";
 import "bootstrap/js/dist/button";
@@ -69,3 +74,21 @@ async function getAccountDetails() {
   let history = await bananojs.getAccountHistory(account, 100);
   return [account, banano, raw, bananoPending, history];
 }
+
+function getTime() {
+  let birthdayEnd = dayjs.utc(dayjs.utc().year() + "-04-02T00:00:00-1200");
+  let birthdayStart = dayjs.utc(dayjs.utc().year() + "-04-01T00:00:00+1400");
+  let message = "placeholder text";
+  if (dayjs.utc() > birthdayEnd) {
+    birthdayStart = birthdayStart.utc().year(birthdayStart.utc().year() + 1);
+    message = "Banano's birthday starts " + dayjs.utc().to(birthdayStart);
+  } else if (dayjs.utc() < birthdayStart) {
+    message = "Banano's birthday starts " + dayjs.utc().to(birthdayStart);
+  } else {
+    message = "It's Banano's birthday! It ends " + dayjs.utc().to(birthdayEnd);
+  }
+  document.getElementById("bananoBirthday").innerHTML =
+    "<p>" + message + "</p>";
+}
+
+getTime();
