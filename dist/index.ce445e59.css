@@ -1005,7 +1005,7 @@ textarea.form-control-lg {
   height: calc(100vh - 112px);
 }
 
-#or {
+.text-primary {
   font-family: Patua One, cursive;
 }
 
