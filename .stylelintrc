@@ -1,7 +1,5 @@
 #https://github.com/twbs/bootstrap-npm-starter/blob/main/.stylelintrc
 
 {
-  "extends": [
-    "stylelint-config-twbs-bootstrap/scss"
-  ]
+  "extends": "stylelint-config-twbs-bootstrap"
 }
