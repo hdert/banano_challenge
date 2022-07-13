@@ -1,0 +1,6 @@
+@use "_modules/variables" as *;
+// @use "_modules/mixins" as *;
+
+#mainContainer {
+  height: calc(100vh - (80px + 32px));
+}

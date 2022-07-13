@@ -1,0 +1,19 @@
+mixin create_names
+  each i in unisex
+    option(value=i)= i
+doctype html 
+html(lang="en")
+  include ../includes/head.pug
+  +head
+  body.min-vh-100.d-flex.flex-column
+    #mainContainer.container.my-3
+      .justify-content-center.align-items-center.d-flex.h-100
+        input.form-control-lg(
+          type="text",
+          list="names",
+          placeholder="Enter your name here"
+        )
+        datalist#names
+          +create_names
+  include ../includes/footer.pug
+  +footer

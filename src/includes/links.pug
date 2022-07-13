@@ -1,0 +1,5 @@
+mixin nav-link(page, activePage, pageName)
+  if page === activePage
+    a.nav-link.active(href=page + ".pug", aria-current="page")= pageName
+  else
+    a.nav-link(href=page + ".pug")= pageName
