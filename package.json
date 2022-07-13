@@ -1,6 +1,6 @@
 {
-  "name": "template_web_project",
-  "version": "1.1.0",
+  "name": "banano_challenge",
+  "version": "1.0.0",
   "description": "",
   "scripts": {
     "css-lint": "stylelint src/scss/",
