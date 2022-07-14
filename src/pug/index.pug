@@ -7,13 +7,19 @@ html(lang="en")
   +head
   body.min-vh-100.d-flex.flex-column
     #mainContainer.container.my-3
-      .justify-content-center.align-items-center.d-flex.h-100
-        input.form-control-lg(
+      .justify-content-center.align-items-center.d-flex.h-100.flex-column
+        input.form-control(
           type="text",
           list="names",
           placeholder="Enter your name here"
         )
         datalist#names
           +create_names
+        input-group.justify-content-center
+          input#textAreaInput.form-control-lg.mt-3.form-control(
+            type="text",
+            placeholder="Enter your address here"
+          )
+          #textArea
   include ../includes/footer.pug
   +footer
