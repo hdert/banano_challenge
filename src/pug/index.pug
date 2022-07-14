@@ -6,20 +6,37 @@ html(lang="en")
   include ../includes/head.pug
   +head
   body.min-vh-100.d-flex.flex-column
+    #infoModal.modal.fade 
+      .modal-dialog
+        .modal-content
+          #infoModalHeader.modal-header
+            h5#infoModalHeaderH5.modal-title Account here
+            button.btn-close(data-bs-dismiss="modal", aria-label="Close")
+          #infoModalBody.modal-body
+            p body stuff
     #mainContainer.container.my-3
-      .justify-content-center.align-items-center.d-flex.h-100.flex-column
-        input.form-control(
-          type="text",
-          list="names",
-          placeholder="Enter your name here"
-        )
-        datalist#names
-          +create_names
-        input-group.justify-content-center
-          input#textAreaInput.form-control-lg.mt-3.form-control(
+      .justify-content-center.align-items-center.d-flex.h-100.flex-wrap
+        .justify-content-center.col-12.col-sm-8.d-flex.flex-wrap
+          input.form-control.mb-2(
             type="text",
-            placeholder="Enter your address here"
+            list="names",
+            placeholder="Enter your name here",
+            aria-label="Your name"
           )
-          #textArea
+          datalist#names
+            +create_names
+          h1#or.text-primary OR
+          .input-group
+            input#textAreaInput.form-control-lg.form-control(
+              type="text",
+              placeholder="Enter your address here",
+              aria-label="Banano Address",
+              aria-describedby="submitButton"
+            )
+            button#submitButton.btn.btn-outline-primary(
+              type="button",
+              onsubmit="return formHandler()"
+            ) Submit
+            //- #textArea
   include ../includes/footer.pug
   +footer
