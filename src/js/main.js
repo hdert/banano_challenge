@@ -17,11 +17,10 @@ import "bootstrap/js/dist/modal";
 const bananojs = require("@bananocoin/bananojs");
 bananojs.setBananodeApiUrl("https://kaliumapi.appditto.com/api");
 
-function formHandler() {
-  publicKey = getAccountDetails();
-
-  document.getElementById("infoModalHeaderH5").innerHTML = publicKey;
-  document.getElementById("infoModalBody").innerHTML = "<p>Hello World!</p>";
+async function formHandler() {
+  account, (balance = await getAccountDetails());
+  document.getElementById("infoModalHeaderH5").innerHTML = account;
+  document.getElementById("infoModalBody").innerHTML = "<p>" + balance + "</p>";
   new Modal(document.getElementById("infoModal")).show();
 }
 
@@ -29,9 +28,12 @@ document.getElementById("submitButton").onclick = function () {
   formHandler();
 };
 
-function getAccountDetails() {
-  account = bananojs.getBananoAccount(document.getElementById("textAreaInput"));
-  console.log(account);
-  console.log(bananojs.getAccountBalanceRaw(account));
-  return account;
+async function getAccountDetails() {
+  account = document.getElementById("textAreaInput").value;
+  balance =
+    Math.round(
+      (await bananojs.getAccountBalanceRaw(account)) /
+        1000000000000000000000000000
+    ) / 100;
+  return account, balance;
 }
