@@ -4,12 +4,12 @@ mixin create_names
 doctype html 
 html(lang="en")
   include ../includes/head.pug
-  +head
+  +head("Banano Challenge", "A website for the Banano Challenge", "../img/bananaCropped.png", "true", "index", "A Cartoon Banana")
   body.min-vh-100.d-flex.flex-column
     #infoModal.modal.fade 
       .modal-dialog
         .modal-content
-          #infoModalHeader.modal-header
+          #infoModalHeader.modal-header.text-wrap
             h5#infoModalHeaderH5.modal-title Account here
             button.btn-close(data-bs-dismiss="modal", aria-label="Close")
           #infoModalBody.modal-body
