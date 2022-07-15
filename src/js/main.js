@@ -1,4 +1,5 @@
 // Import just what we need
+"use strict";
 
 import Modal from "bootstrap/js/dist/modal";
 
@@ -18,7 +19,7 @@ const bananojs = require("@bananocoin/bananojs");
 bananojs.setBananodeApiUrl("https://kaliumapi.appditto.com/api");
 
 async function formHandler() {
-  account, (balance = await getAccountDetails());
+  let [account, balance] = await getAccountDetails();
   document.getElementById("infoModalHeaderH5").innerHTML = account;
   document.getElementById("infoModalBody").innerHTML = "<p>" + balance + "</p>";
   new Modal(document.getElementById("infoModal")).show();
@@ -29,11 +30,11 @@ document.getElementById("submitButton").onclick = function () {
 };
 
 async function getAccountDetails() {
-  account = document.getElementById("textAreaInput").value;
-  balance =
+  let account = document.getElementById("textAreaInput").value;
+  let balance =
     Math.round(
       (await bananojs.getAccountBalanceRaw(account)) /
         1000000000000000000000000000
     ) / 100;
-  return account, balance;
+  return [account, balance];
 }
