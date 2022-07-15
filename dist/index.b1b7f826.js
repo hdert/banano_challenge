@@ -43628,6 +43628,8 @@ var $4b7653f7b7f931c8$exports = {};
 
 
 
+// Import just what we need
+"use strict";
 var $52cba5f557d8a2d6$exports = {};
 'use strict';
 
@@ -44536,7 +44538,7 @@ var $52cba5f557d8a2d6$exports = {};
 
 $52cba5f557d8a2d6$exports.setBananodeApiUrl("https://kaliumapi.appditto.com/api");
 async function $20b690834064e5ca$var$formHandler() {
-    balance = await $20b690834064e5ca$var$getAccountDetails();
+    let [account, balance] = await $20b690834064e5ca$var$getAccountDetails();
     document.getElementById("infoModalHeaderH5").innerHTML = account;
     document.getElementById("infoModalBody").innerHTML = "<p>" + balance + "</p>";
     new (/*@__PURE__*/$parcel$interopDefault($6113053a03963448$exports))(document.getElementById("infoModal")).show();
@@ -44545,9 +44547,12 @@ document.getElementById("submitButton").onclick = function() {
     $20b690834064e5ca$var$formHandler();
 };
 async function $20b690834064e5ca$var$getAccountDetails() {
-    account = document.getElementById("textAreaInput").value;
-    balance = Math.round(await $52cba5f557d8a2d6$exports.getAccountBalanceRaw(account) / 1000000000000000000000000000) / 100;
-    return balance;
+    let account = document.getElementById("textAreaInput").value;
+    let balance = Math.round(await $52cba5f557d8a2d6$exports.getAccountBalanceRaw(account) / 1000000000000000000000000000) / 100;
+    return [
+        account,
+        balance
+    ];
 }
 
 
