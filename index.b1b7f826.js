@@ -44535,20 +44535,19 @@ var $52cba5f557d8a2d6$exports = {};
 
 
 $52cba5f557d8a2d6$exports.setBananodeApiUrl("https://kaliumapi.appditto.com/api");
-function $20b690834064e5ca$var$formHandler() {
-    publicKey = $20b690834064e5ca$var$getAccountDetails();
-    document.getElementById("infoModalHeaderH5").innerHTML = publicKey;
-    document.getElementById("infoModalBody").innerHTML = "<p>Hello World!</p>";
+async function $20b690834064e5ca$var$formHandler() {
+    balance = await $20b690834064e5ca$var$getAccountDetails();
+    document.getElementById("infoModalHeaderH5").innerHTML = account;
+    document.getElementById("infoModalBody").innerHTML = "<p>" + balance + "</p>";
     new (/*@__PURE__*/$parcel$interopDefault($6113053a03963448$exports))(document.getElementById("infoModal")).show();
 }
 document.getElementById("submitButton").onclick = function() {
     $20b690834064e5ca$var$formHandler();
 };
-function $20b690834064e5ca$var$getAccountDetails() {
-    account = $52cba5f557d8a2d6$exports.getBananoAccount(document.getElementById("textAreaInput"));
-    console.log(account);
-    console.log($52cba5f557d8a2d6$exports.getAccountBalanceRaw(account));
-    return account;
+async function $20b690834064e5ca$var$getAccountDetails() {
+    account = document.getElementById("textAreaInput").value;
+    balance = Math.round(await $52cba5f557d8a2d6$exports.getAccountBalanceRaw(account) / 1000000000000000000000000000) / 100;
+    return balance;
 }
 
 
