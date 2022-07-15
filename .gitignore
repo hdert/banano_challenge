@@ -6,3 +6,4 @@ package-lock.json
 dev/
 *.xcf
 dbfiles/
+*.zip

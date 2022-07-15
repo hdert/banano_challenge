@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="140.22128mm"
+   height="141.38243mm"
+   viewBox="0 0 140.22128 141.38243"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   sodipodi:docname="banana.svg"
+   inkscape:export-filename="banana.png"
+   inkscape:export-xdpi="100"
+   inkscape:export-ydpi="100"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.0710164"
+     inkscape:cx="218.0172"
+     inkscape:cy="225.0199"
+     inkscape:window-width="1920"
+     inkscape:window-height="1080"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <filter
+       inkscape:label="Jigsaw Piece"
+       inkscape:menu="Bevels"
+       inkscape:menu-tooltip="Low, sharp bevel"
+       style="color-interpolation-filters:sRGB"
+       id="filter230"
+       x="0"
+       y="0"
+       width="1"
+       height="1">
+      <feSpecularLighting
+         in="SourceAlpha"
+         surfaceScale="1"
+         specularConstant="0"
+         specularExponent="13.89999962"
+         id="feSpecularLighting222">
+        <feDistantLight
+           elevation="0"
+           azimuth="0"
+           id="feDistantLight220" />
+      </feSpecularLighting>
+      <feComposite
+         result="result0"
+         operator="atop"
+         in2="SourceGraphic"
+         id="feComposite224" />
+      <feMorphology
+         radius="3"
+         result="result1"
+         in="SourceAlpha"
+         operator="dilate"
+         id="feMorphology226" />
+      <feComposite
+         in="result0"
+         in2="result1"
+         id="feComposite228" />
+    </filter>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-24.422062,-66.528629)">
+    <g
+       id="g343"
+       transform="rotate(-45.610884,150.64115,115.27838)"
+       style="filter:url(#filter230)">
+      <ellipse
+         style="fill:#ffff00;stroke-width:0.264583"
+         id="path61"
+         cx="3.3716741"
+         cy="112.20901"
+         rx="46.211346"
+         ry="18.915276"
+         transform="rotate(-34.4506)" />
+      <ellipse
+         style="fill:#ffff00;stroke-width:0.264583"
+         id="path61-3"
+         cx="150.15988"
+         cy="17.858324"
+         rx="46.211346"
+         ry="18.915276"
+         transform="rotate(28.660567)" />
+      <path
+         id="path61-3-6"
+         style="fill:#ffff00;stroke-width:0.264583"
+         d="m 98.34351,78.527488 a 18.915276,46.211346 89.372749 0 0 -46.001843,19.420003 18.915276,46.211346 89.372749 0 0 9.441801,11.279409 18.915276,46.211346 89.372749 0 1 37.022029,-8.061 18.915276,46.211346 89.372749 0 1 36.983783,7.13445 18.915276,46.211346 89.372749 0 0 8.97001,-11.364681 18.915276,46.211346 89.372749 0 0 -46.41578,-18.408181 z" />
+    </g>
+  </g>
+</svg>
