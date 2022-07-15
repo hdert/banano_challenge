@@ -932,6 +932,11 @@ textarea.form-control-lg {
   margin-bottom: .5rem !important;
 }
 
+.text-break {
+  word-wrap: break-word !important;
+  word-break: break-word !important;
+}
+
 .text-primary {
   --bs-text-opacity: 1;
   color: rgba(var(--bs-primary-rgb), var(--bs-text-opacity)) !important;
