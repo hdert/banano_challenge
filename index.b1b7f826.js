@@ -44699,7 +44699,7 @@ async function $20b690834064e5ca$var$getAccountDetails() {
     let balance = accountBalance.balance;
     let pending = accountBalance.pending;
     let bananoParts = $52cba5f557d8a2d6$exports.getBananoPartsFromRaw(balance);
-    [banano, raw] = [
+    let [banano, raw] = [
         bananoParts.banano,
         bananoParts.raw
     ];
