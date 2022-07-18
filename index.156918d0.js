@@ -51,7 +51,7 @@ parcelRequire.register("jXMeB", function(module, exports) {
   */ (function(global, factory) {
     module.exports = factory();
 })(module.exports, function() {
-    'use strict';
+    "use strict";
     /**
    * --------------------------------------------------------------------------
    * Bootstrap (v5.1.3): util/index.js
@@ -59,7 +59,7 @@ parcelRequire.register("jXMeB", function(module, exports) {
    * --------------------------------------------------------------------------
    */ const getjQuery = ()=>{
         const { jQuery: jQuery  } = window;
-        if (jQuery && !document.body.hasAttribute('data-bs-no-jquery')) return jQuery;
+        if (jQuery && !document.body.hasAttribute("data-bs-no-jquery")) return jQuery;
         return null;
     };
     /**
@@ -77,57 +77,57 @@ parcelRequire.register("jXMeB", function(module, exports) {
     const eventRegistry = {}; // Events storage
     let uidEvent = 1;
     const customEvents = {
-        mouseenter: 'mouseover',
-        mouseleave: 'mouseout'
+        mouseenter: "mouseover",
+        mouseleave: "mouseout"
     };
     const customEventsRegex = /^(mouseenter|mouseleave)/i;
     const nativeEvents = new Set([
-        'click',
-        'dblclick',
-        'mouseup',
-        'mousedown',
-        'contextmenu',
-        'mousewheel',
-        'DOMMouseScroll',
-        'mouseover',
-        'mouseout',
-        'mousemove',
-        'selectstart',
-        'selectend',
-        'keydown',
-        'keypress',
-        'keyup',
-        'orientationchange',
-        'touchstart',
-        'touchmove',
-        'touchend',
-        'touchcancel',
-        'pointerdown',
-        'pointermove',
-        'pointerup',
-        'pointerleave',
-        'pointercancel',
-        'gesturestart',
-        'gesturechange',
-        'gestureend',
-        'focus',
-        'blur',
-        'change',
-        'reset',
-        'select',
-        'submit',
-        'focusin',
-        'focusout',
-        'load',
-        'unload',
-        'beforeunload',
-        'resize',
-        'move',
-        'DOMContentLoaded',
-        'readystatechange',
-        'error',
-        'abort',
-        'scroll'
+        "click",
+        "dblclick",
+        "mouseup",
+        "mousedown",
+        "contextmenu",
+        "mousewheel",
+        "DOMMouseScroll",
+        "mouseover",
+        "mouseout",
+        "mousemove",
+        "selectstart",
+        "selectend",
+        "keydown",
+        "keypress",
+        "keyup",
+        "orientationchange",
+        "touchstart",
+        "touchmove",
+        "touchend",
+        "touchcancel",
+        "pointerdown",
+        "pointermove",
+        "pointerup",
+        "pointerleave",
+        "pointercancel",
+        "gesturestart",
+        "gesturechange",
+        "gestureend",
+        "focus",
+        "blur",
+        "change",
+        "reset",
+        "select",
+        "submit",
+        "focusin",
+        "focusout",
+        "load",
+        "unload",
+        "beforeunload",
+        "resize",
+        "move",
+        "DOMContentLoaded",
+        "readystatechange",
+        "error",
+        "abort",
+        "scroll"
     ]);
     /**
    * ------------------------------------------------------------------------
@@ -175,7 +175,7 @@ parcelRequire.register("jXMeB", function(module, exports) {
         return null;
     }
     function normalizeParams(originalTypeEvent, handler, delegationFn) {
-        const delegation = typeof handler === 'string';
+        const delegation = typeof handler === "string";
         const originalHandler = delegation ? delegationFn : handler;
         let typeEvent = getTypeEvent(originalTypeEvent);
         const isNative = nativeEvents.has(typeEvent);
@@ -187,7 +187,7 @@ parcelRequire.register("jXMeB", function(module, exports) {
         ];
     }
     function addHandler(element, originalTypeEvent, handler, delegationFn, oneOff) {
-        if (typeof originalTypeEvent !== 'string' || !element) return;
+        if (typeof originalTypeEvent !== "string" || !element) return;
         if (!handler) {
             handler = delegationFn;
             delegationFn = null;
@@ -210,7 +210,7 @@ parcelRequire.register("jXMeB", function(module, exports) {
             previousFn.oneOff = previousFn.oneOff && oneOff;
             return;
         }
-        const uid = getUidEvent(originalHandler, originalTypeEvent.replace(namespaceRegex, ''));
+        const uid = getUidEvent(originalHandler, originalTypeEvent.replace(namespaceRegex, ""));
         const fn1 = delegation ? bootstrapDelegationHandler(element, handler, delegationFn) : bootstrapHandler(element, handler);
         fn1.delegationSelector = delegation ? handler : null;
         fn1.originalHandler = originalHandler;
@@ -236,7 +236,7 @@ parcelRequire.register("jXMeB", function(module, exports) {
     }
     function getTypeEvent(event) {
         // allow to get the native events from namespaced events ('click.bs.button' --> 'click')
-        event = event.replace(stripNameRegex, '');
+        event = event.replace(stripNameRegex, "");
         return customEvents[event] || event;
     }
     const EventHandler = {
@@ -247,12 +247,12 @@ parcelRequire.register("jXMeB", function(module, exports) {
             addHandler(element, event, handler, delegationFn, true);
         },
         off (element, originalTypeEvent, handler, delegationFn) {
-            if (typeof originalTypeEvent !== 'string' || !element) return;
+            if (typeof originalTypeEvent !== "string" || !element) return;
             const [delegation, originalHandler, typeEvent] = normalizeParams(originalTypeEvent, handler, delegationFn);
             const inNamespace = typeEvent !== originalTypeEvent;
             const events = getEvent(element);
-            const isNamespace = originalTypeEvent.startsWith('.');
-            if (typeof originalHandler !== 'undefined') {
+            const isNamespace = originalTypeEvent.startsWith(".");
+            if (typeof originalHandler !== "undefined") {
                 // Simplest case: handler is passed, remove that listener ONLY.
                 if (!events || !events[typeEvent]) return;
                 removeHandler(element, events, typeEvent, originalHandler, delegation ? handler : null);
@@ -263,7 +263,7 @@ parcelRequire.register("jXMeB", function(module, exports) {
             });
             const storeElementEvent = events[typeEvent] || {};
             Object.keys(storeElementEvent).forEach((keyHandlers)=>{
-                const handlerKey = keyHandlers.replace(stripUidRegex, '');
+                const handlerKey = keyHandlers.replace(stripUidRegex, "");
                 if (!inNamespace || originalTypeEvent.includes(handlerKey)) {
                     const event = storeElementEvent[keyHandlers];
                     removeHandler(element, events, typeEvent, event.originalHandler, event.delegationSelector);
@@ -271,7 +271,7 @@ parcelRequire.register("jXMeB", function(module, exports) {
             });
         },
         trigger (element, event, args) {
-            if (typeof event !== 'string' || !element) return null;
+            if (typeof event !== "string" || !element) return null;
             const $ = getjQuery();
             const typeEvent = getTypeEvent(event);
             const inNamespace = event !== typeEvent;
@@ -289,14 +289,14 @@ parcelRequire.register("jXMeB", function(module, exports) {
                 defaultPrevented = jQueryEvent.isDefaultPrevented();
             }
             if (isNative) {
-                evt = document.createEvent('HTMLEvents');
+                evt = document.createEvent("HTMLEvents");
                 evt.initEvent(typeEvent, bubbles, true);
             } else evt = new CustomEvent(event, {
                 bubbles: bubbles,
                 cancelable: true
             });
              // merge custom information in our event
-            if (typeof args !== 'undefined') Object.keys(args).forEach((key)=>{
+            if (typeof args !== "undefined") Object.keys(args).forEach((key)=>{
                 Object.defineProperty(evt, key, {
                     get () {
                         return args[key];
@@ -305,7 +305,7 @@ parcelRequire.register("jXMeB", function(module, exports) {
             });
             if (defaultPrevented) evt.preventDefault();
             if (nativeDispatch) element.dispatchEvent(evt);
-            if (evt.defaultPrevented && typeof jQueryEvent !== 'undefined') jQueryEvent.preventDefault();
+            if (evt.defaultPrevented && typeof jQueryEvent !== "undefined") jQueryEvent.preventDefault();
             return evt;
         }
     };
@@ -322,22 +322,21 @@ parcelRequire.register("fuvDV", function(module, exports) {
   */ (function(global, factory) {
     module.exports = factory();
 })(module.exports, function() {
-    'use strict';
+    "use strict";
     /**
    * --------------------------------------------------------------------------
    * Bootstrap (v5.1.3): dom/manipulator.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */ function normalizeData(val) {
-        if (val === 'true') return true;
-        if (val === 'false') return false;
+        if (val === "true") return true;
+        if (val === "false") return false;
         if (val === Number(val).toString()) return Number(val);
-        if (val === '' || val === 'null') return null;
+        if (val === "" || val === "null") return null;
         return val;
     }
     function normalizeDataKey(key) {
-        return key.replace(/[A-Z]/g, (chr)=>`-${chr.toLowerCase()}`
-        );
+        return key.replace(/[A-Z]/g, (chr)=>`-${chr.toLowerCase()}`);
     }
     const Manipulator = {
         setDataAttribute (element, key, value) {
@@ -349,9 +348,8 @@ parcelRequire.register("fuvDV", function(module, exports) {
         getDataAttributes (element) {
             if (!element) return {};
             const attributes = {};
-            Object.keys(element.dataset).filter((key)=>key.startsWith('bs')
-            ).forEach((key)=>{
-                let pureKey = key.replace(/^bs/, '');
+            Object.keys(element.dataset).filter((key)=>key.startsWith("bs")).forEach((key)=>{
+                let pureKey = key.replace(/^bs/, "");
                 pureKey = pureKey.charAt(0).toLowerCase() + pureKey.slice(1, pureKey.length);
                 attributes[pureKey] = normalizeData(element.dataset[key]);
             });
@@ -387,26 +385,26 @@ parcelRequire.register("3QEeg", function(module, exports) {
   */ (function(global, factory) {
     module.exports = factory();
 })(module.exports, function() {
-    'use strict';
+    "use strict";
     /**
    * --------------------------------------------------------------------------
    * Bootstrap (v5.1.3): util/index.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */ const isElement = (obj)=>{
-        if (!obj || typeof obj !== 'object') return false;
-        if (typeof obj.jquery !== 'undefined') obj = obj[0];
-        return typeof obj.nodeType !== 'undefined';
+        if (!obj || typeof obj !== "object") return false;
+        if (typeof obj.jquery !== "undefined") obj = obj[0];
+        return typeof obj.nodeType !== "undefined";
     };
     const isVisible = (element)=>{
         if (!isElement(element) || element.getClientRects().length === 0) return false;
-        return getComputedStyle(element).getPropertyValue('visibility') === 'visible';
+        return getComputedStyle(element).getPropertyValue("visibility") === "visible";
     };
     const isDisabled = (element)=>{
         if (!element || element.nodeType !== Node.ELEMENT_NODE) return true;
-        if (element.classList.contains('disabled')) return true;
-        if (typeof element.disabled !== 'undefined') return element.disabled;
-        return element.hasAttribute('disabled') && element.getAttribute('disabled') !== 'false';
+        if (element.classList.contains("disabled")) return true;
+        if (typeof element.disabled !== "undefined") return element.disabled;
+        return element.hasAttribute("disabled") && element.getAttribute("disabled") !== "false";
     };
     /**
    * --------------------------------------------------------------------------
@@ -422,8 +420,7 @@ parcelRequire.register("3QEeg", function(module, exports) {
             return Element.prototype.querySelector.call(element, selector);
         },
         children (element, selector) {
-            return [].concat(...element.children).filter((child)=>child.matches(selector)
-            );
+            return [].concat(...element.children).filter((child)=>child.matches(selector));
         },
         parents (element, selector) {
             const parents = [];
@@ -456,18 +453,16 @@ parcelRequire.register("3QEeg", function(module, exports) {
         },
         focusableChildren (element) {
             const focusables = [
-                'a',
-                'button',
-                'input',
-                'textarea',
-                'select',
-                'details',
-                '[tabindex]',
+                "a",
+                "button",
+                "input",
+                "textarea",
+                "select",
+                "details",
+                "[tabindex]",
                 '[contenteditable="true"]'
-            ].map((selector)=>`${selector}:not([tabindex^="-"])`
-            ).join(', ');
-            return this.find(focusables, element).filter((el)=>!isDisabled(el) && isVisible(el)
-            );
+            ].map((selector)=>`${selector}:not([tabindex^="-"])`).join(", ");
+            return this.find(focusables, element).filter((el)=>!isDisabled(el) && isVisible(el));
         }
     };
     return SelectorEngine;
@@ -485,11 +480,10 @@ parcelRequire.register("hGOAQ", function(module, exports) {
   */ (function(global, factory) {
     module.exports = factory((parcelRequire("6VgCa")), (parcelRequire("jXMeB")));
 })(module.exports, function(Data, EventHandler) {
-    'use strict';
-    const _interopDefaultLegacy = (e)=>e && typeof e === 'object' && 'default' in e ? e : {
+    "use strict";
+    const _interopDefaultLegacy = (e)=>e && typeof e === "object" && "default" in e ? e : {
             default: e
-        }
-    ;
+        };
     const Data__default = /*#__PURE__*/ _interopDefaultLegacy(Data);
     const EventHandler__default = /*#__PURE__*/ _interopDefaultLegacy(EventHandler);
     /**
@@ -498,7 +492,7 @@ parcelRequire.register("hGOAQ", function(module, exports) {
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */ const MILLISECONDS_MULTIPLIER = 1000;
-    const TRANSITION_END = 'transitionend'; // Shoutout AngusCroll (https://goo.gl/pxwQGp)
+    const TRANSITION_END = "transitionend"; // Shoutout AngusCroll (https://goo.gl/pxwQGp)
     const getTransitionDurationFromElement = (element)=>{
         if (!element) return 0;
          // Get transition-duration of the element
@@ -507,26 +501,26 @@ parcelRequire.register("hGOAQ", function(module, exports) {
         const floatTransitionDelay = Number.parseFloat(transitionDelay); // Return 0 if element or transition duration is not found
         if (!floatTransitionDuration && !floatTransitionDelay) return 0;
          // If multiple durations are defined, take the first
-        transitionDuration = transitionDuration.split(',')[0];
-        transitionDelay = transitionDelay.split(',')[0];
+        transitionDuration = transitionDuration.split(",")[0];
+        transitionDelay = transitionDelay.split(",")[0];
         return (Number.parseFloat(transitionDuration) + Number.parseFloat(transitionDelay)) * MILLISECONDS_MULTIPLIER;
     };
     const triggerTransitionEnd = (element)=>{
         element.dispatchEvent(new Event(TRANSITION_END));
     };
     const isElement = (obj)=>{
-        if (!obj || typeof obj !== 'object') return false;
-        if (typeof obj.jquery !== 'undefined') obj = obj[0];
-        return typeof obj.nodeType !== 'undefined';
+        if (!obj || typeof obj !== "object") return false;
+        if (typeof obj.jquery !== "undefined") obj = obj[0];
+        return typeof obj.nodeType !== "undefined";
     };
     const getElement = (obj)=>{
         if (isElement(obj)) // it's a jQuery object or a node element
         return obj.jquery ? obj[0] : obj;
-        if (typeof obj === 'string' && obj.length > 0) return document.querySelector(obj);
+        if (typeof obj === "string" && obj.length > 0) return document.querySelector(obj);
         return null;
     };
     const execute = (callback)=>{
-        if (typeof callback === 'function') callback();
+        if (typeof callback === "function") callback();
     };
     const executeAfterTransition = (callback, transitionElement, waitForTransition = true)=>{
         if (!waitForTransition) {
@@ -556,7 +550,7 @@ parcelRequire.register("hGOAQ", function(module, exports) {
    * ------------------------------------------------------------------------
    * Constants
    * ------------------------------------------------------------------------
-   */ const VERSION = '5.1.3';
+   */ const VERSION = "5.1.3";
     class BaseComponent {
         dispose() {
             Data__default.default.remove(this._element, this.constructor.DATA_KEY);
@@ -572,7 +566,7 @@ parcelRequire.register("hGOAQ", function(module, exports) {
             return Data__default.default.get(getElement(element), this.DATA_KEY);
         }
         static getOrCreateInstance(element, config = {}) {
-            return this.getInstance(element) || new this(element, typeof config === 'object' ? config : null);
+            return this.getInstance(element) || new this(element, typeof config === "object" ? config : null);
         }
         static get VERSION() {
             return VERSION;
@@ -605,7 +599,7 @@ parcelRequire.register("6VgCa", function(module, exports) {
   */ (function(global, factory) {
     module.exports = factory();
 })(module.exports, function() {
-    'use strict';
+    "use strict";
     /**
    * --------------------------------------------------------------------------
    * Bootstrap (v5.1.3): dom/data.js
@@ -646,34 +640,34 @@ parcelRequire.register("6VgCa", function(module, exports) {
 
 
 parcelRequire.register("5GmJx", function(module, exports) {
-'use strict';
+"use strict";
 
 
 // STARTED TOP nodejs/browser hack
 (function() {
     // FINISHED TOP nodejs/browser hack
     // istanbul ignore if
-    if (typeof BigInt === 'undefined') return;
+    if (typeof BigInt === "undefined") return;
     const blake = (parcelRequire("E2LX7"));
     const nacl = (parcelRequire("aEibP"));
-    const workMin = BigInt('0xfffffe0000000000');
-    const preamble = '0000000000000000000000000000000000000000000000000000000000000006';
+    const workMin = BigInt("0xfffffe0000000000");
+    const preamble = "0000000000000000000000000000000000000000000000000000000000000006";
     const prefixDivisors = {
         ban_: {
-            minorDivisor: BigInt('1000000000000000000000000000'),
-            majorDivisor: BigInt('100000000000000000000000000000'),
-            majorName: 'banano',
-            minorName: 'banoshi'
+            minorDivisor: BigInt("1000000000000000000000000000"),
+            majorDivisor: BigInt("100000000000000000000000000000"),
+            majorName: "banano",
+            minorName: "banoshi"
         },
         nano_: {
-            minorDivisor: BigInt('1000000000000000000000000'),
-            majorDivisor: BigInt('1000000000000000000000000000000'),
-            majorName: 'nano',
-            minorName: 'nanoshi'
+            minorDivisor: BigInt("1000000000000000000000000"),
+            majorDivisor: BigInt("1000000000000000000000000000000"),
+            majorName: "nano",
+            minorName: "nanoshi"
         }
     };
-    const ACCOUNT_ALPHABET_REGEX_STR = '^[13456789abcdefghijkmnopqrstuwxyz]+$';
-    const SEED_ALPHABET_REGEX_STR = '^[0123456789abcdefABCDEF]{64}$';
+    const ACCOUNT_ALPHABET_REGEX_STR = "^[13456789abcdefghijkmnopqrstuwxyz]+$";
+    const SEED_ALPHABET_REGEX_STR = "^[0123456789abcdefABCDEF]{64}$";
     const LOG_SEND = false;
     const LOG_SEND_PROCESS = false;
     const LOG_RECEIVE = false;
@@ -689,17 +683,17 @@ parcelRequire.register("5GmJx", function(module, exports) {
    * @param {string} amountPrefix the amount, as a string.
    * @return {string} the banano as a raw value.
    */ const getRawStrFromMajorAmountStr = (amountStr, amountPrefix)=>{
-        /* istanbul ignore if */ if (amountStr == undefined) throw Error('amountStr is a required parameter.');
-        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error('amountPrefix is a required parameter.');
-        /* istanbul ignore if */ if (typeof amountStr !== 'string') throw Error(`'${amountStr}' is not a string.`);
-        const decimalPlace = amountStr.indexOf('.');
-        let divisor = BigInt('1');
+        /* istanbul ignore if */ if (amountStr == undefined) throw Error("amountStr is a required parameter.");
+        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error("amountPrefix is a required parameter.");
+        /* istanbul ignore if */ if (typeof amountStr !== "string") throw Error(`'${amountStr}' is not a string.`);
+        const decimalPlace = amountStr.indexOf(".");
+        let divisor = BigInt("1");
         // console.log('STARTED getRawStrFromAmountStr', bananoStr, decimalPlace, divisor);
         if (decimalPlace !== -1) {
-            amountStr = amountStr.replace('.', '');
+            amountStr = amountStr.replace(".", "");
             const decimalsAfter = amountStr.length - decimalPlace;
             // console.log('INTERIM getRawStrFromAmountStr decimalsAfter', decimalsAfter);
-            divisor = BigInt('10') ** BigInt(decimalsAfter);
+            divisor = BigInt("10") ** BigInt(decimalsAfter);
         }
         // console.log('INTERIM getRawStrFromAmountStr', bananoStr, decimalPlace, divisor);
         const amountBi = BigInt(amountStr);
@@ -723,7 +717,7 @@ parcelRequire.register("5GmJx", function(module, exports) {
    * @param {string} amountPrefix the amount prefix, as a string.
    * @return {string} the banano as a raw value.
    */ const getRawStrFromMinorAmountStr = (amountStr, amountPrefix)=>{
-        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error('amountPrefix is a required parameter.');
+        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error("amountPrefix is a required parameter.");
         const amount = BigInt(amountStr);
         const prefixDivisor = prefixDivisors[amountPrefix];
         const minorDivisor = prefixDivisor.minorDivisor;
@@ -743,7 +737,7 @@ parcelRequire.register("5GmJx", function(module, exports) {
    * @param {string} amountPrefix the amount prefix, as a string.
    * @return {BananoParts} the banano parts.
    */ const getAmountPartsFromRaw = (amountRawStr, amountPrefix)=>{
-        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error('amountPrefix is a required parameter.');
+        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error("amountPrefix is a required parameter.");
         const amountRaw = BigInt(amountRawStr);
         //    console.log(`bananoRaw:    ${bananoRaw}`);
         const prefixDivisor = prefixDivisors[amountPrefix];
@@ -769,16 +763,15 @@ parcelRequire.register("5GmJx", function(module, exports) {
         return ret;
     };
     const bytesToHex = (bytes)=>{
-        return Array.prototype.map.call(bytes, (x)=>('00' + x.toString(16)).slice(-2)
-        ).join('').toUpperCase();
+        return Array.prototype.map.call(bytes, (x)=>("00" + x.toString(16)).slice(-2)).join("").toUpperCase();
     };
     const hash1 = (block)=>{
-        /* istanbul ignore if */ if (block === undefined) throw Error('block is a required parameter.');
-        /* istanbul ignore if */ if (block.account === undefined) throw Error('block.account is a required parameter.');
-        /* istanbul ignore if */ if (block.previous === undefined) throw Error('block.previous is a required parameter.');
-        /* istanbul ignore if */ if (block.representative === undefined) throw Error('block.representative is a required parameter.');
-        /* istanbul ignore if */ if (block.balance === undefined) throw Error('block.balance is a required parameter.');
-        /* istanbul ignore if */ if (block.link === undefined) throw Error('block.link is a required parameter.');
+        /* istanbul ignore if */ if (block === undefined) throw Error("block is a required parameter.");
+        /* istanbul ignore if */ if (block.account === undefined) throw Error("block.account is a required parameter.");
+        /* istanbul ignore if */ if (block.previous === undefined) throw Error("block.previous is a required parameter.");
+        /* istanbul ignore if */ if (block.representative === undefined) throw Error("block.representative is a required parameter.");
+        /* istanbul ignore if */ if (block.balance === undefined) throw Error("block.balance is a required parameter.");
+        /* istanbul ignore if */ if (block.link === undefined) throw Error("block.link is a required parameter.");
         const context = blake.blake2bInit(32, null);
         blake.blake2bUpdate(context, hexToBytes(preamble));
         blake.blake2bUpdate(context, hexToBytes(getAccountPublicKey(block.account)));
@@ -787,7 +780,7 @@ parcelRequire.register("5GmJx", function(module, exports) {
         // console.log( `block.balance:${block.balance}` );
         let balanceToPad = BigInt(block.balance).toString(16);
         // console.log( `pre  balanceToPad:${balanceToPad}` );
-        while(balanceToPad.length < 32)balanceToPad = '0' + balanceToPad;
+        while(balanceToPad.length < 32)balanceToPad = "0" + balanceToPad;
         // console.log( `post balanceToPad:${balanceToPad}` );
         const balance = hexToBytes(balanceToPad);
         // console.log( `balance:${balance}` );
@@ -816,7 +809,7 @@ parcelRequire.register("5GmJx", function(module, exports) {
         return croppedArray;
     };
     const uint4ToHex = (uint4)=>{
-        let hex = '';
+        let hex = "";
         for(let i = 0; i < uint4.length; i++)hex += uint4[i].toString(16).toUpperCase();
         return hex;
     };
@@ -841,9 +834,9 @@ parcelRequire.register("5GmJx", function(module, exports) {
         return uint8;
     };
     const stringToUint5 = (string)=>{
-        const letterList = '13456789abcdefghijkmnopqrstuwxyz'.split('');
+        const letterList = "13456789abcdefghijkmnopqrstuwxyz".split("");
         const length = string.length;
-        const stringArray = string.split('');
+        const stringArray = string.split("");
         const uint5 = new Uint8Array(length);
         for(let i = 0; i < length; i++)uint5[i] = letterList.indexOf(stringArray[i]);
         return uint5;
@@ -853,7 +846,7 @@ parcelRequire.register("5GmJx", function(module, exports) {
         const isValid = regex.test(accountSuffix);
         const retval = {};
         retval.valid = isValid;
-        if (isValid) retval.message = '';
+        if (isValid) retval.message = "";
         else retval.message = `does not match regex '${ACCOUNT_ALPHABET_REGEX_STR}'`;
         return retval;
     };
@@ -867,14 +860,14 @@ parcelRequire.register("5GmJx", function(module, exports) {
         if (account === undefined) throw Error(`Undefined BANANO Account`);
         if (account.startsWith === undefined) throw Error(`Not a string: '${account}'`);
         let accountCrop;
-        if (account.startsWith('camo')) {
-            if (!account.startsWith('camo_1') && !account.startsWith('camo_3') || account.length !== 65) throw Error(`Invalid CAMO BANANO Account prefix '${account}'`);
+        if (account.startsWith("camo")) {
+            if (!account.startsWith("camo_1") && !account.startsWith("camo_3") || account.length !== 65) throw Error(`Invalid CAMO BANANO Account prefix '${account}'`);
             accountCrop = account.substring(5, 65);
-        } else if (account.startsWith('nano')) {
-            if (!account.startsWith('nano_1') && !account.startsWith('nano_3') || account.length !== 65) throw Error(`Invalid NANO Account prefix '${account}'`);
+        } else if (account.startsWith("nano")) {
+            if (!account.startsWith("nano_1") && !account.startsWith("nano_3") || account.length !== 65) throw Error(`Invalid NANO Account prefix '${account}'`);
             accountCrop = account.substring(5, 65);
         } else {
-            if (!account.startsWith('ban_1') && !account.startsWith('ban_3') || account.length !== 64) throw Error(`Invalid BANANO Account prefix '${account}'`);
+            if (!account.startsWith("ban_1") && !account.startsWith("ban_3") || account.length !== 64) throw Error(`Invalid BANANO Account prefix '${account}'`);
             accountCrop = account.substring(4, 64);
         }
         const isAccountValid = isAccountSuffixValid(accountCrop);
@@ -899,9 +892,9 @@ parcelRequire.register("5GmJx", function(module, exports) {
         return uint8;
     };
     const decToHex = (decValue, bytes = null)=>{
-        const dec = decValue.toString().split('');
+        const dec = decValue.toString().split("");
         const sum = [];
-        let hex = '';
+        let hex = "";
         const hexArray = [];
         let i;
         let s;
@@ -914,11 +907,11 @@ parcelRequire.register("5GmJx", function(module, exports) {
             }
         }
         while(sum.length)hexArray.push(sum.pop().toString(16));
-        hex = hexArray.join('');
-        if (hex.length % 2 != 0) hex = '0' + hex;
+        hex = hexArray.join("");
+        if (hex.length % 2 != 0) hex = "0" + hex;
         if (bytes > hex.length / 2) {
             const diff = bytes - hex.length / 2;
-            for(let j = 0; j < diff; j++)hex = '00' + hex;
+            for(let j = 0; j < diff; j++)hex = "00" + hex;
         }
         return hex;
     };
@@ -965,13 +958,13 @@ parcelRequire.register("5GmJx", function(module, exports) {
    * @param {string} accountPrefix the prefix. ban_ or nano_.
    * @return {string} the account.
    */ const getAccount = (publicKey, accountPrefix)=>{
-        /* istanbul ignore if */ if (accountPrefix == undefined) throw Error('accountPrefix is a required parameter.');
+        /* istanbul ignore if */ if (accountPrefix == undefined) throw Error("accountPrefix is a required parameter.");
         const accountSuffix = getAccountSuffix(publicKey);
         return `${accountPrefix}${accountSuffix}`;
     };
     const uint5ToString = (uint5)=>{
-        const letterList = '13456789abcdefghijkmnopqrstuwxyz'.split('');
-        let string = '';
+        const letterList = "13456789abcdefghijkmnopqrstuwxyz".split("");
+        let string = "";
         for(let i = 0; i < uint5.length; i++)string += letterList[uint5[i]];
         return string;
     };
@@ -997,7 +990,7 @@ parcelRequire.register("5GmJx", function(module, exports) {
         return nacl.sign.detached.verify(hashBytes, signatureBytes, publicKeyBytes);
     };
     const sign = async (privateKey, block)=>{
-        if (typeof privateKey == 'object') {
+        if (typeof privateKey == "object") {
             const hwResponse = await privateKey.signBlock(block);
             return hwResponse.signature;
         } else return signHash(privateKey, hash1(block));
@@ -1018,14 +1011,14 @@ parcelRequire.register("5GmJx", function(module, exports) {
         blake.blake2bUpdate(context, hashBytes);
         const output = blake.blake2bFinal(context).reverse();
         const outputHex = bytesToHex(output);
-        const outputBigInt = BigInt('0x' + outputHex);
+        const outputBigInt = BigInt("0x" + outputHex);
         const retval = outputBigInt >= workMin;
         /* istanbul ignore if */ if (LOG_IS_WORK_VALID) console.log(`isWorkValid ${outputBigInt} >= ${workMin} ? ${retval}`);
         return retval;
     };
     const incrementBytes = (bytes)=>{
         let x = bytes.length - 1;
-        for(; x >= 0; x--)if (bytes[x] ^ 0xff) {
+        for(x; x >= 0; x--)if (bytes[x] ^ 0xff) {
             bytes[x]++;
             return;
         } else bytes[x] = 0;
@@ -1039,9 +1032,9 @@ parcelRequire.register("5GmJx", function(module, exports) {
         return new Uint8Array(8);
     };
     const getHashCPUWorker = (hash, workBytes)=>{
-        /* istanbul ignore if */ if (LOG_GET_HASH_CPU_WORKER) console.log('STARTED getHashCPUWorker', hash, bytesToHex(workBytes));
-        /* istanbul ignore if */ if (hash === undefined) throw Error('hash is a required parameter.');
-        /* istanbul ignore if */ if (workBytes === undefined) throw Error('workBytes is a required parameter.');
+        /* istanbul ignore if */ if (LOG_GET_HASH_CPU_WORKER) console.log("STARTED getHashCPUWorker", hash, bytesToHex(workBytes));
+        /* istanbul ignore if */ if (hash === undefined) throw Error("hash is a required parameter.");
+        /* istanbul ignore if */ if (workBytes === undefined) throw Error("workBytes is a required parameter.");
         const hashBytes = hexToBytes(hash);
         // const startTime = process.hrtime.bigint();
         let isWorkValidFlag = isWorkValid(hashBytes, workBytes);
@@ -1056,7 +1049,7 @@ parcelRequire.register("5GmJx", function(module, exports) {
         // isWorkValidNanos += process.hrtime.bigint() - startTime1;
         }
         const retval = bytesToHex(workBytes.reverse());
-        /* istanbul ignore if */ if (LOG_GET_HASH_CPU_WORKER) console.log('SUCCESS getHashCPUWorker', hash, bytesToHex(startWorkBytes), retval);
+        /* istanbul ignore if */ if (LOG_GET_HASH_CPU_WORKER) console.log("SUCCESS getHashCPUWorker", hash, bytesToHex(startWorkBytes), retval);
         return retval;
     };
     /**
@@ -1066,7 +1059,7 @@ parcelRequire.register("5GmJx", function(module, exports) {
    * @param {string} privateKey the private key.
    * @return {string} the public key.
    */ const getPublicKey = async (privateKey)=>{
-        if (typeof privateKey == 'object') return await privateKey.getPublicKey();
+        if (typeof privateKey == "object") return await privateKey.getPublicKey();
         const accountKeyPair = generateAccountKeyPair(hexToBytes(privateKey));
         return bytesToHex(accountKeyPair.publicKey);
     };
@@ -1082,7 +1075,7 @@ parcelRequire.register("5GmJx", function(module, exports) {
         const isValid = regex.test(seed);
         const retval = {};
         retval.valid = isValid;
-        if (isValid) retval.message = '';
+        if (isValid) retval.message = "";
         else retval.message = `does not match regex '${SEED_ALPHABET_REGEX_STR}'`;
         return retval;
     };
@@ -1094,8 +1087,8 @@ parcelRequire.register("5GmJx", function(module, exports) {
    * @param {string} seedIx the index to use with the seed.
    * @return {string} the private key.
    */ const getPrivateKey = (seed, seedIx)=>{
-        /* istanbul ignore if */ if (seed === undefined) throw Error('seed is a required parameter.');
-        /* istanbul ignore if */ if (seedIx === undefined) throw Error('seedIx is a required parameter.');
+        /* istanbul ignore if */ if (seed === undefined) throw Error("seed is a required parameter.");
+        /* istanbul ignore if */ if (seedIx === undefined) throw Error("seedIx is a required parameter.");
         const isValid = isSeedValid(seed);
         if (!isValid.valid) throw Error(`Invalid BANANO seed '${seed}', ${isValid.message}`);
         const seedBytes = hexToBytes(seed);
@@ -1103,14 +1096,14 @@ parcelRequire.register("5GmJx", function(module, exports) {
         return bytesToHex(accountBytes);
     };
     const send = async (bananodeApi, seed, seedIx, destAccount, amountRaw, successCallback, failureCallback, accountPrefix)=>{
-        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error('bananodeApi is a required parameter.');
-        /* istanbul ignore if */ if (seed === undefined) throw Error('privateKey is a required parameter.');
-        /* istanbul ignore if */ if (seedIx === undefined) throw Error('privateKey is a required parameter.');
-        /* istanbul ignore if */ if (destAccount === undefined) throw Error('destAccount is a required parameter.');
-        /* istanbul ignore if */ if (amountRaw === undefined) throw Error('amountRaw is a required parameter.');
-        /* istanbul ignore if */ if (successCallback === undefined) throw Error('successCallback is a required parameter.');
-        /* istanbul ignore if */ if (failureCallback === undefined) throw Error('failureCallback is a required parameter.');
-        /* istanbul ignore if */ if (accountPrefix === undefined) throw Error('accountPrefix is a required parameter.');
+        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error("bananodeApi is a required parameter.");
+        /* istanbul ignore if */ if (seed === undefined) throw Error("privateKey is a required parameter.");
+        /* istanbul ignore if */ if (seedIx === undefined) throw Error("privateKey is a required parameter.");
+        /* istanbul ignore if */ if (destAccount === undefined) throw Error("destAccount is a required parameter.");
+        /* istanbul ignore if */ if (amountRaw === undefined) throw Error("amountRaw is a required parameter.");
+        /* istanbul ignore if */ if (successCallback === undefined) throw Error("successCallback is a required parameter.");
+        /* istanbul ignore if */ if (failureCallback === undefined) throw Error("failureCallback is a required parameter.");
+        /* istanbul ignore if */ if (accountPrefix === undefined) throw Error("accountPrefix is a required parameter.");
         /* istanbul ignore if */ if (LOG_SEND) console.log(`STARTED send ${seed} ${seedIx}`);
         const privateKey = getPrivateKey(seed, seedIx);
         /* istanbul ignore if */ if (LOG_SEND) console.log(`INTERIM send ${seed} ${seedIx} ${privateKey}`);
@@ -1118,32 +1111,32 @@ parcelRequire.register("5GmJx", function(module, exports) {
             /* istanbul ignore if */ if (LOG_SEND) console.log(`SUCCESS send ${seed} ${seedIx} ${hash}`);
             successCallback(hash);
         }).catch((error)=>{
-            /* istanbul ignore if */ if (LOG_SEND) console.log('FAILURE send', error);
+            /* istanbul ignore if */ if (LOG_SEND) console.log("FAILURE send", error);
             failureCallback(error);
         });
     };
     const sendFromPrivateKey = async (bananodeApi, privateKey, destAccount, amountRaw, accountPrefix)=>{
-        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error('bananodeApi is a required parameter.');
-        /* istanbul ignore if */ if (privateKey === undefined) throw Error('privateKey is a required parameter.');
-        /* istanbul ignore if */ if (destAccount === undefined) throw Error('destAccount is a required parameter.');
-        /* istanbul ignore if */ if (amountRaw === undefined) throw Error('amountRaw is a required parameter.');
-        /* istanbul ignore if */ if (accountPrefix === undefined) throw Error('accountPrefix is a required parameter.');
+        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error("bananodeApi is a required parameter.");
+        /* istanbul ignore if */ if (privateKey === undefined) throw Error("privateKey is a required parameter.");
+        /* istanbul ignore if */ if (destAccount === undefined) throw Error("destAccount is a required parameter.");
+        /* istanbul ignore if */ if (amountRaw === undefined) throw Error("amountRaw is a required parameter.");
+        /* istanbul ignore if */ if (accountPrefix === undefined) throw Error("accountPrefix is a required parameter.");
         return await sendFromPrivateKeyWithRepresentative(bananodeApi, privateKey, destAccount, amountRaw, undefined, accountPrefix);
     };
     const sendFromPrivateKeyWithRepresentative = async (bananodeApi, privateKey, destAccount, amountRaw, newRepresentative, accountPrefix)=>{
-        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error('bananodeApi is a required parameter.');
-        /* istanbul ignore if */ if (privateKey === undefined) throw Error('privateKey is a required parameter.');
-        /* istanbul ignore if */ if (destAccount === undefined) throw Error('destAccount is a required parameter.');
-        /* istanbul ignore if */ if (amountRaw === undefined) throw Error('amountRaw is a required parameter.');
-        /* istanbul ignore if */ if (accountPrefix === undefined) throw Error('accountPrefix is a required parameter.');
+        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error("bananodeApi is a required parameter.");
+        /* istanbul ignore if */ if (privateKey === undefined) throw Error("privateKey is a required parameter.");
+        /* istanbul ignore if */ if (destAccount === undefined) throw Error("destAccount is a required parameter.");
+        /* istanbul ignore if */ if (amountRaw === undefined) throw Error("amountRaw is a required parameter.");
+        /* istanbul ignore if */ if (accountPrefix === undefined) throw Error("accountPrefix is a required parameter.");
         return await sendFromPrivateKeyWithRepresentativeAndPrevious(bananodeApi, privateKey, destAccount, amountRaw, newRepresentative, undefined, accountPrefix);
     };
     const sendFromPrivateKeyWithRepresentativeAndPrevious = async (bananodeApi, privateKey, destAccount, amountRaw, newRepresentative, newPrevious, accountPrefix)=>{
-        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error('bananodeApi is a required parameter.');
-        /* istanbul ignore if */ if (privateKey === undefined) throw Error('privateKey is a required parameter.');
-        /* istanbul ignore if */ if (destAccount === undefined) throw Error('destAccount is a required parameter.');
-        /* istanbul ignore if */ if (amountRaw === undefined) throw Error('amountRaw is a required parameter.');
-        /* istanbul ignore if */ if (accountPrefix === undefined) throw Error('accountPrefix is a required parameter.');
+        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error("bananodeApi is a required parameter.");
+        /* istanbul ignore if */ if (privateKey === undefined) throw Error("privateKey is a required parameter.");
+        /* istanbul ignore if */ if (destAccount === undefined) throw Error("destAccount is a required parameter.");
+        /* istanbul ignore if */ if (amountRaw === undefined) throw Error("amountRaw is a required parameter.");
+        /* istanbul ignore if */ if (accountPrefix === undefined) throw Error("accountPrefix is a required parameter.");
         // newRepresentative is optional.
         // newPrevious is optional.
         /* istanbul ignore if */ if (LOG_SEND) console.log(`STARTED sendFromPrivateKeyWithRepresentativeAndPrevious ${destAccount} ${amountRaw}`);
@@ -1169,7 +1162,7 @@ parcelRequire.register("5GmJx", function(module, exports) {
         const remainingDecimal = remaining.toString(10);
         let remainingPadded = remaining.toString(16);
         // Left pad with 0's
-        while(remainingPadded.length < 32)remainingPadded = '0' + remainingPadded;
+        while(remainingPadded.length < 32)remainingPadded = "0" + remainingPadded;
         let representative;
         if (newRepresentative !== undefined) representative = newRepresentative;
         else representative = await bananodeApi.getAccountRepresentative(accountAddress);
@@ -1178,27 +1171,27 @@ parcelRequire.register("5GmJx", function(module, exports) {
         if (newPrevious !== undefined) previous = newPrevious;
         else previous = accountInfo.frontier;
         /* istanbul ignore if */ if (LOG_SEND) console.log(`INTERIM send previous ${previous}`);
-        if (previous == '') {
+        if (previous == "") {
             /* istanbul ignore if */ if (LOG_SEND) console.log(`FAILURE previous == ''`);
             return undefined;
         } else {
             // const hashBytes = hexToBytes(previous);
             const block = {};
-            block.type = 'state';
+            block.type = "state";
             block.account = accountAddress;
             block.previous = previous;
             block.representative = representative;
             block.balance = remainingDecimal;
             const work = await bananodeApi.getGeneratedWork(previous);
             block.work = work;
-            /* istanbul ignore if */ if (LOG_SEND) console.log('STARTED getAccountPublicKey', destAccount);
+            /* istanbul ignore if */ if (LOG_SEND) console.log("STARTED getAccountPublicKey", destAccount);
             block.link = getAccountPublicKey(destAccount);
-            /* istanbul ignore if */ if (LOG_SEND) console.log('SUCCESS getAccountPublicKey', destAccount);
-            /* istanbul ignore if */ if (LOG_SEND) console.log('STARTED sign');
+            /* istanbul ignore if */ if (LOG_SEND) console.log("SUCCESS getAccountPublicKey", destAccount);
+            /* istanbul ignore if */ if (LOG_SEND) console.log("STARTED sign");
             block.signature = await sign(privateKey, block);
-            /* istanbul ignore if */ if (LOG_SEND) console.log('SUCCESS sign');
+            /* istanbul ignore if */ if (LOG_SEND) console.log("SUCCESS sign");
             /* istanbul ignore if */ if (LOG_SEND || LOG_SEND_PROCESS) console.log(`STARTED process`, block);
-            const processResponse = await bananodeApi.process(block, 'send');
+            const processResponse = await bananodeApi.process(block, "send");
             /* istanbul ignore if */ if (LOG_SEND || LOG_SEND_PROCESS) console.log(`SUCCESS process`, processResponse);
             return processResponse;
         }
@@ -1207,9 +1200,9 @@ parcelRequire.register("5GmJx", function(module, exports) {
         const work = await bananodeApi.getGeneratedWork(publicKey);
         const accountAddress = getAccount(publicKey, accountPrefix);
         const block = {};
-        block.type = 'state';
+        block.type = "state";
         block.account = accountAddress;
-        block.previous = '0000000000000000000000000000000000000000000000000000000000000000';
+        block.previous = "0000000000000000000000000000000000000000000000000000000000000000";
         block.representative = representative;
         block.balance = pendingValueRaw;
         block.link = pending;
@@ -1217,18 +1210,18 @@ parcelRequire.register("5GmJx", function(module, exports) {
         block.signature = await sign(privateKey, block);
         // console.log( 'open', block );
         try {
-            const processResponse = await bananodeApi.process(block, 'open');
-            /* istanbul ignore if */ if (LOG_OPEN) console.log('SUCCESS open', processResponse);
+            const processResponse = await bananodeApi.process(block, "open");
+            /* istanbul ignore if */ if (LOG_OPEN) console.log("SUCCESS open", processResponse);
             return processResponse;
         } catch (e) {
-            /* istanbul ignore if */ if (LOG_OPEN) console.log('FAILURE open', JSON.stringify(e));
+            /* istanbul ignore if */ if (LOG_OPEN) console.log("FAILURE open", JSON.stringify(e));
             throw Error(e.message);
         }
     };
     const change = async (bananodeApi, privateKey, representative, accountPrefix)=>{
-        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error('bananodeApi is a required parameter.');
-        /* istanbul ignore if */ if (privateKey === undefined) throw Error('privateKey is a required parameter.');
-        /* istanbul ignore if */ if (representative === undefined) throw Error('representative is a required parameter.');
+        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error("bananodeApi is a required parameter.");
+        /* istanbul ignore if */ if (privateKey === undefined) throw Error("privateKey is a required parameter.");
+        /* istanbul ignore if */ if (representative === undefined) throw Error("representative is a required parameter.");
         const publicKey = await getPublicKey(privateKey);
         const accountAddress = getAccount(publicKey, accountPrefix);
         const accountInfo = await bananodeApi.getAccountInfo(accountAddress);
@@ -1240,36 +1233,36 @@ parcelRequire.register("5GmJx", function(module, exports) {
         const remaining = BigInt(balanceRaw);
         const remainingDecimal = remaining.toString(10);
         const block = {};
-        block.type = 'state';
+        block.type = "state";
         block.account = accountAddress;
         block.previous = previous;
         block.representative = representative;
         block.balance = remainingDecimal;
-        block.link = '0000000000000000000000000000000000000000000000000000000000000000';
+        block.link = "0000000000000000000000000000000000000000000000000000000000000000";
         block.work = work;
         block.signature = await sign(privateKey, block);
-        /* istanbul ignore if */ if (LOG_CHANGE) console.log('STARTED change', block);
+        /* istanbul ignore if */ if (LOG_CHANGE) console.log("STARTED change", block);
         try {
-            const processResponse = await bananodeApi.process(block, 'change');
-            /* istanbul ignore if */ if (LOG_CHANGE) console.log('SUCCESS change', processResponse);
+            const processResponse = await bananodeApi.process(block, "change");
+            /* istanbul ignore if */ if (LOG_CHANGE) console.log("SUCCESS change", processResponse);
             return processResponse;
         } catch (e) {
-            /* istanbul ignore if */ if (LOG_RECEIVE) console.log('FAILURE receive', JSON.stringify(e));
+            /* istanbul ignore if */ if (LOG_RECEIVE) console.log("FAILURE receive", JSON.stringify(e));
             throw Error(e.message);
         }
     };
     const receive = async (bananodeApi, privateKey, publicKey, representative, previous, hash, valueRaw, accountPrefix)=>{
-        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error('bananodeApi is a required parameter.');
-        /* istanbul ignore if */ if (privateKey === undefined) throw Error('privateKey is a required parameter.');
-        /* istanbul ignore if */ if (publicKey === undefined) throw Error('publicKey is a required parameter.');
-        /* istanbul ignore if */ if (representative === undefined) throw Error('representative is a required parameter.');
-        /* istanbul ignore if */ if (previous === undefined) throw Error('previous is a required parameter.');
-        /* istanbul ignore if */ if (hash === undefined) throw Error('hash is a required parameter.');
-        /* istanbul ignore if */ if (valueRaw === undefined) throw Error('valueRaw is a required parameter.');
+        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error("bananodeApi is a required parameter.");
+        /* istanbul ignore if */ if (privateKey === undefined) throw Error("privateKey is a required parameter.");
+        /* istanbul ignore if */ if (publicKey === undefined) throw Error("publicKey is a required parameter.");
+        /* istanbul ignore if */ if (representative === undefined) throw Error("representative is a required parameter.");
+        /* istanbul ignore if */ if (previous === undefined) throw Error("previous is a required parameter.");
+        /* istanbul ignore if */ if (hash === undefined) throw Error("hash is a required parameter.");
+        /* istanbul ignore if */ if (valueRaw === undefined) throw Error("valueRaw is a required parameter.");
         const work = await bananodeApi.getGeneratedWork(previous);
         const accountAddress = getAccount(publicKey, accountPrefix);
         const block = {};
-        block.type = 'state';
+        block.type = "state";
         block.account = accountAddress;
         block.previous = previous;
         block.representative = representative;
@@ -1277,10 +1270,10 @@ parcelRequire.register("5GmJx", function(module, exports) {
         block.link = hash;
         block.work = work;
         block.signature = await sign(privateKey, block);
-        /* istanbul ignore if */ if (LOG_RECEIVE) console.log('STARTED receive', block);
+        /* istanbul ignore if */ if (LOG_RECEIVE) console.log("STARTED receive", block);
         try {
-            const processResponse = await bananodeApi.process(block, 'receive');
-            /* istanbul ignore if */ if (LOG_RECEIVE) console.log('SUCCESS receive', processResponse);
+            const processResponse = await bananodeApi.process(block, "receive");
+            /* istanbul ignore if */ if (LOG_RECEIVE) console.log("SUCCESS receive", processResponse);
             return processResponse;
         } catch (e) {
             /* istanbul ignore if */ // console.log('FAILURE receive', e.message);
@@ -1301,20 +1294,20 @@ parcelRequire.register("5GmJx", function(module, exports) {
   * @return {AccountValidationInfo} an object saying if the account is valid, and why.
   */ const getBananoAccountValidationInfo = (account)=>{
         if (account === null) return {
-            message: 'Invalid BANANO Account (null)',
+            message: "Invalid BANANO Account (null)",
             valid: false
         };
         if (account === undefined) return {
-            message: 'Invalid BANANO Account (undefined)',
+            message: "Invalid BANANO Account (undefined)",
             valid: false
         };
         if (account.length == 64) {
-            if (!account.startsWith('ban_1') && !account.startsWith('ban_3')) return {
-                message: 'Invalid BANANO Account (does not start with ban_1 or ban_3)',
+            if (!account.startsWith("ban_1") && !account.startsWith("ban_3")) return {
+                message: "Invalid BANANO Account (does not start with ban_1 or ban_3)",
                 valid: false
             };
         } else return {
-            message: 'Invalid BANANO Account (not 64 characters)',
+            message: "Invalid BANANO Account (not 64 characters)",
             valid: false
         };
         const accountCrop = account.substring(4, 64);
@@ -1332,7 +1325,7 @@ parcelRequire.register("5GmJx", function(module, exports) {
             };
         }
         return {
-            message: 'valid',
+            message: "valid",
             valid: true
         };
     };
@@ -1345,20 +1338,20 @@ parcelRequire.register("5GmJx", function(module, exports) {
    * @return {AccountValidationInfo} an object saying if the account is valid, and why.
    */ const getNanoAccountValidationInfo = (account)=>{
         if (account === null) return {
-            message: 'Invalid NANO Account (null)',
+            message: "Invalid NANO Account (null)",
             valid: false
         };
         if (account === undefined) return {
-            message: 'Invalid NANO Account (undefined)',
+            message: "Invalid NANO Account (undefined)",
             valid: false
         };
         if (account.length == 65) {
-            if (!account.startsWith('nano_1') && !account.startsWith('nano_3')) return {
-                message: 'Invalid NANO Account (does not start with nano_1 or nano_3)',
+            if (!account.startsWith("nano_1") && !account.startsWith("nano_3")) return {
+                message: "Invalid NANO Account (does not start with nano_1 or nano_3)",
                 valid: false
             };
         } else return {
-            message: 'Invalid NANO Account (not 65 characters)',
+            message: "Invalid NANO Account (not 65 characters)",
             valid: false
         };
         const accountCrop = account.substring(5, 65);
@@ -1376,7 +1369,7 @@ parcelRequire.register("5GmJx", function(module, exports) {
             };
         }
         return {
-            message: 'valid',
+            message: "valid",
             valid: true
         };
     };
@@ -1423,7 +1416,7 @@ parcelRequire.register("5GmJx", function(module, exports) {
         return exports;
     })();
     // istanbul ignore else
-    if (typeof module.exports !== 'undefined') module.exports = exports1;
+    if (typeof module.exports !== "undefined") module.exports = exports1;
     else window.bananocoin.bananojs.bananoUtil = exports1;
 })(); // FINISHED BOTTOM nodejs/browser hack
 
@@ -1760,8 +1753,8 @@ parcelRequire.register("E2LX7", function(module, exports) {
     // Requires an output length between 1 and 64 bytes
     // Takes an optional Uint8Array key
     function blake2bInit(outlen, key) {
-        if (outlen === 0 || outlen > 64) throw new Error('Illegal output length, expected 0 < length <= 64');
-        if (key && key.length > 64) throw new Error('Illegal key, expected Uint8Array with 0 < length <= 64');
+        if (outlen === 0 || outlen > 64) throw new Error("Illegal output length, expected 0 < length <= 64");
+        if (key && key.length > 64) throw new Error("Illegal key, expected Uint8Array with 0 < length <= 64");
         // state, 'param block'
         const ctx = {
             b: new Uint8Array(128),
@@ -1844,7 +1837,7 @@ parcelRequire.register("E2LX7", function(module, exports) {
         exports.blake2bFinal = blake2bFinal;
         return exports;
     })();
-    if (typeof module.exports !== 'undefined') module.exports = exports1;
+    if (typeof module.exports !== "undefined") module.exports = exports1;
     else window.blakejs = exports1;
 })(); // FINISHED BOTTOM nodejs/browser hack
 
@@ -1856,13 +1849,13 @@ var $5c148d4b870fa5e7$require$Buffer = $gGU47.Buffer;
 // STARTED TOP nodejs/browser hack
 (function() {
     // FINISHED TOP nodejs/browser hack
-    const ERROR_MSG_INPUT = 'Input must be an string, Buffer or Uint8Array';
+    const ERROR_MSG_INPUT = "Input must be an string, Buffer or Uint8Array";
     // For convenience, let people hash a string, not just a Uint8Array
     function normalizeInput(input) {
         let ret;
         if (input instanceof Uint8Array) ret = input;
         else if (input instanceof $5c148d4b870fa5e7$require$Buffer) ret = new Uint8Array(input);
-        else if (typeof input === 'string') ret = new Uint8Array($5c148d4b870fa5e7$require$Buffer.from(input, 'utf8'));
+        else if (typeof input === "string") ret = new Uint8Array($5c148d4b870fa5e7$require$Buffer.from(input, "utf8"));
         else throw new Error(ERROR_MSG_INPUT);
         return ret;
     }
@@ -1870,8 +1863,8 @@ var $5c148d4b870fa5e7$require$Buffer = $gGU47.Buffer;
     // For example, toHex([255, 0, 255]) returns "ff00ff"
     function toHex(bytes) {
         return Array.prototype.map.call(bytes, function(n) {
-            return (n < 16 ? '0' : '') + n.toString(16);
-        }).join('');
+            return (n < 16 ? "0" : "") + n.toString(16);
+        }).join("");
     }
     // Converts any value in [0...2^32-1] to an 8-character hex string
     function uint32ToHex(val) {
@@ -1880,18 +1873,18 @@ var $5c148d4b870fa5e7$require$Buffer = $gGU47.Buffer;
     // For debugging: prints out hash state in the same format as the RFC
     // sample computation exactly, so that you can diff
     function debugPrint(label, arr, size) {
-        let msg = '\n' + label + ' = ';
+        let msg = "\n" + label + " = ";
         for(let i = 0; i < arr.length; i += 2){
             if (size === 32) {
                 msg += uint32ToHex(arr[i]).toUpperCase();
-                msg += ' ';
+                msg += " ";
                 msg += uint32ToHex(arr[i + 1]).toUpperCase();
             } else if (size === 64) {
                 msg += uint32ToHex(arr[i + 1]).toUpperCase();
                 msg += uint32ToHex(arr[i]).toUpperCase();
-            } else throw new Error('Invalid size ' + size);
-            if (i % 6 === 4) msg += '\n' + new Array(label.length + 4).join(' ');
-            else if (i < arr.length - 2) msg += ' ';
+            } else throw new Error("Invalid size " + size);
+            if (i % 6 === 4) msg += "\n" + new Array(label.length + 4).join(" ");
+            else if (i < arr.length - 2) msg += " ";
         }
         console.log(msg);
     }
@@ -1902,15 +1895,15 @@ var $5c148d4b870fa5e7$require$Buffer = $gGU47.Buffer;
         const input = new Uint8Array(N);
         for(var i = 0; i < N; i++)input[i] = i % 256;
         const genMs = new Date().getTime();
-        console.log('Generated random input in ' + (genMs - startMs) + 'ms');
+        console.log("Generated random input in " + (genMs - startMs) + "ms");
         startMs = genMs;
         for(i = 0; i < M; i++){
             const hashHex = hashFn(input);
             const hashMs = new Date().getTime();
             const ms = hashMs - startMs;
             startMs = hashMs;
-            console.log('Hashed in ' + ms + 'ms: ' + hashHex.substring(0, 20) + '...');
-            console.log(Math.round(N / 1048576 / (ms / 1000) * 100) / 100 + ' MB PER SECOND');
+            console.log("Hashed in " + ms + "ms: " + hashHex.substring(0, 20) + "...");
+            console.log(Math.round(N / 1048576 / (ms / 1000) * 100) / 100 + " MB PER SECOND");
         }
     }
     // STARTED BOTTOM nodejs/browser hack
@@ -1922,7 +1915,7 @@ var $5c148d4b870fa5e7$require$Buffer = $gGU47.Buffer;
         exports.testSpeed = testSpeed;
         return exports;
     })();
-    if (typeof module.exports !== 'undefined') module.exports = exports1;
+    if (typeof module.exports !== "undefined") module.exports = exports1;
     else window.blakejsUtil = exports1;
 })(); // FINISHED BOTTOM nodejs/browser hack
 
@@ -1942,13 +1935,13 @@ var $c26c0eff31d13e46$export$599f31c3813fae4d;
  *
  * @author   Feross Aboukhadijeh <https://feross.org>
  * @license  MIT
- */ /* eslint-disable no-proto */ 'use strict';
+ */ /* eslint-disable no-proto */ "use strict";
 
 var $5wxBn = parcelRequire("5wxBn");
 
 var $3LXLJ = parcelRequire("3LXLJ");
-var $c26c0eff31d13e46$var$customInspectSymbol = typeof Symbol === 'function' && typeof Symbol['for'] === 'function' // eslint-disable-line dot-notation
- ? Symbol['for']('nodejs.util.inspect.custom') // eslint-disable-line dot-notation
+var $c26c0eff31d13e46$var$customInspectSymbol = typeof Symbol === "function" && typeof Symbol["for"] === "function" // eslint-disable-line dot-notation
+ ? Symbol["for"]("nodejs.util.inspect.custom") // eslint-disable-line dot-notation
  : null;
 $c26c0eff31d13e46$export$a143d493d941bafc = $c26c0eff31d13e46$var$Buffer;
 $c26c0eff31d13e46$export$e4cf37d7f6fb9e0a = $c26c0eff31d13e46$var$SlowBuffer;
@@ -1969,7 +1962,7 @@ $c26c0eff31d13e46$export$599f31c3813fae4d = $c26c0eff31d13e46$var$K_MAX_LENGTH;
  * (See: https://bugzilla.mozilla.org/show_bug.cgi?id=695438). IE 10 lacks support
  * for __proto__ and has a buggy typed array implementation.
  */ $c26c0eff31d13e46$var$Buffer.TYPED_ARRAY_SUPPORT = $c26c0eff31d13e46$var$typedArraySupport();
-if (!$c26c0eff31d13e46$var$Buffer.TYPED_ARRAY_SUPPORT && typeof console !== 'undefined' && typeof console.error === 'function') console.error("This browser lacks typed array (Uint8Array) support which is required by `buffer` v5.x. Use `buffer` v4.x if you require old browser support.");
+if (!$c26c0eff31d13e46$var$Buffer.TYPED_ARRAY_SUPPORT && typeof console !== "undefined" && typeof console.error === "function") console.error("This browser lacks typed array (Uint8Array) support which is required by `buffer` v5.x. Use `buffer` v4.x if you require old browser support.");
 function $c26c0eff31d13e46$var$typedArraySupport() {
     // Can typed array instances can be augmented?
     try {
@@ -1986,14 +1979,14 @@ function $c26c0eff31d13e46$var$typedArraySupport() {
         return false;
     }
 }
-Object.defineProperty($c26c0eff31d13e46$var$Buffer.prototype, 'parent', {
+Object.defineProperty($c26c0eff31d13e46$var$Buffer.prototype, "parent", {
     enumerable: true,
     get: function() {
         if (!$c26c0eff31d13e46$var$Buffer.isBuffer(this)) return undefined;
         return this.buffer;
     }
 });
-Object.defineProperty($c26c0eff31d13e46$var$Buffer.prototype, 'offset', {
+Object.defineProperty($c26c0eff31d13e46$var$Buffer.prototype, "offset", {
     enumerable: true,
     get: function() {
         if (!$c26c0eff31d13e46$var$Buffer.isBuffer(this)) return undefined;
@@ -2017,8 +2010,8 @@ function $c26c0eff31d13e46$var$createBuffer(length) {
  * The `Uint8Array` prototype remains unmodified.
  */ function $c26c0eff31d13e46$var$Buffer(arg, encodingOrOffset, length) {
     // Common case.
-    if (typeof arg === 'number') {
-        if (typeof encodingOrOffset === 'string') throw new TypeError('The "string" argument must be of type string. Received type number');
+    if (typeof arg === "number") {
+        if (typeof encodingOrOffset === "string") throw new TypeError('The "string" argument must be of type string. Received type number');
         return $c26c0eff31d13e46$var$allocUnsafe(arg);
     }
     return $c26c0eff31d13e46$var$from(arg, encodingOrOffset, length);
@@ -2026,17 +2019,17 @@ function $c26c0eff31d13e46$var$createBuffer(length) {
 $c26c0eff31d13e46$var$Buffer.poolSize = 8192 // not used by this implementation
 ;
 function $c26c0eff31d13e46$var$from(value, encodingOrOffset, length) {
-    if (typeof value === 'string') return $c26c0eff31d13e46$var$fromString(value, encodingOrOffset);
+    if (typeof value === "string") return $c26c0eff31d13e46$var$fromString(value, encodingOrOffset);
     if (ArrayBuffer.isView(value)) return $c26c0eff31d13e46$var$fromArrayView(value);
     if (value == null) throw new TypeError("The first argument must be one of type string, Buffer, ArrayBuffer, Array, or Array-like Object. Received type " + typeof value);
     if ($c26c0eff31d13e46$var$isInstance(value, ArrayBuffer) || value && $c26c0eff31d13e46$var$isInstance(value.buffer, ArrayBuffer)) return $c26c0eff31d13e46$var$fromArrayBuffer(value, encodingOrOffset, length);
-    if (typeof SharedArrayBuffer !== 'undefined' && ($c26c0eff31d13e46$var$isInstance(value, SharedArrayBuffer) || value && $c26c0eff31d13e46$var$isInstance(value.buffer, SharedArrayBuffer))) return $c26c0eff31d13e46$var$fromArrayBuffer(value, encodingOrOffset, length);
-    if (typeof value === 'number') throw new TypeError('The "value" argument must not be of type number. Received type number');
+    if (typeof SharedArrayBuffer !== "undefined" && ($c26c0eff31d13e46$var$isInstance(value, SharedArrayBuffer) || value && $c26c0eff31d13e46$var$isInstance(value.buffer, SharedArrayBuffer))) return $c26c0eff31d13e46$var$fromArrayBuffer(value, encodingOrOffset, length);
+    if (typeof value === "number") throw new TypeError('The "value" argument must not be of type number. Received type number');
     var valueOf = value.valueOf && value.valueOf();
     if (valueOf != null && valueOf !== value) return $c26c0eff31d13e46$var$Buffer.from(valueOf, encodingOrOffset, length);
     var b = $c26c0eff31d13e46$var$fromObject(value);
     if (b) return b;
-    if (typeof Symbol !== 'undefined' && Symbol.toPrimitive != null && typeof value[Symbol.toPrimitive] === 'function') return $c26c0eff31d13e46$var$Buffer.from(value[Symbol.toPrimitive]('string'), encodingOrOffset, length);
+    if (typeof Symbol !== "undefined" && Symbol.toPrimitive != null && typeof value[Symbol.toPrimitive] === "function") return $c26c0eff31d13e46$var$Buffer.from(value[Symbol.toPrimitive]("string"), encodingOrOffset, length);
     throw new TypeError("The first argument must be one of type string, Buffer, ArrayBuffer, Array, or Array-like Object. Received type " + typeof value);
 }
 /**
@@ -2054,7 +2047,7 @@ function $c26c0eff31d13e46$var$from(value, encodingOrOffset, length) {
 Object.setPrototypeOf($c26c0eff31d13e46$var$Buffer.prototype, Uint8Array.prototype);
 Object.setPrototypeOf($c26c0eff31d13e46$var$Buffer, Uint8Array);
 function $c26c0eff31d13e46$var$assertSize(size) {
-    if (typeof size !== 'number') throw new TypeError('"size" argument must be of type number');
+    if (typeof size !== "number") throw new TypeError('"size" argument must be of type number');
     else if (size < 0) throw new RangeError('The value "' + size + '" is invalid for option "size"');
 }
 function $c26c0eff31d13e46$var$alloc(size, fill, encoding) {
@@ -2063,7 +2056,7 @@ function $c26c0eff31d13e46$var$alloc(size, fill, encoding) {
     if (fill !== undefined) // Only pay attention to encoding if it's a string. This
     // prevents accidentally sending in a number that would
     // be interpreted as a start offset.
-    return typeof encoding === 'string' ? $c26c0eff31d13e46$var$createBuffer(size).fill(fill, encoding) : $c26c0eff31d13e46$var$createBuffer(size).fill(fill);
+    return typeof encoding === "string" ? $c26c0eff31d13e46$var$createBuffer(size).fill(fill, encoding) : $c26c0eff31d13e46$var$createBuffer(size).fill(fill);
     return $c26c0eff31d13e46$var$createBuffer(size);
 }
 /**
@@ -2087,8 +2080,8 @@ function $c26c0eff31d13e46$var$allocUnsafe(size) {
     return $c26c0eff31d13e46$var$allocUnsafe(size);
 };
 function $c26c0eff31d13e46$var$fromString(string, encoding) {
-    if (typeof encoding !== 'string' || encoding === '') encoding = 'utf8';
-    if (!$c26c0eff31d13e46$var$Buffer.isEncoding(encoding)) throw new TypeError('Unknown encoding: ' + encoding);
+    if (typeof encoding !== "string" || encoding === "") encoding = "utf8";
+    if (!$c26c0eff31d13e46$var$Buffer.isEncoding(encoding)) throw new TypeError("Unknown encoding: " + encoding);
     var length = $c26c0eff31d13e46$var$byteLength(string, encoding) | 0;
     var buf = $c26c0eff31d13e46$var$createBuffer(length);
     var actual = buf.write(string, encoding);
@@ -2131,15 +2124,15 @@ function $c26c0eff31d13e46$var$fromObject(obj) {
         return buf;
     }
     if (obj.length !== undefined) {
-        if (typeof obj.length !== 'number' || $c26c0eff31d13e46$var$numberIsNaN(obj.length)) return $c26c0eff31d13e46$var$createBuffer(0);
+        if (typeof obj.length !== "number" || $c26c0eff31d13e46$var$numberIsNaN(obj.length)) return $c26c0eff31d13e46$var$createBuffer(0);
         return $c26c0eff31d13e46$var$fromArrayLike(obj);
     }
-    if (obj.type === 'Buffer' && Array.isArray(obj.data)) return $c26c0eff31d13e46$var$fromArrayLike(obj.data);
+    if (obj.type === "Buffer" && Array.isArray(obj.data)) return $c26c0eff31d13e46$var$fromArrayLike(obj.data);
 }
 function $c26c0eff31d13e46$var$checked(length) {
     // Note: cannot use `length < K_MAX_LENGTH` here because that fails when
     // length is NaN (which is otherwise coerced to zero.)
-    if (length >= $c26c0eff31d13e46$var$K_MAX_LENGTH) throw new RangeError("Attempt to allocate Buffer larger than maximum size: 0x" + $c26c0eff31d13e46$var$K_MAX_LENGTH.toString(16) + ' bytes');
+    if (length >= $c26c0eff31d13e46$var$K_MAX_LENGTH) throw new RangeError("Attempt to allocate Buffer larger than maximum size: 0x" + $c26c0eff31d13e46$var$K_MAX_LENGTH.toString(16) + " bytes");
     return length | 0;
 }
 function $c26c0eff31d13e46$var$SlowBuffer(length) {
@@ -2168,17 +2161,17 @@ $c26c0eff31d13e46$var$Buffer.compare = function compare(a, b) {
 };
 $c26c0eff31d13e46$var$Buffer.isEncoding = function isEncoding(encoding) {
     switch(String(encoding).toLowerCase()){
-        case 'hex':
-        case 'utf8':
-        case 'utf-8':
-        case 'ascii':
-        case 'latin1':
-        case 'binary':
-        case 'base64':
-        case 'ucs2':
-        case 'ucs-2':
-        case 'utf16le':
-        case 'utf-16le':
+        case "hex":
+        case "utf8":
+        case "utf-8":
+        case "ascii":
+        case "latin1":
+        case "binary":
+        case "base64":
+        case "ucs2":
+        case "ucs-2":
+        case "utf16le":
+        case "utf-16le":
             return true;
         default:
             return false;
@@ -2208,33 +2201,33 @@ $c26c0eff31d13e46$var$Buffer.concat = function concat(list, length) {
 function $c26c0eff31d13e46$var$byteLength(string, encoding) {
     if ($c26c0eff31d13e46$var$Buffer.isBuffer(string)) return string.length;
     if (ArrayBuffer.isView(string) || $c26c0eff31d13e46$var$isInstance(string, ArrayBuffer)) return string.byteLength;
-    if (typeof string !== 'string') throw new TypeError('The "string" argument must be one of type string, Buffer, or ArrayBuffer. Received type ' + typeof string);
+    if (typeof string !== "string") throw new TypeError('The "string" argument must be one of type string, Buffer, or ArrayBuffer. Received type ' + typeof string);
     var len = string.length;
     var mustMatch = arguments.length > 2 && arguments[2] === true;
     if (!mustMatch && len === 0) return 0;
     // Use a for loop to avoid recursion
     var loweredCase = false;
     for(;;)switch(encoding){
-        case 'ascii':
-        case 'latin1':
-        case 'binary':
+        case "ascii":
+        case "latin1":
+        case "binary":
             return len;
-        case 'utf8':
-        case 'utf-8':
+        case "utf8":
+        case "utf-8":
             return $c26c0eff31d13e46$var$utf8ToBytes(string).length;
-        case 'ucs2':
-        case 'ucs-2':
-        case 'utf16le':
-        case 'utf-16le':
+        case "ucs2":
+        case "ucs-2":
+        case "utf16le":
+        case "utf-16le":
             return len * 2;
-        case 'hex':
+        case "hex":
             return len >>> 1;
-        case 'base64':
+        case "base64":
             return $c26c0eff31d13e46$var$base64ToBytes(string).length;
         default:
             if (loweredCase) return mustMatch ? -1 : $c26c0eff31d13e46$var$utf8ToBytes(string).length // assume utf8
             ;
-            encoding = ('' + encoding).toLowerCase();
+            encoding = ("" + encoding).toLowerCase();
             loweredCase = true;
     }
 }
@@ -2250,35 +2243,35 @@ function $c26c0eff31d13e46$var$slowToString(encoding, start, end) {
     if (start === undefined || start < 0) start = 0;
     // Return early if start > this.length. Done here to prevent potential uint32
     // coercion fail below.
-    if (start > this.length) return '';
+    if (start > this.length) return "";
     if (end === undefined || end > this.length) end = this.length;
-    if (end <= 0) return '';
+    if (end <= 0) return "";
     // Force coercion to uint32. This will also coerce falsey/NaN values to 0.
     end >>>= 0;
     start >>>= 0;
-    if (end <= start) return '';
-    if (!encoding) encoding = 'utf8';
+    if (end <= start) return "";
+    if (!encoding) encoding = "utf8";
     while(true)switch(encoding){
-        case 'hex':
+        case "hex":
             return $c26c0eff31d13e46$var$hexSlice(this, start, end);
-        case 'utf8':
-        case 'utf-8':
+        case "utf8":
+        case "utf-8":
             return $c26c0eff31d13e46$var$utf8Slice(this, start, end);
-        case 'ascii':
+        case "ascii":
             return $c26c0eff31d13e46$var$asciiSlice(this, start, end);
-        case 'latin1':
-        case 'binary':
+        case "latin1":
+        case "binary":
             return $c26c0eff31d13e46$var$latin1Slice(this, start, end);
-        case 'base64':
+        case "base64":
             return $c26c0eff31d13e46$var$base64Slice(this, start, end);
-        case 'ucs2':
-        case 'ucs-2':
-        case 'utf16le':
-        case 'utf-16le':
+        case "ucs2":
+        case "ucs-2":
+        case "utf16le":
+        case "utf-16le":
             return $c26c0eff31d13e46$var$utf16leSlice(this, start, end);
         default:
-            if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding);
-            encoding = (encoding + '').toLowerCase();
+            if (loweredCase) throw new TypeError("Unknown encoding: " + encoding);
+            encoding = (encoding + "").toLowerCase();
             loweredCase = true;
     }
 }
@@ -2296,13 +2289,13 @@ function $c26c0eff31d13e46$var$swap(b, n, m) {
 }
 $c26c0eff31d13e46$var$Buffer.prototype.swap16 = function swap16() {
     var len = this.length;
-    if (len % 2 !== 0) throw new RangeError('Buffer size must be a multiple of 16-bits');
+    if (len % 2 !== 0) throw new RangeError("Buffer size must be a multiple of 16-bits");
     for(var i = 0; i < len; i += 2)$c26c0eff31d13e46$var$swap(this, i, i + 1);
     return this;
 };
 $c26c0eff31d13e46$var$Buffer.prototype.swap32 = function swap32() {
     var len = this.length;
-    if (len % 4 !== 0) throw new RangeError('Buffer size must be a multiple of 32-bits');
+    if (len % 4 !== 0) throw new RangeError("Buffer size must be a multiple of 32-bits");
     for(var i = 0; i < len; i += 4){
         $c26c0eff31d13e46$var$swap(this, i, i + 3);
         $c26c0eff31d13e46$var$swap(this, i + 1, i + 2);
@@ -2311,7 +2304,7 @@ $c26c0eff31d13e46$var$Buffer.prototype.swap32 = function swap32() {
 };
 $c26c0eff31d13e46$var$Buffer.prototype.swap64 = function swap64() {
     var len = this.length;
-    if (len % 8 !== 0) throw new RangeError('Buffer size must be a multiple of 64-bits');
+    if (len % 8 !== 0) throw new RangeError("Buffer size must be a multiple of 64-bits");
     for(var i = 0; i < len; i += 8){
         $c26c0eff31d13e46$var$swap(this, i, i + 7);
         $c26c0eff31d13e46$var$swap(this, i + 1, i + 6);
@@ -2322,22 +2315,22 @@ $c26c0eff31d13e46$var$Buffer.prototype.swap64 = function swap64() {
 };
 $c26c0eff31d13e46$var$Buffer.prototype.toString = function toString() {
     var length = this.length;
-    if (length === 0) return '';
+    if (length === 0) return "";
     if (arguments.length === 0) return $c26c0eff31d13e46$var$utf8Slice(this, 0, length);
     return $c26c0eff31d13e46$var$slowToString.apply(this, arguments);
 };
 $c26c0eff31d13e46$var$Buffer.prototype.toLocaleString = $c26c0eff31d13e46$var$Buffer.prototype.toString;
 $c26c0eff31d13e46$var$Buffer.prototype.equals = function equals(b) {
-    if (!$c26c0eff31d13e46$var$Buffer.isBuffer(b)) throw new TypeError('Argument must be a Buffer');
+    if (!$c26c0eff31d13e46$var$Buffer.isBuffer(b)) throw new TypeError("Argument must be a Buffer");
     if (this === b) return true;
     return $c26c0eff31d13e46$var$Buffer.compare(this, b) === 0;
 };
 $c26c0eff31d13e46$var$Buffer.prototype.inspect = function inspect() {
-    var str = '';
+    var str = "";
     var max = $c26c0eff31d13e46$export$f99ded8fe4b79145;
-    str = this.toString('hex', 0, max).replace(/(.{2})/g, '$1 ').trim();
-    if (this.length > max) str += ' ... ';
-    return '<Buffer ' + str + '>';
+    str = this.toString("hex", 0, max).replace(/(.{2})/g, "$1 ").trim();
+    if (this.length > max) str += " ... ";
+    return "<Buffer " + str + ">";
 };
 if ($c26c0eff31d13e46$var$customInspectSymbol) $c26c0eff31d13e46$var$Buffer.prototype[$c26c0eff31d13e46$var$customInspectSymbol] = $c26c0eff31d13e46$var$Buffer.prototype.inspect;
 $c26c0eff31d13e46$var$Buffer.prototype.compare = function compare(target, start, end, thisStart, thisEnd) {
@@ -2347,7 +2340,7 @@ $c26c0eff31d13e46$var$Buffer.prototype.compare = function compare(target, start,
     if (end === undefined) end = target ? target.length : 0;
     if (thisStart === undefined) thisStart = 0;
     if (thisEnd === undefined) thisEnd = this.length;
-    if (start < 0 || end > target.length || thisStart < 0 || thisEnd > this.length) throw new RangeError('out of range index');
+    if (start < 0 || end > target.length || thisStart < 0 || thisEnd > this.length) throw new RangeError("out of range index");
     if (thisStart >= thisEnd && start >= end) return 0;
     if (thisStart >= thisEnd) return -1;
     if (start >= end) return 1;
@@ -2383,7 +2376,7 @@ function $c26c0eff31d13e46$var$bidirectionalIndexOf(buffer, val, byteOffset, enc
     // Empty buffer means no match
     if (buffer.length === 0) return -1;
     // Normalize byteOffset
-    if (typeof byteOffset === 'string') {
+    if (typeof byteOffset === "string") {
         encoding = byteOffset;
         byteOffset = 0;
     } else if (byteOffset > 0x7fffffff) byteOffset = 0x7fffffff;
@@ -2402,16 +2395,16 @@ function $c26c0eff31d13e46$var$bidirectionalIndexOf(buffer, val, byteOffset, enc
         else return -1;
     }
     // Normalize val
-    if (typeof val === 'string') val = $c26c0eff31d13e46$var$Buffer.from(val, encoding);
+    if (typeof val === "string") val = $c26c0eff31d13e46$var$Buffer.from(val, encoding);
     // Finally, search either indexOf (if dir is true) or lastIndexOf
     if ($c26c0eff31d13e46$var$Buffer.isBuffer(val)) {
         // Special case: looking for empty string/buffer always fails
         if (val.length === 0) return -1;
         return $c26c0eff31d13e46$var$arrayIndexOf(buffer, val, byteOffset, encoding, dir);
-    } else if (typeof val === 'number') {
+    } else if (typeof val === "number") {
         val = val & 0xFF // Search for a byte value [0-255]
         ;
-        if (typeof Uint8Array.prototype.indexOf === 'function') {
+        if (typeof Uint8Array.prototype.indexOf === "function") {
             if (dir) return Uint8Array.prototype.indexOf.call(buffer, val, byteOffset);
             else return Uint8Array.prototype.lastIndexOf.call(buffer, val, byteOffset);
         }
@@ -2419,7 +2412,7 @@ function $c26c0eff31d13e46$var$bidirectionalIndexOf(buffer, val, byteOffset, enc
             val
         ], byteOffset, encoding, dir);
     }
-    throw new TypeError('val must be string, number or Buffer');
+    throw new TypeError("val must be string, number or Buffer");
 }
 function $c26c0eff31d13e46$var$arrayIndexOf(arr, val, byteOffset, encoding, dir) {
     var indexSize = 1;
@@ -2427,7 +2420,7 @@ function $c26c0eff31d13e46$var$arrayIndexOf(arr, val, byteOffset, encoding, dir)
     var valLength = val.length;
     if (encoding !== undefined) {
         encoding = String(encoding).toLowerCase();
-        if (encoding === 'ucs2' || encoding === 'ucs-2' || encoding === 'utf16le' || encoding === 'utf-16le') {
+        if (encoding === "ucs2" || encoding === "ucs-2" || encoding === "utf16le" || encoding === "utf-16le") {
             if (arr.length < 2 || val.length < 2) return -1;
             indexSize = 2;
             arrLength /= 2;
@@ -2503,11 +2496,11 @@ function $c26c0eff31d13e46$var$ucs2Write(buf, string, offset, length) {
 $c26c0eff31d13e46$var$Buffer.prototype.write = function write(string, offset, length, encoding) {
     // Buffer#write(string)
     if (offset === undefined) {
-        encoding = 'utf8';
+        encoding = "utf8";
         length = this.length;
         offset = 0;
     // Buffer#write(string, encoding)
-    } else if (length === undefined && typeof offset === 'string') {
+    } else if (length === undefined && typeof offset === "string") {
         encoding = offset;
         length = this.length;
         offset = 0;
@@ -2516,44 +2509,44 @@ $c26c0eff31d13e46$var$Buffer.prototype.write = function write(string, offset, le
         offset = offset >>> 0;
         if (isFinite(length)) {
             length = length >>> 0;
-            if (encoding === undefined) encoding = 'utf8';
+            if (encoding === undefined) encoding = "utf8";
         } else {
             encoding = length;
             length = undefined;
         }
-    } else throw new Error('Buffer.write(string, encoding, offset[, length]) is no longer supported');
+    } else throw new Error("Buffer.write(string, encoding, offset[, length]) is no longer supported");
     var remaining = this.length - offset;
     if (length === undefined || length > remaining) length = remaining;
-    if (string.length > 0 && (length < 0 || offset < 0) || offset > this.length) throw new RangeError('Attempt to write outside buffer bounds');
-    if (!encoding) encoding = 'utf8';
+    if (string.length > 0 && (length < 0 || offset < 0) || offset > this.length) throw new RangeError("Attempt to write outside buffer bounds");
+    if (!encoding) encoding = "utf8";
     var loweredCase = false;
     for(;;)switch(encoding){
-        case 'hex':
+        case "hex":
             return $c26c0eff31d13e46$var$hexWrite(this, string, offset, length);
-        case 'utf8':
-        case 'utf-8':
+        case "utf8":
+        case "utf-8":
             return $c26c0eff31d13e46$var$utf8Write(this, string, offset, length);
-        case 'ascii':
-        case 'latin1':
-        case 'binary':
+        case "ascii":
+        case "latin1":
+        case "binary":
             return $c26c0eff31d13e46$var$asciiWrite(this, string, offset, length);
-        case 'base64':
+        case "base64":
             // Warning: maxLength not taken into account in base64Write
             return $c26c0eff31d13e46$var$base64Write(this, string, offset, length);
-        case 'ucs2':
-        case 'ucs-2':
-        case 'utf16le':
-        case 'utf-16le':
+        case "ucs2":
+        case "ucs-2":
+        case "utf16le":
+        case "utf-16le":
             return $c26c0eff31d13e46$var$ucs2Write(this, string, offset, length);
         default:
-            if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding);
-            encoding = ('' + encoding).toLowerCase();
+            if (loweredCase) throw new TypeError("Unknown encoding: " + encoding);
+            encoding = ("" + encoding).toLowerCase();
             loweredCase = true;
     }
 };
 $c26c0eff31d13e46$var$Buffer.prototype.toJSON = function toJSON() {
     return {
-        type: 'Buffer',
+        type: "Buffer",
         data: Array.prototype.slice.call(this._arr || this, 0)
     };
 };
@@ -2625,19 +2618,19 @@ function $c26c0eff31d13e46$var$decodeCodePointsArray(codePoints) {
     if (len <= $c26c0eff31d13e46$var$MAX_ARGUMENTS_LENGTH) return String.fromCharCode.apply(String, codePoints) // avoid extra slice()
     ;
     // Decode in chunks to avoid "call stack size exceeded".
-    var res = '';
+    var res = "";
     var i = 0;
     while(i < len)res += String.fromCharCode.apply(String, codePoints.slice(i, i += $c26c0eff31d13e46$var$MAX_ARGUMENTS_LENGTH));
     return res;
 }
 function $c26c0eff31d13e46$var$asciiSlice(buf, start, end) {
-    var ret = '';
+    var ret = "";
     end = Math.min(buf.length, end);
     for(var i = start; i < end; ++i)ret += String.fromCharCode(buf[i] & 0x7F);
     return ret;
 }
 function $c26c0eff31d13e46$var$latin1Slice(buf, start, end) {
-    var ret = '';
+    var ret = "";
     end = Math.min(buf.length, end);
     for(var i = start; i < end; ++i)ret += String.fromCharCode(buf[i]);
     return ret;
@@ -2646,13 +2639,13 @@ function $c26c0eff31d13e46$var$hexSlice(buf, start, end) {
     var len = buf.length;
     if (!start || start < 0) start = 0;
     if (!end || end < 0 || end > len) end = len;
-    var out = '';
+    var out = "";
     for(var i = start; i < end; ++i)out += $c26c0eff31d13e46$var$hexSliceLookupTable[buf[i]];
     return out;
 }
 function $c26c0eff31d13e46$var$utf16leSlice(buf, start, end) {
     var bytes = buf.slice(start, end);
-    var res = '';
+    var res = "";
     // If bytes.length is odd, the last 8 bits must be ignored (same as node.js)
     for(var i = 0; i < bytes.length - 1; i += 2)res += String.fromCharCode(bytes[i] + bytes[i + 1] * 256);
     return res;
@@ -2678,26 +2671,26 @@ $c26c0eff31d13e46$var$Buffer.prototype.slice = function slice(start, end) {
 /*
  * Need to make sure that buffer isn't trying to write out of bounds.
  */ function $c26c0eff31d13e46$var$checkOffset(offset, ext, length) {
-    if (offset % 1 !== 0 || offset < 0) throw new RangeError('offset is not uint');
-    if (offset + ext > length) throw new RangeError('Trying to access beyond buffer length');
+    if (offset % 1 !== 0 || offset < 0) throw new RangeError("offset is not uint");
+    if (offset + ext > length) throw new RangeError("Trying to access beyond buffer length");
 }
-$c26c0eff31d13e46$var$Buffer.prototype.readUintLE = $c26c0eff31d13e46$var$Buffer.prototype.readUIntLE = function readUIntLE(offset, byteLength, noAssert) {
+$c26c0eff31d13e46$var$Buffer.prototype.readUintLE = $c26c0eff31d13e46$var$Buffer.prototype.readUIntLE = function readUIntLE(offset, byteLength1, noAssert) {
     offset = offset >>> 0;
-    byteLength = byteLength >>> 0;
-    if (!noAssert) $c26c0eff31d13e46$var$checkOffset(offset, byteLength, this.length);
+    byteLength1 = byteLength1 >>> 0;
+    if (!noAssert) $c26c0eff31d13e46$var$checkOffset(offset, byteLength1, this.length);
     var val = this[offset];
     var mul = 1;
     var i = 0;
-    while(++i < byteLength && (mul *= 0x100))val += this[offset + i] * mul;
+    while(++i < byteLength1 && (mul *= 0x100))val += this[offset + i] * mul;
     return val;
 };
-$c26c0eff31d13e46$var$Buffer.prototype.readUintBE = $c26c0eff31d13e46$var$Buffer.prototype.readUIntBE = function readUIntBE(offset, byteLength, noAssert) {
+$c26c0eff31d13e46$var$Buffer.prototype.readUintBE = $c26c0eff31d13e46$var$Buffer.prototype.readUIntBE = function readUIntBE(offset, byteLength2, noAssert) {
     offset = offset >>> 0;
-    byteLength = byteLength >>> 0;
-    if (!noAssert) $c26c0eff31d13e46$var$checkOffset(offset, byteLength, this.length);
-    var val = this[offset + --byteLength];
+    byteLength2 = byteLength2 >>> 0;
+    if (!noAssert) $c26c0eff31d13e46$var$checkOffset(offset, byteLength2, this.length);
+    var val = this[offset + --byteLength2];
     var mul = 1;
-    while(byteLength > 0 && (mul *= 0x100))val += this[offset + --byteLength] * mul;
+    while(byteLength2 > 0 && (mul *= 0x100))val += this[offset + --byteLength2] * mul;
     return val;
 };
 $c26c0eff31d13e46$var$Buffer.prototype.readUint8 = $c26c0eff31d13e46$var$Buffer.prototype.readUInt8 = function readUInt8(offset, noAssert) {
@@ -2725,28 +2718,28 @@ $c26c0eff31d13e46$var$Buffer.prototype.readUint32BE = $c26c0eff31d13e46$var$Buff
     if (!noAssert) $c26c0eff31d13e46$var$checkOffset(offset, 4, this.length);
     return this[offset] * 0x1000000 + (this[offset + 1] << 16 | this[offset + 2] << 8 | this[offset + 3]);
 };
-$c26c0eff31d13e46$var$Buffer.prototype.readIntLE = function readIntLE(offset, byteLength, noAssert) {
+$c26c0eff31d13e46$var$Buffer.prototype.readIntLE = function readIntLE(offset, byteLength3, noAssert) {
     offset = offset >>> 0;
-    byteLength = byteLength >>> 0;
-    if (!noAssert) $c26c0eff31d13e46$var$checkOffset(offset, byteLength, this.length);
+    byteLength3 = byteLength3 >>> 0;
+    if (!noAssert) $c26c0eff31d13e46$var$checkOffset(offset, byteLength3, this.length);
     var val = this[offset];
     var mul = 1;
     var i = 0;
-    while(++i < byteLength && (mul *= 0x100))val += this[offset + i] * mul;
+    while(++i < byteLength3 && (mul *= 0x100))val += this[offset + i] * mul;
     mul *= 0x80;
-    if (val >= mul) val -= Math.pow(2, 8 * byteLength);
+    if (val >= mul) val -= Math.pow(2, 8 * byteLength3);
     return val;
 };
-$c26c0eff31d13e46$var$Buffer.prototype.readIntBE = function readIntBE(offset, byteLength, noAssert) {
+$c26c0eff31d13e46$var$Buffer.prototype.readIntBE = function readIntBE(offset, byteLength4, noAssert) {
     offset = offset >>> 0;
-    byteLength = byteLength >>> 0;
-    if (!noAssert) $c26c0eff31d13e46$var$checkOffset(offset, byteLength, this.length);
-    var i = byteLength;
+    byteLength4 = byteLength4 >>> 0;
+    if (!noAssert) $c26c0eff31d13e46$var$checkOffset(offset, byteLength4, this.length);
+    var i = byteLength4;
     var mul = 1;
     var val = this[offset + --i];
     while(i > 0 && (mul *= 0x100))val += this[offset + --i] * mul;
     mul *= 0x80;
-    if (val >= mul) val -= Math.pow(2, 8 * byteLength);
+    if (val >= mul) val -= Math.pow(2, 8 * byteLength4);
     return val;
 };
 $c26c0eff31d13e46$var$Buffer.prototype.readInt8 = function readInt8(offset, noAssert) {
@@ -2800,35 +2793,35 @@ $c26c0eff31d13e46$var$Buffer.prototype.readDoubleBE = function readDoubleBE(offs
 function $c26c0eff31d13e46$var$checkInt(buf, value, offset, ext, max, min) {
     if (!$c26c0eff31d13e46$var$Buffer.isBuffer(buf)) throw new TypeError('"buffer" argument must be a Buffer instance');
     if (value > max || value < min) throw new RangeError('"value" argument is out of bounds');
-    if (offset + ext > buf.length) throw new RangeError('Index out of range');
+    if (offset + ext > buf.length) throw new RangeError("Index out of range");
 }
-$c26c0eff31d13e46$var$Buffer.prototype.writeUintLE = $c26c0eff31d13e46$var$Buffer.prototype.writeUIntLE = function writeUIntLE(value, offset, byteLength, noAssert) {
+$c26c0eff31d13e46$var$Buffer.prototype.writeUintLE = $c26c0eff31d13e46$var$Buffer.prototype.writeUIntLE = function writeUIntLE(value, offset, byteLength5, noAssert) {
     value = +value;
     offset = offset >>> 0;
-    byteLength = byteLength >>> 0;
+    byteLength5 = byteLength5 >>> 0;
     if (!noAssert) {
-        var maxBytes = Math.pow(2, 8 * byteLength) - 1;
-        $c26c0eff31d13e46$var$checkInt(this, value, offset, byteLength, maxBytes, 0);
+        var maxBytes = Math.pow(2, 8 * byteLength5) - 1;
+        $c26c0eff31d13e46$var$checkInt(this, value, offset, byteLength5, maxBytes, 0);
     }
     var mul = 1;
     var i = 0;
     this[offset] = value & 0xFF;
-    while(++i < byteLength && (mul *= 0x100))this[offset + i] = value / mul & 0xFF;
-    return offset + byteLength;
+    while(++i < byteLength5 && (mul *= 0x100))this[offset + i] = value / mul & 0xFF;
+    return offset + byteLength5;
 };
-$c26c0eff31d13e46$var$Buffer.prototype.writeUintBE = $c26c0eff31d13e46$var$Buffer.prototype.writeUIntBE = function writeUIntBE(value, offset, byteLength, noAssert) {
+$c26c0eff31d13e46$var$Buffer.prototype.writeUintBE = $c26c0eff31d13e46$var$Buffer.prototype.writeUIntBE = function writeUIntBE(value, offset, byteLength6, noAssert) {
     value = +value;
     offset = offset >>> 0;
-    byteLength = byteLength >>> 0;
+    byteLength6 = byteLength6 >>> 0;
     if (!noAssert) {
-        var maxBytes = Math.pow(2, 8 * byteLength) - 1;
-        $c26c0eff31d13e46$var$checkInt(this, value, offset, byteLength, maxBytes, 0);
+        var maxBytes = Math.pow(2, 8 * byteLength6) - 1;
+        $c26c0eff31d13e46$var$checkInt(this, value, offset, byteLength6, maxBytes, 0);
     }
-    var i = byteLength - 1;
+    var i = byteLength6 - 1;
     var mul = 1;
     this[offset + i] = value & 0xFF;
     while(--i >= 0 && (mul *= 0x100))this[offset + i] = value / mul & 0xFF;
-    return offset + byteLength;
+    return offset + byteLength6;
 };
 $c26c0eff31d13e46$var$Buffer.prototype.writeUint8 = $c26c0eff31d13e46$var$Buffer.prototype.writeUInt8 = function writeUInt8(value, offset, noAssert) {
     value = +value;
@@ -2873,31 +2866,31 @@ $c26c0eff31d13e46$var$Buffer.prototype.writeUint32BE = $c26c0eff31d13e46$var$Buf
     this[offset + 3] = value & 0xff;
     return offset + 4;
 };
-$c26c0eff31d13e46$var$Buffer.prototype.writeIntLE = function writeIntLE(value, offset, byteLength, noAssert) {
+$c26c0eff31d13e46$var$Buffer.prototype.writeIntLE = function writeIntLE(value, offset, byteLength7, noAssert) {
     value = +value;
     offset = offset >>> 0;
     if (!noAssert) {
-        var limit = Math.pow(2, 8 * byteLength - 1);
-        $c26c0eff31d13e46$var$checkInt(this, value, offset, byteLength, limit - 1, -limit);
+        var limit = Math.pow(2, 8 * byteLength7 - 1);
+        $c26c0eff31d13e46$var$checkInt(this, value, offset, byteLength7, limit - 1, -limit);
     }
     var i = 0;
     var mul = 1;
     var sub = 0;
     this[offset] = value & 0xFF;
-    while(++i < byteLength && (mul *= 0x100)){
+    while(++i < byteLength7 && (mul *= 0x100)){
         if (value < 0 && sub === 0 && this[offset + i - 1] !== 0) sub = 1;
         this[offset + i] = (value / mul >> 0) - sub & 0xFF;
     }
-    return offset + byteLength;
+    return offset + byteLength7;
 };
-$c26c0eff31d13e46$var$Buffer.prototype.writeIntBE = function writeIntBE(value, offset, byteLength, noAssert) {
+$c26c0eff31d13e46$var$Buffer.prototype.writeIntBE = function writeIntBE(value, offset, byteLength8, noAssert) {
     value = +value;
     offset = offset >>> 0;
     if (!noAssert) {
-        var limit = Math.pow(2, 8 * byteLength - 1);
-        $c26c0eff31d13e46$var$checkInt(this, value, offset, byteLength, limit - 1, -limit);
+        var limit = Math.pow(2, 8 * byteLength8 - 1);
+        $c26c0eff31d13e46$var$checkInt(this, value, offset, byteLength8, limit - 1, -limit);
     }
-    var i = byteLength - 1;
+    var i = byteLength8 - 1;
     var mul = 1;
     var sub = 0;
     this[offset + i] = value & 0xFF;
@@ -2905,7 +2898,7 @@ $c26c0eff31d13e46$var$Buffer.prototype.writeIntBE = function writeIntBE(value, o
         if (value < 0 && sub === 0 && this[offset + i + 1] !== 0) sub = 1;
         this[offset + i] = (value / mul >> 0) - sub & 0xFF;
     }
-    return offset + byteLength;
+    return offset + byteLength8;
 };
 $c26c0eff31d13e46$var$Buffer.prototype.writeInt8 = function writeInt8(value, offset, noAssert) {
     value = +value;
@@ -2953,8 +2946,8 @@ $c26c0eff31d13e46$var$Buffer.prototype.writeInt32BE = function writeInt32BE(valu
     return offset + 4;
 };
 function $c26c0eff31d13e46$var$checkIEEE754(buf, value, offset, ext, max, min) {
-    if (offset + ext > buf.length) throw new RangeError('Index out of range');
-    if (offset < 0) throw new RangeError('Index out of range');
+    if (offset + ext > buf.length) throw new RangeError("Index out of range");
+    if (offset < 0) throw new RangeError("Index out of range");
 }
 function $c26c0eff31d13e46$var$writeFloat(buf, value, offset, littleEndian, noAssert) {
     value = +value;
@@ -2984,7 +2977,7 @@ $c26c0eff31d13e46$var$Buffer.prototype.writeDoubleBE = function writeDoubleBE(va
 };
 // copy(targetBuffer, targetStart=0, sourceStart=0, sourceEnd=buffer.length)
 $c26c0eff31d13e46$var$Buffer.prototype.copy = function copy(target, targetStart, start, end) {
-    if (!$c26c0eff31d13e46$var$Buffer.isBuffer(target)) throw new TypeError('argument should be a Buffer');
+    if (!$c26c0eff31d13e46$var$Buffer.isBuffer(target)) throw new TypeError("argument should be a Buffer");
     if (!start) start = 0;
     if (!end && end !== 0) end = this.length;
     if (targetStart >= target.length) targetStart = target.length;
@@ -2994,14 +2987,14 @@ $c26c0eff31d13e46$var$Buffer.prototype.copy = function copy(target, targetStart,
     if (end === start) return 0;
     if (target.length === 0 || this.length === 0) return 0;
     // Fatal error conditions
-    if (targetStart < 0) throw new RangeError('targetStart out of bounds');
-    if (start < 0 || start >= this.length) throw new RangeError('Index out of range');
-    if (end < 0) throw new RangeError('sourceEnd out of bounds');
+    if (targetStart < 0) throw new RangeError("targetStart out of bounds");
+    if (start < 0 || start >= this.length) throw new RangeError("Index out of range");
+    if (end < 0) throw new RangeError("sourceEnd out of bounds");
     // Are we oob?
     if (end > this.length) end = this.length;
     if (target.length - targetStart < end - start) end = target.length - targetStart + start;
     var len = end - start;
-    if (this === target && typeof Uint8Array.prototype.copyWithin === 'function') // Use built-in when available, missing from IE11
+    if (this === target && typeof Uint8Array.prototype.copyWithin === "function") // Use built-in when available, missing from IE11
     this.copyWithin(targetStart, start, end);
     else Uint8Array.prototype.set.call(target, this.subarray(start, end), targetStart);
     return len;
@@ -3012,32 +3005,32 @@ $c26c0eff31d13e46$var$Buffer.prototype.copy = function copy(target, targetStart,
 //    buffer.fill(string[, offset[, end]][, encoding])
 $c26c0eff31d13e46$var$Buffer.prototype.fill = function fill(val, start, end, encoding) {
     // Handle string cases:
-    if (typeof val === 'string') {
-        if (typeof start === 'string') {
+    if (typeof val === "string") {
+        if (typeof start === "string") {
             encoding = start;
             start = 0;
             end = this.length;
-        } else if (typeof end === 'string') {
+        } else if (typeof end === "string") {
             encoding = end;
             end = this.length;
         }
-        if (encoding !== undefined && typeof encoding !== 'string') throw new TypeError('encoding must be a string');
-        if (typeof encoding === 'string' && !$c26c0eff31d13e46$var$Buffer.isEncoding(encoding)) throw new TypeError('Unknown encoding: ' + encoding);
+        if (encoding !== undefined && typeof encoding !== "string") throw new TypeError("encoding must be a string");
+        if (typeof encoding === "string" && !$c26c0eff31d13e46$var$Buffer.isEncoding(encoding)) throw new TypeError("Unknown encoding: " + encoding);
         if (val.length === 1) {
             var code = val.charCodeAt(0);
-            if (encoding === 'utf8' && code < 128 || encoding === 'latin1') // Fast path: If `val` fits into a single byte, use that numeric value.
+            if (encoding === "utf8" && code < 128 || encoding === "latin1") // Fast path: If `val` fits into a single byte, use that numeric value.
             val = code;
         }
-    } else if (typeof val === 'number') val = val & 255;
-    else if (typeof val === 'boolean') val = Number(val);
+    } else if (typeof val === "number") val = val & 255;
+    else if (typeof val === "boolean") val = Number(val);
     // Invalid ranges are not set to a default, so can range check early.
-    if (start < 0 || this.length < start || this.length < end) throw new RangeError('Out of range index');
+    if (start < 0 || this.length < start || this.length < end) throw new RangeError("Out of range index");
     if (end <= start) return this;
     start = start >>> 0;
     end = end === undefined ? this.length : end >>> 0;
     if (!val) val = 0;
     var i;
-    if (typeof val === 'number') for(i = start; i < end; ++i)this[i] = val;
+    if (typeof val === "number") for(i = start; i < end; ++i)this[i] = val;
     else {
         var bytes = $c26c0eff31d13e46$var$Buffer.isBuffer(val) ? val : $c26c0eff31d13e46$var$Buffer.from(val, encoding);
         var len = bytes.length;
@@ -3051,13 +3044,13 @@ $c26c0eff31d13e46$var$Buffer.prototype.fill = function fill(val, start, end, enc
 var $c26c0eff31d13e46$var$INVALID_BASE64_RE = /[^+/0-9A-Za-z-_]/g;
 function $c26c0eff31d13e46$var$base64clean(str) {
     // Node takes equal signs as end of the Base64 encoding
-    str = str.split('=')[0];
+    str = str.split("=")[0];
     // Node strips out invalid characters like \n and \t from the string, base64-js does not
-    str = str.trim().replace($c26c0eff31d13e46$var$INVALID_BASE64_RE, '');
+    str = str.trim().replace($c26c0eff31d13e46$var$INVALID_BASE64_RE, "");
     // Node converts strings with length < 2 to ''
-    if (str.length < 2) return '';
+    if (str.length < 2) return "";
     // Node allows for non-padded base64 strings (missing trailing ===), base64-js does not
-    while(str.length % 4 !== 0)str = str + '=';
+    while(str.length % 4 !== 0)str = str + "=";
     return str;
 }
 function $c26c0eff31d13e46$var$utf8ToBytes(string, units) {
@@ -3112,7 +3105,7 @@ function $c26c0eff31d13e46$var$utf8ToBytes(string, units) {
         } else if (codePoint < 0x110000) {
             if ((units -= 4) < 0) break;
             bytes.push(codePoint >> 0x12 | 0xF0, codePoint >> 0xC & 0x3F | 0x80, codePoint >> 0x6 & 0x3F | 0x80, codePoint & 0x3F | 0x80);
-        } else throw new Error('Invalid code point');
+        } else throw new Error("Invalid code point");
     }
     return bytes;
 }
@@ -3159,7 +3152,7 @@ function $c26c0eff31d13e46$var$numberIsNaN(obj) {
 // Create lookup table for `toString('hex')`
 // See: https://github.com/feross/buffer/issues/219
 var $c26c0eff31d13e46$var$hexSliceLookupTable = function() {
-    var alphabet = '0123456789abcdef';
+    var alphabet = "0123456789abcdef";
     var table = new Array(256);
     for(var i = 0; i < 16; ++i){
         var i16 = i * 16;
@@ -3176,30 +3169,30 @@ $parcel$export(module.exports, "fromByteArray", function () { return $405a018a08
 var $405a018a0854aaa1$export$a48f0734ac7c2329;
 var $405a018a0854aaa1$export$d622b2ad8d90c771;
 var $405a018a0854aaa1$export$6100ba28696e12de;
-'use strict';
+"use strict";
 $405a018a0854aaa1$export$a48f0734ac7c2329 = $405a018a0854aaa1$var$byteLength;
 $405a018a0854aaa1$export$d622b2ad8d90c771 = $405a018a0854aaa1$var$toByteArray;
 $405a018a0854aaa1$export$6100ba28696e12de = $405a018a0854aaa1$var$fromByteArray;
 var $405a018a0854aaa1$var$lookup = [];
 var $405a018a0854aaa1$var$revLookup = [];
-var $405a018a0854aaa1$var$Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array;
-var $405a018a0854aaa1$var$code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+var $405a018a0854aaa1$var$Arr = typeof Uint8Array !== "undefined" ? Uint8Array : Array;
+var $405a018a0854aaa1$var$code = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 for(var $405a018a0854aaa1$var$i = 0, $405a018a0854aaa1$var$len = $405a018a0854aaa1$var$code.length; $405a018a0854aaa1$var$i < $405a018a0854aaa1$var$len; ++$405a018a0854aaa1$var$i){
     $405a018a0854aaa1$var$lookup[$405a018a0854aaa1$var$i] = $405a018a0854aaa1$var$code[$405a018a0854aaa1$var$i];
     $405a018a0854aaa1$var$revLookup[$405a018a0854aaa1$var$code.charCodeAt($405a018a0854aaa1$var$i)] = $405a018a0854aaa1$var$i;
 }
 // Support decoding URL-safe base64 strings, as Node.js does.
 // See: https://en.wikipedia.org/wiki/Base64#URL_applications
-$405a018a0854aaa1$var$revLookup['-'.charCodeAt(0)] = 62;
-$405a018a0854aaa1$var$revLookup['_'.charCodeAt(0)] = 63;
+$405a018a0854aaa1$var$revLookup["-".charCodeAt(0)] = 62;
+$405a018a0854aaa1$var$revLookup["_".charCodeAt(0)] = 63;
 function $405a018a0854aaa1$var$getLens(b64) {
-    var len = b64.length;
-    if (len % 4 > 0) throw new Error('Invalid string. Length must be a multiple of 4');
+    var len1 = b64.length;
+    if (len1 % 4 > 0) throw new Error("Invalid string. Length must be a multiple of 4");
     // Trim off extra bytes after placeholder bytes are found
     // See: https://github.com/beatgammit/base64-js/issues/42
-    var validLen = b64.indexOf('=');
-    if (validLen === -1) validLen = len;
-    var placeHoldersLen = validLen === len ? 0 : 4 - validLen % 4;
+    var validLen = b64.indexOf("=");
+    if (validLen === -1) validLen = len1;
+    var placeHoldersLen = validLen === len1 ? 0 : 4 - validLen % 4;
     return [
         validLen,
         placeHoldersLen
@@ -3223,20 +3216,20 @@ function $405a018a0854aaa1$var$toByteArray(b64) {
     var arr = new $405a018a0854aaa1$var$Arr($405a018a0854aaa1$var$_byteLength(b64, validLen, placeHoldersLen));
     var curByte = 0;
     // if there are placeholders, only get up to the last complete 4 chars
-    var len = placeHoldersLen > 0 ? validLen - 4 : validLen;
-    var i;
-    for(i = 0; i < len; i += 4){
-        tmp = $405a018a0854aaa1$var$revLookup[b64.charCodeAt(i)] << 18 | $405a018a0854aaa1$var$revLookup[b64.charCodeAt(i + 1)] << 12 | $405a018a0854aaa1$var$revLookup[b64.charCodeAt(i + 2)] << 6 | $405a018a0854aaa1$var$revLookup[b64.charCodeAt(i + 3)];
+    var len2 = placeHoldersLen > 0 ? validLen - 4 : validLen;
+    var i1;
+    for(i1 = 0; i1 < len2; i1 += 4){
+        tmp = $405a018a0854aaa1$var$revLookup[b64.charCodeAt(i1)] << 18 | $405a018a0854aaa1$var$revLookup[b64.charCodeAt(i1 + 1)] << 12 | $405a018a0854aaa1$var$revLookup[b64.charCodeAt(i1 + 2)] << 6 | $405a018a0854aaa1$var$revLookup[b64.charCodeAt(i1 + 3)];
         arr[curByte++] = tmp >> 16 & 0xFF;
         arr[curByte++] = tmp >> 8 & 0xFF;
         arr[curByte++] = tmp & 0xFF;
     }
     if (placeHoldersLen === 2) {
-        tmp = $405a018a0854aaa1$var$revLookup[b64.charCodeAt(i)] << 2 | $405a018a0854aaa1$var$revLookup[b64.charCodeAt(i + 1)] >> 4;
+        tmp = $405a018a0854aaa1$var$revLookup[b64.charCodeAt(i1)] << 2 | $405a018a0854aaa1$var$revLookup[b64.charCodeAt(i1 + 1)] >> 4;
         arr[curByte++] = tmp & 0xFF;
     }
     if (placeHoldersLen === 1) {
-        tmp = $405a018a0854aaa1$var$revLookup[b64.charCodeAt(i)] << 10 | $405a018a0854aaa1$var$revLookup[b64.charCodeAt(i + 1)] << 4 | $405a018a0854aaa1$var$revLookup[b64.charCodeAt(i + 2)] >> 2;
+        tmp = $405a018a0854aaa1$var$revLookup[b64.charCodeAt(i1)] << 10 | $405a018a0854aaa1$var$revLookup[b64.charCodeAt(i1 + 1)] << 4 | $405a018a0854aaa1$var$revLookup[b64.charCodeAt(i1 + 2)] >> 2;
         arr[curByte++] = tmp >> 8 & 0xFF;
         arr[curByte++] = tmp & 0xFF;
     }
@@ -3248,31 +3241,31 @@ function $405a018a0854aaa1$var$tripletToBase64(num) {
 function $405a018a0854aaa1$var$encodeChunk(uint8, start, end) {
     var tmp;
     var output = [];
-    for(var i = start; i < end; i += 3){
-        tmp = (uint8[i] << 16 & 0xFF0000) + (uint8[i + 1] << 8 & 0xFF00) + (uint8[i + 2] & 0xFF);
+    for(var i2 = start; i2 < end; i2 += 3){
+        tmp = (uint8[i2] << 16 & 0xFF0000) + (uint8[i2 + 1] << 8 & 0xFF00) + (uint8[i2 + 2] & 0xFF);
         output.push($405a018a0854aaa1$var$tripletToBase64(tmp));
     }
-    return output.join('');
+    return output.join("");
 }
 function $405a018a0854aaa1$var$fromByteArray(uint8) {
     var tmp;
-    var len = uint8.length;
-    var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
+    var len3 = uint8.length;
+    var extraBytes = len3 % 3 // if we have 1 byte left, pad 2 bytes
     ;
     var parts = [];
     var maxChunkLength = 16383 // must be multiple of 3
     ;
     // go through the array every three bytes, we'll deal with trailing stuff later
-    for(var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength)parts.push($405a018a0854aaa1$var$encodeChunk(uint8, i, i + maxChunkLength > len2 ? len2 : i + maxChunkLength));
+    for(var i3 = 0, len2 = len3 - extraBytes; i3 < len2; i3 += maxChunkLength)parts.push($405a018a0854aaa1$var$encodeChunk(uint8, i3, i3 + maxChunkLength > len2 ? len2 : i3 + maxChunkLength));
     // pad the end with zeros, but make sure to not forget the extra bytes
     if (extraBytes === 1) {
-        tmp = uint8[len - 1];
-        parts.push($405a018a0854aaa1$var$lookup[tmp >> 2] + $405a018a0854aaa1$var$lookup[tmp << 4 & 0x3F] + '==');
+        tmp = uint8[len3 - 1];
+        parts.push($405a018a0854aaa1$var$lookup[tmp >> 2] + $405a018a0854aaa1$var$lookup[tmp << 4 & 0x3F] + "==");
     } else if (extraBytes === 2) {
-        tmp = (uint8[len - 2] << 8) + uint8[len - 1];
-        parts.push($405a018a0854aaa1$var$lookup[tmp >> 10] + $405a018a0854aaa1$var$lookup[tmp >> 4 & 0x3F] + $405a018a0854aaa1$var$lookup[tmp << 2 & 0x3F] + '=');
+        tmp = (uint8[len3 - 2] << 8) + uint8[len3 - 1];
+        parts.push($405a018a0854aaa1$var$lookup[tmp >> 10] + $405a018a0854aaa1$var$lookup[tmp >> 4 & 0x3F] + $405a018a0854aaa1$var$lookup[tmp << 2 & 0x3F] + "=");
     }
-    return parts.join('');
+    return parts.join("");
 }
 
 });
@@ -3358,7 +3351,7 @@ $2bf41fb6db0b4b4b$export$68d8715fc104d294 = function(buffer, value, offset, isLE
 
 
 parcelRequire.register("aEibP", function(module, exports) {
-'use strict';
+"use strict";
 
 
 // STARTED TOP nodejs/browser hack
@@ -3384,7 +3377,7 @@ parcelRequire.register("aEibP", function(module, exports) {
         };
         // Pluggable, initialized in high-level API below.
         let randombytes = function() {
-            throw new Error('no PRNG');
+            throw new Error("no PRNG");
         };
         const _0 = new Uint8Array(16);
         const _9 = new Uint8Array(32);
@@ -4303,15 +4296,15 @@ parcelRequire.register("aEibP", function(module, exports) {
         exports.camo.hashsecret = hashSecret;
         exports.camo.scalarMult = function(n, p) {
             checkArrayTypes(n, p);
-            if (n.length !== crypto_scalarmult_SCALARBYTES * 2) throw new Error('bad n size');
-            if (p.length !== crypto_scalarmult_BYTES) throw new Error('bad p size');
+            if (n.length !== crypto_scalarmult_SCALARBYTES * 2) throw new Error("bad n size");
+            if (p.length !== crypto_scalarmult_BYTES) throw new Error("bad p size");
             const q = new Uint8Array(crypto_scalarmult_BYTES);
             crypto_scalarmult(q, n, p);
             return q;
         };
         exports.camo.scalarMult.base = function(n) {
             checkArrayTypes(n);
-            if (n.length !== crypto_scalarmult_SCALARBYTES * 2) throw new Error('bad n size');
+            if (n.length !== crypto_scalarmult_SCALARBYTES * 2) throw new Error("bad n size");
             const q = new Uint8Array(crypto_scalarmult_BYTES);
             crypto_scalarmult_base(q, n);
             return q;
@@ -4596,16 +4589,16 @@ parcelRequire.register("aEibP", function(module, exports) {
             crypto_hash_BYTES: crypto_hash_BYTES
         };
         /* High-level API */ function checkLengths(k, n) {
-            if (k.length !== crypto_secretbox_KEYBYTES) throw new Error('bad key size' + n.length + ' expected:' + crypto_secretbox_KEYBYTES);
-            if (n.length !== crypto_secretbox_NONCEBYTES) throw new Error('bad nonce size' + n.length + ' expected:' + crypto_secretbox_NONCEBYTES);
+            if (k.length !== crypto_secretbox_KEYBYTES) throw new Error("bad key size" + n.length + " expected:" + crypto_secretbox_KEYBYTES);
+            if (n.length !== crypto_secretbox_NONCEBYTES) throw new Error("bad nonce size" + n.length + " expected:" + crypto_secretbox_NONCEBYTES);
         }
         function checkBoxLengths(pk, sk) {
-            if (pk.length !== crypto_box_PUBLICKEYBYTES) throw new Error('bad public key size' + pk.length + ' expected:' + crypto_box_PUBLICKEYBYTES);
-            if (sk.length !== crypto_box_SECRETKEYBYTES) throw new Error('bad secret key size:' + sk.length + ' expected:' + crypto_box_SECRETKEYBYTES);
+            if (pk.length !== crypto_box_PUBLICKEYBYTES) throw new Error("bad public key size" + pk.length + " expected:" + crypto_box_PUBLICKEYBYTES);
+            if (sk.length !== crypto_box_SECRETKEYBYTES) throw new Error("bad secret key size:" + sk.length + " expected:" + crypto_box_SECRETKEYBYTES);
         }
         function checkArrayTypes() {
             for(let i = 0; i < arguments.length; i++){
-                if (!(arguments[i] instanceof Uint8Array)) throw new TypeError('unexpected type, use Uint8Array');
+                if (!(arguments[i] instanceof Uint8Array)) throw new TypeError("unexpected type, use Uint8Array");
             }
         }
         function cleanup(arr) {
@@ -4632,12 +4625,12 @@ parcelRequire.register("aEibP", function(module, exports) {
             const m = new Uint8Array(c.length);
             for(let i = 0; i < box.length; i++)c[i + crypto_secretbox_BOXZEROBYTES] = box[i];
             if (c.length < 32) {
-                console.log('c.length < 32', c.length);
+                console.log("c.length < 32", c.length);
                 return null;
             }
             const val = crypto_secretbox_open(m, c, c.length, nonce, key);
             if (val !== 0) {
-                console.log('val !== 0', val);
+                console.log("val !== 0", val);
                 return null;
             }
             return m.subarray(crypto_secretbox_ZEROBYTES);
@@ -4647,15 +4640,15 @@ parcelRequire.register("aEibP", function(module, exports) {
         exports.secretbox.overheadLength = crypto_secretbox_BOXZEROBYTES;
         exports.scalarMult = function(n, p) {
             checkArrayTypes(n, p);
-            if (n.length !== crypto_scalarmult_SCALARBYTES) throw new Error('bad n size');
-            if (p.length !== crypto_scalarmult_BYTES) throw new Error('bad p size');
+            if (n.length !== crypto_scalarmult_SCALARBYTES) throw new Error("bad n size");
+            if (p.length !== crypto_scalarmult_BYTES) throw new Error("bad p size");
             const q = new Uint8Array(crypto_scalarmult_BYTES);
             crypto_scalarmult(q, n, p);
             return q;
         };
         exports.scalarMult.base = function(n) {
             checkArrayTypes(n);
-            if (n.length !== crypto_scalarmult_SCALARBYTES) throw new Error('bad n size');
+            if (n.length !== crypto_scalarmult_SCALARBYTES) throw new Error("bad n size");
             const q = new Uint8Array(crypto_scalarmult_BYTES);
             crypto_scalarmult_base(q, n);
             return q;
@@ -4690,7 +4683,7 @@ parcelRequire.register("aEibP", function(module, exports) {
         };
         exports.box.keyPair.fromSecretKey = function(secretKey) {
             checkArrayTypes(secretKey);
-            if (secretKey.length !== crypto_box_SECRETKEYBYTES) throw new Error('bad secret key size');
+            if (secretKey.length !== crypto_box_SECRETKEYBYTES) throw new Error("bad secret key size");
             const pk = new Uint8Array(crypto_box_PUBLICKEYBYTES);
             crypto_scalarmult_base(pk, secretKey);
             return {
@@ -4705,14 +4698,14 @@ parcelRequire.register("aEibP", function(module, exports) {
         exports.box.overheadLength = exports.secretbox.overheadLength;
         exports.sign = function(msg, secretKey) {
             checkArrayTypes(msg, secretKey);
-            if (secretKey.length !== crypto_sign_SECRETKEYBYTES) throw new Error('bad secret key size');
+            if (secretKey.length !== crypto_sign_SECRETKEYBYTES) throw new Error("bad secret key size");
             const signedMsg = new Uint8Array(crypto_sign_BYTES + msg.length);
             crypto_sign(signedMsg, msg, msg.length, secretKey);
             return signedMsg;
         };
         exports.sign.open = function(signedMsg, publicKey) {
             checkArrayTypes(signedMsg, publicKey);
-            if (publicKey.length !== crypto_sign_PUBLICKEYBYTES) throw new Error('bad public key size');
+            if (publicKey.length !== crypto_sign_PUBLICKEYBYTES) throw new Error("bad public key size");
             const tmp = new Uint8Array(signedMsg.length);
             const mlen = crypto_sign_open(tmp, signedMsg, signedMsg.length, publicKey);
             if (mlen < 0) return null;
@@ -4728,8 +4721,8 @@ parcelRequire.register("aEibP", function(module, exports) {
         };
         exports.sign.detached.verify = function(msg, sig, publicKey) {
             checkArrayTypes(msg, sig, publicKey);
-            if (sig.length !== crypto_sign_BYTES) throw new Error('bad signature size');
-            if (publicKey.length !== crypto_sign_PUBLICKEYBYTES) throw new Error('bad public key size:' + publicKey.length + ' expected:' + crypto_sign_PUBLICKEYBYTES);
+            if (sig.length !== crypto_sign_BYTES) throw new Error("bad signature size");
+            if (publicKey.length !== crypto_sign_PUBLICKEYBYTES) throw new Error("bad public key size:" + publicKey.length + " expected:" + crypto_sign_PUBLICKEYBYTES);
             const sm = new Uint8Array(crypto_sign_BYTES + msg.length);
             const m = new Uint8Array(crypto_sign_BYTES + msg.length);
             let i;
@@ -4815,7 +4808,7 @@ parcelRequire.register("aEibP", function(module, exports) {
         };
         exports.sign.keyPair.fromSecretKey = function(secretKey) {
             checkArrayTypes(secretKey);
-            if (secretKey.length !== crypto_sign_SECRETKEYBYTES) throw new Error('bad secret key size:' + secretKey.length + ' expected:' + crypto_box_SECRETKEYBYTES);
+            if (secretKey.length !== crypto_sign_SECRETKEYBYTES) throw new Error("bad secret key size:" + secretKey.length + " expected:" + crypto_box_SECRETKEYBYTES);
             let pk = new Uint8Array(crypto_sign_PUBLICKEYBYTES);
             pk = derivePublicFromSecret(secretKey);
             return {
@@ -4825,7 +4818,7 @@ parcelRequire.register("aEibP", function(module, exports) {
         };
         exports.sign.keyPair.fromSeed = function(seed) {
             checkArrayTypes(seed);
-            if (seed.length !== crypto_sign_SEEDBYTES) throw new Error('bad seed size');
+            if (seed.length !== crypto_sign_SEEDBYTES) throw new Error("bad seed size");
             const pk = new Uint8Array(crypto_sign_PUBLICKEYBYTES);
             const sk = new Uint8Array(crypto_sign_SECRETKEYBYTES);
             for(let i = 0; i < 32; i++)sk[i] = seed[i];
@@ -4859,7 +4852,7 @@ parcelRequire.register("aEibP", function(module, exports) {
         (function() {
             // Initialize PRNG if environment provides CSPRNG.
             // If not, methods calling randombytes will throw.
-            let crypto = typeof self !== 'undefined' ? self.crypto || self.msCrypto : null;
+            let crypto = typeof self !== "undefined" ? self.crypto || self.msCrypto : null;
             if (crypto && crypto.getRandomValues) {
                 // Browsers.
                 const QUOTA = 65536;
@@ -4884,7 +4877,7 @@ parcelRequire.register("aEibP", function(module, exports) {
         // STARTED BOTTOM nodejs/browser hack
         return exports;
     })();
-    if (typeof module.exports !== 'undefined') module.exports = exports1;
+    if (typeof module.exports !== "undefined") module.exports = exports1;
     else window.nacl = exports1;
 })(); // FINISHED BOTTOM nodejs/browser hack
 
@@ -4969,7 +4962,7 @@ var $380544d1fa80b09e$export$bb1abf2ce84fc7e8;
 var $380544d1fa80b09e$export$2f7171e78e524d5e;
 var $380544d1fa80b09e$export$e1d879b482f37d98;
 var $380544d1fa80b09e$export$1a988e7317c65621;
-'use strict';
+"use strict";
 
 $380544d1fa80b09e$export$5f828d93ff035aa8 = $380544d1fa80b09e$export$cd94982b18c6332c = $380544d1fa80b09e$export$1d518568e4f529b0 = $380544d1fa80b09e$export$5285b6d41c912b41 = (parcelRequire("94o1H"));
 
@@ -4980,13 +4973,13 @@ $380544d1fa80b09e$export$da39cf97e1eb7c91 = $380544d1fa80b09e$export$52a9039d717
 var $df5hN = parcelRequire("df5hN");
 var $380544d1fa80b09e$var$algoKeys = Object.keys($df5hN);
 var $380544d1fa80b09e$var$hashes = [
-    'sha1',
-    'sha224',
-    'sha256',
-    'sha384',
-    'sha512',
-    'md5',
-    'rmd160'
+    "sha1",
+    "sha224",
+    "sha256",
+    "sha384",
+    "sha512",
+    "md5",
+    "rmd160"
 ].concat($380544d1fa80b09e$var$algoKeys);
 $380544d1fa80b09e$export$f7201db400317331 = function() {
     return $380544d1fa80b09e$var$hashes;
@@ -5034,32 +5027,32 @@ $380544d1fa80b09e$export$bb1abf2ce84fc7e8 = $6kkrD.randomFill;
 $380544d1fa80b09e$export$2f7171e78e524d5e = $6kkrD.randomFillSync;
 $380544d1fa80b09e$export$e1d879b482f37d98 = function() {
     throw new Error([
-        'sorry, createCredentials is not implemented yet',
-        'we accept pull requests',
-        'https://github.com/crypto-browserify/crypto-browserify'
-    ].join('\n'));
+        "sorry, createCredentials is not implemented yet",
+        "we accept pull requests",
+        "https://github.com/crypto-browserify/crypto-browserify"
+    ].join("\n"));
 };
 $380544d1fa80b09e$export$1a988e7317c65621 = {
-    'DH_CHECK_P_NOT_SAFE_PRIME': 2,
-    'DH_CHECK_P_NOT_PRIME': 1,
-    'DH_UNABLE_TO_CHECK_GENERATOR': 4,
-    'DH_NOT_SUITABLE_GENERATOR': 8,
-    'NPN_ENABLED': 1,
-    'ALPN_ENABLED': 1,
-    'RSA_PKCS1_PADDING': 1,
-    'RSA_SSLV23_PADDING': 2,
-    'RSA_NO_PADDING': 3,
-    'RSA_PKCS1_OAEP_PADDING': 4,
-    'RSA_X931_PADDING': 5,
-    'RSA_PKCS1_PSS_PADDING': 6,
-    'POINT_CONVERSION_COMPRESSED': 2,
-    'POINT_CONVERSION_UNCOMPRESSED': 4,
-    'POINT_CONVERSION_HYBRID': 6
+    "DH_CHECK_P_NOT_SAFE_PRIME": 2,
+    "DH_CHECK_P_NOT_PRIME": 1,
+    "DH_UNABLE_TO_CHECK_GENERATOR": 4,
+    "DH_NOT_SUITABLE_GENERATOR": 8,
+    "NPN_ENABLED": 1,
+    "ALPN_ENABLED": 1,
+    "RSA_PKCS1_PADDING": 1,
+    "RSA_SSLV23_PADDING": 2,
+    "RSA_NO_PADDING": 3,
+    "RSA_PKCS1_OAEP_PADDING": 4,
+    "RSA_X931_PADDING": 5,
+    "RSA_PKCS1_PSS_PADDING": 6,
+    "POINT_CONVERSION_COMPRESSED": 2,
+    "POINT_CONVERSION_UNCOMPRESSED": 4,
+    "POINT_CONVERSION_HYBRID": 6
 };
 
 });
 parcelRequire.register("94o1H", function(module, exports) {
-'use strict';
+"use strict";
 
 var $36zFS = parcelRequire("36zFS");
 // limit of Crypto.getRandomValues()
@@ -5069,7 +5062,7 @@ var $69a71febf98bc205$var$MAX_BYTES = 65536;
 // https://github.com/nodejs/node/blob/master/lib/internal/crypto/random.js#L48
 var $69a71febf98bc205$var$MAX_UINT32 = 4294967295;
 function $69a71febf98bc205$var$oldBrowser() {
-    throw new Error('Secure random number generation is not supported by this browser.\nUse Chrome, Firefox or Internet Explorer 11');
+    throw new Error("Secure random number generation is not supported by this browser.\nUse Chrome, Firefox or Internet Explorer 11");
 }
 
 var $8k9oS = parcelRequire("8k9oS");
@@ -5079,7 +5072,7 @@ if ($69a71febf98bc205$var$crypto && $69a71febf98bc205$var$crypto.getRandomValues
 else module.exports = $69a71febf98bc205$var$oldBrowser;
 function $69a71febf98bc205$var$randomBytes(size, cb) {
     // phantomjs needs to throw
-    if (size > $69a71febf98bc205$var$MAX_UINT32) throw new RangeError('requested too many random bytes');
+    if (size > $69a71febf98bc205$var$MAX_UINT32) throw new RangeError("requested too many random bytes");
     var bytes = $69a71febf98bc205$require$Buffer.allocUnsafe(size);
     if (size > 0) {
         if (size > $69a71febf98bc205$var$MAX_BYTES) // can do at once see https://developer.mozilla.org/en-US/docs/Web/API/window.crypto.getRandomValues
@@ -5088,7 +5081,7 @@ function $69a71febf98bc205$var$randomBytes(size, cb) {
         $69a71febf98bc205$var$crypto.getRandomValues(bytes.slice(generated, generated + $69a71febf98bc205$var$MAX_BYTES));
         else $69a71febf98bc205$var$crypto.getRandomValues(bytes);
     }
-    if (typeof cb === 'function') return $36zFS.nextTick(function() {
+    if (typeof cb === "function") return $36zFS.nextTick(function() {
         cb(null, bytes);
     });
     return bytes;
@@ -5105,20 +5098,20 @@ var $242d9ad2c459da46$var$process = module.exports = {};
 var $242d9ad2c459da46$var$cachedSetTimeout;
 var $242d9ad2c459da46$var$cachedClearTimeout;
 function $242d9ad2c459da46$var$defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
+    throw new Error("setTimeout has not been defined");
 }
 function $242d9ad2c459da46$var$defaultClearTimeout() {
-    throw new Error('clearTimeout has not been defined');
+    throw new Error("clearTimeout has not been defined");
 }
 (function() {
     try {
-        if (typeof setTimeout === 'function') $242d9ad2c459da46$var$cachedSetTimeout = setTimeout;
+        if (typeof setTimeout === "function") $242d9ad2c459da46$var$cachedSetTimeout = setTimeout;
         else $242d9ad2c459da46$var$cachedSetTimeout = $242d9ad2c459da46$var$defaultSetTimout;
     } catch (e) {
         $242d9ad2c459da46$var$cachedSetTimeout = $242d9ad2c459da46$var$defaultSetTimout;
     }
     try {
-        if (typeof clearTimeout === 'function') $242d9ad2c459da46$var$cachedClearTimeout = clearTimeout;
+        if (typeof clearTimeout === "function") $242d9ad2c459da46$var$cachedClearTimeout = clearTimeout;
         else $242d9ad2c459da46$var$cachedClearTimeout = $242d9ad2c459da46$var$defaultClearTimeout;
     } catch (e1) {
         $242d9ad2c459da46$var$cachedClearTimeout = $242d9ad2c459da46$var$defaultClearTimeout;
@@ -5208,11 +5201,11 @@ function $242d9ad2c459da46$var$Item(fun, array) {
 $242d9ad2c459da46$var$Item.prototype.run = function() {
     this.fun.apply(null, this.array);
 };
-$242d9ad2c459da46$var$process.title = 'browser';
+$242d9ad2c459da46$var$process.title = "browser";
 $242d9ad2c459da46$var$process.browser = true;
 $242d9ad2c459da46$var$process.env = {};
 $242d9ad2c459da46$var$process.argv = [];
-$242d9ad2c459da46$var$process.version = ''; // empty string to avoid regexp issues
+$242d9ad2c459da46$var$process.version = ""; // empty string to avoid regexp issues
 $242d9ad2c459da46$var$process.versions = {};
 function $242d9ad2c459da46$var$noop() {}
 $242d9ad2c459da46$var$process.on = $242d9ad2c459da46$var$noop;
@@ -5228,13 +5221,13 @@ $242d9ad2c459da46$var$process.listeners = function(name) {
     return [];
 };
 $242d9ad2c459da46$var$process.binding = function(name) {
-    throw new Error('process.binding is not supported');
+    throw new Error("process.binding is not supported");
 };
 $242d9ad2c459da46$var$process.cwd = function() {
-    return '/';
+    return "/";
 };
 $242d9ad2c459da46$var$process.chdir = function(dir) {
-    throw new Error('process.chdir is not supported');
+    throw new Error("process.chdir is not supported");
 };
 $242d9ad2c459da46$var$process.umask = function() {
     return 0;
@@ -5263,24 +5256,24 @@ $60f77bacd8877140$var$SafeBuffer.prototype = Object.create($60f77bacd8877140$var
 // Copy static methods from Buffer
 $60f77bacd8877140$var$copyProps($60f77bacd8877140$var$Buffer, $60f77bacd8877140$var$SafeBuffer);
 $60f77bacd8877140$var$SafeBuffer.from = function(arg, encodingOrOffset, length) {
-    if (typeof arg === 'number') throw new TypeError('Argument must not be a number');
+    if (typeof arg === "number") throw new TypeError("Argument must not be a number");
     return $60f77bacd8877140$var$Buffer(arg, encodingOrOffset, length);
 };
 $60f77bacd8877140$var$SafeBuffer.alloc = function(size, fill, encoding) {
-    if (typeof size !== 'number') throw new TypeError('Argument must be a number');
+    if (typeof size !== "number") throw new TypeError("Argument must be a number");
     var buf = $60f77bacd8877140$var$Buffer(size);
     if (fill !== undefined) {
-        if (typeof encoding === 'string') buf.fill(fill, encoding);
+        if (typeof encoding === "string") buf.fill(fill, encoding);
         else buf.fill(fill);
     } else buf.fill(0);
     return buf;
 };
 $60f77bacd8877140$var$SafeBuffer.allocUnsafe = function(size) {
-    if (typeof size !== 'number') throw new TypeError('Argument must be a number');
+    if (typeof size !== "number") throw new TypeError("Argument must be a number");
     return $60f77bacd8877140$var$Buffer(size);
 };
 $60f77bacd8877140$var$SafeBuffer.allocUnsafeSlow = function(size) {
-    if (typeof size !== 'number') throw new TypeError('Argument must be a number');
+    if (typeof size !== "number") throw new TypeError("Argument must be a number");
     return $gGU47.SlowBuffer(size);
 };
 
@@ -5288,7 +5281,7 @@ $60f77bacd8877140$var$SafeBuffer.allocUnsafeSlow = function(size) {
 
 
 parcelRequire.register("cv73a", function(module, exports) {
-'use strict';
+"use strict";
 
 var $baEok = parcelRequire("baEok");
 
@@ -5300,7 +5293,7 @@ var $lCSWS = parcelRequire("lCSWS");
 
 var $h2SJW = parcelRequire("h2SJW");
 function $919dd94c9c2348dc$var$Hash(hash) {
-    $h2SJW.call(this, 'digest');
+    $h2SJW.call(this, "digest");
     this._hash = hash;
 }
 $baEok($919dd94c9c2348dc$var$Hash, $h2SJW);
@@ -5312,14 +5305,14 @@ $919dd94c9c2348dc$var$Hash.prototype._final = function() {
 };
 module.exports = function createHash(alg) {
     alg = alg.toLowerCase();
-    if (alg === 'md5') return new $2MW9T();
-    if (alg === 'rmd160' || alg === 'ripemd160') return new $iUB0B();
+    if (alg === "md5") return new $2MW9T();
+    if (alg === "rmd160" || alg === "ripemd160") return new $iUB0B();
     return new $919dd94c9c2348dc$var$Hash($lCSWS(alg));
 };
 
 });
 parcelRequire.register("baEok", function(module, exports) {
-if (typeof Object.create === 'function') // implementation from standard node.js 'util' module
+if (typeof Object.create === "function") // implementation from standard node.js 'util' module
 module.exports = function inherits(ctor, superCtor) {
     if (superCtor) {
         ctor.super_ = superCtor;
@@ -5347,7 +5340,7 @@ module.exports = function inherits(ctor, superCtor) {
 });
 
 parcelRequire.register("2MW9T", function(module, exports) {
-'use strict';
+"use strict";
 
 var $baEok = parcelRequire("baEok");
 
@@ -5480,7 +5473,7 @@ module.exports = $207d2d8971b347b4$var$MD5;
 
 });
 parcelRequire.register("lfuKR", function(module, exports) {
-'use strict';
+"use strict";
 
 var $8k9oS = parcelRequire("8k9oS");
 var $f782daf4b8d900a0$require$Buffer = $8k9oS.Buffer;
@@ -5490,7 +5483,7 @@ var $f782daf4b8d900a0$require$Transform = $8jMh9.Transform;
 
 var $baEok = parcelRequire("baEok");
 function $f782daf4b8d900a0$var$throwIfNotStringOrBuffer(val, prefix) {
-    if (!$f782daf4b8d900a0$require$Buffer.isBuffer(val) && typeof val !== 'string') throw new TypeError(prefix + ' must be a string or a buffer');
+    if (!$f782daf4b8d900a0$require$Buffer.isBuffer(val) && typeof val !== "string") throw new TypeError(prefix + " must be a string or a buffer");
 }
 function $f782daf4b8d900a0$var$HashBase(blockSize) {
     $f782daf4b8d900a0$require$Transform.call(this);
@@ -5525,8 +5518,8 @@ $f782daf4b8d900a0$var$HashBase.prototype._flush = function(callback) {
     callback(error);
 };
 $f782daf4b8d900a0$var$HashBase.prototype.update = function(data, encoding) {
-    $f782daf4b8d900a0$var$throwIfNotStringOrBuffer(data, 'Data');
-    if (this._finalized) throw new Error('Digest already called');
+    $f782daf4b8d900a0$var$throwIfNotStringOrBuffer(data, "Data");
+    if (this._finalized) throw new Error("Digest already called");
     if (!$f782daf4b8d900a0$require$Buffer.isBuffer(data)) data = $f782daf4b8d900a0$require$Buffer.from(data, encoding);
     // consume data
     var block = this._block;
@@ -5546,10 +5539,10 @@ $f782daf4b8d900a0$var$HashBase.prototype.update = function(data, encoding) {
     return this;
 };
 $f782daf4b8d900a0$var$HashBase.prototype._update = function() {
-    throw new Error('_update is not implemented');
+    throw new Error("_update is not implemented");
 };
 $f782daf4b8d900a0$var$HashBase.prototype.digest = function(encoding) {
-    if (this._finalized) throw new Error('Digest already called');
+    if (this._finalized) throw new Error("Digest already called");
     this._finalized = true;
     var digest = this._digest();
     if (encoding !== undefined) digest = digest.toString(encoding);
@@ -5560,7 +5553,7 @@ $f782daf4b8d900a0$var$HashBase.prototype.digest = function(encoding) {
     return digest;
 };
 $f782daf4b8d900a0$var$HashBase.prototype._digest = function() {
-    throw new Error('_digest is not implemented');
+    throw new Error("_digest is not implemented");
 };
 module.exports = $f782daf4b8d900a0$var$HashBase;
 
@@ -5605,7 +5598,7 @@ parcelRequire.register("guKjM", function(module, exports) {
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
-'use strict';
+"use strict";
 
 var $36zFS = parcelRequire("36zFS");
 module.exports = $c0236074eb3fc5d0$var$Readable;
@@ -5632,7 +5625,7 @@ function $c0236074eb3fc5d0$var$_isUint8Array(obj) {
 
 var $c7mcJ = parcelRequire("c7mcJ");
 var $c0236074eb3fc5d0$var$debug;
-if ($c7mcJ && $c7mcJ.debuglog) $c0236074eb3fc5d0$var$debug = $c7mcJ.debuglog('stream');
+if ($c7mcJ && $c7mcJ.debuglog) $c0236074eb3fc5d0$var$debug = $c7mcJ.debuglog("stream");
 else $c0236074eb3fc5d0$var$debug = function debug() {};
 
 var $ccqwk = parcelRequire("ccqwk");
@@ -5652,16 +5645,16 @@ var $c0236074eb3fc5d0$var$from;
 (parcelRequire("baEok"))($c0236074eb3fc5d0$var$Readable, $dv3s3);
 var $c0236074eb3fc5d0$var$errorOrDestroy = $9Z4lO.errorOrDestroy;
 var $c0236074eb3fc5d0$var$kProxyEvents = [
-    'error',
-    'close',
-    'destroy',
-    'pause',
-    'resume'
+    "error",
+    "close",
+    "destroy",
+    "pause",
+    "resume"
 ];
 function $c0236074eb3fc5d0$var$prependListener(emitter, event, fn) {
     // Sadly this is not cacheable as some libraries bundle their own
     // event emitter implementation with them.
-    if (typeof emitter.prependListener === 'function') return emitter.prependListener(event, fn); // This is a hack to make sure that our error handler is attached before any
+    if (typeof emitter.prependListener === "function") return emitter.prependListener(event, fn); // This is a hack to make sure that our error handler is attached before any
     // userland ones.  NEVER DO THIS. This is here only because this code needs
     // to continue to work with older versions of Node.js that do not include
     // the prependListener() method. The goal is to eventually remove this hack.
@@ -5681,12 +5674,12 @@ function $c0236074eb3fc5d0$var$ReadableState(options, stream, isDuplex) {
     // However, some cases require setting options to different
     // values for the readable and the writable sides of the duplex stream.
     // These options can be provided separately as readableXXX and writableXXX.
-    if (typeof isDuplex !== 'boolean') isDuplex = stream instanceof $c0236074eb3fc5d0$var$Duplex; // object stream flag. Used to make read(n) ignore n and to
+    if (typeof isDuplex !== "boolean") isDuplex = stream instanceof $c0236074eb3fc5d0$var$Duplex; // object stream flag. Used to make read(n) ignore n and to
     // make all the buffer merging and length checks go away
     this.objectMode = !!options.objectMode;
     if (isDuplex) this.objectMode = this.objectMode || !!options.readableObjectMode; // the point at which it stops calling _read() to fill the buffer
     // Note: 0 is a valid value, means "don't call _read preemptively ever"
-    this.highWaterMark = $c0236074eb3fc5d0$var$getHighWaterMark(this, options, 'readableHighWaterMark', isDuplex); // A linked list is used to store data chunks instead of an array because the
+    this.highWaterMark = $c0236074eb3fc5d0$var$getHighWaterMark(this, options, "readableHighWaterMark", isDuplex); // A linked list is used to store data chunks instead of an array because the
     // linked list can remove elements from the beginning faster than
     // array.shift()
     this.buffer = new $ccqwk();
@@ -5712,7 +5705,7 @@ function $c0236074eb3fc5d0$var$ReadableState(options, stream, isDuplex) {
     this.destroyed = false; // Crypto is kind of old and crusty.  Historically, its default string
     // encoding is 'binary' so we have to make this configurable.
     // Everything else in the universe uses 'utf8', though.
-    this.defaultEncoding = options.defaultEncoding || 'utf8'; // the number of writers that are awaiting a drain event in .pipe()s
+    this.defaultEncoding = options.defaultEncoding || "utf8"; // the number of writers that are awaiting a drain event in .pipe()s
     this.awaitDrain = 0; // if true, a maybeReadMore has been scheduled
     this.readingMore = false;
     this.decoder = null;
@@ -5732,12 +5725,12 @@ function $c0236074eb3fc5d0$var$Readable(options) {
     this._readableState = new $c0236074eb3fc5d0$var$ReadableState(options, this, isDuplex); // legacy
     this.readable = true;
     if (options) {
-        if (typeof options.read === 'function') this._read = options.read;
-        if (typeof options.destroy === 'function') this._destroy = options.destroy;
+        if (typeof options.read === "function") this._read = options.read;
+        if (typeof options.destroy === "function") this._destroy = options.destroy;
     }
     $dv3s3.call(this);
 }
-Object.defineProperty($c0236074eb3fc5d0$var$Readable.prototype, 'destroyed', {
+Object.defineProperty($c0236074eb3fc5d0$var$Readable.prototype, "destroyed", {
     // making it explicit this property is not enumerable
     // because otherwise some prototype manipulation in
     // userland will fail
@@ -5767,11 +5760,11 @@ $c0236074eb3fc5d0$var$Readable.prototype.push = function(chunk, encoding) {
     var state = this._readableState;
     var skipChunkCheck;
     if (!state.objectMode) {
-        if (typeof chunk === 'string') {
+        if (typeof chunk === "string") {
             encoding = encoding || state.defaultEncoding;
             if (encoding !== state.encoding) {
                 chunk = $c0236074eb3fc5d0$require$Buffer.from(chunk, encoding);
-                encoding = '';
+                encoding = "";
             }
             skipChunkCheck = true;
         }
@@ -5782,7 +5775,7 @@ $c0236074eb3fc5d0$var$Readable.prototype.unshift = function(chunk) {
     return $c0236074eb3fc5d0$var$readableAddChunk(this, chunk, null, true, false);
 };
 function $c0236074eb3fc5d0$var$readableAddChunk(stream, chunk, encoding, addToFront, skipChunkCheck) {
-    $c0236074eb3fc5d0$var$debug('readableAddChunk', chunk);
+    $c0236074eb3fc5d0$var$debug("readableAddChunk", chunk);
     var state = stream._readableState;
     if (chunk === null) {
         state.reading = false;
@@ -5792,7 +5785,7 @@ function $c0236074eb3fc5d0$var$readableAddChunk(stream, chunk, encoding, addToFr
         if (!skipChunkCheck) er = $c0236074eb3fc5d0$var$chunkInvalid(state, chunk);
         if (er) $c0236074eb3fc5d0$var$errorOrDestroy(stream, er);
         else if (state.objectMode || chunk && chunk.length > 0) {
-            if (typeof chunk !== 'string' && !state.objectMode && Object.getPrototypeOf(chunk) !== $c0236074eb3fc5d0$require$Buffer.prototype) chunk = $c0236074eb3fc5d0$var$_uint8ArrayToBuffer(chunk);
+            if (typeof chunk !== "string" && !state.objectMode && Object.getPrototypeOf(chunk) !== $c0236074eb3fc5d0$require$Buffer.prototype) chunk = $c0236074eb3fc5d0$var$_uint8ArrayToBuffer(chunk);
             if (addToFront) {
                 if (state.endEmitted) $c0236074eb3fc5d0$var$errorOrDestroy(stream, new $c0236074eb3fc5d0$var$ERR_STREAM_UNSHIFT_AFTER_END_EVENT());
                 else $c0236074eb3fc5d0$var$addChunk(stream, state, chunk, true);
@@ -5818,7 +5811,7 @@ function $c0236074eb3fc5d0$var$readableAddChunk(stream, chunk, encoding, addToFr
 function $c0236074eb3fc5d0$var$addChunk(stream, state, chunk, addToFront) {
     if (state.flowing && state.length === 0 && !state.sync) {
         state.awaitDrain = 0;
-        stream.emit('data', chunk);
+        stream.emit("data", chunk);
     } else {
         // update the buffer info.
         state.length += state.objectMode ? 1 : chunk.length;
@@ -5830,10 +5823,10 @@ function $c0236074eb3fc5d0$var$addChunk(stream, state, chunk, addToFront) {
 }
 function $c0236074eb3fc5d0$var$chunkInvalid(state, chunk) {
     var er;
-    if (!$c0236074eb3fc5d0$var$_isUint8Array(chunk) && typeof chunk !== 'string' && chunk !== undefined && !state.objectMode) er = new $c0236074eb3fc5d0$var$ERR_INVALID_ARG_TYPE('chunk', [
-        'string',
-        'Buffer',
-        'Uint8Array'
+    if (!$c0236074eb3fc5d0$var$_isUint8Array(chunk) && typeof chunk !== "string" && chunk !== undefined && !state.objectMode) er = new $c0236074eb3fc5d0$var$ERR_INVALID_ARG_TYPE("chunk", [
+        "string",
+        "Buffer",
+        "Uint8Array"
     ], chunk);
     return er;
 }
@@ -5847,13 +5840,13 @@ $c0236074eb3fc5d0$var$Readable.prototype.setEncoding = function(enc) {
     this._readableState.decoder = decoder; // If setEncoding(null), decoder.encoding equals utf8
     this._readableState.encoding = this._readableState.decoder.encoding; // Iterate over current buffer to convert already stored Buffers:
     var p = this._readableState.buffer.head;
-    var content = '';
+    var content = "";
     while(p !== null){
         content += decoder.write(p.data);
         p = p.next;
     }
     this._readableState.buffer.clear();
-    if (content !== '') this._readableState.buffer.push(content);
+    if (content !== "") this._readableState.buffer.push(content);
     this._readableState.length = content.length;
     return this;
 }; // Don't raise the hwm > 1GB
@@ -5892,7 +5885,7 @@ function $c0236074eb3fc5d0$var$howMuchToRead(n, state) {
     return state.length;
 } // you can override either this method, or the async _read(n) below.
 $c0236074eb3fc5d0$var$Readable.prototype.read = function(n) {
-    $c0236074eb3fc5d0$var$debug('read', n);
+    $c0236074eb3fc5d0$var$debug("read", n);
     n = parseInt(n, 10);
     var state = this._readableState;
     var nOrig = n;
@@ -5900,7 +5893,7 @@ $c0236074eb3fc5d0$var$Readable.prototype.read = function(n) {
     // already have a bunch of data in the buffer, then just trigger
     // the 'readable' event and move on.
     if (n === 0 && state.needReadable && ((state.highWaterMark !== 0 ? state.length >= state.highWaterMark : state.length > 0) || state.ended)) {
-        $c0236074eb3fc5d0$var$debug('read: emitReadable', state.length, state.ended);
+        $c0236074eb3fc5d0$var$debug("read: emitReadable", state.length, state.ended);
         if (state.length === 0 && state.ended) $c0236074eb3fc5d0$var$endReadable(this);
         else $c0236074eb3fc5d0$var$emitReadable(this);
         return null;
@@ -5932,17 +5925,17 @@ $c0236074eb3fc5d0$var$Readable.prototype.read = function(n) {
     // 3. Actually pull the requested chunks out of the buffer and return.
     // if we need a readable event, then we need to do some reading.
     var doRead = state.needReadable;
-    $c0236074eb3fc5d0$var$debug('need readable', doRead); // if we currently have less than the highWaterMark, then also read some
+    $c0236074eb3fc5d0$var$debug("need readable", doRead); // if we currently have less than the highWaterMark, then also read some
     if (state.length === 0 || state.length - n < state.highWaterMark) {
         doRead = true;
-        $c0236074eb3fc5d0$var$debug('length less than watermark', doRead);
+        $c0236074eb3fc5d0$var$debug("length less than watermark", doRead);
     } // however, if we've ended, then there's no point, and if we're already
     // reading, then it's unnecessary.
     if (state.ended || state.reading) {
         doRead = false;
-        $c0236074eb3fc5d0$var$debug('reading or ended', doRead);
+        $c0236074eb3fc5d0$var$debug("reading or ended", doRead);
     } else if (doRead) {
-        $c0236074eb3fc5d0$var$debug('do read');
+        $c0236074eb3fc5d0$var$debug("do read");
         state.reading = true;
         state.sync = true; // if the length is currently zero, then we *need* a readable event.
         if (state.length === 0) state.needReadable = true; // call internal read method
@@ -5967,11 +5960,11 @@ $c0236074eb3fc5d0$var$Readable.prototype.read = function(n) {
         if (!state.ended) state.needReadable = true; // If we tried to read() past the EOF, then emit end on the next tick.
         if (nOrig !== n && state.ended) $c0236074eb3fc5d0$var$endReadable(this);
     }
-    if (ret !== null) this.emit('data', ret);
+    if (ret !== null) this.emit("data", ret);
     return ret;
 };
 function $c0236074eb3fc5d0$var$onEofChunk(stream, state) {
-    $c0236074eb3fc5d0$var$debug('onEofChunk');
+    $c0236074eb3fc5d0$var$debug("onEofChunk");
     if (state.ended) return;
     if (state.decoder) {
         var chunk = state.decoder.end();
@@ -5998,19 +5991,19 @@ function $c0236074eb3fc5d0$var$onEofChunk(stream, state) {
 // a nextTick recursion warning, but that's not so bad.
 function $c0236074eb3fc5d0$var$emitReadable(stream) {
     var state = stream._readableState;
-    $c0236074eb3fc5d0$var$debug('emitReadable', state.needReadable, state.emittedReadable);
+    $c0236074eb3fc5d0$var$debug("emitReadable", state.needReadable, state.emittedReadable);
     state.needReadable = false;
     if (!state.emittedReadable) {
-        $c0236074eb3fc5d0$var$debug('emitReadable', state.flowing);
+        $c0236074eb3fc5d0$var$debug("emitReadable", state.flowing);
         state.emittedReadable = true;
         $36zFS.nextTick($c0236074eb3fc5d0$var$emitReadable_, stream);
     }
 }
 function $c0236074eb3fc5d0$var$emitReadable_(stream) {
     var state = stream._readableState;
-    $c0236074eb3fc5d0$var$debug('emitReadable_', state.destroyed, state.length, state.ended);
+    $c0236074eb3fc5d0$var$debug("emitReadable_", state.destroyed, state.length, state.ended);
     if (!state.destroyed && (state.length || state.ended)) {
-        stream.emit('readable');
+        stream.emit("readable");
         state.emittedReadable = false;
     } // The stream needs another readable event if
     // 1. It is not flowing, as the flow mechanism will take
@@ -6058,7 +6051,7 @@ function $c0236074eb3fc5d0$var$maybeReadMore_(stream, state) {
     //   up calling push() with more data.
     while(!state.reading && !state.ended && (state.length < state.highWaterMark || state.flowing && state.length === 0)){
         var len = state.length;
-        $c0236074eb3fc5d0$var$debug('maybeReadMore read 0');
+        $c0236074eb3fc5d0$var$debug("maybeReadMore read 0");
         stream.read(0);
         if (len === state.length) break;
     }
@@ -6068,7 +6061,7 @@ function $c0236074eb3fc5d0$var$maybeReadMore_(stream, state) {
 // for virtual (non-string, non-buffer) streams, "length" is somewhat
 // arbitrary, and perhaps not very meaningful.
 $c0236074eb3fc5d0$var$Readable.prototype._read = function(n) {
-    $c0236074eb3fc5d0$var$errorOrDestroy(this, new $c0236074eb3fc5d0$var$ERR_METHOD_NOT_IMPLEMENTED('_read()'));
+    $c0236074eb3fc5d0$var$errorOrDestroy(this, new $c0236074eb3fc5d0$var$ERR_METHOD_NOT_IMPLEMENTED("_read()"));
 };
 $c0236074eb3fc5d0$var$Readable.prototype.pipe = function(dest, pipeOpts) {
     var src = this;
@@ -6088,14 +6081,14 @@ $c0236074eb3fc5d0$var$Readable.prototype.pipe = function(dest, pipeOpts) {
             break;
     }
     state.pipesCount += 1;
-    $c0236074eb3fc5d0$var$debug('pipe count=%d opts=%j', state.pipesCount, pipeOpts);
+    $c0236074eb3fc5d0$var$debug("pipe count=%d opts=%j", state.pipesCount, pipeOpts);
     var doEnd = (!pipeOpts || pipeOpts.end !== false) && dest !== $36zFS.stdout && dest !== $36zFS.stderr;
     var endFn = doEnd ? onend : unpipe;
     if (state.endEmitted) $36zFS.nextTick(endFn);
-    else src.once('end', endFn);
-    dest.on('unpipe', onunpipe);
+    else src.once("end", endFn);
+    dest.on("unpipe", onunpipe);
     function onunpipe(readable, unpipeInfo) {
-        $c0236074eb3fc5d0$var$debug('onunpipe');
+        $c0236074eb3fc5d0$var$debug("onunpipe");
         if (readable === src) {
             if (unpipeInfo && unpipeInfo.hasUnpiped === false) {
                 unpipeInfo.hasUnpiped = true;
@@ -6104,25 +6097,25 @@ $c0236074eb3fc5d0$var$Readable.prototype.pipe = function(dest, pipeOpts) {
         }
     }
     function onend() {
-        $c0236074eb3fc5d0$var$debug('onend');
+        $c0236074eb3fc5d0$var$debug("onend");
         dest.end();
     } // when the dest drains, it reduces the awaitDrain counter
     // on the source.  This would be more elegant with a .once()
     // handler in flow(), but adding and removing repeatedly is
     // too slow.
     var ondrain = $c0236074eb3fc5d0$var$pipeOnDrain(src);
-    dest.on('drain', ondrain);
+    dest.on("drain", ondrain);
     var cleanedUp = false;
     function cleanup() {
-        $c0236074eb3fc5d0$var$debug('cleanup'); // cleanup event handlers once the pipe is broken
-        dest.removeListener('close', onclose);
-        dest.removeListener('finish', onfinish);
-        dest.removeListener('drain', ondrain);
-        dest.removeListener('error', onerror);
-        dest.removeListener('unpipe', onunpipe);
-        src.removeListener('end', onend);
-        src.removeListener('end', unpipe);
-        src.removeListener('data', ondata);
+        $c0236074eb3fc5d0$var$debug("cleanup"); // cleanup event handlers once the pipe is broken
+        dest.removeListener("close", onclose);
+        dest.removeListener("finish", onfinish);
+        dest.removeListener("drain", ondrain);
+        dest.removeListener("error", onerror);
+        dest.removeListener("unpipe", onunpipe);
+        src.removeListener("end", onend);
+        src.removeListener("end", unpipe);
+        src.removeListener("data", ondata);
         cleanedUp = true; // if the reader is waiting for a drain event from this
         // specific writer, then it would cause it to never start
         // flowing again.
@@ -6130,18 +6123,18 @@ $c0236074eb3fc5d0$var$Readable.prototype.pipe = function(dest, pipeOpts) {
         // If we don't know, then assume that we are waiting for one.
         if (state.awaitDrain && (!dest._writableState || dest._writableState.needDrain)) ondrain();
     }
-    src.on('data', ondata);
+    src.on("data", ondata);
     function ondata(chunk) {
-        $c0236074eb3fc5d0$var$debug('ondata');
+        $c0236074eb3fc5d0$var$debug("ondata");
         var ret = dest.write(chunk);
-        $c0236074eb3fc5d0$var$debug('dest.write', ret);
+        $c0236074eb3fc5d0$var$debug("dest.write", ret);
         if (ret === false) {
             // If the user unpiped during `dest.write()`, it is possible
             // to get stuck in a permanently paused state if that write
             // also returned false.
             // => Check whether `dest` is still a piping destination.
             if ((state.pipesCount === 1 && state.pipes === dest || state.pipesCount > 1 && $c0236074eb3fc5d0$var$indexOf(state.pipes, dest) !== -1) && !cleanedUp) {
-                $c0236074eb3fc5d0$var$debug('false write response, pause', state.awaitDrain);
+                $c0236074eb3fc5d0$var$debug("false write response, pause", state.awaitDrain);
                 state.awaitDrain++;
             }
             src.pause();
@@ -6149,30 +6142,30 @@ $c0236074eb3fc5d0$var$Readable.prototype.pipe = function(dest, pipeOpts) {
     } // if the dest has an error, then stop piping into it.
     // however, don't suppress the throwing behavior for this.
     function onerror(er) {
-        $c0236074eb3fc5d0$var$debug('onerror', er);
+        $c0236074eb3fc5d0$var$debug("onerror", er);
         unpipe();
-        dest.removeListener('error', onerror);
-        if ($c0236074eb3fc5d0$var$EElistenerCount(dest, 'error') === 0) $c0236074eb3fc5d0$var$errorOrDestroy(dest, er);
+        dest.removeListener("error", onerror);
+        if ($c0236074eb3fc5d0$var$EElistenerCount(dest, "error") === 0) $c0236074eb3fc5d0$var$errorOrDestroy(dest, er);
     } // Make sure our error handler is attached before userland ones.
-    $c0236074eb3fc5d0$var$prependListener(dest, 'error', onerror); // Both close and finish should trigger unpipe, but only once.
+    $c0236074eb3fc5d0$var$prependListener(dest, "error", onerror); // Both close and finish should trigger unpipe, but only once.
     function onclose() {
-        dest.removeListener('finish', onfinish);
+        dest.removeListener("finish", onfinish);
         unpipe();
     }
-    dest.once('close', onclose);
+    dest.once("close", onclose);
     function onfinish() {
-        $c0236074eb3fc5d0$var$debug('onfinish');
-        dest.removeListener('close', onclose);
+        $c0236074eb3fc5d0$var$debug("onfinish");
+        dest.removeListener("close", onclose);
         unpipe();
     }
-    dest.once('finish', onfinish);
+    dest.once("finish", onfinish);
     function unpipe() {
-        $c0236074eb3fc5d0$var$debug('unpipe');
+        $c0236074eb3fc5d0$var$debug("unpipe");
         src.unpipe(dest);
     } // tell the dest that it's being piped to
-    dest.emit('pipe', src); // start the flow if it hasn't been started already.
+    dest.emit("pipe", src); // start the flow if it hasn't been started already.
     if (!state.flowing) {
-        $c0236074eb3fc5d0$var$debug('pipe resume');
+        $c0236074eb3fc5d0$var$debug("pipe resume");
         src.resume();
     }
     return dest;
@@ -6180,9 +6173,9 @@ $c0236074eb3fc5d0$var$Readable.prototype.pipe = function(dest, pipeOpts) {
 function $c0236074eb3fc5d0$var$pipeOnDrain(src) {
     return function pipeOnDrainFunctionResult() {
         var state = src._readableState;
-        $c0236074eb3fc5d0$var$debug('pipeOnDrain', state.awaitDrain);
+        $c0236074eb3fc5d0$var$debug("pipeOnDrain", state.awaitDrain);
         if (state.awaitDrain) state.awaitDrain--;
-        if (state.awaitDrain === 0 && $c0236074eb3fc5d0$var$EElistenerCount(src, 'data')) {
+        if (state.awaitDrain === 0 && $c0236074eb3fc5d0$var$EElistenerCount(src, "data")) {
             state.flowing = true;
             $c0236074eb3fc5d0$var$flow(src);
         }
@@ -6201,7 +6194,7 @@ $c0236074eb3fc5d0$var$Readable.prototype.unpipe = function(dest) {
         state.pipes = null;
         state.pipesCount = 0;
         state.flowing = false;
-        if (dest) dest.emit('unpipe', this, unpipeInfo);
+        if (dest) dest.emit("unpipe", this, unpipeInfo);
         return this;
     } // slow case. multiple pipe destinations.
     if (!dest) {
@@ -6211,7 +6204,7 @@ $c0236074eb3fc5d0$var$Readable.prototype.unpipe = function(dest) {
         state.pipes = null;
         state.pipesCount = 0;
         state.flowing = false;
-        for(var i = 0; i < len; i++)dests[i].emit('unpipe', this, {
+        for(var i = 0; i < len; i++)dests[i].emit("unpipe", this, {
             hasUnpiped: false
         });
         return this;
@@ -6221,24 +6214,24 @@ $c0236074eb3fc5d0$var$Readable.prototype.unpipe = function(dest) {
     state.pipes.splice(index, 1);
     state.pipesCount -= 1;
     if (state.pipesCount === 1) state.pipes = state.pipes[0];
-    dest.emit('unpipe', this, unpipeInfo);
+    dest.emit("unpipe", this, unpipeInfo);
     return this;
 }; // set up data events if they are asked for
 // Ensure readable listeners eventually get something
 $c0236074eb3fc5d0$var$Readable.prototype.on = function(ev, fn) {
     var res = $dv3s3.prototype.on.call(this, ev, fn);
     var state = this._readableState;
-    if (ev === 'data') {
+    if (ev === "data") {
         // update readableListening so that resume() may be a no-op
         // a few lines down. This is needed to support once('readable').
-        state.readableListening = this.listenerCount('readable') > 0; // Try start flowing on next tick if stream isn't explicitly paused
+        state.readableListening = this.listenerCount("readable") > 0; // Try start flowing on next tick if stream isn't explicitly paused
         if (state.flowing !== false) this.resume();
-    } else if (ev === 'readable') {
+    } else if (ev === "readable") {
         if (!state.endEmitted && !state.readableListening) {
             state.readableListening = state.needReadable = true;
             state.flowing = false;
             state.emittedReadable = false;
-            $c0236074eb3fc5d0$var$debug('on readable', state.length, state.reading);
+            $c0236074eb3fc5d0$var$debug("on readable", state.length, state.reading);
             if (state.length) $c0236074eb3fc5d0$var$emitReadable(this);
             else if (!state.reading) $36zFS.nextTick($c0236074eb3fc5d0$var$nReadingNextTick, this);
         }
@@ -6248,7 +6241,7 @@ $c0236074eb3fc5d0$var$Readable.prototype.on = function(ev, fn) {
 $c0236074eb3fc5d0$var$Readable.prototype.addListener = $c0236074eb3fc5d0$var$Readable.prototype.on;
 $c0236074eb3fc5d0$var$Readable.prototype.removeListener = function(ev, fn) {
     var res = $dv3s3.prototype.removeListener.call(this, ev, fn);
-    if (ev === 'readable') // We need to check if there is someone still listening to
+    if (ev === "readable") // We need to check if there is someone still listening to
     // readable and reset the state. However this needs to happen
     // after readable has been emitted but before I/O (nextTick) to
     // support once('readable', fn) cycles. This means that calling
@@ -6259,7 +6252,7 @@ $c0236074eb3fc5d0$var$Readable.prototype.removeListener = function(ev, fn) {
 };
 $c0236074eb3fc5d0$var$Readable.prototype.removeAllListeners = function(ev) {
     var res = $dv3s3.prototype.removeAllListeners.apply(this, arguments);
-    if (ev === 'readable' || ev === undefined) // We need to check if there is someone still listening to
+    if (ev === "readable" || ev === undefined) // We need to check if there is someone still listening to
     // readable and reset the state. However this needs to happen
     // after readable has been emitted but before I/O (nextTick) to
     // support once('readable', fn) cycles. This means that calling
@@ -6270,21 +6263,21 @@ $c0236074eb3fc5d0$var$Readable.prototype.removeAllListeners = function(ev) {
 };
 function $c0236074eb3fc5d0$var$updateReadableListening(self) {
     var state = self._readableState;
-    state.readableListening = self.listenerCount('readable') > 0;
+    state.readableListening = self.listenerCount("readable") > 0;
     if (state.resumeScheduled && !state.paused) // flowing needs to be set to true now, otherwise
     // the upcoming resume will not flow.
     state.flowing = true; // crude way to check if we should resume
-    else if (self.listenerCount('data') > 0) self.resume();
+    else if (self.listenerCount("data") > 0) self.resume();
 }
 function $c0236074eb3fc5d0$var$nReadingNextTick(self) {
-    $c0236074eb3fc5d0$var$debug('readable nexttick read 0');
+    $c0236074eb3fc5d0$var$debug("readable nexttick read 0");
     self.read(0);
 } // pause() and resume() are remnants of the legacy readable stream API
 // If the user uses them, then switch into old mode.
 $c0236074eb3fc5d0$var$Readable.prototype.resume = function() {
     var state = this._readableState;
     if (!state.flowing) {
-        $c0236074eb3fc5d0$var$debug('resume'); // we flow only if there is no one listening
+        $c0236074eb3fc5d0$var$debug("resume"); // we flow only if there is no one listening
         // for readable, but we still have to call
         // resume()
         state.flowing = !state.readableListening;
@@ -6300,26 +6293,26 @@ function $c0236074eb3fc5d0$var$resume(stream, state) {
     }
 }
 function $c0236074eb3fc5d0$var$resume_(stream, state) {
-    $c0236074eb3fc5d0$var$debug('resume', state.reading);
+    $c0236074eb3fc5d0$var$debug("resume", state.reading);
     if (!state.reading) stream.read(0);
     state.resumeScheduled = false;
-    stream.emit('resume');
+    stream.emit("resume");
     $c0236074eb3fc5d0$var$flow(stream);
     if (state.flowing && !state.reading) stream.read(0);
 }
 $c0236074eb3fc5d0$var$Readable.prototype.pause = function() {
-    $c0236074eb3fc5d0$var$debug('call pause flowing=%j', this._readableState.flowing);
+    $c0236074eb3fc5d0$var$debug("call pause flowing=%j", this._readableState.flowing);
     if (this._readableState.flowing !== false) {
-        $c0236074eb3fc5d0$var$debug('pause');
+        $c0236074eb3fc5d0$var$debug("pause");
         this._readableState.flowing = false;
-        this.emit('pause');
+        this.emit("pause");
     }
     this._readableState.paused = true;
     return this;
 };
 function $c0236074eb3fc5d0$var$flow(stream) {
     var state = stream._readableState;
-    $c0236074eb3fc5d0$var$debug('flow', state.flowing);
+    $c0236074eb3fc5d0$var$debug("flow", state.flowing);
     while(state.flowing && stream.read() !== null);
 } // wrap an old-style stream as the async data source.
 // This is *not* part of the readable stream interface.
@@ -6328,16 +6321,16 @@ $c0236074eb3fc5d0$var$Readable.prototype.wrap = function(stream) {
     var _this = this;
     var state = this._readableState;
     var paused = false;
-    stream.on('end', function() {
-        $c0236074eb3fc5d0$var$debug('wrapped end');
+    stream.on("end", function() {
+        $c0236074eb3fc5d0$var$debug("wrapped end");
         if (state.decoder && !state.ended) {
             var chunk = state.decoder.end();
             if (chunk && chunk.length) _this.push(chunk);
         }
         _this.push(null);
     });
-    stream.on('data', function(chunk) {
-        $c0236074eb3fc5d0$var$debug('wrapped data');
+    stream.on("data", function(chunk) {
+        $c0236074eb3fc5d0$var$debug("wrapped data");
         if (state.decoder) chunk = state.decoder.write(chunk); // don't skip over falsy values in objectMode
         if (state.objectMode && (chunk === null || chunk === undefined)) return;
         else if (!state.objectMode && (!chunk || !chunk.length)) return;
@@ -6348,7 +6341,7 @@ $c0236074eb3fc5d0$var$Readable.prototype.wrap = function(stream) {
         }
     }); // proxy all the other methods.
     // important when wrapping filters and duplexes.
-    for(var i in stream)if (this[i] === undefined && typeof stream[i] === 'function') this[i] = function methodWrap(method) {
+    for(var i in stream)if (this[i] === undefined && typeof stream[i] === "function") this[i] = function methodWrap(method) {
         return function methodWrapReturnFunction() {
             return stream[method].apply(stream, arguments);
         };
@@ -6358,7 +6351,7 @@ $c0236074eb3fc5d0$var$Readable.prototype.wrap = function(stream) {
      // when we try to consume some more bytes, simply unpause the
     // underlying stream.
     this._read = function(n) {
-        $c0236074eb3fc5d0$var$debug('wrapped _read', n);
+        $c0236074eb3fc5d0$var$debug("wrapped _read", n);
         if (paused) {
             paused = false;
             stream.resume();
@@ -6367,11 +6360,11 @@ $c0236074eb3fc5d0$var$Readable.prototype.wrap = function(stream) {
     return this;
 };
 
-if (typeof Symbol === 'function') $c0236074eb3fc5d0$var$Readable.prototype[Symbol.asyncIterator] = function() {
+if (typeof Symbol === "function") $c0236074eb3fc5d0$var$Readable.prototype[Symbol.asyncIterator] = function() {
     if ($c0236074eb3fc5d0$var$createReadableStreamAsyncIterator === undefined) $c0236074eb3fc5d0$var$createReadableStreamAsyncIterator = (parcelRequire("b3ER6"));
     return $c0236074eb3fc5d0$var$createReadableStreamAsyncIterator(this);
 };
-Object.defineProperty($c0236074eb3fc5d0$var$Readable.prototype, 'readableHighWaterMark', {
+Object.defineProperty($c0236074eb3fc5d0$var$Readable.prototype, "readableHighWaterMark", {
     // making it explicit this property is not enumerable
     // because otherwise some prototype manipulation in
     // userland will fail
@@ -6380,7 +6373,7 @@ Object.defineProperty($c0236074eb3fc5d0$var$Readable.prototype, 'readableHighWat
         return this._readableState.highWaterMark;
     }
 });
-Object.defineProperty($c0236074eb3fc5d0$var$Readable.prototype, 'readableBuffer', {
+Object.defineProperty($c0236074eb3fc5d0$var$Readable.prototype, "readableBuffer", {
     // making it explicit this property is not enumerable
     // because otherwise some prototype manipulation in
     // userland will fail
@@ -6389,7 +6382,7 @@ Object.defineProperty($c0236074eb3fc5d0$var$Readable.prototype, 'readableBuffer'
         return this._readableState && this._readableState.buffer;
     }
 });
-Object.defineProperty($c0236074eb3fc5d0$var$Readable.prototype, 'readableFlowing', {
+Object.defineProperty($c0236074eb3fc5d0$var$Readable.prototype, "readableFlowing", {
     // making it explicit this property is not enumerable
     // because otherwise some prototype manipulation in
     // userland will fail
@@ -6402,7 +6395,7 @@ Object.defineProperty($c0236074eb3fc5d0$var$Readable.prototype, 'readableFlowing
     }
 }); // exposed for testing purposes only.
 $c0236074eb3fc5d0$var$Readable._fromList = $c0236074eb3fc5d0$var$fromList;
-Object.defineProperty($c0236074eb3fc5d0$var$Readable.prototype, 'readableLength', {
+Object.defineProperty($c0236074eb3fc5d0$var$Readable.prototype, "readableLength", {
     // making it explicit this property is not enumerable
     // because otherwise some prototype manipulation in
     // userland will fail
@@ -6421,7 +6414,7 @@ function $c0236074eb3fc5d0$var$fromList(n, state) {
     if (state.objectMode) ret = state.buffer.shift();
     else if (!n || n >= state.length) {
         // read it all, truncate the list
-        if (state.decoder) ret = state.buffer.join('');
+        if (state.decoder) ret = state.buffer.join("");
         else if (state.buffer.length === 1) ret = state.buffer.first();
         else ret = state.buffer.concat(state.length);
         state.buffer.clear();
@@ -6431,18 +6424,18 @@ function $c0236074eb3fc5d0$var$fromList(n, state) {
 }
 function $c0236074eb3fc5d0$var$endReadable(stream) {
     var state = stream._readableState;
-    $c0236074eb3fc5d0$var$debug('endReadable', state.endEmitted);
+    $c0236074eb3fc5d0$var$debug("endReadable", state.endEmitted);
     if (!state.endEmitted) {
         state.ended = true;
         $36zFS.nextTick($c0236074eb3fc5d0$var$endReadableNT, state, stream);
     }
 }
 function $c0236074eb3fc5d0$var$endReadableNT(state, stream) {
-    $c0236074eb3fc5d0$var$debug('endReadableNT', state.endEmitted, state.length); // Check that we didn't get one last unshift.
+    $c0236074eb3fc5d0$var$debug("endReadableNT", state.endEmitted, state.length); // Check that we didn't get one last unshift.
     if (!state.endEmitted && state.length === 0) {
         state.endEmitted = true;
         stream.readable = false;
-        stream.emit('end');
+        stream.emit("end");
         if (state.autoDestroy) {
             // In case of duplex streams we need a way to detect
             // if the writable side is ready for autoDestroy as well
@@ -6452,7 +6445,7 @@ function $c0236074eb3fc5d0$var$endReadableNT(state, stream) {
     }
 }
 
-if (typeof Symbol === 'function') $c0236074eb3fc5d0$var$Readable.from = function(iterable, opts) {
+if (typeof Symbol === "function") $c0236074eb3fc5d0$var$Readable.from = function(iterable, opts) {
     if ($c0236074eb3fc5d0$var$from === undefined) $c0236074eb3fc5d0$var$from = (parcelRequire("dBC93"));
     return $c0236074eb3fc5d0$var$from($c0236074eb3fc5d0$var$Readable, iterable, opts);
 };
@@ -6485,13 +6478,13 @@ parcelRequire.register("8GOdr", function(module, exports) {
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
-'use strict';
-var $653932cad08a465d$var$R = typeof Reflect === 'object' ? Reflect : null;
-var $653932cad08a465d$var$ReflectApply = $653932cad08a465d$var$R && typeof $653932cad08a465d$var$R.apply === 'function' ? $653932cad08a465d$var$R.apply : function ReflectApply(target, receiver, args) {
+"use strict";
+var $653932cad08a465d$var$R = typeof Reflect === "object" ? Reflect : null;
+var $653932cad08a465d$var$ReflectApply = $653932cad08a465d$var$R && typeof $653932cad08a465d$var$R.apply === "function" ? $653932cad08a465d$var$R.apply : function ReflectApply(target, receiver, args) {
     return Function.prototype.apply.call(target, receiver, args);
 };
 var $653932cad08a465d$var$ReflectOwnKeys;
-if ($653932cad08a465d$var$R && typeof $653932cad08a465d$var$R.ownKeys === 'function') $653932cad08a465d$var$ReflectOwnKeys = $653932cad08a465d$var$R.ownKeys;
+if ($653932cad08a465d$var$R && typeof $653932cad08a465d$var$R.ownKeys === "function") $653932cad08a465d$var$ReflectOwnKeys = $653932cad08a465d$var$R.ownKeys;
 else if (Object.getOwnPropertySymbols) $653932cad08a465d$var$ReflectOwnKeys = function ReflectOwnKeys(target) {
     return Object.getOwnPropertyNames(target).concat(Object.getOwnPropertySymbols(target));
 };
@@ -6518,15 +6511,15 @@ $653932cad08a465d$var$EventEmitter.prototype._maxListeners = undefined;
 // added to it. This is a useful default which helps finding memory leaks.
 var $653932cad08a465d$var$defaultMaxListeners = 10;
 function $653932cad08a465d$var$checkListener(listener) {
-    if (typeof listener !== 'function') throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
+    if (typeof listener !== "function") throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
 }
-Object.defineProperty($653932cad08a465d$var$EventEmitter, 'defaultMaxListeners', {
+Object.defineProperty($653932cad08a465d$var$EventEmitter, "defaultMaxListeners", {
     enumerable: true,
     get: function() {
         return $653932cad08a465d$var$defaultMaxListeners;
     },
     set: function(arg) {
-        if (typeof arg !== 'number' || arg < 0 || $653932cad08a465d$var$NumberIsNaN(arg)) throw new RangeError('The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + arg + '.');
+        if (typeof arg !== "number" || arg < 0 || $653932cad08a465d$var$NumberIsNaN(arg)) throw new RangeError('The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + arg + ".");
         $653932cad08a465d$var$defaultMaxListeners = arg;
     }
 });
@@ -6540,7 +6533,7 @@ $653932cad08a465d$var$EventEmitter.init = function() {
 // Obviously not all Emitters should be limited to 10. This function allows
 // that to be increased. Set to zero for unlimited.
 $653932cad08a465d$var$EventEmitter.prototype.setMaxListeners = function setMaxListeners(n) {
-    if (typeof n !== 'number' || n < 0 || $653932cad08a465d$var$NumberIsNaN(n)) throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received ' + n + '.');
+    if (typeof n !== "number" || n < 0 || $653932cad08a465d$var$NumberIsNaN(n)) throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received ' + n + ".");
     this._maxListeners = n;
     return this;
 };
@@ -6554,7 +6547,7 @@ $653932cad08a465d$var$EventEmitter.prototype.getMaxListeners = function getMaxLi
 $653932cad08a465d$var$EventEmitter.prototype.emit = function emit(type) {
     var args = [];
     for(var i = 1; i < arguments.length; i++)args.push(arguments[i]);
-    var doError = type === 'error';
+    var doError = type === "error";
     var events = this._events;
     if (events !== undefined) doError = doError && events.error === undefined;
     else if (!doError) return false;
@@ -6566,13 +6559,13 @@ $653932cad08a465d$var$EventEmitter.prototype.emit = function emit(type) {
         // up in Node's output if this results in an unhandled exception.
         throw er; // Unhandled 'error' event
         // At least give some kind of context to the user
-        var err = new Error('Unhandled error.' + (er ? ' (' + er.message + ')' : ''));
+        var err = new Error("Unhandled error." + (er ? " (" + er.message + ")" : ""));
         err.context = er;
         throw err; // Unhandled 'error' event
     }
     var handler = events[type];
     if (handler === undefined) return false;
-    if (typeof handler === 'function') $653932cad08a465d$var$ReflectApply(handler, this, args);
+    if (typeof handler === "function") $653932cad08a465d$var$ReflectApply(handler, this, args);
     else {
         var len = handler.length;
         var listeners = $653932cad08a465d$var$arrayClone(handler, len);
@@ -6593,7 +6586,7 @@ function $653932cad08a465d$var$_addListener(target, type, listener, prepend) {
         // To avoid recursion in the case that type === "newListener"! Before
         // adding it to the listeners, first emit "newListener".
         if (events.newListener !== undefined) {
-            target.emit('newListener', type, listener.listener ? listener.listener : listener);
+            target.emit("newListener", type, listener.listener ? listener.listener : listener);
             // Re-assign `events` because a newListener handler could have caused the
             // this._events to be assigned to a new object
             events = target._events;
@@ -6605,7 +6598,7 @@ function $653932cad08a465d$var$_addListener(target, type, listener, prepend) {
         existing = events[type] = listener;
         ++target._eventsCount;
     } else {
-        if (typeof existing === 'function') // Adding the second element, need to change to array.
+        if (typeof existing === "function") // Adding the second element, need to change to array.
         existing = events[type] = prepend ? [
             listener,
             existing
@@ -6621,8 +6614,8 @@ function $653932cad08a465d$var$_addListener(target, type, listener, prepend) {
             existing.warned = true;
             // No error code for this since it is a Warning
             // eslint-disable-next-line no-restricted-syntax
-            var w = new Error('Possible EventEmitter memory leak detected. ' + existing.length + ' ' + String(type) + ' listeners ' + 'added. Use emitter.setMaxListeners() to ' + 'increase limit');
-            w.name = 'MaxListenersExceededWarning';
+            var w = new Error("Possible EventEmitter memory leak detected. " + existing.length + " " + String(type) + " listeners " + "added. Use emitter.setMaxListeners() to " + "increase limit");
+            w.name = "MaxListenersExceededWarning";
             w.emitter = target;
             w.type = type;
             w.count = existing.length;
@@ -6681,9 +6674,9 @@ $653932cad08a465d$var$EventEmitter.prototype.removeListener = function removeLis
         if (--this._eventsCount === 0) this._events = Object.create(null);
         else {
             delete events[type];
-            if (events.removeListener) this.emit('removeListener', type, list.listener || listener);
+            if (events.removeListener) this.emit("removeListener", type, list.listener || listener);
         }
-    } else if (typeof list !== 'function') {
+    } else if (typeof list !== "function") {
         position = -1;
         for(i = list.length - 1; i >= 0; i--)if (list[i] === listener || list[i].listener === listener) {
             originalListener = list[i].listener;
@@ -6694,7 +6687,7 @@ $653932cad08a465d$var$EventEmitter.prototype.removeListener = function removeLis
         if (position === 0) list.shift();
         else $653932cad08a465d$var$spliceOne(list, position);
         if (list.length === 1) events[type] = list[0];
-        if (events.removeListener !== undefined) this.emit('removeListener', type, originalListener || listener);
+        if (events.removeListener !== undefined) this.emit("removeListener", type, originalListener || listener);
     }
     return this;
 };
@@ -6720,16 +6713,16 @@ $653932cad08a465d$var$EventEmitter.prototype.removeAllListeners = function remov
         var key;
         for(i = 0; i < keys.length; ++i){
             key = keys[i];
-            if (key === 'removeListener') continue;
+            if (key === "removeListener") continue;
             this.removeAllListeners(key);
         }
-        this.removeAllListeners('removeListener');
+        this.removeAllListeners("removeListener");
         this._events = Object.create(null);
         this._eventsCount = 0;
         return this;
     }
     listeners = events[type];
-    if (typeof listeners === 'function') this.removeListener(type, listeners);
+    if (typeof listeners === "function") this.removeListener(type, listeners);
     else if (listeners !== undefined) // LIFO order
     for(i = listeners.length - 1; i >= 0; i--)this.removeListener(type, listeners[i]);
     return this;
@@ -6739,7 +6732,7 @@ function $653932cad08a465d$var$_listeners(target, type, unwrap) {
     if (events === undefined) return [];
     var evlistener = events[type];
     if (evlistener === undefined) return [];
-    if (typeof evlistener === 'function') return unwrap ? [
+    if (typeof evlistener === "function") return unwrap ? [
         evlistener.listener || evlistener
     ] : [
         evlistener
@@ -6753,7 +6746,7 @@ $653932cad08a465d$var$EventEmitter.prototype.rawListeners = function rawListener
     return $653932cad08a465d$var$_listeners(this, type, false);
 };
 $653932cad08a465d$var$EventEmitter.listenerCount = function(emitter, type) {
-    if (typeof emitter.listenerCount === 'function') return emitter.listenerCount(type);
+    if (typeof emitter.listenerCount === "function") return emitter.listenerCount(type);
     else return $653932cad08a465d$var$listenerCount.call(emitter, type);
 };
 $653932cad08a465d$var$EventEmitter.prototype.listenerCount = $653932cad08a465d$var$listenerCount;
@@ -6761,7 +6754,7 @@ function $653932cad08a465d$var$listenerCount(type) {
     var events = this._events;
     if (events !== undefined) {
         var evlistener = events[type];
-        if (typeof evlistener === 'function') return 1;
+        if (typeof evlistener === "function") return 1;
         else if (evlistener !== undefined) return evlistener.length;
     }
     return 0;
@@ -6790,25 +6783,25 @@ function $653932cad08a465d$var$once(emitter, name) {
             reject(err);
         }
         function resolver() {
-            if (typeof emitter.removeListener === 'function') emitter.removeListener('error', errorListener);
+            if (typeof emitter.removeListener === "function") emitter.removeListener("error", errorListener);
             resolve([].slice.call(arguments));
         }
         $653932cad08a465d$var$eventTargetAgnosticAddListener(emitter, name, resolver, {
             once: true
         });
-        if (name !== 'error') $653932cad08a465d$var$addErrorHandlerIfEventEmitter(emitter, errorListener, {
+        if (name !== "error") $653932cad08a465d$var$addErrorHandlerIfEventEmitter(emitter, errorListener, {
             once: true
         });
     });
 }
 function $653932cad08a465d$var$addErrorHandlerIfEventEmitter(emitter, handler, flags) {
-    if (typeof emitter.on === 'function') $653932cad08a465d$var$eventTargetAgnosticAddListener(emitter, 'error', handler, flags);
+    if (typeof emitter.on === "function") $653932cad08a465d$var$eventTargetAgnosticAddListener(emitter, "error", handler, flags);
 }
 function $653932cad08a465d$var$eventTargetAgnosticAddListener(emitter, name, listener, flags) {
-    if (typeof emitter.on === 'function') {
+    if (typeof emitter.on === "function") {
         if (flags.once) emitter.once(name, listener);
         else emitter.on(name, listener);
-    } else if (typeof emitter.addEventListener === 'function') // EventTarget does not have `error` event semantics like Node
+    } else if (typeof emitter.addEventListener === "function") // EventTarget does not have `error` event semantics like Node
     // EventEmitters, we do not listen for `error` events here.
     emitter.addEventListener(name, function wrapListener(arg) {
         // IE does not have builtin `{ once: true }` support so we
@@ -6833,7 +6826,7 @@ parcelRequire.register("c7mcJ", function(module, exports) {
 });
 
 parcelRequire.register("ccqwk", function(module, exports) {
-'use strict';
+"use strict";
 function $8e1b2d6bd7da6334$var$ownKeys(object, enumerableOnly) {
     var keys = Object.keys(object);
     if (Object.getOwnPropertySymbols) {
@@ -6891,7 +6884,7 @@ var $8e1b2d6bd7da6334$var$Buffer = $gGU47.Buffer;
 
 var $c7mcJ = parcelRequire("c7mcJ");
 var $8e1b2d6bd7da6334$var$inspect = $c7mcJ.inspect;
-var $8e1b2d6bd7da6334$var$custom = $8e1b2d6bd7da6334$var$inspect && $8e1b2d6bd7da6334$var$inspect.custom || 'inspect';
+var $8e1b2d6bd7da6334$var$custom = $8e1b2d6bd7da6334$var$inspect && $8e1b2d6bd7da6334$var$inspect.custom || "inspect";
 function $8e1b2d6bd7da6334$var$copyBuffer(src, target, offset) {
     $8e1b2d6bd7da6334$var$Buffer.prototype.copy.call(src, target, offset);
 }
@@ -6949,9 +6942,9 @@ module.exports = /*#__PURE__*/ function() {
         {
             key: "join",
             value: function join(s) {
-                if (this.length === 0) return '';
+                if (this.length === 0) return "";
                 var p = this.head;
-                var ret = '' + p.data;
+                var ret = "" + p.data;
                 while(p = p.next)ret += s + p.data;
                 return ret;
             }
@@ -7070,7 +7063,7 @@ module.exports = /*#__PURE__*/ function() {
 });
 
 parcelRequire.register("9Z4lO", function(module, exports) {
-'use strict'; // undocumented cb() API, needed for core, not for public API
+"use strict"; // undocumented cb() API, needed for core, not for public API
 
 var $36zFS = parcelRequire("36zFS");
 function $744d2f888819bf34$var$destroy(err1, cb) {
@@ -7113,7 +7106,7 @@ function $744d2f888819bf34$var$emitErrorAndCloseNT(self, err) {
 function $744d2f888819bf34$var$emitCloseNT(self) {
     if (self._writableState && !self._writableState.emitClose) return;
     if (self._readableState && !self._readableState.emitClose) return;
-    self.emit('close');
+    self.emit("close");
 }
 function $744d2f888819bf34$var$undestroy() {
     if (this._readableState) {
@@ -7133,7 +7126,7 @@ function $744d2f888819bf34$var$undestroy() {
     }
 }
 function $744d2f888819bf34$var$emitErrorNT(self, err) {
-    self.emit('error', err);
+    self.emit("error", err);
 }
 function $744d2f888819bf34$var$errorOrDestroy(stream, err) {
     // We have tests that rely on errors being emitted
@@ -7144,7 +7137,7 @@ function $744d2f888819bf34$var$errorOrDestroy(stream, err) {
     var rState = stream._readableState;
     var wState = stream._writableState;
     if (rState && rState.autoDestroy || wState && wState.autoDestroy) stream.destroy(err);
-    else stream.emit('error', err);
+    else stream.emit("error", err);
 }
 module.exports = {
     destroy: $744d2f888819bf34$var$destroy,
@@ -7155,7 +7148,7 @@ module.exports = {
 });
 
 parcelRequire.register("52fNV", function(module, exports) {
-'use strict';
+"use strict";
 
 var $1wnE4 = parcelRequire("1wnE4");
 var $3aa9660634694709$var$ERR_INVALID_OPT_VALUE = $1wnE4.codes.ERR_INVALID_OPT_VALUE;
@@ -7166,7 +7159,7 @@ function $3aa9660634694709$var$getHighWaterMark(state, options, duplexKey, isDup
     var hwm = $3aa9660634694709$var$highWaterMarkFrom(options, isDuplex, duplexKey);
     if (hwm != null) {
         if (!(isFinite(hwm) && Math.floor(hwm) === hwm) || hwm < 0) {
-            var name = isDuplex ? duplexKey : 'highWaterMark';
+            var name = isDuplex ? duplexKey : "highWaterMark";
             throw new $3aa9660634694709$var$ERR_INVALID_OPT_VALUE(name, hwm);
         }
         return Math.floor(hwm);
@@ -7182,7 +7175,7 @@ parcelRequire.register("1wnE4", function(module, exports) {
 
 $parcel$export(module.exports, "codes", function () { return $11bb1f0c779a52ad$export$e45cb6485273080e; }, function (v) { return $11bb1f0c779a52ad$export$e45cb6485273080e = v; });
 var $11bb1f0c779a52ad$export$e45cb6485273080e;
-'use strict';
+"use strict";
 function $11bb1f0c779a52ad$var$_inheritsLoose(subClass, superClass) {
     subClass.prototype = Object.create(superClass.prototype);
     subClass.prototype.constructor = subClass;
@@ -7192,7 +7185,7 @@ var $11bb1f0c779a52ad$var$codes = {};
 function $11bb1f0c779a52ad$var$createErrorType(code, message, Base) {
     if (!Base) Base = Error;
     function getMessage(arg1, arg2, arg3) {
-        if (typeof message === 'string') return message;
+        if (typeof message === "string") return message;
         else return message(arg1, arg2, arg3);
     }
     var NodeError1 = /*#__PURE__*/ function(_Base) {
@@ -7212,7 +7205,7 @@ function $11bb1f0c779a52ad$var$oneOf(expected, thing) {
         expected = expected.map(function(i) {
             return String(i);
         });
-        if (len > 2) return "one of ".concat(thing, " ").concat(expected.slice(0, len - 1).join(', '), ", or ") + expected[len - 1];
+        if (len > 2) return "one of ".concat(thing, " ").concat(expected.slice(0, len - 1).join(", "), ", or ") + expected[len - 1];
         else if (len === 2) return "one of ".concat(thing, " ").concat(expected[0], " or ").concat(expected[1]);
         else return "of ".concat(thing, " ").concat(expected[0]);
     } else return "of ".concat(thing, " ").concat(String(expected));
@@ -7225,46 +7218,46 @@ function $11bb1f0c779a52ad$var$endsWith(str, search, this_len) {
     return str.substring(this_len - search.length, this_len) === search;
 } // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes
 function $11bb1f0c779a52ad$var$includes(str, search, start) {
-    if (typeof start !== 'number') start = 0;
+    if (typeof start !== "number") start = 0;
     if (start + search.length > str.length) return false;
     else return str.indexOf(search, start) !== -1;
 }
-$11bb1f0c779a52ad$var$createErrorType('ERR_INVALID_OPT_VALUE', function(name, value) {
+$11bb1f0c779a52ad$var$createErrorType("ERR_INVALID_OPT_VALUE", function(name, value) {
     return 'The value "' + value + '" is invalid for option "' + name + '"';
 }, TypeError);
-$11bb1f0c779a52ad$var$createErrorType('ERR_INVALID_ARG_TYPE', function(name, expected, actual) {
+$11bb1f0c779a52ad$var$createErrorType("ERR_INVALID_ARG_TYPE", function(name, expected, actual) {
     // determiner: 'must be' or 'must not be'
     var determiner;
-    if (typeof expected === 'string' && $11bb1f0c779a52ad$var$startsWith(expected, 'not ')) {
-        determiner = 'must not be';
-        expected = expected.replace(/^not /, '');
-    } else determiner = 'must be';
+    if (typeof expected === "string" && $11bb1f0c779a52ad$var$startsWith(expected, "not ")) {
+        determiner = "must not be";
+        expected = expected.replace(/^not /, "");
+    } else determiner = "must be";
     var msg;
-    if ($11bb1f0c779a52ad$var$endsWith(name, ' argument')) // For cases like 'first argument'
-    msg = "The ".concat(name, " ").concat(determiner, " ").concat($11bb1f0c779a52ad$var$oneOf(expected, 'type'));
+    if ($11bb1f0c779a52ad$var$endsWith(name, " argument")) // For cases like 'first argument'
+    msg = "The ".concat(name, " ").concat(determiner, " ").concat($11bb1f0c779a52ad$var$oneOf(expected, "type"));
     else {
-        var type = $11bb1f0c779a52ad$var$includes(name, '.') ? 'property' : 'argument';
-        msg = "The \"".concat(name, "\" ").concat(type, " ").concat(determiner, " ").concat($11bb1f0c779a52ad$var$oneOf(expected, 'type'));
+        var type = $11bb1f0c779a52ad$var$includes(name, ".") ? "property" : "argument";
+        msg = 'The "'.concat(name, '" ').concat(type, " ").concat(determiner, " ").concat($11bb1f0c779a52ad$var$oneOf(expected, "type"));
     }
     msg += ". Received type ".concat(typeof actual);
     return msg;
 }, TypeError);
-$11bb1f0c779a52ad$var$createErrorType('ERR_STREAM_PUSH_AFTER_EOF', 'stream.push() after EOF');
-$11bb1f0c779a52ad$var$createErrorType('ERR_METHOD_NOT_IMPLEMENTED', function(name) {
-    return 'The ' + name + ' method is not implemented';
+$11bb1f0c779a52ad$var$createErrorType("ERR_STREAM_PUSH_AFTER_EOF", "stream.push() after EOF");
+$11bb1f0c779a52ad$var$createErrorType("ERR_METHOD_NOT_IMPLEMENTED", function(name) {
+    return "The " + name + " method is not implemented";
 });
-$11bb1f0c779a52ad$var$createErrorType('ERR_STREAM_PREMATURE_CLOSE', 'Premature close');
-$11bb1f0c779a52ad$var$createErrorType('ERR_STREAM_DESTROYED', function(name) {
-    return 'Cannot call ' + name + ' after a stream was destroyed';
+$11bb1f0c779a52ad$var$createErrorType("ERR_STREAM_PREMATURE_CLOSE", "Premature close");
+$11bb1f0c779a52ad$var$createErrorType("ERR_STREAM_DESTROYED", function(name) {
+    return "Cannot call " + name + " after a stream was destroyed";
 });
-$11bb1f0c779a52ad$var$createErrorType('ERR_MULTIPLE_CALLBACK', 'Callback called multiple times');
-$11bb1f0c779a52ad$var$createErrorType('ERR_STREAM_CANNOT_PIPE', 'Cannot pipe, not readable');
-$11bb1f0c779a52ad$var$createErrorType('ERR_STREAM_WRITE_AFTER_END', 'write after end');
-$11bb1f0c779a52ad$var$createErrorType('ERR_STREAM_NULL_VALUES', 'May not write null values to stream', TypeError);
-$11bb1f0c779a52ad$var$createErrorType('ERR_UNKNOWN_ENCODING', function(arg) {
-    return 'Unknown encoding: ' + arg;
+$11bb1f0c779a52ad$var$createErrorType("ERR_MULTIPLE_CALLBACK", "Callback called multiple times");
+$11bb1f0c779a52ad$var$createErrorType("ERR_STREAM_CANNOT_PIPE", "Cannot pipe, not readable");
+$11bb1f0c779a52ad$var$createErrorType("ERR_STREAM_WRITE_AFTER_END", "write after end");
+$11bb1f0c779a52ad$var$createErrorType("ERR_STREAM_NULL_VALUES", "May not write null values to stream", TypeError);
+$11bb1f0c779a52ad$var$createErrorType("ERR_UNKNOWN_ENCODING", function(arg) {
+    return "Unknown encoding: " + arg;
 }, TypeError);
-$11bb1f0c779a52ad$var$createErrorType('ERR_STREAM_UNSHIFT_AFTER_END_EVENT', 'stream.unshift() after end event');
+$11bb1f0c779a52ad$var$createErrorType("ERR_STREAM_UNSHIFT_AFTER_END_EVENT", "stream.unshift() after end event");
 $11bb1f0c779a52ad$export$e45cb6485273080e = $11bb1f0c779a52ad$var$codes;
 
 });
@@ -7295,13 +7288,13 @@ parcelRequire.register("3Sygc", function(module, exports) {
 // Since JS doesn't have multiple prototypal inheritance, this class
 // prototypally inherits from Readable, and then parasitically from
 // Writable.
-'use strict';
+"use strict";
 
 var $36zFS = parcelRequire("36zFS");
 /*<replacement>*/ var $2d30fd9b4d20168f$var$objectKeys = Object.keys || function(obj) {
-    var keys = [];
-    for(var key in obj)keys.push(key);
-    return keys;
+    var keys1 = [];
+    for(var key in obj)keys1.push(key);
+    return keys1;
 };
 /*</replacement>*/ module.exports = $2d30fd9b4d20168f$var$Duplex;
 
@@ -7326,11 +7319,11 @@ function $2d30fd9b4d20168f$var$Duplex(options) {
         if (options.writable === false) this.writable = false;
         if (options.allowHalfOpen === false) {
             this.allowHalfOpen = false;
-            this.once('end', $2d30fd9b4d20168f$var$onend);
+            this.once("end", $2d30fd9b4d20168f$var$onend);
         }
     }
 }
-Object.defineProperty($2d30fd9b4d20168f$var$Duplex.prototype, 'writableHighWaterMark', {
+Object.defineProperty($2d30fd9b4d20168f$var$Duplex.prototype, "writableHighWaterMark", {
     // making it explicit this property is not enumerable
     // because otherwise some prototype manipulation in
     // userland will fail
@@ -7339,7 +7332,7 @@ Object.defineProperty($2d30fd9b4d20168f$var$Duplex.prototype, 'writableHighWater
         return this._writableState.highWaterMark;
     }
 });
-Object.defineProperty($2d30fd9b4d20168f$var$Duplex.prototype, 'writableBuffer', {
+Object.defineProperty($2d30fd9b4d20168f$var$Duplex.prototype, "writableBuffer", {
     // making it explicit this property is not enumerable
     // because otherwise some prototype manipulation in
     // userland will fail
@@ -7348,7 +7341,7 @@ Object.defineProperty($2d30fd9b4d20168f$var$Duplex.prototype, 'writableBuffer', 
         return this._writableState && this._writableState.getBuffer();
     }
 });
-Object.defineProperty($2d30fd9b4d20168f$var$Duplex.prototype, 'writableLength', {
+Object.defineProperty($2d30fd9b4d20168f$var$Duplex.prototype, "writableLength", {
     // making it explicit this property is not enumerable
     // because otherwise some prototype manipulation in
     // userland will fail
@@ -7366,7 +7359,7 @@ function $2d30fd9b4d20168f$var$onend() {
 function $2d30fd9b4d20168f$var$onEndNT(self) {
     self.end();
 }
-Object.defineProperty($2d30fd9b4d20168f$var$Duplex.prototype, 'destroyed', {
+Object.defineProperty($2d30fd9b4d20168f$var$Duplex.prototype, "destroyed", {
     // making it explicit this property is not enumerable
     // because otherwise some prototype manipulation in
     // userland will fail
@@ -7411,7 +7404,7 @@ parcelRequire.register("gmw45", function(module, exports) {
 // A bit simpler than readable streams.
 // Implement an async ._write(chunk, encoding, cb), and it'll handle all
 // the drain event emission and buffering.
-'use strict';
+"use strict";
 
 var $36zFS = parcelRequire("36zFS");
 module.exports = $be9792da81681517$var$Writable;
@@ -7469,13 +7462,13 @@ function $be9792da81681517$var$WritableState(options, stream, isDuplex) {
     // However, some cases require setting options to different
     // values for the readable and the writable sides of the duplex stream,
     // e.g. options.readableObjectMode vs. options.writableObjectMode, etc.
-    if (typeof isDuplex !== 'boolean') isDuplex = stream instanceof $be9792da81681517$var$Duplex; // object stream flag to indicate whether or not this stream
+    if (typeof isDuplex !== "boolean") isDuplex = stream instanceof $be9792da81681517$var$Duplex; // object stream flag to indicate whether or not this stream
     // contains buffers or objects.
     this.objectMode = !!options.objectMode;
     if (isDuplex) this.objectMode = this.objectMode || !!options.writableObjectMode; // the point at which write() starts returning false
     // Note: 0 is a valid value, means that we always return false if
     // the entire buffer is not flushed immediately on write()
-    this.highWaterMark = $be9792da81681517$var$getHighWaterMark(this, options, 'writableHighWaterMark', isDuplex); // if _final has been called
+    this.highWaterMark = $be9792da81681517$var$getHighWaterMark(this, options, "writableHighWaterMark", isDuplex); // if _final has been called
     this.finalCalled = false; // drain event flag.
     this.needDrain = false; // at the start of calling end()
     this.ending = false; // when end() has been called, and returned
@@ -7488,7 +7481,7 @@ function $be9792da81681517$var$WritableState(options, stream, isDuplex) {
     this.decodeStrings = !noDecode; // Crypto is kind of old and crusty.  Historically, its default string
     // encoding is 'binary' so we have to make this configurable.
     // Everything else in the universe uses 'utf8', though.
-    this.defaultEncoding = options.defaultEncoding || 'utf8'; // not an actual buffer we keep track of, but a measurement
+    this.defaultEncoding = options.defaultEncoding || "utf8"; // not an actual buffer we keep track of, but a measurement
     // of how much we're waiting to get pushed to some underlying
     // socket or file.
     this.length = 0; // a flag to see when we're in the middle of a write.
@@ -7530,16 +7523,16 @@ $be9792da81681517$var$WritableState.prototype.getBuffer = function getBuffer() {
 };
 (function() {
     try {
-        Object.defineProperty($be9792da81681517$var$WritableState.prototype, 'buffer', {
+        Object.defineProperty($be9792da81681517$var$WritableState.prototype, "buffer", {
             get: $be9792da81681517$var$internalUtil.deprecate(function writableStateBufferGetter() {
                 return this.getBuffer();
-            }, "_writableState.buffer is deprecated. Use _writableState.getBuffer instead.", 'DEP0003')
+            }, "_writableState.buffer is deprecated. Use _writableState.getBuffer instead.", "DEP0003")
         });
     } catch (_) {}
 })(); // Test _writableState for inheritance to account for Duplex streams,
 // whose prototype chain only points to Readable.
 var $be9792da81681517$var$realHasInstance;
-if (typeof Symbol === 'function' && Symbol.hasInstance && typeof Function.prototype[Symbol.hasInstance] === 'function') {
+if (typeof Symbol === "function" && Symbol.hasInstance && typeof Function.prototype[Symbol.hasInstance] === "function") {
     $be9792da81681517$var$realHasInstance = Function.prototype[Symbol.hasInstance];
     Object.defineProperty($be9792da81681517$var$Writable, Symbol.hasInstance, {
         value: function value(object) {
@@ -7566,10 +7559,10 @@ function $be9792da81681517$var$Writable(options) {
     this._writableState = new $be9792da81681517$var$WritableState(options, this, isDuplex); // legacy.
     this.writable = true;
     if (options) {
-        if (typeof options.write === 'function') this._write = options.write;
-        if (typeof options.writev === 'function') this._writev = options.writev;
-        if (typeof options.destroy === 'function') this._destroy = options.destroy;
-        if (typeof options.final === 'function') this._final = options.final;
+        if (typeof options.write === "function") this._write = options.write;
+        if (typeof options.writev === "function") this._writev = options.writev;
+        if (typeof options.destroy === "function") this._destroy = options.destroy;
+        if (typeof options.final === "function") this._final = options.final;
     }
     $dv3s3.call(this);
 } // Otherwise people can pipe Writable streams, which is just wrong.
@@ -7586,9 +7579,9 @@ function $be9792da81681517$var$writeAfterEnd(stream, cb) {
 function $be9792da81681517$var$validChunk(stream, state, chunk, cb) {
     var er;
     if (chunk === null) er = new $be9792da81681517$var$ERR_STREAM_NULL_VALUES();
-    else if (typeof chunk !== 'string' && !state.objectMode) er = new $be9792da81681517$var$ERR_INVALID_ARG_TYPE('chunk', [
-        'string',
-        'Buffer'
+    else if (typeof chunk !== "string" && !state.objectMode) er = new $be9792da81681517$var$ERR_INVALID_ARG_TYPE("chunk", [
+        "string",
+        "Buffer"
     ], chunk);
     if (er) {
         $be9792da81681517$var$errorOrDestroy(stream, er);
@@ -7602,13 +7595,13 @@ $be9792da81681517$var$Writable.prototype.write = function(chunk, encoding, cb) {
     var ret = false;
     var isBuf = !state.objectMode && $be9792da81681517$var$_isUint8Array(chunk);
     if (isBuf && !$be9792da81681517$require$Buffer.isBuffer(chunk)) chunk = $be9792da81681517$var$_uint8ArrayToBuffer(chunk);
-    if (typeof encoding === 'function') {
+    if (typeof encoding === "function") {
         cb = encoding;
         encoding = null;
     }
-    if (isBuf) encoding = 'buffer';
+    if (isBuf) encoding = "buffer";
     else if (!encoding) encoding = state.defaultEncoding;
-    if (typeof cb !== 'function') cb = $be9792da81681517$var$nop;
+    if (typeof cb !== "function") cb = $be9792da81681517$var$nop;
     if (state.ending) $be9792da81681517$var$writeAfterEnd(this, cb);
     else if (isBuf || $be9792da81681517$var$validChunk(this, state, chunk, cb)) {
         state.pendingcb++;
@@ -7628,24 +7621,24 @@ $be9792da81681517$var$Writable.prototype.uncork = function() {
 };
 $be9792da81681517$var$Writable.prototype.setDefaultEncoding = function setDefaultEncoding(encoding) {
     // node::ParseEncoding() requires lower case.
-    if (typeof encoding === 'string') encoding = encoding.toLowerCase();
+    if (typeof encoding === "string") encoding = encoding.toLowerCase();
     if (!([
-        'hex',
-        'utf8',
-        'utf-8',
-        'ascii',
-        'binary',
-        'base64',
-        'ucs2',
-        'ucs-2',
-        'utf16le',
-        'utf-16le',
-        'raw'
-    ].indexOf((encoding + '').toLowerCase()) > -1)) throw new $be9792da81681517$var$ERR_UNKNOWN_ENCODING(encoding);
+        "hex",
+        "utf8",
+        "utf-8",
+        "ascii",
+        "binary",
+        "base64",
+        "ucs2",
+        "ucs-2",
+        "utf16le",
+        "utf-16le",
+        "raw"
+    ].indexOf((encoding + "").toLowerCase()) > -1)) throw new $be9792da81681517$var$ERR_UNKNOWN_ENCODING(encoding);
     this._writableState.defaultEncoding = encoding;
     return this;
 };
-Object.defineProperty($be9792da81681517$var$Writable.prototype, 'writableBuffer', {
+Object.defineProperty($be9792da81681517$var$Writable.prototype, "writableBuffer", {
     // making it explicit this property is not enumerable
     // because otherwise some prototype manipulation in
     // userland will fail
@@ -7655,10 +7648,10 @@ Object.defineProperty($be9792da81681517$var$Writable.prototype, 'writableBuffer'
     }
 });
 function $be9792da81681517$var$decodeChunk(state, chunk, encoding) {
-    if (!state.objectMode && state.decodeStrings !== false && typeof chunk === 'string') chunk = $be9792da81681517$require$Buffer.from(chunk, encoding);
+    if (!state.objectMode && state.decodeStrings !== false && typeof chunk === "string") chunk = $be9792da81681517$require$Buffer.from(chunk, encoding);
     return chunk;
 }
-Object.defineProperty($be9792da81681517$var$Writable.prototype, 'writableHighWaterMark', {
+Object.defineProperty($be9792da81681517$var$Writable.prototype, "writableHighWaterMark", {
     // making it explicit this property is not enumerable
     // because otherwise some prototype manipulation in
     // userland will fail
@@ -7674,7 +7667,7 @@ function $be9792da81681517$var$writeOrBuffer(stream, state, isBuf, chunk, encodi
         var newChunk = $be9792da81681517$var$decodeChunk(state, chunk, encoding);
         if (chunk !== newChunk) {
             isBuf = true;
-            encoding = 'buffer';
+            encoding = "buffer";
             chunk = newChunk;
         }
     }
@@ -7702,7 +7695,7 @@ function $be9792da81681517$var$doWrite(stream, state, writev, len, chunk, encodi
     state.writecb = cb;
     state.writing = true;
     state.sync = true;
-    if (state.destroyed) state.onwrite(new $be9792da81681517$var$ERR_STREAM_DESTROYED('write'));
+    if (state.destroyed) state.onwrite(new $be9792da81681517$var$ERR_STREAM_DESTROYED("write"));
     else if (writev) stream._writev(chunk, state.onwrite);
     else stream._write(chunk, encoding, state.onwrite);
     state.sync = false;
@@ -7737,7 +7730,7 @@ function $be9792da81681517$var$onwrite(stream, er) {
     var state = stream._writableState;
     var sync = state.sync;
     var cb = state.writecb;
-    if (typeof cb !== 'function') throw new $be9792da81681517$var$ERR_MULTIPLE_CALLBACK();
+    if (typeof cb !== "function") throw new $be9792da81681517$var$ERR_MULTIPLE_CALLBACK();
     $be9792da81681517$var$onwriteStateUpdate(state);
     if (er) $be9792da81681517$var$onwriteError(stream, state, sync, er, cb);
     else {
@@ -7759,7 +7752,7 @@ function $be9792da81681517$var$afterWrite(stream, state, finished, cb) {
 function $be9792da81681517$var$onwriteDrain(stream, state) {
     if (state.length === 0 && state.needDrain) {
         state.needDrain = false;
-        stream.emit('drain');
+        stream.emit("drain");
     }
 } // if there's something in the buffer waiting, then process it
 function $be9792da81681517$var$clearBuffer(stream, state) {
@@ -7780,7 +7773,7 @@ function $be9792da81681517$var$clearBuffer(stream, state) {
             count += 1;
         }
         buffer.allBuffers = allBuffers;
-        $be9792da81681517$var$doWrite(stream, state, true, state.length, buffer, '', holder.finish); // doWrite is almost always async, defer these to save a bit of time
+        $be9792da81681517$var$doWrite(stream, state, true, state.length, buffer, "", holder.finish); // doWrite is almost always async, defer these to save a bit of time
         // as the hot path ends with doWrite
         state.pendingcb++;
         state.lastBufferedRequest = null;
@@ -7810,16 +7803,16 @@ function $be9792da81681517$var$clearBuffer(stream, state) {
     state.bufferProcessing = false;
 }
 $be9792da81681517$var$Writable.prototype._write = function(chunk, encoding, cb) {
-    cb(new $be9792da81681517$var$ERR_METHOD_NOT_IMPLEMENTED('_write()'));
+    cb(new $be9792da81681517$var$ERR_METHOD_NOT_IMPLEMENTED("_write()"));
 };
 $be9792da81681517$var$Writable.prototype._writev = null;
 $be9792da81681517$var$Writable.prototype.end = function(chunk, encoding, cb) {
     var state = this._writableState;
-    if (typeof chunk === 'function') {
+    if (typeof chunk === "function") {
         cb = chunk;
         chunk = null;
         encoding = null;
-    } else if (typeof encoding === 'function') {
+    } else if (typeof encoding === "function") {
         cb = encoding;
         encoding = null;
     }
@@ -7831,7 +7824,7 @@ $be9792da81681517$var$Writable.prototype.end = function(chunk, encoding, cb) {
     if (!state.ending) $be9792da81681517$var$endWritable(this, state, cb);
     return this;
 };
-Object.defineProperty($be9792da81681517$var$Writable.prototype, 'writableLength', {
+Object.defineProperty($be9792da81681517$var$Writable.prototype, "writableLength", {
     // making it explicit this property is not enumerable
     // because otherwise some prototype manipulation in
     // userland will fail
@@ -7848,19 +7841,19 @@ function $be9792da81681517$var$callFinal(stream, state) {
         state.pendingcb--;
         if (err) $be9792da81681517$var$errorOrDestroy(stream, err);
         state.prefinished = true;
-        stream.emit('prefinish');
+        stream.emit("prefinish");
         $be9792da81681517$var$finishMaybe(stream, state);
     });
 }
 function $be9792da81681517$var$prefinish(stream, state) {
     if (!state.prefinished && !state.finalCalled) {
-        if (typeof stream._final === 'function' && !state.destroyed) {
+        if (typeof stream._final === "function" && !state.destroyed) {
             state.pendingcb++;
             state.finalCalled = true;
             $36zFS.nextTick($be9792da81681517$var$callFinal, stream, state);
         } else {
             state.prefinished = true;
-            stream.emit('prefinish');
+            stream.emit("prefinish");
         }
     }
 }
@@ -7870,7 +7863,7 @@ function $be9792da81681517$var$finishMaybe(stream, state) {
         $be9792da81681517$var$prefinish(stream, state);
         if (state.pendingcb === 0) {
             state.finished = true;
-            stream.emit('finish');
+            stream.emit("finish");
             if (state.autoDestroy) {
                 // In case of duplex streams we need a way to detect
                 // if the readable side is ready for autoDestroy as well
@@ -7886,7 +7879,7 @@ function $be9792da81681517$var$endWritable(stream, state, cb) {
     $be9792da81681517$var$finishMaybe(stream, state);
     if (cb) {
         if (state.finished) $36zFS.nextTick(cb);
-        else stream.once('finish', cb);
+        else stream.once("finish", cb);
     }
     state.ended = true;
     stream.writable = false;
@@ -7902,7 +7895,7 @@ function $be9792da81681517$var$onCorkedFinish(corkReq, state, err) {
     } // reuse the free corkReq.
     state.corkedRequestsFree.next = corkReq;
 }
-Object.defineProperty($be9792da81681517$var$Writable.prototype, 'destroyed', {
+Object.defineProperty($be9792da81681517$var$Writable.prototype, "destroyed", {
     // making it explicit this property is not enumerable
     // because otherwise some prototype manipulation in
     // userland will fail
@@ -7948,12 +7941,12 @@ parcelRequire.register("93hL2", function(module, exports) {
  * @returns {Function} a new "deprecated" version of `fn`
  * @api public
  */ function $69722b28163b2659$var$deprecate(fn, msg) {
-    if ($69722b28163b2659$var$config('noDeprecation')) return fn;
+    if ($69722b28163b2659$var$config("noDeprecation")) return fn;
     var warned = false;
     function deprecated() {
         if (!warned) {
-            if ($69722b28163b2659$var$config('throwDeprecation')) throw new Error(msg);
-            else if ($69722b28163b2659$var$config('traceDeprecation')) console.trace(msg);
+            if ($69722b28163b2659$var$config("throwDeprecation")) throw new Error(msg);
+            else if ($69722b28163b2659$var$config("traceDeprecation")) console.trace(msg);
             else console.warn(msg);
             warned = true;
         }
@@ -7976,7 +7969,7 @@ parcelRequire.register("93hL2", function(module, exports) {
     }
     var val = $parcel$global.localStorage[name];
     if (null == val) return false;
-    return String(val).toLowerCase() === 'true';
+    return String(val).toLowerCase() === "true";
 }
 
 });
@@ -8010,51 +8003,51 @@ var $c060e96f0892ab24$export$63a7aa211a91ed69;
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
-'use strict';
+"use strict";
 
 var $8k9oS = parcelRequire("8k9oS");
 var $c060e96f0892ab24$require$Buffer = $8k9oS.Buffer;
 /*</replacement>*/ var $c060e96f0892ab24$var$isEncoding = $c060e96f0892ab24$require$Buffer.isEncoding || function(encoding) {
-    encoding = '' + encoding;
+    encoding = "" + encoding;
     switch(encoding && encoding.toLowerCase()){
-        case 'hex':
-        case 'utf8':
-        case 'utf-8':
-        case 'ascii':
-        case 'binary':
-        case 'base64':
-        case 'ucs2':
-        case 'ucs-2':
-        case 'utf16le':
-        case 'utf-16le':
-        case 'raw':
+        case "hex":
+        case "utf8":
+        case "utf-8":
+        case "ascii":
+        case "binary":
+        case "base64":
+        case "ucs2":
+        case "ucs-2":
+        case "utf16le":
+        case "utf-16le":
+        case "raw":
             return true;
         default:
             return false;
     }
 };
 function $c060e96f0892ab24$var$_normalizeEncoding(enc) {
-    if (!enc) return 'utf8';
+    if (!enc) return "utf8";
     var retried;
     while(true)switch(enc){
-        case 'utf8':
-        case 'utf-8':
-            return 'utf8';
-        case 'ucs2':
-        case 'ucs-2':
-        case 'utf16le':
-        case 'utf-16le':
-            return 'utf16le';
-        case 'latin1':
-        case 'binary':
-            return 'latin1';
-        case 'base64':
-        case 'ascii':
-        case 'hex':
+        case "utf8":
+        case "utf-8":
+            return "utf8";
+        case "ucs2":
+        case "ucs-2":
+        case "utf16le":
+        case "utf-16le":
+            return "utf16le";
+        case "latin1":
+        case "binary":
+            return "latin1";
+        case "base64":
+        case "ascii":
+        case "hex":
             return enc;
         default:
             if (retried) return; // undefined
-            enc = ('' + enc).toLowerCase();
+            enc = ("" + enc).toLowerCase();
             retried = true;
     }
 }
@@ -8062,7 +8055,7 @@ function $c060e96f0892ab24$var$_normalizeEncoding(enc) {
 // modules monkey-patch it to support additional encodings
 function $c060e96f0892ab24$var$normalizeEncoding(enc) {
     var nenc = $c060e96f0892ab24$var$_normalizeEncoding(enc);
-    if (typeof nenc !== 'string' && ($c060e96f0892ab24$require$Buffer.isEncoding === $c060e96f0892ab24$var$isEncoding || !$c060e96f0892ab24$var$isEncoding(enc))) throw new Error('Unknown encoding: ' + enc);
+    if (typeof nenc !== "string" && ($c060e96f0892ab24$require$Buffer.isEncoding === $c060e96f0892ab24$var$isEncoding || !$c060e96f0892ab24$var$isEncoding(enc))) throw new Error("Unknown encoding: " + enc);
     return nenc || enc;
 }
 $c060e96f0892ab24$export$63a7aa211a91ed69 = $c060e96f0892ab24$var$StringDecoder;
@@ -8070,16 +8063,16 @@ function $c060e96f0892ab24$var$StringDecoder(encoding) {
     this.encoding = $c060e96f0892ab24$var$normalizeEncoding(encoding);
     var nb;
     switch(this.encoding){
-        case 'utf16le':
+        case "utf16le":
             this.text = $c060e96f0892ab24$var$utf16Text;
             this.end = $c060e96f0892ab24$var$utf16End;
             nb = 4;
             break;
-        case 'utf8':
+        case "utf8":
             this.fillLast = $c060e96f0892ab24$var$utf8FillLast;
             nb = 4;
             break;
-        case 'base64':
+        case "base64":
             this.text = $c060e96f0892ab24$var$base64Text;
             this.end = $c060e96f0892ab24$var$base64End;
             nb = 3;
@@ -8094,17 +8087,17 @@ function $c060e96f0892ab24$var$StringDecoder(encoding) {
     this.lastChar = $c060e96f0892ab24$require$Buffer.allocUnsafe(nb);
 }
 $c060e96f0892ab24$var$StringDecoder.prototype.write = function(buf) {
-    if (buf.length === 0) return '';
+    if (buf.length === 0) return "";
     var r;
     var i;
     if (this.lastNeed) {
         r = this.fillLast(buf);
-        if (r === undefined) return '';
+        if (r === undefined) return "";
         i = this.lastNeed;
         this.lastNeed = 0;
     } else i = 0;
     if (i < buf.length) return r ? r + this.text(buf, i) : this.text(buf, i);
-    return r || '';
+    return r || "";
 };
 $c060e96f0892ab24$var$StringDecoder.prototype.end = $c060e96f0892ab24$var$utf8End;
 // Returns only complete characters in a Buffer
@@ -8166,17 +8159,17 @@ function $c060e96f0892ab24$var$utf8CheckIncomplete(self, buf, i) {
 function $c060e96f0892ab24$var$utf8CheckExtraBytes(self, buf, p) {
     if ((buf[0] & 0xC0) !== 0x80) {
         self.lastNeed = 0;
-        return '\ufffd';
+        return "\uFFFD";
     }
     if (self.lastNeed > 1 && buf.length > 1) {
         if ((buf[1] & 0xC0) !== 0x80) {
             self.lastNeed = 1;
-            return '\ufffd';
+            return "\uFFFD";
         }
         if (self.lastNeed > 2 && buf.length > 2) {
             if ((buf[2] & 0xC0) !== 0x80) {
                 self.lastNeed = 2;
-                return '\ufffd';
+                return "\uFFFD";
             }
         }
     }
@@ -8198,17 +8191,17 @@ function $c060e96f0892ab24$var$utf8FillLast(buf) {
 // number of bytes are available.
 function $c060e96f0892ab24$var$utf8Text(buf, i) {
     var total = $c060e96f0892ab24$var$utf8CheckIncomplete(this, buf, i);
-    if (!this.lastNeed) return buf.toString('utf8', i);
+    if (!this.lastNeed) return buf.toString("utf8", i);
     this.lastTotal = total;
     var end = buf.length - (total - this.lastNeed);
     buf.copy(this.lastChar, 0, end);
-    return buf.toString('utf8', i, end);
+    return buf.toString("utf8", i, end);
 }
 // For UTF-8, a replacement character is added when ending on a partial
 // character.
 function $c060e96f0892ab24$var$utf8End(buf) {
-    var r = buf && buf.length ? this.write(buf) : '';
-    if (this.lastNeed) return r + '\ufffd';
+    var r = buf && buf.length ? this.write(buf) : "";
+    if (this.lastNeed) return r + "\uFFFD";
     return r;
 }
 // UTF-16LE typically needs two bytes per character, but even if we have an even
@@ -8217,7 +8210,7 @@ function $c060e96f0892ab24$var$utf8End(buf) {
 // decode the last character properly.
 function $c060e96f0892ab24$var$utf16Text(buf, i) {
     if ((buf.length - i) % 2 === 0) {
-        var r = buf.toString('utf16le', i);
+        var r = buf.toString("utf16le", i);
         if (r) {
             var c = r.charCodeAt(r.length - 1);
             if (c >= 0xD800 && c <= 0xDBFF) {
@@ -8233,21 +8226,21 @@ function $c060e96f0892ab24$var$utf16Text(buf, i) {
     this.lastNeed = 1;
     this.lastTotal = 2;
     this.lastChar[0] = buf[buf.length - 1];
-    return buf.toString('utf16le', i, buf.length - 1);
+    return buf.toString("utf16le", i, buf.length - 1);
 }
 // For UTF-16LE we do not explicitly append special replacement characters if we
 // end on a partial character, we simply let v8 handle that.
 function $c060e96f0892ab24$var$utf16End(buf) {
-    var r = buf && buf.length ? this.write(buf) : '';
+    var r = buf && buf.length ? this.write(buf) : "";
     if (this.lastNeed) {
         var end = this.lastTotal - this.lastNeed;
-        return r + this.lastChar.toString('utf16le', 0, end);
+        return r + this.lastChar.toString("utf16le", 0, end);
     }
     return r;
 }
 function $c060e96f0892ab24$var$base64Text(buf, i) {
     var n = (buf.length - i) % 3;
-    if (n === 0) return buf.toString('base64', i);
+    if (n === 0) return buf.toString("base64", i);
     this.lastNeed = 3 - n;
     this.lastTotal = 3;
     if (n === 1) this.lastChar[0] = buf[buf.length - 1];
@@ -8255,11 +8248,11 @@ function $c060e96f0892ab24$var$base64Text(buf, i) {
         this.lastChar[0] = buf[buf.length - 2];
         this.lastChar[1] = buf[buf.length - 1];
     }
-    return buf.toString('base64', i, buf.length - n);
+    return buf.toString("base64", i, buf.length - n);
 }
 function $c060e96f0892ab24$var$base64End(buf) {
-    var r = buf && buf.length ? this.write(buf) : '';
-    if (this.lastNeed) return r + this.lastChar.toString('base64', 0, 3 - this.lastNeed);
+    var r = buf && buf.length ? this.write(buf) : "";
+    if (this.lastNeed) return r + this.lastChar.toString("base64", 0, 3 - this.lastNeed);
     return r;
 }
 // Pass bytes on through for single-byte encodings (e.g. ascii, latin1, hex)
@@ -8267,13 +8260,13 @@ function $c060e96f0892ab24$var$simpleWrite(buf) {
     return buf.toString(this.encoding);
 }
 function $c060e96f0892ab24$var$simpleEnd(buf) {
-    return buf && buf.length ? this.write(buf) : '';
+    return buf && buf.length ? this.write(buf) : "";
 }
 
 });
 
 parcelRequire.register("b3ER6", function(module, exports) {
-'use strict';
+"use strict";
 
 var $36zFS = parcelRequire("36zFS");
 var $80cfaa9083a99513$var$_Object$setPrototypeO;
@@ -8289,13 +8282,13 @@ function $80cfaa9083a99513$var$_defineProperty(obj, key, value) {
 }
 
 var $6wOn5 = parcelRequire("6wOn5");
-var $80cfaa9083a99513$var$kLastResolve = Symbol('lastResolve');
-var $80cfaa9083a99513$var$kLastReject = Symbol('lastReject');
-var $80cfaa9083a99513$var$kError = Symbol('error');
-var $80cfaa9083a99513$var$kEnded = Symbol('ended');
-var $80cfaa9083a99513$var$kLastPromise = Symbol('lastPromise');
-var $80cfaa9083a99513$var$kHandlePromise = Symbol('handlePromise');
-var $80cfaa9083a99513$var$kStream = Symbol('stream');
+var $80cfaa9083a99513$var$kLastResolve = Symbol("lastResolve");
+var $80cfaa9083a99513$var$kLastReject = Symbol("lastReject");
+var $80cfaa9083a99513$var$kError = Symbol("error");
+var $80cfaa9083a99513$var$kEnded = Symbol("ended");
+var $80cfaa9083a99513$var$kLastPromise = Symbol("lastPromise");
+var $80cfaa9083a99513$var$kHandlePromise = Symbol("handlePromise");
+var $80cfaa9083a99513$var$kStream = Symbol("stream");
 function $80cfaa9083a99513$var$createIterResult(value, done) {
     return {
         value: value,
@@ -8422,7 +8415,7 @@ var $80cfaa9083a99513$var$createReadableStreamAsyncIterator = function createRea
     }), _Object$create));
     iterator[$80cfaa9083a99513$var$kLastPromise] = null;
     $6wOn5(stream, function(err) {
-        if (err && err.code !== 'ERR_STREAM_PREMATURE_CLOSE') {
+        if (err && err.code !== "ERR_STREAM_PREMATURE_CLOSE") {
             var reject = iterator[$80cfaa9083a99513$var$kLastReject]; // reject if we are waiting for data in the Promise
             // returned by next() and store the error
             if (reject !== null) {
@@ -8443,7 +8436,7 @@ var $80cfaa9083a99513$var$createReadableStreamAsyncIterator = function createRea
         }
         iterator[$80cfaa9083a99513$var$kEnded] = true;
     });
-    stream.on('readable', $80cfaa9083a99513$var$onReadable.bind(null, iterator));
+    stream.on("readable", $80cfaa9083a99513$var$onReadable.bind(null, iterator));
     return iterator;
 };
 module.exports = $80cfaa9083a99513$var$createReadableStreamAsyncIterator;
@@ -8452,7 +8445,7 @@ module.exports = $80cfaa9083a99513$var$createReadableStreamAsyncIterator;
 parcelRequire.register("6wOn5", function(module, exports) {
 // Ported from https://github.com/mafintosh/end-of-stream with
 // permission from the author, Mathias Buus (@mafintosh).
-'use strict';
+"use strict";
 
 var $1wnE4 = parcelRequire("1wnE4");
 var $4c0ccdf18f670250$var$ERR_STREAM_PREMATURE_CLOSE = $1wnE4.codes.ERR_STREAM_PREMATURE_CLOSE;
@@ -8467,10 +8460,10 @@ function $4c0ccdf18f670250$var$once(callback) {
 }
 function $4c0ccdf18f670250$var$noop() {}
 function $4c0ccdf18f670250$var$isRequest(stream) {
-    return stream.setHeader && typeof stream.abort === 'function';
+    return stream.setHeader && typeof stream.abort === "function";
 }
 function $4c0ccdf18f670250$var$eos(stream, opts, callback) {
-    if (typeof opts === 'function') return $4c0ccdf18f670250$var$eos(stream, null, opts);
+    if (typeof opts === "function") return $4c0ccdf18f670250$var$eos(stream, null, opts);
     if (!opts) opts = {};
     callback = $4c0ccdf18f670250$var$once(callback || $4c0ccdf18f670250$var$noop);
     var readable = opts.readable || opts.readable !== false && stream.readable;
@@ -8505,33 +8498,33 @@ function $4c0ccdf18f670250$var$eos(stream, opts, callback) {
         }
     };
     var onrequest = function onrequest() {
-        stream.req.on('finish', onfinish);
+        stream.req.on("finish", onfinish);
     };
     if ($4c0ccdf18f670250$var$isRequest(stream)) {
-        stream.on('complete', onfinish);
-        stream.on('abort', onclose);
+        stream.on("complete", onfinish);
+        stream.on("abort", onclose);
         if (stream.req) onrequest();
-        else stream.on('request', onrequest);
+        else stream.on("request", onrequest);
     } else if (writable && !stream._writableState) {
         // legacy streams
-        stream.on('end', onlegacyfinish);
-        stream.on('close', onlegacyfinish);
+        stream.on("end", onlegacyfinish);
+        stream.on("close", onlegacyfinish);
     }
-    stream.on('end', onend);
-    stream.on('finish', onfinish);
-    if (opts.error !== false) stream.on('error', onerror);
-    stream.on('close', onclose);
+    stream.on("end", onend);
+    stream.on("finish", onfinish);
+    if (opts.error !== false) stream.on("error", onerror);
+    stream.on("close", onclose);
     return function() {
-        stream.removeListener('complete', onfinish);
-        stream.removeListener('abort', onclose);
-        stream.removeListener('request', onrequest);
-        if (stream.req) stream.req.removeListener('finish', onfinish);
-        stream.removeListener('end', onlegacyfinish);
-        stream.removeListener('close', onlegacyfinish);
-        stream.removeListener('finish', onfinish);
-        stream.removeListener('end', onend);
-        stream.removeListener('error', onerror);
-        stream.removeListener('close', onclose);
+        stream.removeListener("complete", onfinish);
+        stream.removeListener("abort", onclose);
+        stream.removeListener("request", onrequest);
+        if (stream.req) stream.req.removeListener("finish", onfinish);
+        stream.removeListener("end", onlegacyfinish);
+        stream.removeListener("close", onlegacyfinish);
+        stream.removeListener("finish", onfinish);
+        stream.removeListener("end", onend);
+        stream.removeListener("error", onerror);
+        stream.removeListener("close", onclose);
     };
 }
 module.exports = $4c0ccdf18f670250$var$eos;
@@ -8541,7 +8534,7 @@ module.exports = $4c0ccdf18f670250$var$eos;
 
 parcelRequire.register("dBC93", function(module, exports) {
 module.exports = function() {
-    throw new Error('Readable.from is not available in the browser');
+    throw new Error("Readable.from is not available in the browser");
 };
 
 });
@@ -8609,7 +8602,7 @@ parcelRequire.register("fJLVb", function(module, exports) {
 // However, even in such a pathological case, only a single written chunk
 // would be consumed, and then the rest would wait (un-transformed) until
 // the results of the previous transformed chunk were consumed.
-'use strict';
+"use strict";
 module.exports = $b7503b22f960d7be$var$Transform;
 
 var $1wnE4 = parcelRequire("1wnE4");
@@ -8623,7 +8616,7 @@ function $b7503b22f960d7be$var$afterTransform(er, data) {
     var ts = this._transformState;
     ts.transforming = false;
     var cb = ts.writecb;
-    if (cb === null) return this.emit('error', new $b7503b22f960d7be$var$ERR_MULTIPLE_CALLBACK());
+    if (cb === null) return this.emit("error", new $b7503b22f960d7be$var$ERR_MULTIPLE_CALLBACK());
     ts.writechunk = null;
     ts.writecb = null;
     if (data != null) this.push(data);
@@ -8648,14 +8641,14 @@ function $b7503b22f960d7be$var$Transform(options) {
     // sync guard flag.
     this._readableState.sync = false;
     if (options) {
-        if (typeof options.transform === 'function') this._transform = options.transform;
-        if (typeof options.flush === 'function') this._flush = options.flush;
+        if (typeof options.transform === "function") this._transform = options.transform;
+        if (typeof options.flush === "function") this._flush = options.flush;
     } // When the writable side finishes, then flush out anything remaining.
-    this.on('prefinish', $b7503b22f960d7be$var$prefinish);
+    this.on("prefinish", $b7503b22f960d7be$var$prefinish);
 }
 function $b7503b22f960d7be$var$prefinish() {
     var _this = this;
-    if (typeof this._flush === 'function' && !this._readableState.destroyed) this._flush(function(er, data) {
+    if (typeof this._flush === "function" && !this._readableState.destroyed) this._flush(function(er, data) {
         $b7503b22f960d7be$var$done(_this, er, data);
     });
     else $b7503b22f960d7be$var$done(this, null, null);
@@ -8674,7 +8667,7 @@ $b7503b22f960d7be$var$Transform.prototype.push = function(chunk, encoding) {
 // an error, then that'll put the hurt on the whole operation.  If you
 // never call cb(), then you'll never get another chunk.
 $b7503b22f960d7be$var$Transform.prototype._transform = function(chunk, encoding, cb) {
-    cb(new $b7503b22f960d7be$var$ERR_METHOD_NOT_IMPLEMENTED('_transform()'));
+    cb(new $b7503b22f960d7be$var$ERR_METHOD_NOT_IMPLEMENTED("_transform()"));
 };
 $b7503b22f960d7be$var$Transform.prototype._write = function(chunk, encoding, cb) {
     var ts = this._transformState;
@@ -8703,7 +8696,7 @@ $b7503b22f960d7be$var$Transform.prototype._destroy = function(err, cb) {
     });
 };
 function $b7503b22f960d7be$var$done(stream, er, data) {
-    if (er) return stream.emit('error', er);
+    if (er) return stream.emit("error", er);
     if (data != null) stream.push(data); // TODO(BridgeAR): Write a test for these two error cases
     // if there's nothing in the write buffer, then that means
     // that nothing more will ever be provided
@@ -8738,7 +8731,7 @@ parcelRequire.register("7FJFn", function(module, exports) {
 // a passthrough stream.
 // basically just the most minimal sort of Transform stream.
 // Every written chunk gets output as-is.
-'use strict';
+"use strict";
 module.exports = $595fc91cd722c9fe$var$PassThrough;
 
 var $fJLVb = parcelRequire("fJLVb");
@@ -8757,7 +8750,7 @@ $595fc91cd722c9fe$var$PassThrough.prototype._transform = function(chunk, encodin
 parcelRequire.register("kgCmy", function(module, exports) {
 // Ported from https://github.com/mafintosh/pump with
 // permission from the author, Mathias Buus (@mafintosh).
-'use strict';
+"use strict";
 var $ec130f4c973118e9$var$eos;
 function $ec130f4c973118e9$var$once(callback) {
     var called = false;
@@ -8776,13 +8769,13 @@ function $ec130f4c973118e9$var$noop(err) {
     if (err) throw err;
 }
 function $ec130f4c973118e9$var$isRequest(stream) {
-    return stream.setHeader && typeof stream.abort === 'function';
+    return stream.setHeader && typeof stream.abort === "function";
 }
 
 function $ec130f4c973118e9$var$destroyer(stream, reading, writing, callback) {
     callback = $ec130f4c973118e9$var$once(callback);
     var closed = false;
-    stream.on('close', function() {
+    stream.on("close", function() {
         closed = true;
     });
     if ($ec130f4c973118e9$var$eos === undefined) $ec130f4c973118e9$var$eos = (parcelRequire("6wOn5"));
@@ -8800,8 +8793,8 @@ function $ec130f4c973118e9$var$destroyer(stream, reading, writing, callback) {
         if (destroyed) return;
         destroyed = true; // request.destroy just do .end - .abort is what we want
         if ($ec130f4c973118e9$var$isRequest(stream)) return stream.abort();
-        if (typeof stream.destroy === 'function') return stream.destroy();
-        callback(err || new $ec130f4c973118e9$var$ERR_STREAM_DESTROYED('pipe'));
+        if (typeof stream.destroy === "function") return stream.destroy();
+        callback(err || new $ec130f4c973118e9$var$ERR_STREAM_DESTROYED("pipe"));
     };
 }
 function $ec130f4c973118e9$var$call(fn) {
@@ -8812,14 +8805,14 @@ function $ec130f4c973118e9$var$pipe(from, to) {
 }
 function $ec130f4c973118e9$var$popCallback(streams) {
     if (!streams.length) return $ec130f4c973118e9$var$noop;
-    if (typeof streams[streams.length - 1] !== 'function') return $ec130f4c973118e9$var$noop;
+    if (typeof streams[streams.length - 1] !== "function") return $ec130f4c973118e9$var$noop;
     return streams.pop();
 }
 function $ec130f4c973118e9$var$pipeline() {
     for(var _len = arguments.length, streams = new Array(_len), _key = 0; _key < _len; _key++)streams[_key] = arguments[_key];
     var callback = $ec130f4c973118e9$var$popCallback(streams);
     if (Array.isArray(streams[0])) streams = streams[0];
-    if (streams.length < 2) throw new $ec130f4c973118e9$var$ERR_MISSING_ARGS('streams');
+    if (streams.length < 2) throw new $ec130f4c973118e9$var$ERR_MISSING_ARGS("streams");
     var error;
     var destroys = streams.map(function(stream, i) {
         var reading = i < streams.length - 1;
@@ -8842,7 +8835,7 @@ module.exports = $ec130f4c973118e9$var$pipeline;
 
 
 parcelRequire.register("iUB0B", function(module, exports) {
-'use strict';
+"use strict";
 
 var $gGU47 = parcelRequire("gGU47");
 var $dc4a2a1de747da16$require$Buffer = $gGU47.Buffer;
@@ -9302,7 +9295,7 @@ parcelRequire.register("lCSWS", function(module, exports) {
 var $fbe7c540cbaf973b$var$exports = module.exports = function SHA(algorithm) {
     algorithm = algorithm.toLowerCase();
     var Algorithm = $fbe7c540cbaf973b$var$exports[algorithm];
-    if (!Algorithm) throw new Error(algorithm + ' is not supported (we accept pull requests)');
+    if (!Algorithm) throw new Error(algorithm + " is not supported (we accept pull requests)");
     return new Algorithm();
 };
 
@@ -9360,17 +9353,17 @@ function $7fd306ace8ab1c99$var$ft(s, b, c, d) {
     return b ^ c ^ d;
 }
 $7fd306ace8ab1c99$var$Sha.prototype._update = function(M) {
-    var W = this._w;
+    var W1 = this._w;
     var a = this._a | 0;
     var b = this._b | 0;
     var c = this._c | 0;
     var d = this._d | 0;
     var e = this._e | 0;
-    for(var i = 0; i < 16; ++i)W[i] = M.readInt32BE(i * 4);
-    for(; i < 80; ++i)W[i] = W[i - 3] ^ W[i - 8] ^ W[i - 14] ^ W[i - 16];
+    for(var i = 0; i < 16; ++i)W1[i] = M.readInt32BE(i * 4);
+    for(; i < 80; ++i)W1[i] = W1[i - 3] ^ W1[i - 8] ^ W1[i - 14] ^ W1[i - 16];
     for(var j = 0; j < 80; ++j){
         var s = ~~(j / 20);
-        var t = $7fd306ace8ab1c99$var$rotl5(a) + $7fd306ace8ab1c99$var$ft(s, b, c, d) + e + W[j] + $7fd306ace8ab1c99$var$K[s] | 0;
+        var t = $7fd306ace8ab1c99$var$rotl5(a) + $7fd306ace8ab1c99$var$ft(s, b, c, d) + e + W1[j] + $7fd306ace8ab1c99$var$K[s] | 0;
         e = d;
         d = c;
         c = $7fd306ace8ab1c99$var$rotl30(b);
@@ -9407,8 +9400,8 @@ function $3899af947224f4f6$var$Hash(blockSize, finalSize) {
     this._len = 0;
 }
 $3899af947224f4f6$var$Hash.prototype.update = function(data, enc) {
-    if (typeof data === 'string') {
-        enc = enc || 'utf8';
+    if (typeof data === "string") {
+        enc = enc || "utf8";
         data = $3899af947224f4f6$require$Buffer.from(data, enc);
     }
     var block = this._block;
@@ -9450,7 +9443,7 @@ $3899af947224f4f6$var$Hash.prototype.digest = function(enc) {
     return enc ? hash.toString(enc) : hash;
 };
 $3899af947224f4f6$var$Hash.prototype._update = function() {
-    throw new Error('_update must be implemented by subclass');
+    throw new Error("_update must be implemented by subclass");
 };
 module.exports = $3899af947224f4f6$var$Hash;
 
@@ -9501,17 +9494,17 @@ function $e7cab06ffe950a50$var$ft(s, b, c, d) {
     return b ^ c ^ d;
 }
 $e7cab06ffe950a50$var$Sha1.prototype._update = function(M) {
-    var W = this._w;
+    var W1 = this._w;
     var a = this._a | 0;
     var b = this._b | 0;
     var c = this._c | 0;
     var d = this._d | 0;
     var e = this._e | 0;
-    for(var i = 0; i < 16; ++i)W[i] = M.readInt32BE(i * 4);
-    for(; i < 80; ++i)W[i] = $e7cab06ffe950a50$var$rotl1(W[i - 3] ^ W[i - 8] ^ W[i - 14] ^ W[i - 16]);
+    for(var i = 0; i < 16; ++i)W1[i] = M.readInt32BE(i * 4);
+    for(; i < 80; ++i)W1[i] = $e7cab06ffe950a50$var$rotl1(W1[i - 3] ^ W1[i - 8] ^ W1[i - 14] ^ W1[i - 16]);
     for(var j = 0; j < 80; ++j){
         var s = ~~(j / 20);
-        var t = $e7cab06ffe950a50$var$rotl5(a) + $e7cab06ffe950a50$var$ft(s, b, c, d) + e + W[j] + $e7cab06ffe950a50$var$K[s] | 0;
+        var t = $e7cab06ffe950a50$var$rotl5(a) + $e7cab06ffe950a50$var$ft(s, b, c, d) + e + W1[j] + $e7cab06ffe950a50$var$K[s] | 0;
         e = d;
         d = c;
         c = $e7cab06ffe950a50$var$rotl30(b);
@@ -9692,7 +9685,7 @@ function $009d9793dd6e7739$var$gamma1(x) {
     return (x >>> 17 | x << 15) ^ (x >>> 19 | x << 13) ^ x >>> 10;
 }
 $009d9793dd6e7739$var$Sha256.prototype._update = function(M) {
-    var W = this._w;
+    var W1 = this._w;
     var a = this._a | 0;
     var b = this._b | 0;
     var c = this._c | 0;
@@ -9701,10 +9694,10 @@ $009d9793dd6e7739$var$Sha256.prototype._update = function(M) {
     var f = this._f | 0;
     var g = this._g | 0;
     var h = this._h | 0;
-    for(var i = 0; i < 16; ++i)W[i] = M.readInt32BE(i * 4);
-    for(; i < 64; ++i)W[i] = $009d9793dd6e7739$var$gamma1(W[i - 2]) + W[i - 7] + $009d9793dd6e7739$var$gamma0(W[i - 15]) + W[i - 16] | 0;
+    for(var i = 0; i < 16; ++i)W1[i] = M.readInt32BE(i * 4);
+    for(; i < 64; ++i)W1[i] = $009d9793dd6e7739$var$gamma1(W1[i - 2]) + W1[i - 7] + $009d9793dd6e7739$var$gamma0(W1[i - 15]) + W1[i - 16] | 0;
     for(var j = 0; j < 64; ++j){
-        var T1 = h + $009d9793dd6e7739$var$sigma1(e) + $009d9793dd6e7739$var$ch(e, f, g) + $009d9793dd6e7739$var$K[j] + W[j] | 0;
+        var T1 = h + $009d9793dd6e7739$var$sigma1(e) + $009d9793dd6e7739$var$ch(e, f, g) + $009d9793dd6e7739$var$K[j] + W1[j] | 0;
         var T2 = $009d9793dd6e7739$var$sigma0(a) + $009d9793dd6e7739$var$maj(a, b, c) | 0;
         h = g;
         g = f;
@@ -10018,7 +10011,7 @@ function $9a03467784f6b5d2$var$getCarry(a, b) {
     return a >>> 0 < b >>> 0 ? 1 : 0;
 }
 $9a03467784f6b5d2$var$Sha512.prototype._update = function(M) {
-    var W = this._w;
+    var W1 = this._w;
     var ah = this._ah | 0;
     var bh = this._bh | 0;
     var ch = this._ch | 0;
@@ -10036,35 +10029,35 @@ $9a03467784f6b5d2$var$Sha512.prototype._update = function(M) {
     var gl = this._gl | 0;
     var hl = this._hl | 0;
     for(var i = 0; i < 32; i += 2){
-        W[i] = M.readInt32BE(i * 4);
-        W[i + 1] = M.readInt32BE(i * 4 + 4);
+        W1[i] = M.readInt32BE(i * 4);
+        W1[i + 1] = M.readInt32BE(i * 4 + 4);
     }
     for(; i < 160; i += 2){
-        var xh = W[i - 30];
-        var xl = W[i - 30 + 1];
+        var xh = W1[i - 30];
+        var xl = W1[i - 30 + 1];
         var gamma0 = $9a03467784f6b5d2$var$Gamma0(xh, xl);
         var gamma0l = $9a03467784f6b5d2$var$Gamma0l(xl, xh);
-        xh = W[i - 4];
-        xl = W[i - 4 + 1];
+        xh = W1[i - 4];
+        xl = W1[i - 4 + 1];
         var gamma1 = $9a03467784f6b5d2$var$Gamma1(xh, xl);
         var gamma1l = $9a03467784f6b5d2$var$Gamma1l(xl, xh);
         // W[i] = gamma0 + W[i - 7] + gamma1 + W[i - 16]
-        var Wi7h = W[i - 14];
-        var Wi7l = W[i - 14 + 1];
-        var Wi16h = W[i - 32];
-        var Wi16l = W[i - 32 + 1];
+        var Wi7h = W1[i - 14];
+        var Wi7l = W1[i - 14 + 1];
+        var Wi16h = W1[i - 32];
+        var Wi16l = W1[i - 32 + 1];
         var Wil = gamma0l + Wi7l | 0;
         var Wih = gamma0 + Wi7h + $9a03467784f6b5d2$var$getCarry(Wil, gamma0l) | 0;
         Wil = Wil + gamma1l | 0;
         Wih = Wih + gamma1 + $9a03467784f6b5d2$var$getCarry(Wil, gamma1l) | 0;
         Wil = Wil + Wi16l | 0;
         Wih = Wih + Wi16h + $9a03467784f6b5d2$var$getCarry(Wil, Wi16l) | 0;
-        W[i] = Wih;
-        W[i + 1] = Wil;
+        W1[i] = Wih;
+        W1[i + 1] = Wil;
     }
     for(var j = 0; j < 160; j += 2){
-        Wih = W[j];
-        Wil = W[j + 1];
+        Wih = W1[j];
+        Wil = W1[j + 1];
         var majh = $9a03467784f6b5d2$var$maj(ah, bh, ch);
         var majl = $9a03467784f6b5d2$var$maj(al, bl, cl);
         var sigma0h = $9a03467784f6b5d2$var$sigma0(ah, al);
@@ -10157,7 +10150,7 @@ var $c68d15c64a810cf0$require$StringDecoder = $gw1E8.StringDecoder;
 var $baEok = parcelRequire("baEok");
 function $c68d15c64a810cf0$var$CipherBase(hashMode) {
     $c68d15c64a810cf0$require$Transform.call(this);
-    this.hashMode = typeof hashMode === 'string';
+    this.hashMode = typeof hashMode === "string";
     if (this.hashMode) this[hashMode] = this._finalOrDigest;
     else this.final = this._finalOrDigest;
     if (this._final) {
@@ -10169,7 +10162,7 @@ function $c68d15c64a810cf0$var$CipherBase(hashMode) {
 }
 $baEok($c68d15c64a810cf0$var$CipherBase, $c68d15c64a810cf0$require$Transform);
 $c68d15c64a810cf0$var$CipherBase.prototype.update = function(data, inputEnc, outputEnc) {
-    if (typeof data === 'string') data = $c68d15c64a810cf0$require$Buffer.from(data, inputEnc);
+    if (typeof data === "string") data = $c68d15c64a810cf0$require$Buffer.from(data, inputEnc);
     var outData = this._update(data);
     if (this.hashMode) return this;
     if (outputEnc) outData = this._toString(outData, outputEnc);
@@ -10177,13 +10170,13 @@ $c68d15c64a810cf0$var$CipherBase.prototype.update = function(data, inputEnc, out
 };
 $c68d15c64a810cf0$var$CipherBase.prototype.setAutoPadding = function() {};
 $c68d15c64a810cf0$var$CipherBase.prototype.getAuthTag = function() {
-    throw new Error('trying to get auth tag in unsupported state');
+    throw new Error("trying to get auth tag in unsupported state");
 };
 $c68d15c64a810cf0$var$CipherBase.prototype.setAuthTag = function() {
-    throw new Error('trying to set auth tag in unsupported state');
+    throw new Error("trying to set auth tag in unsupported state");
 };
 $c68d15c64a810cf0$var$CipherBase.prototype.setAAD = function() {
-    throw new Error('trying to set aad in unsupported state');
+    throw new Error("trying to set aad in unsupported state");
 };
 $c68d15c64a810cf0$var$CipherBase.prototype._transform = function(data, _, next) {
     var err;
@@ -10215,7 +10208,7 @@ $c68d15c64a810cf0$var$CipherBase.prototype._toString = function(value, enc, fin)
         this._decoder = new $c68d15c64a810cf0$require$StringDecoder(enc);
         this._encoding = enc;
     }
-    if (this._encoding !== enc) throw new Error('can\'t switch encodings');
+    if (this._encoding !== enc) throw new Error("can't switch encodings");
     var out = this._decoder.write(value);
     if (fin) out += this._decoder.end();
     return out;
@@ -10279,16 +10272,16 @@ $4d211b3846b2a234$var$Stream.prototype.pipe = function(dest, options) {
             if (false === dest.write(chunk) && source.pause) source.pause();
         }
     }
-    source.on('data', ondata);
+    source.on("data", ondata);
     function ondrain() {
         if (source.readable && source.resume) source.resume();
     }
-    dest.on('drain', ondrain);
+    dest.on("drain", ondrain);
     // If the 'end' option is not supplied, dest.end() will be called when
     // source gets the 'end' or 'close' events.  Only dest.end() once.
     if (!dest._isStdio && (!options || options.end !== false)) {
-        source.on('end', onend);
-        source.on('close', onclose);
+        source.on("end", onend);
+        source.on("close", onclose);
     }
     var didOnEnd = false;
     function onend() {
@@ -10299,31 +10292,31 @@ $4d211b3846b2a234$var$Stream.prototype.pipe = function(dest, options) {
     function onclose() {
         if (didOnEnd) return;
         didOnEnd = true;
-        if (typeof dest.destroy === 'function') dest.destroy();
+        if (typeof dest.destroy === "function") dest.destroy();
     }
     // don't leave dangling pipes when there are errors.
     function onerror(er) {
         cleanup();
-        if ($4d211b3846b2a234$require$EE.listenerCount(this, 'error') === 0) throw er; // Unhandled stream error in pipe.
+        if ($4d211b3846b2a234$require$EE.listenerCount(this, "error") === 0) throw er; // Unhandled stream error in pipe.
     }
-    source.on('error', onerror);
-    dest.on('error', onerror);
+    source.on("error", onerror);
+    dest.on("error", onerror);
     // remove all the event listeners that were added.
     function cleanup() {
-        source.removeListener('data', ondata);
-        dest.removeListener('drain', ondrain);
-        source.removeListener('end', onend);
-        source.removeListener('close', onclose);
-        source.removeListener('error', onerror);
-        dest.removeListener('error', onerror);
-        source.removeListener('end', cleanup);
-        source.removeListener('close', cleanup);
-        dest.removeListener('close', cleanup);
+        source.removeListener("data", ondata);
+        dest.removeListener("drain", ondrain);
+        source.removeListener("end", onend);
+        source.removeListener("close", onclose);
+        source.removeListener("error", onerror);
+        dest.removeListener("error", onerror);
+        source.removeListener("end", cleanup);
+        source.removeListener("close", cleanup);
+        dest.removeListener("close", cleanup);
     }
-    source.on('end', cleanup);
-    source.on('close', cleanup);
-    dest.on('close', cleanup);
-    dest.emit('pipe', source);
+    source.on("end", cleanup);
+    source.on("close", cleanup);
+    dest.on("close", cleanup);
+    dest.emit("pipe", source);
     // Allow for unix-like usage: A.pipe(B).pipe(C)
     return dest;
 };
@@ -10333,7 +10326,7 @@ $4d211b3846b2a234$var$Stream.prototype.pipe = function(dest, options) {
 
 
 parcelRequire.register("dA0oy", function(module, exports) {
-'use strict';
+"use strict";
 
 var $baEok = parcelRequire("baEok");
 
@@ -10351,13 +10344,13 @@ var $iUB0B = parcelRequire("iUB0B");
 var $lCSWS = parcelRequire("lCSWS");
 var $9e2ef199a19582f9$var$ZEROS = $9e2ef199a19582f9$require$Buffer.alloc(128);
 function $9e2ef199a19582f9$var$Hmac(alg, key) {
-    $h2SJW.call(this, 'digest');
-    if (typeof key === 'string') key = $9e2ef199a19582f9$require$Buffer.from(key);
-    var blocksize = alg === 'sha512' || alg === 'sha384' ? 128 : 64;
+    $h2SJW.call(this, "digest");
+    if (typeof key === "string") key = $9e2ef199a19582f9$require$Buffer.from(key);
+    var blocksize = alg === "sha512" || alg === "sha384" ? 128 : 64;
     this._alg = alg;
     this._key = key;
     if (key.length > blocksize) {
-        var hash = alg === 'rmd160' ? new $iUB0B() : $lCSWS(alg);
+        var hash = alg === "rmd160" ? new $iUB0B() : $lCSWS(alg);
         key = hash.update(key).digest();
     } else if (key.length < blocksize) key = $9e2ef199a19582f9$require$Buffer.concat([
         key,
@@ -10369,7 +10362,7 @@ function $9e2ef199a19582f9$var$Hmac(alg, key) {
         ipad[i] = key[i] ^ 0x36;
         opad[i] = key[i] ^ 0x5C;
     }
-    this._hash = alg === 'rmd160' ? new $iUB0B() : $lCSWS(alg);
+    this._hash = alg === "rmd160" ? new $iUB0B() : $lCSWS(alg);
     this._hash.update(ipad);
 }
 $baEok($9e2ef199a19582f9$var$Hmac, $h2SJW);
@@ -10378,19 +10371,19 @@ $9e2ef199a19582f9$var$Hmac.prototype._update = function(data) {
 };
 $9e2ef199a19582f9$var$Hmac.prototype._final = function() {
     var h = this._hash.digest();
-    var hash = this._alg === 'rmd160' ? new $iUB0B() : $lCSWS(this._alg);
+    var hash = this._alg === "rmd160" ? new $iUB0B() : $lCSWS(this._alg);
     return hash.update(this._opad).update(h).digest();
 };
 module.exports = function createHmac(alg, key) {
     alg = alg.toLowerCase();
-    if (alg === 'rmd160' || alg === 'ripemd160') return new $9e2ef199a19582f9$var$Hmac('rmd160', key);
-    if (alg === 'md5') return new $dnctp($2BKTG, key);
+    if (alg === "rmd160" || alg === "ripemd160") return new $9e2ef199a19582f9$var$Hmac("rmd160", key);
+    if (alg === "md5") return new $dnctp($2BKTG, key);
     return new $9e2ef199a19582f9$var$Hmac(alg, key);
 };
 
 });
 parcelRequire.register("dnctp", function(module, exports) {
-'use strict';
+"use strict";
 
 var $baEok = parcelRequire("baEok");
 
@@ -10401,8 +10394,8 @@ var $h2SJW = parcelRequire("h2SJW");
 var $9bc71950dfcbbf7e$var$ZEROS = $9bc71950dfcbbf7e$require$Buffer.alloc(128);
 var $9bc71950dfcbbf7e$var$blocksize = 64;
 function $9bc71950dfcbbf7e$var$Hmac(alg, key) {
-    $h2SJW.call(this, 'digest');
-    if (typeof key === 'string') key = $9bc71950dfcbbf7e$require$Buffer.from(key);
+    $h2SJW.call(this, "digest");
+    if (typeof key === "string") key = $9bc71950dfcbbf7e$require$Buffer.from(key);
     this._alg = alg;
     this._key = key;
     if (key.length > $9bc71950dfcbbf7e$var$blocksize) key = alg(key);
@@ -10451,7 +10444,7 @@ module.exports = (parcelRequire("bPHlq"));
 
 });
 parcelRequire.register("bPHlq", function(module, exports) {
-module.exports = JSON.parse("{\"sha224WithRSAEncryption\":{\"sign\":\"rsa\",\"hash\":\"sha224\",\"id\":\"302d300d06096086480165030402040500041c\"},\"RSA-SHA224\":{\"sign\":\"ecdsa/rsa\",\"hash\":\"sha224\",\"id\":\"302d300d06096086480165030402040500041c\"},\"sha256WithRSAEncryption\":{\"sign\":\"rsa\",\"hash\":\"sha256\",\"id\":\"3031300d060960864801650304020105000420\"},\"RSA-SHA256\":{\"sign\":\"ecdsa/rsa\",\"hash\":\"sha256\",\"id\":\"3031300d060960864801650304020105000420\"},\"sha384WithRSAEncryption\":{\"sign\":\"rsa\",\"hash\":\"sha384\",\"id\":\"3041300d060960864801650304020205000430\"},\"RSA-SHA384\":{\"sign\":\"ecdsa/rsa\",\"hash\":\"sha384\",\"id\":\"3041300d060960864801650304020205000430\"},\"sha512WithRSAEncryption\":{\"sign\":\"rsa\",\"hash\":\"sha512\",\"id\":\"3051300d060960864801650304020305000440\"},\"RSA-SHA512\":{\"sign\":\"ecdsa/rsa\",\"hash\":\"sha512\",\"id\":\"3051300d060960864801650304020305000440\"},\"RSA-SHA1\":{\"sign\":\"rsa\",\"hash\":\"sha1\",\"id\":\"3021300906052b0e03021a05000414\"},\"ecdsa-with-SHA1\":{\"sign\":\"ecdsa\",\"hash\":\"sha1\",\"id\":\"\"},\"sha256\":{\"sign\":\"ecdsa\",\"hash\":\"sha256\",\"id\":\"\"},\"sha224\":{\"sign\":\"ecdsa\",\"hash\":\"sha224\",\"id\":\"\"},\"sha384\":{\"sign\":\"ecdsa\",\"hash\":\"sha384\",\"id\":\"\"},\"sha512\":{\"sign\":\"ecdsa\",\"hash\":\"sha512\",\"id\":\"\"},\"DSA-SHA\":{\"sign\":\"dsa\",\"hash\":\"sha1\",\"id\":\"\"},\"DSA-SHA1\":{\"sign\":\"dsa\",\"hash\":\"sha1\",\"id\":\"\"},\"DSA\":{\"sign\":\"dsa\",\"hash\":\"sha1\",\"id\":\"\"},\"DSA-WITH-SHA224\":{\"sign\":\"dsa\",\"hash\":\"sha224\",\"id\":\"\"},\"DSA-SHA224\":{\"sign\":\"dsa\",\"hash\":\"sha224\",\"id\":\"\"},\"DSA-WITH-SHA256\":{\"sign\":\"dsa\",\"hash\":\"sha256\",\"id\":\"\"},\"DSA-SHA256\":{\"sign\":\"dsa\",\"hash\":\"sha256\",\"id\":\"\"},\"DSA-WITH-SHA384\":{\"sign\":\"dsa\",\"hash\":\"sha384\",\"id\":\"\"},\"DSA-SHA384\":{\"sign\":\"dsa\",\"hash\":\"sha384\",\"id\":\"\"},\"DSA-WITH-SHA512\":{\"sign\":\"dsa\",\"hash\":\"sha512\",\"id\":\"\"},\"DSA-SHA512\":{\"sign\":\"dsa\",\"hash\":\"sha512\",\"id\":\"\"},\"DSA-RIPEMD160\":{\"sign\":\"dsa\",\"hash\":\"rmd160\",\"id\":\"\"},\"ripemd160WithRSA\":{\"sign\":\"rsa\",\"hash\":\"rmd160\",\"id\":\"3021300906052b2403020105000414\"},\"RSA-RIPEMD160\":{\"sign\":\"rsa\",\"hash\":\"rmd160\",\"id\":\"3021300906052b2403020105000414\"},\"md5WithRSAEncryption\":{\"sign\":\"rsa\",\"hash\":\"md5\",\"id\":\"3020300c06082a864886f70d020505000410\"},\"RSA-MD5\":{\"sign\":\"rsa\",\"hash\":\"md5\",\"id\":\"3020300c06082a864886f70d020505000410\"}}");
+module.exports = JSON.parse('{"sha224WithRSAEncryption":{"sign":"rsa","hash":"sha224","id":"302d300d06096086480165030402040500041c"},"RSA-SHA224":{"sign":"ecdsa/rsa","hash":"sha224","id":"302d300d06096086480165030402040500041c"},"sha256WithRSAEncryption":{"sign":"rsa","hash":"sha256","id":"3031300d060960864801650304020105000420"},"RSA-SHA256":{"sign":"ecdsa/rsa","hash":"sha256","id":"3031300d060960864801650304020105000420"},"sha384WithRSAEncryption":{"sign":"rsa","hash":"sha384","id":"3041300d060960864801650304020205000430"},"RSA-SHA384":{"sign":"ecdsa/rsa","hash":"sha384","id":"3041300d060960864801650304020205000430"},"sha512WithRSAEncryption":{"sign":"rsa","hash":"sha512","id":"3051300d060960864801650304020305000440"},"RSA-SHA512":{"sign":"ecdsa/rsa","hash":"sha512","id":"3051300d060960864801650304020305000440"},"RSA-SHA1":{"sign":"rsa","hash":"sha1","id":"3021300906052b0e03021a05000414"},"ecdsa-with-SHA1":{"sign":"ecdsa","hash":"sha1","id":""},"sha256":{"sign":"ecdsa","hash":"sha256","id":""},"sha224":{"sign":"ecdsa","hash":"sha224","id":""},"sha384":{"sign":"ecdsa","hash":"sha384","id":""},"sha512":{"sign":"ecdsa","hash":"sha512","id":""},"DSA-SHA":{"sign":"dsa","hash":"sha1","id":""},"DSA-SHA1":{"sign":"dsa","hash":"sha1","id":""},"DSA":{"sign":"dsa","hash":"sha1","id":""},"DSA-WITH-SHA224":{"sign":"dsa","hash":"sha224","id":""},"DSA-SHA224":{"sign":"dsa","hash":"sha224","id":""},"DSA-WITH-SHA256":{"sign":"dsa","hash":"sha256","id":""},"DSA-SHA256":{"sign":"dsa","hash":"sha256","id":""},"DSA-WITH-SHA384":{"sign":"dsa","hash":"sha384","id":""},"DSA-SHA384":{"sign":"dsa","hash":"sha384","id":""},"DSA-WITH-SHA512":{"sign":"dsa","hash":"sha512","id":""},"DSA-SHA512":{"sign":"dsa","hash":"sha512","id":""},"DSA-RIPEMD160":{"sign":"dsa","hash":"rmd160","id":""},"ripemd160WithRSA":{"sign":"rsa","hash":"rmd160","id":"3021300906052b2403020105000414"},"RSA-RIPEMD160":{"sign":"rsa","hash":"rmd160","id":"3021300906052b2403020105000414"},"md5WithRSAEncryption":{"sign":"rsa","hash":"md5","id":"3020300c06082a864886f70d020505000410"},"RSA-MD5":{"sign":"rsa","hash":"md5","id":"3020300c06082a864886f70d020505000410"}}');
 
 });
 
@@ -10483,15 +10476,15 @@ var $gUf7P = parcelRequire("gUf7P");
 var $3ba4b3e91e43c169$var$ZERO_BUF;
 var $3ba4b3e91e43c169$var$subtle = $parcel$global.crypto && $parcel$global.crypto.subtle;
 var $3ba4b3e91e43c169$var$toBrowser = {
-    sha: 'SHA-1',
-    'sha-1': 'SHA-1',
-    sha1: 'SHA-1',
-    sha256: 'SHA-256',
-    'sha-256': 'SHA-256',
-    sha384: 'SHA-384',
-    'sha-384': 'SHA-384',
-    'sha-512': 'SHA-512',
-    sha512: 'SHA-512'
+    sha: "SHA-1",
+    "sha-1": "SHA-1",
+    sha1: "SHA-1",
+    sha256: "SHA-256",
+    "sha-256": "SHA-256",
+    sha384: "SHA-384",
+    "sha-384": "SHA-384",
+    "sha-512": "SHA-512",
+    sha512: "SHA-512"
 };
 var $3ba4b3e91e43c169$var$checks = [];
 function $3ba4b3e91e43c169$var$checkNative(algo) {
@@ -10517,13 +10510,13 @@ function $3ba4b3e91e43c169$var$getNextTick() {
     return $3ba4b3e91e43c169$var$nextTick;
 }
 function $3ba4b3e91e43c169$var$browserPbkdf2(password, salt, iterations, length, algo) {
-    return $3ba4b3e91e43c169$var$subtle.importKey('raw', password, {
-        name: 'PBKDF2'
+    return $3ba4b3e91e43c169$var$subtle.importKey("raw", password, {
+        name: "PBKDF2"
     }, false, [
-        'deriveBits'
+        "deriveBits"
     ]).then(function(key) {
         return $3ba4b3e91e43c169$var$subtle.deriveBits({
-            name: 'PBKDF2',
+            name: "PBKDF2",
             salt: salt,
             iterations: iterations,
             hash: {
@@ -10546,13 +10539,13 @@ function $3ba4b3e91e43c169$var$resolvePromise(promise, callback) {
     });
 }
 module.exports = function(password, salt, iterations, keylen, digest, callback) {
-    if (typeof digest === 'function') {
+    if (typeof digest === "function") {
         callback = digest;
         digest = undefined;
     }
-    digest = digest || 'sha1';
+    digest = digest || "sha1";
     var algo = $3ba4b3e91e43c169$var$toBrowser[digest.toLowerCase()];
-    if (!algo || typeof $parcel$global.Promise !== 'function') {
+    if (!algo || typeof $parcel$global.Promise !== "function") {
         $3ba4b3e91e43c169$var$getNextTick()(function() {
             var out;
             try {
@@ -10565,9 +10558,9 @@ module.exports = function(password, salt, iterations, keylen, digest, callback) 
         return;
     }
     $g6sS6(iterations, keylen);
-    password = $gUf7P(password, $bU7tN, 'Password');
-    salt = $gUf7P(salt, $bU7tN, 'Salt');
-    if (typeof callback !== 'function') throw new Error('No callback provided to pbkdf2');
+    password = $gUf7P(password, $bU7tN, "Password");
+    salt = $gUf7P(salt, $bU7tN, "Salt");
+    if (typeof callback !== "function") throw new Error("No callback provided to pbkdf2");
     $3ba4b3e91e43c169$var$resolvePromise($3ba4b3e91e43c169$var$checkNative(algo).then(function(resp) {
         if (resp) return $3ba4b3e91e43c169$var$browserPbkdf2(password, salt, iterations, keylen, algo);
         return $91Pep(password, salt, iterations, keylen, digest);
@@ -10579,10 +10572,10 @@ parcelRequire.register("g6sS6", function(module, exports) {
 var $bb939a2fd115074e$var$MAX_ALLOC = Math.pow(2, 30) - 1 // default in iojs
 ;
 module.exports = function(iterations, keylen) {
-    if (typeof iterations !== 'number') throw new TypeError('Iterations not a number');
-    if (iterations < 0) throw new TypeError('Bad iterations');
-    if (typeof keylen !== 'number') throw new TypeError('Key length not a number');
-    if (keylen < 0 || keylen > $bb939a2fd115074e$var$MAX_ALLOC || keylen !== keylen) throw new TypeError('Bad key length');
+    if (typeof iterations !== "number") throw new TypeError("Iterations not a number");
+    if (iterations < 0) throw new TypeError("Bad iterations");
+    if (typeof keylen !== "number") throw new TypeError("Key length not a number");
+    if (keylen < 0 || keylen > $bb939a2fd115074e$var$MAX_ALLOC || keylen !== keylen) throw new TypeError("Bad key length");
 };
 
 });
@@ -10591,11 +10584,11 @@ parcelRequire.register("bU7tN", function(module, exports) {
 
 var $36zFS = parcelRequire("36zFS");
 var $8aaab9f5028848fa$var$defaultEncoding;
-/* istanbul ignore next */ if ($parcel$global.process && $parcel$global.process.browser) $8aaab9f5028848fa$var$defaultEncoding = 'utf-8';
+/* istanbul ignore next */ if ($parcel$global.process && $parcel$global.process.browser) $8aaab9f5028848fa$var$defaultEncoding = "utf-8";
 else if ($parcel$global.process && $parcel$global.process.version) {
-    var $8aaab9f5028848fa$var$pVersionMajor = parseInt($36zFS.version.split('.')[0].slice(1), 10);
-    $8aaab9f5028848fa$var$defaultEncoding = $8aaab9f5028848fa$var$pVersionMajor >= 6 ? 'utf-8' : 'binary';
-} else $8aaab9f5028848fa$var$defaultEncoding = 'utf-8';
+    var $8aaab9f5028848fa$var$pVersionMajor = parseInt($36zFS.version.split(".")[0].slice(1), 10);
+    $8aaab9f5028848fa$var$defaultEncoding = $8aaab9f5028848fa$var$pVersionMajor >= 6 ? "utf-8" : "binary";
+} else $8aaab9f5028848fa$var$defaultEncoding = "utf-8";
 module.exports = $8aaab9f5028848fa$var$defaultEncoding;
 
 });
@@ -10629,7 +10622,7 @@ var $692bf2894320f75f$var$sizes = {
 };
 function $692bf2894320f75f$var$Hmac(alg, key, saltLen) {
     var hash = $692bf2894320f75f$var$getDigest(alg);
-    var blocksize = alg === 'sha512' || alg === 'sha384' ? 128 : 64;
+    var blocksize = alg === "sha512" || alg === "sha384" ? 128 : 64;
     if (key.length > blocksize) key = hash(key);
     else if (key.length < blocksize) key = $692bf2894320f75f$require$Buffer.concat([
         key,
@@ -10664,15 +10657,15 @@ function $692bf2894320f75f$var$getDigest(alg) {
     function rmd160Func(data) {
         return new $iUB0B().update(data).digest();
     }
-    if (alg === 'rmd160' || alg === 'ripemd160') return rmd160Func;
-    if (alg === 'md5') return $2BKTG;
+    if (alg === "rmd160" || alg === "ripemd160") return rmd160Func;
+    if (alg === "md5") return $2BKTG;
     return shaFunc;
 }
 function $692bf2894320f75f$var$pbkdf2(password, salt, iterations, keylen, digest) {
     $g6sS6(iterations, keylen);
-    password = $gUf7P(password, $bU7tN, 'Password');
-    salt = $gUf7P(salt, $bU7tN, 'Salt');
-    digest = digest || 'sha1';
+    password = $gUf7P(password, $bU7tN, "Password");
+    salt = $gUf7P(salt, $bU7tN, "Salt");
+    digest = digest || "sha1";
     var hmac = new $692bf2894320f75f$var$Hmac(digest, password, salt.length);
     var DK = $692bf2894320f75f$require$Buffer.allocUnsafe(keylen);
     var block1 = $692bf2894320f75f$require$Buffer.allocUnsafe(salt.length + 4);
@@ -10702,9 +10695,9 @@ var $8k9oS = parcelRequire("8k9oS");
 var $c4ed9bdb322f1e7a$require$Buffer = $8k9oS.Buffer;
 module.exports = function(thing, encoding, name) {
     if ($c4ed9bdb322f1e7a$require$Buffer.isBuffer(thing)) return thing;
-    else if (typeof thing === 'string') return $c4ed9bdb322f1e7a$require$Buffer.from(thing, encoding);
+    else if (typeof thing === "string") return $c4ed9bdb322f1e7a$require$Buffer.from(thing, encoding);
     else if (ArrayBuffer.isView(thing)) return $c4ed9bdb322f1e7a$require$Buffer.from(thing.buffer);
-    else throw new TypeError(name + ' must be a string, a Buffer, a typed array or a DataView');
+    else throw new TypeError(name + " must be a string, a Buffer, a typed array or a DataView");
 };
 
 });
@@ -10753,7 +10746,7 @@ function $8d350b0818699abf$var$createCipher(suite, password) {
     } else if ($cUscF[suite]) {
         keyLen = $cUscF[suite].key * 8;
         ivLen = $cUscF[suite].iv;
-    } else throw new TypeError('invalid suite type');
+    } else throw new TypeError("invalid suite type");
     var keys = $l5861(password, false, keyLen, ivLen);
     return $8d350b0818699abf$var$createCipheriv(suite, keys.key, keys.iv);
 }
@@ -10766,7 +10759,7 @@ function $8d350b0818699abf$var$createDecipher(suite, password) {
     } else if ($cUscF[suite]) {
         keyLen = $cUscF[suite].key * 8;
         ivLen = $cUscF[suite].iv;
-    } else throw new TypeError('invalid suite type');
+    } else throw new TypeError("invalid suite type");
     var keys = $l5861(password, false, keyLen, ivLen);
     return $8d350b0818699abf$var$createDecipheriv(suite, keys.key, keys.iv);
 }
@@ -10778,7 +10771,7 @@ function $8d350b0818699abf$var$createCipheriv(suite, key, iv) {
         iv: iv,
         mode: suite
     });
-    throw new TypeError('invalid suite type');
+    throw new TypeError("invalid suite type");
 }
 function $8d350b0818699abf$var$createDecipheriv(suite, key, iv) {
     suite = suite.toLowerCase();
@@ -10789,7 +10782,7 @@ function $8d350b0818699abf$var$createDecipheriv(suite, key, iv) {
         mode: suite,
         decrypt: true
     });
-    throw new TypeError('invalid suite type');
+    throw new TypeError("invalid suite type");
 }
 function $8d350b0818699abf$var$getCiphers() {
     return Object.keys($cUscF).concat($jEWuG.getCiphers());
@@ -10812,15 +10805,15 @@ var $baEok = parcelRequire("baEok");
 var $8k9oS = parcelRequire("8k9oS");
 var $3faf6e1ee69b4f9c$require$Buffer = $8k9oS.Buffer;
 var $3faf6e1ee69b4f9c$var$modes = {
-    'des-ede3-cbc': $eIsWz.CBC.instantiate($eIsWz.EDE),
-    'des-ede3': $eIsWz.EDE,
-    'des-ede-cbc': $eIsWz.CBC.instantiate($eIsWz.EDE),
-    'des-ede': $eIsWz.EDE,
-    'des-cbc': $eIsWz.CBC.instantiate($eIsWz.DES),
-    'des-ecb': $eIsWz.DES
+    "des-ede3-cbc": $eIsWz.CBC.instantiate($eIsWz.EDE),
+    "des-ede3": $eIsWz.EDE,
+    "des-ede-cbc": $eIsWz.CBC.instantiate($eIsWz.EDE),
+    "des-ede": $eIsWz.EDE,
+    "des-cbc": $eIsWz.CBC.instantiate($eIsWz.DES),
+    "des-ecb": $eIsWz.DES
 };
-$3faf6e1ee69b4f9c$var$modes.des = $3faf6e1ee69b4f9c$var$modes['des-cbc'];
-$3faf6e1ee69b4f9c$var$modes.des3 = $3faf6e1ee69b4f9c$var$modes['des-ede3-cbc'];
+$3faf6e1ee69b4f9c$var$modes.des = $3faf6e1ee69b4f9c$var$modes["des-cbc"];
+$3faf6e1ee69b4f9c$var$modes.des3 = $3faf6e1ee69b4f9c$var$modes["des-ede3-cbc"];
 module.exports = $3faf6e1ee69b4f9c$var$DES;
 $baEok($3faf6e1ee69b4f9c$var$DES, $h2SJW);
 function $3faf6e1ee69b4f9c$var$DES(opts) {
@@ -10828,11 +10821,11 @@ function $3faf6e1ee69b4f9c$var$DES(opts) {
     var modeName = opts.mode.toLowerCase();
     var mode = $3faf6e1ee69b4f9c$var$modes[modeName];
     var type;
-    if (opts.decrypt) type = 'decrypt';
-    else type = 'encrypt';
+    if (opts.decrypt) type = "decrypt";
+    else type = "encrypt";
     var key = opts.key;
     if (!$3faf6e1ee69b4f9c$require$Buffer.isBuffer(key)) key = $3faf6e1ee69b4f9c$require$Buffer.from(key);
-    if (modeName === 'des-ede' || modeName === 'des-ede-cbc') key = $3faf6e1ee69b4f9c$require$Buffer.concat([
+    if (modeName === "des-ede" || modeName === "des-ede-cbc") key = $3faf6e1ee69b4f9c$require$Buffer.concat([
         key,
         key.slice(0, 8)
     ]);
@@ -10862,7 +10855,7 @@ var $ab6ba05a929a9536$export$26e5786e8ac8e530;
 var $ab6ba05a929a9536$export$cc8859615686b300;
 var $ab6ba05a929a9536$export$8ad3f227af08fcc5;
 var $ab6ba05a929a9536$export$947646e34766044f;
-'use strict';
+"use strict";
 
 $ab6ba05a929a9536$export$eab97d15b1788b8d = (parcelRequire("boATU"));
 
@@ -10899,7 +10892,7 @@ var $84be8f4e49b85c13$export$9f77e0932fb78f72;
 var $84be8f4e49b85c13$export$d865ce2836f5927f;
 var $84be8f4e49b85c13$export$95e62ad65da8b7d2;
 var $84be8f4e49b85c13$export$209139ff098c441a;
-'use strict';
+"use strict";
 $84be8f4e49b85c13$export$cfaef8ed399428b0 = function readUInt32BE(bytes, off) {
     var res = bytes[0 + off] << 24 | bytes[1 + off] << 16 | bytes[2 + off] << 8 | bytes[3 + off];
     return res >>> 0;
@@ -11656,16 +11649,16 @@ $84be8f4e49b85c13$export$95e62ad65da8b7d2 = function permute(num) {
 };
 $84be8f4e49b85c13$export$209139ff098c441a = function padSplit(num, size, group) {
     var str = num.toString(2);
-    while(str.length < size)str = '0' + str;
+    while(str.length < size)str = "0" + str;
     var out = [];
     for(var i = 0; i < size; i += group)out.push(str.slice(i, i + group));
-    return out.join(' ');
+    return out.join(" ");
 };
 
 });
 
 parcelRequire.register("1XNu1", function(module, exports) {
-'use strict';
+"use strict";
 
 var $dN0Q4 = parcelRequire("dN0Q4");
 function $16e1af78d4596c8c$var$Cipher(options) {
@@ -11682,7 +11675,7 @@ $16e1af78d4596c8c$var$Cipher.prototype._init = function _init() {
 };
 $16e1af78d4596c8c$var$Cipher.prototype.update = function update(data) {
     if (data.length === 0) return [];
-    if (this.type === 'decrypt') return this._updateDecrypt(data);
+    if (this.type === "decrypt") return this._updateDecrypt(data);
     else return this._updateEncrypt(data);
 };
 $16e1af78d4596c8c$var$Cipher.prototype._buffer = function _buffer(data, off) {
@@ -11735,7 +11728,7 @@ $16e1af78d4596c8c$var$Cipher.prototype.final = function final(buffer) {
     var first;
     if (buffer) first = this.update(buffer);
     var last;
-    if (this.type === 'encrypt') last = this._finalEncrypt();
+    if (this.type === "encrypt") last = this._finalEncrypt();
     else last = this._finalDecrypt();
     if (first) return first.concat(last);
     else return last;
@@ -11755,7 +11748,7 @@ $16e1af78d4596c8c$var$Cipher.prototype._unpad = function _unpad(buffer) {
     return buffer;
 };
 $16e1af78d4596c8c$var$Cipher.prototype._finalDecrypt = function _finalDecrypt() {
-    $dN0Q4.equal(this.bufferOff, this.blockSize, 'Not enough data to decrypt');
+    $dN0Q4.equal(this.bufferOff, this.blockSize, "Not enough data to decrypt");
     var out = new Array(this.blockSize);
     this._flushBuffer(out, 0);
     return this._unpad(out);
@@ -11765,17 +11758,17 @@ $16e1af78d4596c8c$var$Cipher.prototype._finalDecrypt = function _finalDecrypt() 
 parcelRequire.register("dN0Q4", function(module, exports) {
 module.exports = $a0a08085af058274$var$assert;
 function $a0a08085af058274$var$assert(val, msg) {
-    if (!val) throw new Error(msg || 'Assertion failed');
+    if (!val) throw new Error(msg || "Assertion failed");
 }
 $a0a08085af058274$var$assert.equal = function assertEqual(l, r, msg) {
-    if (l != r) throw new Error(msg || 'Assertion failed: ' + l + ' != ' + r);
+    if (l != r) throw new Error(msg || "Assertion failed: " + l + " != " + r);
 };
 
 });
 
 
 parcelRequire.register("fILu8", function(module, exports) {
-'use strict';
+"use strict";
 
 var $dN0Q4 = parcelRequire("dN0Q4");
 
@@ -11819,7 +11812,7 @@ var $b71fcca17cb35207$var$shiftTable = [
 ];
 $b71fcca17cb35207$var$DES.prototype.deriveKeys = function deriveKeys(state, key) {
     state.keys = new Array(32);
-    $dN0Q4.equal(key.length, this.blockSize, 'Invalid key length');
+    $dN0Q4.equal(key.length, this.blockSize, "Invalid key length");
     var kL = $boATU.readUInt32BE(key, 0);
     var kR = $boATU.readUInt32BE(key, 4);
     $boATU.pc1(kL, kR, state.tmp, 0);
@@ -11840,7 +11833,7 @@ $b71fcca17cb35207$var$DES.prototype._update = function _update(inp, inOff, out, 
     $boATU.ip(l, r, state.tmp, 0);
     l = state.tmp[0];
     r = state.tmp[1];
-    if (this.type === 'encrypt') this._encrypt(state, l, r, state.tmp, 0);
+    if (this.type === "encrypt") this._encrypt(state, l, r, state.tmp, 0);
     else this._decrypt(state, l, r, state.tmp, 0);
     l = state.tmp[0];
     r = state.tmp[1];
@@ -11904,14 +11897,14 @@ parcelRequire.register("WHnax", function(module, exports) {
 
 $parcel$export(module.exports, "instantiate", function () { return $0b070fcecc868d6e$export$f9bb8d20ccc7477a; }, function (v) { return $0b070fcecc868d6e$export$f9bb8d20ccc7477a = v; });
 var $0b070fcecc868d6e$export$f9bb8d20ccc7477a;
-'use strict';
+"use strict";
 
 var $dN0Q4 = parcelRequire("dN0Q4");
 
 var $baEok = parcelRequire("baEok");
 var $0b070fcecc868d6e$var$proto = {};
 function $0b070fcecc868d6e$var$CBCState(iv) {
-    $dN0Q4.equal(iv.length, 8, 'Invalid IV length');
+    $dN0Q4.equal(iv.length, 8, "Invalid IV length");
     this.iv = new Array(8);
     for(var i = 0; i < this.iv.length; i++)this.iv[i] = iv[i];
 }
@@ -11940,7 +11933,7 @@ $0b070fcecc868d6e$var$proto._update = function _update(inp, inOff, out, outOff) 
     var state = this._cbcState;
     var superProto = this.constructor.super_.prototype;
     var iv = state.iv;
-    if (this.type === 'encrypt') {
+    if (this.type === "encrypt") {
         for(var i = 0; i < this.blockSize; i++)iv[i] ^= inp[inOff + i];
         superProto._update.call(this, iv, 0, out, outOff);
         for(var i = 0; i < this.blockSize; i++)iv[i] = out[outOff + i];
@@ -11954,7 +11947,7 @@ $0b070fcecc868d6e$var$proto._update = function _update(inp, inOff, out, outOff) 
 });
 
 parcelRequire.register("6dLk9", function(module, exports) {
-'use strict';
+"use strict";
 
 var $dN0Q4 = parcelRequire("dN0Q4");
 
@@ -11964,35 +11957,35 @@ var $1XNu1 = parcelRequire("1XNu1");
 
 var $fILu8 = parcelRequire("fILu8");
 function $4878aa847e0ada9d$var$EDEState(type, key) {
-    $dN0Q4.equal(key.length, 24, 'Invalid key length');
+    $dN0Q4.equal(key.length, 24, "Invalid key length");
     var k1 = key.slice(0, 8);
     var k2 = key.slice(8, 16);
     var k3 = key.slice(16, 24);
-    if (type === 'encrypt') this.ciphers = [
+    if (type === "encrypt") this.ciphers = [
         $fILu8.create({
-            type: 'encrypt',
+            type: "encrypt",
             key: k1
         }),
         $fILu8.create({
-            type: 'decrypt',
+            type: "decrypt",
             key: k2
         }),
         $fILu8.create({
-            type: 'encrypt',
+            type: "encrypt",
             key: k3
         })
     ];
     else this.ciphers = [
         $fILu8.create({
-            type: 'decrypt',
+            type: "decrypt",
             key: k3
         }),
         $fILu8.create({
-            type: 'encrypt',
+            type: "encrypt",
             key: k2
         }),
         $fILu8.create({
-            type: 'decrypt',
+            type: "decrypt",
             key: k1
         })
     ];
@@ -12104,7 +12097,7 @@ $60cd7512204e9906$var$Cipher.prototype._final = function() {
     }
     if (!chunk.equals($60cd7512204e9906$var$PADDING)) {
         this._cipher.scrub();
-        throw new Error('data not multiple of block length');
+        throw new Error("data not multiple of block length");
     }
 };
 $60cd7512204e9906$var$Cipher.prototype.setAutoPadding = function(setTo) {
@@ -12140,18 +12133,18 @@ $60cd7512204e9906$var$Splitter.prototype.flush = function() {
 };
 function $60cd7512204e9906$var$createCipheriv(suite, password, iv) {
     var config = $1OG5o[suite.toLowerCase()];
-    if (!config) throw new TypeError('invalid suite type');
-    if (typeof password === 'string') password = $60cd7512204e9906$require$Buffer.from(password);
-    if (password.length !== config.key / 8) throw new TypeError('invalid key length ' + password.length);
-    if (typeof iv === 'string') iv = $60cd7512204e9906$require$Buffer.from(iv);
-    if (config.mode !== 'GCM' && iv.length !== config.iv) throw new TypeError('invalid iv length ' + iv.length);
-    if (config.type === 'stream') return new $ctiRE(config.module, password, iv);
-    else if (config.type === 'auth') return new $1cV2f(config.module, password, iv);
+    if (!config) throw new TypeError("invalid suite type");
+    if (typeof password === "string") password = $60cd7512204e9906$require$Buffer.from(password);
+    if (password.length !== config.key / 8) throw new TypeError("invalid key length " + password.length);
+    if (typeof iv === "string") iv = $60cd7512204e9906$require$Buffer.from(iv);
+    if (config.mode !== "GCM" && iv.length !== config.iv) throw new TypeError("invalid iv length " + iv.length);
+    if (config.type === "stream") return new $ctiRE(config.module, password, iv);
+    else if (config.type === "auth") return new $1cV2f(config.module, password, iv);
     return new $60cd7512204e9906$var$Cipher(config.module, password, iv);
 }
 function $60cd7512204e9906$var$createCipher(suite, password) {
     var config = $1OG5o[suite.toLowerCase()];
-    if (!config) throw new TypeError('invalid suite type');
+    if (!config) throw new TypeError("invalid suite type");
     var keys = $l5861(password, false, config.key, config.iv);
     return $60cd7512204e9906$var$createCipheriv(suite, keys.key, keys.iv);
 }
@@ -12437,7 +12430,7 @@ module.exports = $adbf25b7a65ceb68$var$incr32;
 
 
 parcelRequire.register("iOqZM", function(module, exports) {
-module.exports = JSON.parse("{\"aes-128-ecb\":{\"cipher\":\"AES\",\"key\":128,\"iv\":0,\"mode\":\"ECB\",\"type\":\"block\"},\"aes-192-ecb\":{\"cipher\":\"AES\",\"key\":192,\"iv\":0,\"mode\":\"ECB\",\"type\":\"block\"},\"aes-256-ecb\":{\"cipher\":\"AES\",\"key\":256,\"iv\":0,\"mode\":\"ECB\",\"type\":\"block\"},\"aes-128-cbc\":{\"cipher\":\"AES\",\"key\":128,\"iv\":16,\"mode\":\"CBC\",\"type\":\"block\"},\"aes-192-cbc\":{\"cipher\":\"AES\",\"key\":192,\"iv\":16,\"mode\":\"CBC\",\"type\":\"block\"},\"aes-256-cbc\":{\"cipher\":\"AES\",\"key\":256,\"iv\":16,\"mode\":\"CBC\",\"type\":\"block\"},\"aes128\":{\"cipher\":\"AES\",\"key\":128,\"iv\":16,\"mode\":\"CBC\",\"type\":\"block\"},\"aes192\":{\"cipher\":\"AES\",\"key\":192,\"iv\":16,\"mode\":\"CBC\",\"type\":\"block\"},\"aes256\":{\"cipher\":\"AES\",\"key\":256,\"iv\":16,\"mode\":\"CBC\",\"type\":\"block\"},\"aes-128-cfb\":{\"cipher\":\"AES\",\"key\":128,\"iv\":16,\"mode\":\"CFB\",\"type\":\"stream\"},\"aes-192-cfb\":{\"cipher\":\"AES\",\"key\":192,\"iv\":16,\"mode\":\"CFB\",\"type\":\"stream\"},\"aes-256-cfb\":{\"cipher\":\"AES\",\"key\":256,\"iv\":16,\"mode\":\"CFB\",\"type\":\"stream\"},\"aes-128-cfb8\":{\"cipher\":\"AES\",\"key\":128,\"iv\":16,\"mode\":\"CFB8\",\"type\":\"stream\"},\"aes-192-cfb8\":{\"cipher\":\"AES\",\"key\":192,\"iv\":16,\"mode\":\"CFB8\",\"type\":\"stream\"},\"aes-256-cfb8\":{\"cipher\":\"AES\",\"key\":256,\"iv\":16,\"mode\":\"CFB8\",\"type\":\"stream\"},\"aes-128-cfb1\":{\"cipher\":\"AES\",\"key\":128,\"iv\":16,\"mode\":\"CFB1\",\"type\":\"stream\"},\"aes-192-cfb1\":{\"cipher\":\"AES\",\"key\":192,\"iv\":16,\"mode\":\"CFB1\",\"type\":\"stream\"},\"aes-256-cfb1\":{\"cipher\":\"AES\",\"key\":256,\"iv\":16,\"mode\":\"CFB1\",\"type\":\"stream\"},\"aes-128-ofb\":{\"cipher\":\"AES\",\"key\":128,\"iv\":16,\"mode\":\"OFB\",\"type\":\"stream\"},\"aes-192-ofb\":{\"cipher\":\"AES\",\"key\":192,\"iv\":16,\"mode\":\"OFB\",\"type\":\"stream\"},\"aes-256-ofb\":{\"cipher\":\"AES\",\"key\":256,\"iv\":16,\"mode\":\"OFB\",\"type\":\"stream\"},\"aes-128-ctr\":{\"cipher\":\"AES\",\"key\":128,\"iv\":16,\"mode\":\"CTR\",\"type\":\"stream\"},\"aes-192-ctr\":{\"cipher\":\"AES\",\"key\":192,\"iv\":16,\"mode\":\"CTR\",\"type\":\"stream\"},\"aes-256-ctr\":{\"cipher\":\"AES\",\"key\":256,\"iv\":16,\"mode\":\"CTR\",\"type\":\"stream\"},\"aes-128-gcm\":{\"cipher\":\"AES\",\"key\":128,\"iv\":12,\"mode\":\"GCM\",\"type\":\"auth\"},\"aes-192-gcm\":{\"cipher\":\"AES\",\"key\":192,\"iv\":12,\"mode\":\"GCM\",\"type\":\"auth\"},\"aes-256-gcm\":{\"cipher\":\"AES\",\"key\":256,\"iv\":12,\"mode\":\"GCM\",\"type\":\"auth\"}}");
+module.exports = JSON.parse('{"aes-128-ecb":{"cipher":"AES","key":128,"iv":0,"mode":"ECB","type":"block"},"aes-192-ecb":{"cipher":"AES","key":192,"iv":0,"mode":"ECB","type":"block"},"aes-256-ecb":{"cipher":"AES","key":256,"iv":0,"mode":"ECB","type":"block"},"aes-128-cbc":{"cipher":"AES","key":128,"iv":16,"mode":"CBC","type":"block"},"aes-192-cbc":{"cipher":"AES","key":192,"iv":16,"mode":"CBC","type":"block"},"aes-256-cbc":{"cipher":"AES","key":256,"iv":16,"mode":"CBC","type":"block"},"aes128":{"cipher":"AES","key":128,"iv":16,"mode":"CBC","type":"block"},"aes192":{"cipher":"AES","key":192,"iv":16,"mode":"CBC","type":"block"},"aes256":{"cipher":"AES","key":256,"iv":16,"mode":"CBC","type":"block"},"aes-128-cfb":{"cipher":"AES","key":128,"iv":16,"mode":"CFB","type":"stream"},"aes-192-cfb":{"cipher":"AES","key":192,"iv":16,"mode":"CFB","type":"stream"},"aes-256-cfb":{"cipher":"AES","key":256,"iv":16,"mode":"CFB","type":"stream"},"aes-128-cfb8":{"cipher":"AES","key":128,"iv":16,"mode":"CFB8","type":"stream"},"aes-192-cfb8":{"cipher":"AES","key":192,"iv":16,"mode":"CFB8","type":"stream"},"aes-256-cfb8":{"cipher":"AES","key":256,"iv":16,"mode":"CFB8","type":"stream"},"aes-128-cfb1":{"cipher":"AES","key":128,"iv":16,"mode":"CFB1","type":"stream"},"aes-192-cfb1":{"cipher":"AES","key":192,"iv":16,"mode":"CFB1","type":"stream"},"aes-256-cfb1":{"cipher":"AES","key":256,"iv":16,"mode":"CFB1","type":"stream"},"aes-128-ofb":{"cipher":"AES","key":128,"iv":16,"mode":"OFB","type":"stream"},"aes-192-ofb":{"cipher":"AES","key":192,"iv":16,"mode":"OFB","type":"stream"},"aes-256-ofb":{"cipher":"AES","key":256,"iv":16,"mode":"OFB","type":"stream"},"aes-128-ctr":{"cipher":"AES","key":128,"iv":16,"mode":"CTR","type":"stream"},"aes-192-ctr":{"cipher":"AES","key":192,"iv":16,"mode":"CTR","type":"stream"},"aes-256-ctr":{"cipher":"AES","key":256,"iv":16,"mode":"CTR","type":"stream"},"aes-128-gcm":{"cipher":"AES","key":128,"iv":12,"mode":"GCM","type":"auth"},"aes-192-gcm":{"cipher":"AES","key":192,"iv":12,"mode":"GCM","type":"auth"},"aes-256-gcm":{"cipher":"AES","key":256,"iv":12,"mode":"GCM","type":"auth"}}');
 
 });
 
@@ -12538,22 +12531,22 @@ $0e13276f98d1c782$var$StreamCipher.prototype._update = function(chunk) {
     return out;
 };
 $0e13276f98d1c782$var$StreamCipher.prototype._final = function() {
-    if (this._decrypt && !this._authTag) throw new Error('Unsupported state or unable to authenticate data');
+    if (this._decrypt && !this._authTag) throw new Error("Unsupported state or unable to authenticate data");
     var tag = $fQBn9(this._ghash.final(this._alen * 8, this._len * 8), this._cipher.encryptBlock(this._finID));
-    if (this._decrypt && $0e13276f98d1c782$var$xorTest(tag, this._authTag)) throw new Error('Unsupported state or unable to authenticate data');
+    if (this._decrypt && $0e13276f98d1c782$var$xorTest(tag, this._authTag)) throw new Error("Unsupported state or unable to authenticate data");
     this._authTag = tag;
     this._cipher.scrub();
 };
 $0e13276f98d1c782$var$StreamCipher.prototype.getAuthTag = function getAuthTag() {
-    if (this._decrypt || !$0e13276f98d1c782$require$Buffer.isBuffer(this._authTag)) throw new Error('Attempting to get auth tag in unsupported state');
+    if (this._decrypt || !$0e13276f98d1c782$require$Buffer.isBuffer(this._authTag)) throw new Error("Attempting to get auth tag in unsupported state");
     return this._authTag;
 };
 $0e13276f98d1c782$var$StreamCipher.prototype.setAuthTag = function setAuthTag(tag) {
-    if (!this._decrypt) throw new Error('Attempting to set auth tag in unsupported state');
+    if (!this._decrypt) throw new Error("Attempting to set auth tag in unsupported state");
     this._authTag = tag;
 };
 $0e13276f98d1c782$var$StreamCipher.prototype.setAAD = function setAAD(buf) {
-    if (this._called) throw new Error('Attempting to set AAD in unsupported state');
+    if (this._called) throw new Error("Attempting to set AAD in unsupported state");
     this._ghash.update(buf);
     this._alen += buf.length;
 };
@@ -12884,10 +12877,10 @@ var $f59058584f418962$require$Buffer = $8k9oS.Buffer;
 
 var $2MW9T = parcelRequire("2MW9T");
 /* eslint-disable camelcase */ function $f59058584f418962$var$EVP_BytesToKey(password, salt, keyBits, ivLen) {
-    if (!$f59058584f418962$require$Buffer.isBuffer(password)) password = $f59058584f418962$require$Buffer.from(password, 'binary');
+    if (!$f59058584f418962$require$Buffer.isBuffer(password)) password = $f59058584f418962$require$Buffer.from(password, "binary");
     if (salt) {
-        if (!$f59058584f418962$require$Buffer.isBuffer(salt)) salt = $f59058584f418962$require$Buffer.from(salt, 'binary');
-        if (salt.length !== 8) throw new RangeError('salt should be Buffer with 8 byte length');
+        if (!$f59058584f418962$require$Buffer.isBuffer(salt)) salt = $f59058584f418962$require$Buffer.from(salt, "binary");
+        if (salt.length !== 8) throw new RangeError("salt should be Buffer with 8 byte length");
     }
     var keyLen = keyBits / 8;
     var key = $f59058584f418962$require$Buffer.alloc(keyLen);
@@ -12971,7 +12964,7 @@ $a1f25a694b42ad04$var$Decipher.prototype._update = function(data) {
 $a1f25a694b42ad04$var$Decipher.prototype._final = function() {
     var chunk = this._cache.flush();
     if (this._autopadding) return $a1f25a694b42ad04$var$unpad(this._mode.decrypt(this, chunk));
-    else if (chunk) throw new Error('data not multiple of block length');
+    else if (chunk) throw new Error("data not multiple of block length");
 };
 $a1f25a694b42ad04$var$Decipher.prototype.setAutoPadding = function(setTo) {
     this._autopadding = !!setTo;
@@ -13006,28 +12999,28 @@ $a1f25a694b42ad04$var$Splitter.prototype.flush = function() {
 };
 function $a1f25a694b42ad04$var$unpad(last) {
     var padded = last[15];
-    if (padded < 1 || padded > 16) throw new Error('unable to decrypt data');
+    if (padded < 1 || padded > 16) throw new Error("unable to decrypt data");
     var i = -1;
     while(++i < padded){
-        if (last[i + (16 - padded)] !== padded) throw new Error('unable to decrypt data');
+        if (last[i + (16 - padded)] !== padded) throw new Error("unable to decrypt data");
     }
     if (padded === 16) return;
     return last.slice(0, 16 - padded);
 }
 function $a1f25a694b42ad04$var$createDecipheriv(suite, password, iv) {
     var config = $1OG5o[suite.toLowerCase()];
-    if (!config) throw new TypeError('invalid suite type');
-    if (typeof iv === 'string') iv = $a1f25a694b42ad04$require$Buffer.from(iv);
-    if (config.mode !== 'GCM' && iv.length !== config.iv) throw new TypeError('invalid iv length ' + iv.length);
-    if (typeof password === 'string') password = $a1f25a694b42ad04$require$Buffer.from(password);
-    if (password.length !== config.key / 8) throw new TypeError('invalid key length ' + password.length);
-    if (config.type === 'stream') return new $ctiRE(config.module, password, iv, true);
-    else if (config.type === 'auth') return new $1cV2f(config.module, password, iv, true);
+    if (!config) throw new TypeError("invalid suite type");
+    if (typeof iv === "string") iv = $a1f25a694b42ad04$require$Buffer.from(iv);
+    if (config.mode !== "GCM" && iv.length !== config.iv) throw new TypeError("invalid iv length " + iv.length);
+    if (typeof password === "string") password = $a1f25a694b42ad04$require$Buffer.from(password);
+    if (password.length !== config.key / 8) throw new TypeError("invalid key length " + password.length);
+    if (config.type === "stream") return new $ctiRE(config.module, password, iv, true);
+    else if (config.type === "auth") return new $1cV2f(config.module, password, iv, true);
     return new $a1f25a694b42ad04$var$Decipher(config.module, password, iv);
 }
 function $a1f25a694b42ad04$var$createDecipher(suite, password) {
     var config = $1OG5o[suite.toLowerCase()];
-    if (!config) throw new TypeError('invalid suite type');
+    if (!config) throw new TypeError("invalid suite type");
     var keys = $l5861(password, false, config.key, config.iv);
     return $a1f25a694b42ad04$var$createDecipheriv(suite, keys.key, keys.iv);
 }
@@ -13105,24 +13098,24 @@ var $jEY0F = parcelRequire("jEY0F");
 
 var $gxraZ = parcelRequire("gxraZ");
 function $4e57cfabef8abb13$var$getDiffieHellman(mod) {
-    var prime = new $4e57cfabef8abb13$require$Buffer($jEY0F[mod].prime, 'hex');
-    var gen = new $4e57cfabef8abb13$require$Buffer($jEY0F[mod].gen, 'hex');
+    var prime = new $4e57cfabef8abb13$require$Buffer($jEY0F[mod].prime, "hex");
+    var gen = new $4e57cfabef8abb13$require$Buffer($jEY0F[mod].gen, "hex");
     return new $gxraZ(prime, gen);
 }
 var $4e57cfabef8abb13$var$ENCODINGS = {
-    'binary': true,
-    'hex': true,
-    'base64': true
+    "binary": true,
+    "hex": true,
+    "base64": true
 };
 function $4e57cfabef8abb13$var$createDiffieHellman(prime, enc, generator, genc) {
-    if ($4e57cfabef8abb13$require$Buffer.isBuffer(enc) || $4e57cfabef8abb13$var$ENCODINGS[enc] === undefined) return $4e57cfabef8abb13$var$createDiffieHellman(prime, 'binary', enc, generator);
-    enc = enc || 'binary';
-    genc = genc || 'binary';
+    if ($4e57cfabef8abb13$require$Buffer.isBuffer(enc) || $4e57cfabef8abb13$var$ENCODINGS[enc] === undefined) return $4e57cfabef8abb13$var$createDiffieHellman(prime, "binary", enc, generator);
+    enc = enc || "binary";
+    genc = genc || "binary";
     generator = generator || new $4e57cfabef8abb13$require$Buffer([
         2
     ]);
     if (!$4e57cfabef8abb13$require$Buffer.isBuffer(generator)) generator = new $4e57cfabef8abb13$require$Buffer(generator, genc);
-    if (typeof prime === 'number') return new $gxraZ($j89TZ(prime, generator), generator, true);
+    if (typeof prime === "number") return new $gxraZ($j89TZ(prime, generator), generator, true);
     if (!$4e57cfabef8abb13$require$Buffer.isBuffer(prime)) prime = new $4e57cfabef8abb13$require$Buffer(prime, enc);
     return new $gxraZ(prime, generator, true);
 }
@@ -13169,9 +13162,9 @@ function $ded6720299bdb2e3$var$_getPrimes() {
     return res;
 }
 function $ded6720299bdb2e3$var$simpleSieve(p) {
-    var primes = $ded6720299bdb2e3$var$_getPrimes();
-    for(var i = 0; i < primes.length; i++)if (p.modn(primes[i]) === 0) {
-        if (p.cmpn(primes[i]) === 0) return true;
+    var primes1 = $ded6720299bdb2e3$var$_getPrimes();
+    for(var i = 0; i < primes1.length; i++)if (p.modn(primes1[i]) === 0) {
+        if (p.cmpn(primes1[i]) === 0) return true;
         else return false;
     }
     return true;
@@ -13210,9 +13203,10 @@ function $ded6720299bdb2e3$var$findPrime(bits, gen) {
 parcelRequire.register("ifKRX", function(module, exports) {
 
 (function(module, exports) {
+    "use strict";
     // Utils
     function assert(val, msg) {
-        if (!val) throw new Error(msg || 'Assertion failed');
+        if (!val) throw new Error(msg || "Assertion failed");
     }
     // Could use `inherits` module, but don't want to move from single file
     // architecture yet.
@@ -13232,25 +13226,25 @@ parcelRequire.register("ifKRX", function(module, exports) {
         // Reduction context
         this.red = null;
         if (number !== null) {
-            if (base === 'le' || base === 'be') {
+            if (base === "le" || base === "be") {
                 endian = base;
                 base = 10;
             }
-            this._init(number || 0, base || 10, endian || 'be');
+            this._init(number || 0, base || 10, endian || "be");
         }
     }
-    if (typeof module === 'object') module.exports = BN;
+    if (typeof module === "object") module.exports = BN;
     else exports.BN = BN;
     BN.BN = BN;
     BN.wordSize = 26;
     var Buffer;
     try {
-        if (typeof window !== 'undefined' && typeof window.Buffer !== 'undefined') Buffer = window.Buffer;
+        if (typeof window !== "undefined" && typeof window.Buffer !== "undefined") Buffer = window.Buffer;
         else Buffer = (parcelRequire("c7mcJ")).Buffer;
     } catch (e) {}
     BN.isBN = function isBN(num) {
         if (num instanceof BN) return true;
-        return num !== null && typeof num === 'object' && num.constructor.wordSize === BN.wordSize && Array.isArray(num.words);
+        return num !== null && typeof num === "object" && num.constructor.wordSize === BN.wordSize && Array.isArray(num.words);
     };
     BN.max = function max(left, right) {
         if (left.cmp(right) > 0) return left;
@@ -13261,13 +13255,13 @@ parcelRequire.register("ifKRX", function(module, exports) {
         return right;
     };
     BN.prototype._init = function init(number, base, endian) {
-        if (typeof number === 'number') return this._initNumber(number, base, endian);
-        if (typeof number === 'object') return this._initArray(number, base, endian);
-        if (base === 'hex') base = 16;
+        if (typeof number === "number") return this._initNumber(number, base, endian);
+        if (typeof number === "object") return this._initArray(number, base, endian);
+        if (base === "hex") base = 16;
         assert(base === (base | 0) && base >= 2 && base <= 36);
-        number = number.toString().replace(/\s+/g, '');
+        number = number.toString().replace(/\s+/g, "");
         var start = 0;
-        if (number[0] === '-') {
+        if (number[0] === "-") {
             start++;
             this.negative = 1;
         }
@@ -13275,7 +13269,7 @@ parcelRequire.register("ifKRX", function(module, exports) {
             if (base === 16) this._parseHex(number, start, endian);
             else {
                 this._parseBase(number, base, start);
-                if (endian === 'le') this._initArray(this.toArray(), base, endian);
+                if (endian === "le") this._initArray(this.toArray(), base, endian);
             }
         }
     };
@@ -13304,13 +13298,13 @@ parcelRequire.register("ifKRX", function(module, exports) {
             ];
             this.length = 3;
         }
-        if (endian !== 'le') return;
+        if (endian !== "le") return;
         // Reverse the bytes
         this._initArray(this.toArray(), base, endian);
     };
     BN.prototype._initArray = function _initArray(number, base, endian) {
         // Perhaps a Uint8Array
-        assert(typeof number.length === 'number');
+        assert(typeof number.length === "number");
         if (number.length <= 0) {
             this.words = [
                 0
@@ -13323,7 +13317,7 @@ parcelRequire.register("ifKRX", function(module, exports) {
         for(var i = 0; i < this.length; i++)this.words[i] = 0;
         var j, w;
         var off = 0;
-        if (endian === 'be') for(i = number.length - 1, j = 0; i >= 0; i -= 3){
+        if (endian === "be") for(i = number.length - 1, j = 0; i >= 0; i -= 3){
             w = number[i] | number[i - 1] << 8 | number[i - 2] << 16;
             this.words[j] |= w << off & 0x3ffffff;
             this.words[j + 1] = w >>> 26 - off & 0x3ffffff;
@@ -13333,7 +13327,7 @@ parcelRequire.register("ifKRX", function(module, exports) {
                 j++;
             }
         }
-        else if (endian === 'le') for(i = 0, j = 0; i < number.length; i += 3){
+        else if (endian === "le") for(i = 0, j = 0; i < number.length; i += 3){
             w = number[i] | number[i + 1] << 8 | number[i + 2] << 16;
             this.words[j] |= w << off & 0x3ffffff;
             this.words[j + 1] = w >>> 26 - off & 0x3ffffff;
@@ -13366,7 +13360,7 @@ parcelRequire.register("ifKRX", function(module, exports) {
         var off = 0;
         var j = 0;
         var w;
-        if (endian === 'be') for(i = number.length - 1; i >= start; i -= 2){
+        if (endian === "be") for(i = number.length - 1; i >= start; i -= 2){
             w = parseHexByte(number, start, i) << off;
             this.words[j] |= w & 0x3ffffff;
             if (off >= 18) {
@@ -13459,7 +13453,7 @@ parcelRequire.register("ifKRX", function(module, exports) {
         return this;
     };
     BN.prototype.inspect = function inspect() {
-        return (this.red ? '<BN-R: ' : '<BN: ') + this.toString(16) + '>';
+        return (this.red ? "<BN-R: " : "<BN: ") + this.toString(16) + ">";
     };
     /*
 
@@ -13490,32 +13484,32 @@ parcelRequire.register("ifKRX", function(module, exports) {
   }
 
   */ var zeros = [
-        '',
-        '0',
-        '00',
-        '000',
-        '0000',
-        '00000',
-        '000000',
-        '0000000',
-        '00000000',
-        '000000000',
-        '0000000000',
-        '00000000000',
-        '000000000000',
-        '0000000000000',
-        '00000000000000',
-        '000000000000000',
-        '0000000000000000',
-        '00000000000000000',
-        '000000000000000000',
-        '0000000000000000000',
-        '00000000000000000000',
-        '000000000000000000000',
-        '0000000000000000000000',
-        '00000000000000000000000',
-        '000000000000000000000000',
-        '0000000000000000000000000'
+        "",
+        "0",
+        "00",
+        "000",
+        "0000",
+        "00000",
+        "000000",
+        "0000000",
+        "00000000",
+        "000000000",
+        "0000000000",
+        "00000000000",
+        "000000000000",
+        "0000000000000",
+        "00000000000000",
+        "000000000000000",
+        "0000000000000000",
+        "00000000000000000",
+        "000000000000000000",
+        "0000000000000000000",
+        "00000000000000000000",
+        "000000000000000000000",
+        "0000000000000000000000",
+        "00000000000000000000000",
+        "000000000000000000000000",
+        "0000000000000000000000000"
     ];
     var groupSizes = [
         0,
@@ -13599,8 +13593,8 @@ parcelRequire.register("ifKRX", function(module, exports) {
         base = base || 10;
         padding = padding | 0 || 1;
         var out;
-        if (base === 16 || base === 'hex') {
-            out = '';
+        if (base === 16 || base === "hex") {
+            out = "";
             var off = 0;
             var carry = 0;
             for(var i = 0; i < this.length; i++){
@@ -13616,8 +13610,8 @@ parcelRequire.register("ifKRX", function(module, exports) {
                 }
             }
             if (carry !== 0) out = carry.toString(16) + out;
-            while(out.length % padding !== 0)out = '0' + out;
-            if (this.negative !== 0) out = '-' + out;
+            while(out.length % padding !== 0)out = "0" + out;
+            if (this.negative !== 0) out = "-" + out;
             return out;
         }
         if (base === (base | 0) && base >= 2 && base <= 36) {
@@ -13625,7 +13619,7 @@ parcelRequire.register("ifKRX", function(module, exports) {
             var groupSize = groupSizes[base];
             // var groupBase = Math.pow(base, groupSize);
             var groupBase = groupBases[base];
-            out = '';
+            out = "";
             var c = this.clone();
             c.negative = 0;
             while(!c.isZero()){
@@ -13634,26 +13628,26 @@ parcelRequire.register("ifKRX", function(module, exports) {
                 if (!c.isZero()) out = zeros[groupSize - r.length] + r + out;
                 else out = r + out;
             }
-            if (this.isZero()) out = '0' + out;
-            while(out.length % padding !== 0)out = '0' + out;
-            if (this.negative !== 0) out = '-' + out;
+            if (this.isZero()) out = "0" + out;
+            while(out.length % padding !== 0)out = "0" + out;
+            if (this.negative !== 0) out = "-" + out;
             return out;
         }
-        assert(false, 'Base should be between 2 and 36');
+        assert(false, "Base should be between 2 and 36");
     };
     BN.prototype.toNumber = function toNumber() {
         var ret = this.words[0];
         if (this.length === 2) ret += this.words[1] * 0x4000000;
         else if (this.length === 3 && this.words[2] === 0x01) // NOTE: at this stage it is known that the top bit is set
         ret += 0x10000000000000 + this.words[1] * 0x4000000;
-        else if (this.length > 2) assert(false, 'Number can only safely store up to 53 bits');
+        else if (this.length > 2) assert(false, "Number can only safely store up to 53 bits");
         return this.negative !== 0 ? -ret : ret;
     };
     BN.prototype.toJSON = function toJSON() {
         return this.toString(16);
     };
     BN.prototype.toBuffer = function toBuffer(endian, length) {
-        assert(typeof Buffer !== 'undefined');
+        assert(typeof Buffer !== "undefined");
         return this.toArrayLike(Buffer, endian, length);
     };
     BN.prototype.toArray = function toArray(endian, length) {
@@ -13662,10 +13656,10 @@ parcelRequire.register("ifKRX", function(module, exports) {
     BN.prototype.toArrayLike = function toArrayLike(ArrayType, endian, length) {
         var byteLength = this.byteLength();
         var reqLength = length || Math.max(1, byteLength);
-        assert(byteLength <= reqLength, 'byte array longer than desired length');
-        assert(reqLength > 0, 'Requested array length <= 0');
+        assert(byteLength <= reqLength, "byte array longer than desired length");
+        assert(reqLength > 0, "Requested array length <= 0");
         this.strip();
-        var littleEndian = endian === 'le';
+        var littleEndian = endian === "le";
         var res = new ArrayType(reqLength);
         var b, i;
         var q = this.clone();
@@ -13857,7 +13851,7 @@ parcelRequire.register("ifKRX", function(module, exports) {
     };
     // Not ``this`` with ``width`` bitwidth
     BN.prototype.inotn = function inotn(width) {
-        assert(typeof width === 'number' && width >= 0);
+        assert(typeof width === "number" && width >= 0);
         var bytesNeeded = Math.ceil(width / 26) | 0;
         var bitsLeft = width % 26;
         // Extend the buffer with leading zeroes
@@ -13875,7 +13869,7 @@ parcelRequire.register("ifKRX", function(module, exports) {
     };
     // Set `bit` of `this`
     BN.prototype.setn = function setn(bit, val) {
-        assert(typeof bit === 'number' && bit >= 0);
+        assert(typeof bit === "number" && bit >= 0);
         var off = bit / 26 | 0;
         var wbit = bit % 26;
         this._expand(off + 1);
@@ -14787,7 +14781,7 @@ parcelRequire.register("ifKRX", function(module, exports) {
         return this.clone().mulTo(num, this);
     };
     BN.prototype.imuln = function imuln(num) {
-        assert(typeof num === 'number');
+        assert(typeof num === "number");
         assert(num < 0x4000000);
         // Carry
         var carry = 0;
@@ -14834,7 +14828,7 @@ parcelRequire.register("ifKRX", function(module, exports) {
     };
     // Shift-left in-place
     BN.prototype.iushln = function iushln(bits) {
-        assert(typeof bits === 'number' && bits >= 0);
+        assert(typeof bits === "number" && bits >= 0);
         var r = bits % 26;
         var s = (bits - r) / 26;
         var carryMask = 0x3ffffff >>> 26 - r << 26 - r;
@@ -14868,7 +14862,7 @@ parcelRequire.register("ifKRX", function(module, exports) {
     // NOTE: `hint` is a lowest bit before trailing zeroes
     // NOTE: if `extended` is present - it will be filled with destroyed bits
     BN.prototype.iushrn = function iushrn(bits, hint, extended) {
-        assert(typeof bits === 'number' && bits >= 0);
+        assert(typeof bits === "number" && bits >= 0);
         var h;
         if (hint) h = (hint - hint % 26) / 26;
         else h = 0;
@@ -14926,7 +14920,7 @@ parcelRequire.register("ifKRX", function(module, exports) {
     };
     // Test if n bit is set
     BN.prototype.testn = function testn(bit) {
-        assert(typeof bit === 'number' && bit >= 0);
+        assert(typeof bit === "number" && bit >= 0);
         var r = bit % 26;
         var s = (bit - r) / 26;
         var q = 1 << r;
@@ -14938,10 +14932,10 @@ parcelRequire.register("ifKRX", function(module, exports) {
     };
     // Return only lowers bits of number (in-place)
     BN.prototype.imaskn = function imaskn(bits) {
-        assert(typeof bits === 'number' && bits >= 0);
+        assert(typeof bits === "number" && bits >= 0);
         var r = bits % 26;
         var s = (bits - r) / 26;
-        assert(this.negative === 0, 'imaskn works only with positive numbers');
+        assert(this.negative === 0, "imaskn works only with positive numbers");
         if (this.length <= s) return this;
         if (r !== 0) s++;
         this.length = Math.min(s, this.length);
@@ -14957,7 +14951,7 @@ parcelRequire.register("ifKRX", function(module, exports) {
     };
     // Add plain number `num` to `this`
     BN.prototype.iaddn = function iaddn(num) {
-        assert(typeof num === 'number');
+        assert(typeof num === "number");
         assert(num < 0x4000000);
         if (num < 0) return this.isubn(-num);
         // Possible sign change
@@ -14988,7 +14982,7 @@ parcelRequire.register("ifKRX", function(module, exports) {
     };
     // Subtract plain number `num` from `this`
     BN.prototype.isubn = function isubn(num) {
-        assert(typeof num === 'number');
+        assert(typeof num === "number");
         assert(num < 0x4000000);
         if (num < 0) return this.iaddn(-num);
         if (this.negative !== 0) {
@@ -15067,7 +15061,7 @@ parcelRequire.register("ifKRX", function(module, exports) {
         // Initialize quotient
         var m = a.length - b.length;
         var q;
-        if (mode !== 'mod') {
+        if (mode !== "mod") {
             q = new BN(null);
             q.length = m + 1;
             q.words = new Array(q.length);
@@ -15095,7 +15089,7 @@ parcelRequire.register("ifKRX", function(module, exports) {
         if (q) q.strip();
         a.strip();
         // Denormalize
-        if (mode !== 'div' && shift !== 0) a.iushrn(shift);
+        if (mode !== "div" && shift !== 0) a.iushrn(shift);
         return {
             div: q || null,
             mod: a
@@ -15114,8 +15108,8 @@ parcelRequire.register("ifKRX", function(module, exports) {
         var div, mod, res;
         if (this.negative !== 0 && num.negative === 0) {
             res = this.neg().divmod(num, mode);
-            if (mode !== 'mod') div = res.div.neg();
-            if (mode !== 'div') {
+            if (mode !== "mod") div = res.div.neg();
+            if (mode !== "div") {
                 mod = res.mod.neg();
                 if (positive && mod.negative !== 0) mod.iadd(num);
             }
@@ -15126,7 +15120,7 @@ parcelRequire.register("ifKRX", function(module, exports) {
         }
         if (this.negative === 0 && num.negative !== 0) {
             res = this.divmod(num.neg(), mode);
-            if (mode !== 'mod') div = res.div.neg();
+            if (mode !== "mod") div = res.div.neg();
             return {
                 div: div,
                 mod: res.mod
@@ -15134,7 +15128,7 @@ parcelRequire.register("ifKRX", function(module, exports) {
         }
         if ((this.negative & num.negative) !== 0) {
             res = this.neg().divmod(num.neg(), mode);
-            if (mode !== 'div') {
+            if (mode !== "div") {
                 mod = res.mod.neg();
                 if (positive && mod.negative !== 0) mod.isub(num);
             }
@@ -15151,11 +15145,11 @@ parcelRequire.register("ifKRX", function(module, exports) {
         };
         // Very short reduction
         if (num.length === 1) {
-            if (mode === 'div') return {
+            if (mode === "div") return {
                 div: this.divn(num.words[0]),
                 mod: null
             };
-            if (mode === 'mod') return {
+            if (mode === "mod") return {
                 div: null,
                 mod: new BN(this.modn(num.words[0]))
             };
@@ -15168,14 +15162,14 @@ parcelRequire.register("ifKRX", function(module, exports) {
     };
     // Find `this` / `num`
     BN.prototype.div = function div(num) {
-        return this.divmod(num, 'div', false).div;
+        return this.divmod(num, "div", false).div;
     };
     // Find `this` % `num`
     BN.prototype.mod = function mod(num) {
-        return this.divmod(num, 'mod', false).mod;
+        return this.divmod(num, "mod", false).mod;
     };
     BN.prototype.umod = function umod(num) {
-        return this.divmod(num, 'mod', true).mod;
+        return this.divmod(num, "mod", true).mod;
     };
     // Find Round(`this` / `num`)
     BN.prototype.divRound = function divRound(num) {
@@ -15341,7 +15335,7 @@ parcelRequire.register("ifKRX", function(module, exports) {
                 b = t;
             } else if (r === 0 || b.cmpn(1) === 0) break;
             a.isub(b);
-        }while (true)
+        }while (true);
         return b.iushln(shift);
     };
     // Invert number in the field F(num)
@@ -15360,7 +15354,7 @@ parcelRequire.register("ifKRX", function(module, exports) {
     };
     // Increment at the bit position in-line
     BN.prototype.bincn = function bincn(bit) {
-        assert(typeof bit === 'number');
+        assert(typeof bit === "number");
         var r = bit % 26;
         var s = (bit - r) / 26;
         var q = 1 << r;
@@ -15397,7 +15391,7 @@ parcelRequire.register("ifKRX", function(module, exports) {
         if (this.length > 1) res = 1;
         else {
             if (negative) num = -num;
-            assert(num <= 0x3ffffff, 'Number is too big');
+            assert(num <= 0x3ffffff, "Number is too big");
             var w = this.words[0] | 0;
             res = w === num ? 0 : w < num ? -1 : 1;
         }
@@ -15469,12 +15463,12 @@ parcelRequire.register("ifKRX", function(module, exports) {
         return new Red(num);
     };
     BN.prototype.toRed = function toRed(ctx) {
-        assert(!this.red, 'Already a number in reduction context');
-        assert(this.negative === 0, 'red works only with positives');
+        assert(!this.red, "Already a number in reduction context");
+        assert(this.negative === 0, "red works only with positives");
         return ctx.convertTo(this)._forceRed(ctx);
     };
     BN.prototype.fromRed = function fromRed() {
-        assert(this.red, 'fromRed works only with numbers in reduction context');
+        assert(this.red, "fromRed works only with numbers in reduction context");
         return this.red.convertFrom(this);
     };
     BN.prototype._forceRed = function _forceRed(ctx) {
@@ -15482,68 +15476,68 @@ parcelRequire.register("ifKRX", function(module, exports) {
         return this;
     };
     BN.prototype.forceRed = function forceRed(ctx) {
-        assert(!this.red, 'Already a number in reduction context');
+        assert(!this.red, "Already a number in reduction context");
         return this._forceRed(ctx);
     };
     BN.prototype.redAdd = function redAdd(num) {
-        assert(this.red, 'redAdd works only with red numbers');
+        assert(this.red, "redAdd works only with red numbers");
         return this.red.add(this, num);
     };
     BN.prototype.redIAdd = function redIAdd(num) {
-        assert(this.red, 'redIAdd works only with red numbers');
+        assert(this.red, "redIAdd works only with red numbers");
         return this.red.iadd(this, num);
     };
     BN.prototype.redSub = function redSub(num) {
-        assert(this.red, 'redSub works only with red numbers');
+        assert(this.red, "redSub works only with red numbers");
         return this.red.sub(this, num);
     };
     BN.prototype.redISub = function redISub(num) {
-        assert(this.red, 'redISub works only with red numbers');
+        assert(this.red, "redISub works only with red numbers");
         return this.red.isub(this, num);
     };
     BN.prototype.redShl = function redShl(num) {
-        assert(this.red, 'redShl works only with red numbers');
+        assert(this.red, "redShl works only with red numbers");
         return this.red.shl(this, num);
     };
     BN.prototype.redMul = function redMul(num) {
-        assert(this.red, 'redMul works only with red numbers');
+        assert(this.red, "redMul works only with red numbers");
         this.red._verify2(this, num);
         return this.red.mul(this, num);
     };
     BN.prototype.redIMul = function redIMul(num) {
-        assert(this.red, 'redMul works only with red numbers');
+        assert(this.red, "redMul works only with red numbers");
         this.red._verify2(this, num);
         return this.red.imul(this, num);
     };
     BN.prototype.redSqr = function redSqr() {
-        assert(this.red, 'redSqr works only with red numbers');
+        assert(this.red, "redSqr works only with red numbers");
         this.red._verify1(this);
         return this.red.sqr(this);
     };
     BN.prototype.redISqr = function redISqr() {
-        assert(this.red, 'redISqr works only with red numbers');
+        assert(this.red, "redISqr works only with red numbers");
         this.red._verify1(this);
         return this.red.isqr(this);
     };
     // Square root over p
     BN.prototype.redSqrt = function redSqrt() {
-        assert(this.red, 'redSqrt works only with red numbers');
+        assert(this.red, "redSqrt works only with red numbers");
         this.red._verify1(this);
         return this.red.sqrt(this);
     };
     BN.prototype.redInvm = function redInvm() {
-        assert(this.red, 'redInvm works only with red numbers');
+        assert(this.red, "redInvm works only with red numbers");
         this.red._verify1(this);
         return this.red.invm(this);
     };
     // Return negative clone of `this` % `red modulo`
     BN.prototype.redNeg = function redNeg() {
-        assert(this.red, 'redNeg works only with red numbers');
+        assert(this.red, "redNeg works only with red numbers");
         this.red._verify1(this);
         return this.red.neg(this);
     };
     BN.prototype.redPow = function redPow(num) {
-        assert(this.red && !num.red, 'redPow(normalNum)');
+        assert(this.red && !num.red, "redPow(normalNum)");
         this.red._verify1(this);
         return this.red.pow(this, num);
     };
@@ -15578,7 +15572,7 @@ parcelRequire.register("ifKRX", function(module, exports) {
             r = this.imulK(r);
             r = r.iadd(this.tmp);
             rlen = r.bitLength();
-        }while (rlen > this.n)
+        }while (rlen > this.n);
         var cmp = rlen < this.n ? -1 : r.ucmp(this.p);
         if (cmp === 0) {
             r.words[0] = 0;
@@ -15597,7 +15591,7 @@ parcelRequire.register("ifKRX", function(module, exports) {
         return num.imul(this.k);
     };
     function K256() {
-        MPrime.call(this, 'k256', 'ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff fffffffe fffffc2f');
+        MPrime.call(this, "k256", "ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff fffffffe fffffc2f");
     }
     inherits(K256, MPrime);
     K256.prototype.split = function split(input, output) {
@@ -15645,16 +15639,16 @@ parcelRequire.register("ifKRX", function(module, exports) {
         return num;
     };
     function P224() {
-        MPrime.call(this, 'p224', 'ffffffff ffffffff ffffffff ffffffff 00000000 00000000 00000001');
+        MPrime.call(this, "p224", "ffffffff ffffffff ffffffff ffffffff 00000000 00000000 00000001");
     }
     inherits(P224, MPrime);
     function P192() {
-        MPrime.call(this, 'p192', 'ffffffff ffffffff ffffffff fffffffe ffffffff ffffffff');
+        MPrime.call(this, "p192", "ffffffff ffffffff ffffffff fffffffe ffffffff ffffffff");
     }
     inherits(P192, MPrime);
     function P25519() {
         // 2 ^ 255 - 19
-        MPrime.call(this, '25519', '7fffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffed');
+        MPrime.call(this, "25519", "7fffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffed");
     }
     inherits(P25519, MPrime);
     P25519.prototype.imulK = function imulK(num) {
@@ -15675,11 +15669,11 @@ parcelRequire.register("ifKRX", function(module, exports) {
         // Cached version of prime
         if (primes[name]) return primes[name];
         var prime;
-        if (name === 'k256') prime = new K256();
-        else if (name === 'p224') prime = new P224();
-        else if (name === 'p192') prime = new P192();
-        else if (name === 'p25519') prime = new P25519();
-        else throw new Error('Unknown prime ' + name);
+        if (name === "k256") prime = new K256();
+        else if (name === "p224") prime = new P224();
+        else if (name === "p192") prime = new P192();
+        else if (name === "p25519") prime = new P25519();
+        else throw new Error("Unknown prime " + name);
         primes[name] = prime;
         return prime;
     };
@@ -15687,23 +15681,23 @@ parcelRequire.register("ifKRX", function(module, exports) {
     // Base reduction engine
     //
     function Red(m) {
-        if (typeof m === 'string') {
+        if (typeof m === "string") {
             var prime = BN._prime(m);
             this.m = prime.p;
             this.prime = prime;
         } else {
-            assert(m.gtn(1), 'modulus must be greater than 1');
+            assert(m.gtn(1), "modulus must be greater than 1");
             this.m = m;
             this.prime = null;
         }
     }
     Red.prototype._verify1 = function _verify1(a) {
-        assert(a.negative === 0, 'red works only with positives');
-        assert(a.red, 'red works only with red numbers');
+        assert(a.negative === 0, "red works only with positives");
+        assert(a.red, "red works only with red numbers");
     };
     Red.prototype._verify2 = function _verify2(a, b) {
-        assert((a.negative | b.negative) === 0, 'red works only with positives');
-        assert(a.red && a.red === b.red, 'red works only with red numbers');
+        assert((a.negative | b.negative) === 0, "red works only with positives");
+        assert(a.red && a.red === b.red, "red works only with red numbers");
     };
     Red.prototype.imod = function imod(a) {
         if (this.prime) return this.prime.ireduce(a)._forceRed(this);
@@ -15925,7 +15919,7 @@ $d01759ae1838a303$var$MillerRabin.prototype._randbelow = function _randbelow(n) 
     // Generage random bytes until a number less than n is found.
     // This ensures that 0..n-1 have an equal probability of being selected.
     do var a = new $2rt5I(this.rand.generate(min_bytes));
-    while (a.cmp(n) >= 0)
+    while (a.cmp(n) >= 0);
     return a;
 };
 $d01759ae1838a303$var$MillerRabin.prototype._randrange = function _randrange(start, stop) {
@@ -15991,9 +15985,10 @@ $d01759ae1838a303$var$MillerRabin.prototype.getDivisor = function getDivisor(n, 
 parcelRequire.register("2rt5I", function(module, exports) {
 
 (function(module, exports) {
+    "use strict";
     // Utils
     function assert(val, msg) {
-        if (!val) throw new Error(msg || 'Assertion failed');
+        if (!val) throw new Error(msg || "Assertion failed");
     }
     // Could use `inherits` module, but don't want to move from single file
     // architecture yet.
@@ -16013,25 +16008,25 @@ parcelRequire.register("2rt5I", function(module, exports) {
         // Reduction context
         this.red = null;
         if (number !== null) {
-            if (base === 'le' || base === 'be') {
+            if (base === "le" || base === "be") {
                 endian = base;
                 base = 10;
             }
-            this._init(number || 0, base || 10, endian || 'be');
+            this._init(number || 0, base || 10, endian || "be");
         }
     }
-    if (typeof module === 'object') module.exports = BN;
+    if (typeof module === "object") module.exports = BN;
     else exports.BN = BN;
     BN.BN = BN;
     BN.wordSize = 26;
     var Buffer;
     try {
-        if (typeof window !== 'undefined' && typeof window.Buffer !== 'undefined') Buffer = window.Buffer;
+        if (typeof window !== "undefined" && typeof window.Buffer !== "undefined") Buffer = window.Buffer;
         else Buffer = (parcelRequire("c7mcJ")).Buffer;
     } catch (e) {}
     BN.isBN = function isBN(num) {
         if (num instanceof BN) return true;
-        return num !== null && typeof num === 'object' && num.constructor.wordSize === BN.wordSize && Array.isArray(num.words);
+        return num !== null && typeof num === "object" && num.constructor.wordSize === BN.wordSize && Array.isArray(num.words);
     };
     BN.max = function max(left, right) {
         if (left.cmp(right) > 0) return left;
@@ -16042,13 +16037,13 @@ parcelRequire.register("2rt5I", function(module, exports) {
         return right;
     };
     BN.prototype._init = function init(number, base, endian) {
-        if (typeof number === 'number') return this._initNumber(number, base, endian);
-        if (typeof number === 'object') return this._initArray(number, base, endian);
-        if (base === 'hex') base = 16;
+        if (typeof number === "number") return this._initNumber(number, base, endian);
+        if (typeof number === "object") return this._initArray(number, base, endian);
+        if (base === "hex") base = 16;
         assert(base === (base | 0) && base >= 2 && base <= 36);
-        number = number.toString().replace(/\s+/g, '');
+        number = number.toString().replace(/\s+/g, "");
         var start = 0;
-        if (number[0] === '-') {
+        if (number[0] === "-") {
             start++;
             this.negative = 1;
         }
@@ -16056,7 +16051,7 @@ parcelRequire.register("2rt5I", function(module, exports) {
             if (base === 16) this._parseHex(number, start, endian);
             else {
                 this._parseBase(number, base, start);
-                if (endian === 'le') this._initArray(this.toArray(), base, endian);
+                if (endian === "le") this._initArray(this.toArray(), base, endian);
             }
         }
     };
@@ -16085,13 +16080,13 @@ parcelRequire.register("2rt5I", function(module, exports) {
             ];
             this.length = 3;
         }
-        if (endian !== 'le') return;
+        if (endian !== "le") return;
         // Reverse the bytes
         this._initArray(this.toArray(), base, endian);
     };
     BN.prototype._initArray = function _initArray(number, base, endian) {
         // Perhaps a Uint8Array
-        assert(typeof number.length === 'number');
+        assert(typeof number.length === "number");
         if (number.length <= 0) {
             this.words = [
                 0
@@ -16104,7 +16099,7 @@ parcelRequire.register("2rt5I", function(module, exports) {
         for(var i = 0; i < this.length; i++)this.words[i] = 0;
         var j, w;
         var off = 0;
-        if (endian === 'be') for(i = number.length - 1, j = 0; i >= 0; i -= 3){
+        if (endian === "be") for(i = number.length - 1, j = 0; i >= 0; i -= 3){
             w = number[i] | number[i - 1] << 8 | number[i - 2] << 16;
             this.words[j] |= w << off & 0x3ffffff;
             this.words[j + 1] = w >>> 26 - off & 0x3ffffff;
@@ -16114,7 +16109,7 @@ parcelRequire.register("2rt5I", function(module, exports) {
                 j++;
             }
         }
-        else if (endian === 'le') for(i = 0, j = 0; i < number.length; i += 3){
+        else if (endian === "le") for(i = 0, j = 0; i < number.length; i += 3){
             w = number[i] | number[i + 1] << 8 | number[i + 2] << 16;
             this.words[j] |= w << off & 0x3ffffff;
             this.words[j + 1] = w >>> 26 - off & 0x3ffffff;
@@ -16147,7 +16142,7 @@ parcelRequire.register("2rt5I", function(module, exports) {
         var off = 0;
         var j = 0;
         var w;
-        if (endian === 'be') for(i = number.length - 1; i >= start; i -= 2){
+        if (endian === "be") for(i = number.length - 1; i >= start; i -= 2){
             w = parseHexByte(number, start, i) << off;
             this.words[j] |= w & 0x3ffffff;
             if (off >= 18) {
@@ -16240,7 +16235,7 @@ parcelRequire.register("2rt5I", function(module, exports) {
         return this;
     };
     BN.prototype.inspect = function inspect() {
-        return (this.red ? '<BN-R: ' : '<BN: ') + this.toString(16) + '>';
+        return (this.red ? "<BN-R: " : "<BN: ") + this.toString(16) + ">";
     };
     /*
 
@@ -16271,32 +16266,32 @@ parcelRequire.register("2rt5I", function(module, exports) {
   }
 
   */ var zeros = [
-        '',
-        '0',
-        '00',
-        '000',
-        '0000',
-        '00000',
-        '000000',
-        '0000000',
-        '00000000',
-        '000000000',
-        '0000000000',
-        '00000000000',
-        '000000000000',
-        '0000000000000',
-        '00000000000000',
-        '000000000000000',
-        '0000000000000000',
-        '00000000000000000',
-        '000000000000000000',
-        '0000000000000000000',
-        '00000000000000000000',
-        '000000000000000000000',
-        '0000000000000000000000',
-        '00000000000000000000000',
-        '000000000000000000000000',
-        '0000000000000000000000000'
+        "",
+        "0",
+        "00",
+        "000",
+        "0000",
+        "00000",
+        "000000",
+        "0000000",
+        "00000000",
+        "000000000",
+        "0000000000",
+        "00000000000",
+        "000000000000",
+        "0000000000000",
+        "00000000000000",
+        "000000000000000",
+        "0000000000000000",
+        "00000000000000000",
+        "000000000000000000",
+        "0000000000000000000",
+        "00000000000000000000",
+        "000000000000000000000",
+        "0000000000000000000000",
+        "00000000000000000000000",
+        "000000000000000000000000",
+        "0000000000000000000000000"
     ];
     var groupSizes = [
         0,
@@ -16380,8 +16375,8 @@ parcelRequire.register("2rt5I", function(module, exports) {
         base = base || 10;
         padding = padding | 0 || 1;
         var out;
-        if (base === 16 || base === 'hex') {
-            out = '';
+        if (base === 16 || base === "hex") {
+            out = "";
             var off = 0;
             var carry = 0;
             for(var i = 0; i < this.length; i++){
@@ -16397,8 +16392,8 @@ parcelRequire.register("2rt5I", function(module, exports) {
                 }
             }
             if (carry !== 0) out = carry.toString(16) + out;
-            while(out.length % padding !== 0)out = '0' + out;
-            if (this.negative !== 0) out = '-' + out;
+            while(out.length % padding !== 0)out = "0" + out;
+            if (this.negative !== 0) out = "-" + out;
             return out;
         }
         if (base === (base | 0) && base >= 2 && base <= 36) {
@@ -16406,7 +16401,7 @@ parcelRequire.register("2rt5I", function(module, exports) {
             var groupSize = groupSizes[base];
             // var groupBase = Math.pow(base, groupSize);
             var groupBase = groupBases[base];
-            out = '';
+            out = "";
             var c = this.clone();
             c.negative = 0;
             while(!c.isZero()){
@@ -16415,26 +16410,26 @@ parcelRequire.register("2rt5I", function(module, exports) {
                 if (!c.isZero()) out = zeros[groupSize - r.length] + r + out;
                 else out = r + out;
             }
-            if (this.isZero()) out = '0' + out;
-            while(out.length % padding !== 0)out = '0' + out;
-            if (this.negative !== 0) out = '-' + out;
+            if (this.isZero()) out = "0" + out;
+            while(out.length % padding !== 0)out = "0" + out;
+            if (this.negative !== 0) out = "-" + out;
             return out;
         }
-        assert(false, 'Base should be between 2 and 36');
+        assert(false, "Base should be between 2 and 36");
     };
     BN.prototype.toNumber = function toNumber() {
         var ret = this.words[0];
         if (this.length === 2) ret += this.words[1] * 0x4000000;
         else if (this.length === 3 && this.words[2] === 0x01) // NOTE: at this stage it is known that the top bit is set
         ret += 0x10000000000000 + this.words[1] * 0x4000000;
-        else if (this.length > 2) assert(false, 'Number can only safely store up to 53 bits');
+        else if (this.length > 2) assert(false, "Number can only safely store up to 53 bits");
         return this.negative !== 0 ? -ret : ret;
     };
     BN.prototype.toJSON = function toJSON() {
         return this.toString(16);
     };
     BN.prototype.toBuffer = function toBuffer(endian, length) {
-        assert(typeof Buffer !== 'undefined');
+        assert(typeof Buffer !== "undefined");
         return this.toArrayLike(Buffer, endian, length);
     };
     BN.prototype.toArray = function toArray(endian, length) {
@@ -16443,10 +16438,10 @@ parcelRequire.register("2rt5I", function(module, exports) {
     BN.prototype.toArrayLike = function toArrayLike(ArrayType, endian, length) {
         var byteLength = this.byteLength();
         var reqLength = length || Math.max(1, byteLength);
-        assert(byteLength <= reqLength, 'byte array longer than desired length');
-        assert(reqLength > 0, 'Requested array length <= 0');
+        assert(byteLength <= reqLength, "byte array longer than desired length");
+        assert(reqLength > 0, "Requested array length <= 0");
         this.strip();
-        var littleEndian = endian === 'le';
+        var littleEndian = endian === "le";
         var res = new ArrayType(reqLength);
         var b, i;
         var q = this.clone();
@@ -16638,7 +16633,7 @@ parcelRequire.register("2rt5I", function(module, exports) {
     };
     // Not ``this`` with ``width`` bitwidth
     BN.prototype.inotn = function inotn(width) {
-        assert(typeof width === 'number' && width >= 0);
+        assert(typeof width === "number" && width >= 0);
         var bytesNeeded = Math.ceil(width / 26) | 0;
         var bitsLeft = width % 26;
         // Extend the buffer with leading zeroes
@@ -16656,7 +16651,7 @@ parcelRequire.register("2rt5I", function(module, exports) {
     };
     // Set `bit` of `this`
     BN.prototype.setn = function setn(bit, val) {
-        assert(typeof bit === 'number' && bit >= 0);
+        assert(typeof bit === "number" && bit >= 0);
         var off = bit / 26 | 0;
         var wbit = bit % 26;
         this._expand(off + 1);
@@ -17568,7 +17563,7 @@ parcelRequire.register("2rt5I", function(module, exports) {
         return this.clone().mulTo(num, this);
     };
     BN.prototype.imuln = function imuln(num) {
-        assert(typeof num === 'number');
+        assert(typeof num === "number");
         assert(num < 0x4000000);
         // Carry
         var carry = 0;
@@ -17615,7 +17610,7 @@ parcelRequire.register("2rt5I", function(module, exports) {
     };
     // Shift-left in-place
     BN.prototype.iushln = function iushln(bits) {
-        assert(typeof bits === 'number' && bits >= 0);
+        assert(typeof bits === "number" && bits >= 0);
         var r = bits % 26;
         var s = (bits - r) / 26;
         var carryMask = 0x3ffffff >>> 26 - r << 26 - r;
@@ -17649,7 +17644,7 @@ parcelRequire.register("2rt5I", function(module, exports) {
     // NOTE: `hint` is a lowest bit before trailing zeroes
     // NOTE: if `extended` is present - it will be filled with destroyed bits
     BN.prototype.iushrn = function iushrn(bits, hint, extended) {
-        assert(typeof bits === 'number' && bits >= 0);
+        assert(typeof bits === "number" && bits >= 0);
         var h;
         if (hint) h = (hint - hint % 26) / 26;
         else h = 0;
@@ -17707,7 +17702,7 @@ parcelRequire.register("2rt5I", function(module, exports) {
     };
     // Test if n bit is set
     BN.prototype.testn = function testn(bit) {
-        assert(typeof bit === 'number' && bit >= 0);
+        assert(typeof bit === "number" && bit >= 0);
         var r = bit % 26;
         var s = (bit - r) / 26;
         var q = 1 << r;
@@ -17719,10 +17714,10 @@ parcelRequire.register("2rt5I", function(module, exports) {
     };
     // Return only lowers bits of number (in-place)
     BN.prototype.imaskn = function imaskn(bits) {
-        assert(typeof bits === 'number' && bits >= 0);
+        assert(typeof bits === "number" && bits >= 0);
         var r = bits % 26;
         var s = (bits - r) / 26;
-        assert(this.negative === 0, 'imaskn works only with positive numbers');
+        assert(this.negative === 0, "imaskn works only with positive numbers");
         if (this.length <= s) return this;
         if (r !== 0) s++;
         this.length = Math.min(s, this.length);
@@ -17738,7 +17733,7 @@ parcelRequire.register("2rt5I", function(module, exports) {
     };
     // Add plain number `num` to `this`
     BN.prototype.iaddn = function iaddn(num) {
-        assert(typeof num === 'number');
+        assert(typeof num === "number");
         assert(num < 0x4000000);
         if (num < 0) return this.isubn(-num);
         // Possible sign change
@@ -17769,7 +17764,7 @@ parcelRequire.register("2rt5I", function(module, exports) {
     };
     // Subtract plain number `num` from `this`
     BN.prototype.isubn = function isubn(num) {
-        assert(typeof num === 'number');
+        assert(typeof num === "number");
         assert(num < 0x4000000);
         if (num < 0) return this.iaddn(-num);
         if (this.negative !== 0) {
@@ -17848,7 +17843,7 @@ parcelRequire.register("2rt5I", function(module, exports) {
         // Initialize quotient
         var m = a.length - b.length;
         var q;
-        if (mode !== 'mod') {
+        if (mode !== "mod") {
             q = new BN(null);
             q.length = m + 1;
             q.words = new Array(q.length);
@@ -17876,7 +17871,7 @@ parcelRequire.register("2rt5I", function(module, exports) {
         if (q) q.strip();
         a.strip();
         // Denormalize
-        if (mode !== 'div' && shift !== 0) a.iushrn(shift);
+        if (mode !== "div" && shift !== 0) a.iushrn(shift);
         return {
             div: q || null,
             mod: a
@@ -17895,8 +17890,8 @@ parcelRequire.register("2rt5I", function(module, exports) {
         var div, mod, res;
         if (this.negative !== 0 && num.negative === 0) {
             res = this.neg().divmod(num, mode);
-            if (mode !== 'mod') div = res.div.neg();
-            if (mode !== 'div') {
+            if (mode !== "mod") div = res.div.neg();
+            if (mode !== "div") {
                 mod = res.mod.neg();
                 if (positive && mod.negative !== 0) mod.iadd(num);
             }
@@ -17907,7 +17902,7 @@ parcelRequire.register("2rt5I", function(module, exports) {
         }
         if (this.negative === 0 && num.negative !== 0) {
             res = this.divmod(num.neg(), mode);
-            if (mode !== 'mod') div = res.div.neg();
+            if (mode !== "mod") div = res.div.neg();
             return {
                 div: div,
                 mod: res.mod
@@ -17915,7 +17910,7 @@ parcelRequire.register("2rt5I", function(module, exports) {
         }
         if ((this.negative & num.negative) !== 0) {
             res = this.neg().divmod(num.neg(), mode);
-            if (mode !== 'div') {
+            if (mode !== "div") {
                 mod = res.mod.neg();
                 if (positive && mod.negative !== 0) mod.isub(num);
             }
@@ -17932,11 +17927,11 @@ parcelRequire.register("2rt5I", function(module, exports) {
         };
         // Very short reduction
         if (num.length === 1) {
-            if (mode === 'div') return {
+            if (mode === "div") return {
                 div: this.divn(num.words[0]),
                 mod: null
             };
-            if (mode === 'mod') return {
+            if (mode === "mod") return {
                 div: null,
                 mod: new BN(this.modn(num.words[0]))
             };
@@ -17949,14 +17944,14 @@ parcelRequire.register("2rt5I", function(module, exports) {
     };
     // Find `this` / `num`
     BN.prototype.div = function div(num) {
-        return this.divmod(num, 'div', false).div;
+        return this.divmod(num, "div", false).div;
     };
     // Find `this` % `num`
     BN.prototype.mod = function mod(num) {
-        return this.divmod(num, 'mod', false).mod;
+        return this.divmod(num, "mod", false).mod;
     };
     BN.prototype.umod = function umod(num) {
-        return this.divmod(num, 'mod', true).mod;
+        return this.divmod(num, "mod", true).mod;
     };
     // Find Round(`this` / `num`)
     BN.prototype.divRound = function divRound(num) {
@@ -18122,7 +18117,7 @@ parcelRequire.register("2rt5I", function(module, exports) {
                 b = t;
             } else if (r === 0 || b.cmpn(1) === 0) break;
             a.isub(b);
-        }while (true)
+        }while (true);
         return b.iushln(shift);
     };
     // Invert number in the field F(num)
@@ -18141,7 +18136,7 @@ parcelRequire.register("2rt5I", function(module, exports) {
     };
     // Increment at the bit position in-line
     BN.prototype.bincn = function bincn(bit) {
-        assert(typeof bit === 'number');
+        assert(typeof bit === "number");
         var r = bit % 26;
         var s = (bit - r) / 26;
         var q = 1 << r;
@@ -18178,7 +18173,7 @@ parcelRequire.register("2rt5I", function(module, exports) {
         if (this.length > 1) res = 1;
         else {
             if (negative) num = -num;
-            assert(num <= 0x3ffffff, 'Number is too big');
+            assert(num <= 0x3ffffff, "Number is too big");
             var w = this.words[0] | 0;
             res = w === num ? 0 : w < num ? -1 : 1;
         }
@@ -18250,12 +18245,12 @@ parcelRequire.register("2rt5I", function(module, exports) {
         return new Red(num);
     };
     BN.prototype.toRed = function toRed(ctx) {
-        assert(!this.red, 'Already a number in reduction context');
-        assert(this.negative === 0, 'red works only with positives');
+        assert(!this.red, "Already a number in reduction context");
+        assert(this.negative === 0, "red works only with positives");
         return ctx.convertTo(this)._forceRed(ctx);
     };
     BN.prototype.fromRed = function fromRed() {
-        assert(this.red, 'fromRed works only with numbers in reduction context');
+        assert(this.red, "fromRed works only with numbers in reduction context");
         return this.red.convertFrom(this);
     };
     BN.prototype._forceRed = function _forceRed(ctx) {
@@ -18263,68 +18258,68 @@ parcelRequire.register("2rt5I", function(module, exports) {
         return this;
     };
     BN.prototype.forceRed = function forceRed(ctx) {
-        assert(!this.red, 'Already a number in reduction context');
+        assert(!this.red, "Already a number in reduction context");
         return this._forceRed(ctx);
     };
     BN.prototype.redAdd = function redAdd(num) {
-        assert(this.red, 'redAdd works only with red numbers');
+        assert(this.red, "redAdd works only with red numbers");
         return this.red.add(this, num);
     };
     BN.prototype.redIAdd = function redIAdd(num) {
-        assert(this.red, 'redIAdd works only with red numbers');
+        assert(this.red, "redIAdd works only with red numbers");
         return this.red.iadd(this, num);
     };
     BN.prototype.redSub = function redSub(num) {
-        assert(this.red, 'redSub works only with red numbers');
+        assert(this.red, "redSub works only with red numbers");
         return this.red.sub(this, num);
     };
     BN.prototype.redISub = function redISub(num) {
-        assert(this.red, 'redISub works only with red numbers');
+        assert(this.red, "redISub works only with red numbers");
         return this.red.isub(this, num);
     };
     BN.prototype.redShl = function redShl(num) {
-        assert(this.red, 'redShl works only with red numbers');
+        assert(this.red, "redShl works only with red numbers");
         return this.red.shl(this, num);
     };
     BN.prototype.redMul = function redMul(num) {
-        assert(this.red, 'redMul works only with red numbers');
+        assert(this.red, "redMul works only with red numbers");
         this.red._verify2(this, num);
         return this.red.mul(this, num);
     };
     BN.prototype.redIMul = function redIMul(num) {
-        assert(this.red, 'redMul works only with red numbers');
+        assert(this.red, "redMul works only with red numbers");
         this.red._verify2(this, num);
         return this.red.imul(this, num);
     };
     BN.prototype.redSqr = function redSqr() {
-        assert(this.red, 'redSqr works only with red numbers');
+        assert(this.red, "redSqr works only with red numbers");
         this.red._verify1(this);
         return this.red.sqr(this);
     };
     BN.prototype.redISqr = function redISqr() {
-        assert(this.red, 'redISqr works only with red numbers');
+        assert(this.red, "redISqr works only with red numbers");
         this.red._verify1(this);
         return this.red.isqr(this);
     };
     // Square root over p
     BN.prototype.redSqrt = function redSqrt() {
-        assert(this.red, 'redSqrt works only with red numbers');
+        assert(this.red, "redSqrt works only with red numbers");
         this.red._verify1(this);
         return this.red.sqrt(this);
     };
     BN.prototype.redInvm = function redInvm() {
-        assert(this.red, 'redInvm works only with red numbers');
+        assert(this.red, "redInvm works only with red numbers");
         this.red._verify1(this);
         return this.red.invm(this);
     };
     // Return negative clone of `this` % `red modulo`
     BN.prototype.redNeg = function redNeg() {
-        assert(this.red, 'redNeg works only with red numbers');
+        assert(this.red, "redNeg works only with red numbers");
         this.red._verify1(this);
         return this.red.neg(this);
     };
     BN.prototype.redPow = function redPow(num) {
-        assert(this.red && !num.red, 'redPow(normalNum)');
+        assert(this.red && !num.red, "redPow(normalNum)");
         this.red._verify1(this);
         return this.red.pow(this, num);
     };
@@ -18359,7 +18354,7 @@ parcelRequire.register("2rt5I", function(module, exports) {
             r = this.imulK(r);
             r = r.iadd(this.tmp);
             rlen = r.bitLength();
-        }while (rlen > this.n)
+        }while (rlen > this.n);
         var cmp = rlen < this.n ? -1 : r.ucmp(this.p);
         if (cmp === 0) {
             r.words[0] = 0;
@@ -18378,7 +18373,7 @@ parcelRequire.register("2rt5I", function(module, exports) {
         return num.imul(this.k);
     };
     function K256() {
-        MPrime.call(this, 'k256', 'ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff fffffffe fffffc2f');
+        MPrime.call(this, "k256", "ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff fffffffe fffffc2f");
     }
     inherits(K256, MPrime);
     K256.prototype.split = function split(input, output) {
@@ -18426,16 +18421,16 @@ parcelRequire.register("2rt5I", function(module, exports) {
         return num;
     };
     function P224() {
-        MPrime.call(this, 'p224', 'ffffffff ffffffff ffffffff ffffffff 00000000 00000000 00000001');
+        MPrime.call(this, "p224", "ffffffff ffffffff ffffffff ffffffff 00000000 00000000 00000001");
     }
     inherits(P224, MPrime);
     function P192() {
-        MPrime.call(this, 'p192', 'ffffffff ffffffff ffffffff fffffffe ffffffff ffffffff');
+        MPrime.call(this, "p192", "ffffffff ffffffff ffffffff fffffffe ffffffff ffffffff");
     }
     inherits(P192, MPrime);
     function P25519() {
         // 2 ^ 255 - 19
-        MPrime.call(this, '25519', '7fffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffed');
+        MPrime.call(this, "25519", "7fffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffed");
     }
     inherits(P25519, MPrime);
     P25519.prototype.imulK = function imulK(num) {
@@ -18456,11 +18451,11 @@ parcelRequire.register("2rt5I", function(module, exports) {
         // Cached version of prime
         if (primes[name]) return primes[name];
         var prime;
-        if (name === 'k256') prime = new K256();
-        else if (name === 'p224') prime = new P224();
-        else if (name === 'p192') prime = new P192();
-        else if (name === 'p25519') prime = new P25519();
-        else throw new Error('Unknown prime ' + name);
+        if (name === "k256") prime = new K256();
+        else if (name === "p224") prime = new P224();
+        else if (name === "p192") prime = new P192();
+        else if (name === "p25519") prime = new P25519();
+        else throw new Error("Unknown prime " + name);
         primes[name] = prime;
         return prime;
     };
@@ -18468,23 +18463,23 @@ parcelRequire.register("2rt5I", function(module, exports) {
     // Base reduction engine
     //
     function Red(m) {
-        if (typeof m === 'string') {
+        if (typeof m === "string") {
             var prime = BN._prime(m);
             this.m = prime.p;
             this.prime = prime;
         } else {
-            assert(m.gtn(1), 'modulus must be greater than 1');
+            assert(m.gtn(1), "modulus must be greater than 1");
             this.m = m;
             this.prime = null;
         }
     }
     Red.prototype._verify1 = function _verify1(a) {
-        assert(a.negative === 0, 'red works only with positives');
-        assert(a.red, 'red works only with red numbers');
+        assert(a.negative === 0, "red works only with positives");
+        assert(a.red, "red works only with red numbers");
     };
     Red.prototype._verify2 = function _verify2(a, b) {
-        assert((a.negative | b.negative) === 0, 'red works only with positives');
-        assert(a.red && a.red === b.red, 'red works only with red numbers');
+        assert((a.negative | b.negative) === 0, "red works only with positives");
+        assert(a.red && a.red === b.red, "red works only with red numbers");
     };
     Red.prototype.imod = function imod(a) {
         if (this.prime) return this.prime.ireduce(a)._forceRed(this);
@@ -18709,7 +18704,7 @@ $000a8a6747c0f660$var$Rand.prototype._rand = function _rand(n) {
     return res;
 };
 
-if (typeof self === 'object') {
+if (typeof self === "object") {
     if (self.crypto && self.crypto.getRandomValues) // Modern browsers
     $000a8a6747c0f660$var$Rand.prototype._rand = function _rand(n) {
         var arr = new Uint8Array(n);
@@ -18722,14 +18717,14 @@ if (typeof self === 'object') {
         self.msCrypto.getRandomValues(arr);
         return arr;
     };
-    else if (typeof window === 'object') // Old junk
+    else if (typeof window === "object") // Old junk
     $000a8a6747c0f660$var$Rand.prototype._rand = function() {
-        throw new Error('Not implemented yet');
+        throw new Error("Not implemented yet");
     };
 } else // Node.js or Web worker with no crypto support
 try {
     var $000a8a6747c0f660$var$crypto = (parcelRequire("c7mcJ"));
-    if (typeof $000a8a6747c0f660$var$crypto.randomBytes !== 'function') throw new Error('Not supported');
+    if (typeof $000a8a6747c0f660$var$crypto.randomBytes !== "function") throw new Error("Not supported");
     $000a8a6747c0f660$var$Rand.prototype._rand = function _rand(n) {
         return $000a8a6747c0f660$var$crypto.randomBytes(n);
     };
@@ -18740,7 +18735,7 @@ try {
 
 
 parcelRequire.register("jEY0F", function(module, exports) {
-module.exports = JSON.parse("{\"modp1\":{\"gen\":\"02\",\"prime\":\"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a63a3620ffffffffffffffff\"},\"modp2\":{\"gen\":\"02\",\"prime\":\"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece65381ffffffffffffffff\"},\"modp5\":{\"gen\":\"02\",\"prime\":\"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca237327ffffffffffffffff\"},\"modp14\":{\"gen\":\"02\",\"prime\":\"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aacaa68ffffffffffffffff\"},\"modp15\":{\"gen\":\"02\",\"prime\":\"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a93ad2caffffffffffffffff\"},\"modp16\":{\"gen\":\"02\",\"prime\":\"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c934063199ffffffffffffffff\"},\"modp17\":{\"gen\":\"02\",\"prime\":\"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c93402849236c3fab4d27c7026c1d4dcb2602646dec9751e763dba37bdf8ff9406ad9e530ee5db382f413001aeb06a53ed9027d831179727b0865a8918da3edbebcf9b14ed44ce6cbaced4bb1bdb7f1447e6cc254b332051512bd7af426fb8f401378cd2bf5983ca01c64b92ecf032ea15d1721d03f482d7ce6e74fef6d55e702f46980c82b5a84031900b1c9e59e7c97fbec7e8f323a97a7e36cc88be0f1d45b7ff585ac54bd407b22b4154aacc8f6d7ebf48e1d814cc5ed20f8037e0a79715eef29be32806a1d58bb7c5da76f550aa3d8a1fbff0eb19ccb1a313d55cda56c9ec2ef29632387fe8d76e3c0468043e8f663f4860ee12bf2d5b0b7474d6e694f91e6dcc4024ffffffffffffffff\"},\"modp18\":{\"gen\":\"02\",\"prime\":\"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c93402849236c3fab4d27c7026c1d4dcb2602646dec9751e763dba37bdf8ff9406ad9e530ee5db382f413001aeb06a53ed9027d831179727b0865a8918da3edbebcf9b14ed44ce6cbaced4bb1bdb7f1447e6cc254b332051512bd7af426fb8f401378cd2bf5983ca01c64b92ecf032ea15d1721d03f482d7ce6e74fef6d55e702f46980c82b5a84031900b1c9e59e7c97fbec7e8f323a97a7e36cc88be0f1d45b7ff585ac54bd407b22b4154aacc8f6d7ebf48e1d814cc5ed20f8037e0a79715eef29be32806a1d58bb7c5da76f550aa3d8a1fbff0eb19ccb1a313d55cda56c9ec2ef29632387fe8d76e3c0468043e8f663f4860ee12bf2d5b0b7474d6e694f91e6dbe115974a3926f12fee5e438777cb6a932df8cd8bec4d073b931ba3bc832b68d9dd300741fa7bf8afc47ed2576f6936ba424663aab639c5ae4f5683423b4742bf1c978238f16cbe39d652de3fdb8befc848ad922222e04a4037c0713eb57a81a23f0c73473fc646cea306b4bcbc8862f8385ddfa9d4b7fa2c087e879683303ed5bdd3a062b3cf5b3a278a66d2a13f83f44f82ddf310ee074ab6a364597e899a0255dc164f31cc50846851df9ab48195ded7ea1b1d510bd7ee74d73faf36bc31ecfa268359046f4eb879f924009438b481c6cd7889a002ed5ee382bc9190da6fc026e479558e4475677e9aa9e3050e2765694dfc81f56e880b96e7160c980dd98edd3dfffffffffffffffff\"}}");
+module.exports = JSON.parse('{"modp1":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a63a3620ffffffffffffffff"},"modp2":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece65381ffffffffffffffff"},"modp5":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca237327ffffffffffffffff"},"modp14":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aacaa68ffffffffffffffff"},"modp15":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a93ad2caffffffffffffffff"},"modp16":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c934063199ffffffffffffffff"},"modp17":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c93402849236c3fab4d27c7026c1d4dcb2602646dec9751e763dba37bdf8ff9406ad9e530ee5db382f413001aeb06a53ed9027d831179727b0865a8918da3edbebcf9b14ed44ce6cbaced4bb1bdb7f1447e6cc254b332051512bd7af426fb8f401378cd2bf5983ca01c64b92ecf032ea15d1721d03f482d7ce6e74fef6d55e702f46980c82b5a84031900b1c9e59e7c97fbec7e8f323a97a7e36cc88be0f1d45b7ff585ac54bd407b22b4154aacc8f6d7ebf48e1d814cc5ed20f8037e0a79715eef29be32806a1d58bb7c5da76f550aa3d8a1fbff0eb19ccb1a313d55cda56c9ec2ef29632387fe8d76e3c0468043e8f663f4860ee12bf2d5b0b7474d6e694f91e6dcc4024ffffffffffffffff"},"modp18":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c93402849236c3fab4d27c7026c1d4dcb2602646dec9751e763dba37bdf8ff9406ad9e530ee5db382f413001aeb06a53ed9027d831179727b0865a8918da3edbebcf9b14ed44ce6cbaced4bb1bdb7f1447e6cc254b332051512bd7af426fb8f401378cd2bf5983ca01c64b92ecf032ea15d1721d03f482d7ce6e74fef6d55e702f46980c82b5a84031900b1c9e59e7c97fbec7e8f323a97a7e36cc88be0f1d45b7ff585ac54bd407b22b4154aacc8f6d7ebf48e1d814cc5ed20f8037e0a79715eef29be32806a1d58bb7c5da76f550aa3d8a1fbff0eb19ccb1a313d55cda56c9ec2ef29632387fe8d76e3c0468043e8f663f4860ee12bf2d5b0b7474d6e694f91e6dbe115974a3926f12fee5e438777cb6a932df8cd8bec4d073b931ba3bc832b68d9dd300741fa7bf8afc47ed2576f6936ba424663aab639c5ae4f5683423b4742bf1c978238f16cbe39d652de3fdb8befc848ad922222e04a4037c0713eb57a81a23f0c73473fc646cea306b4bcbc8862f8385ddfa9d4b7fa2c087e879683303ed5bdd3a062b3cf5b3a278a66d2a13f83f44f82ddf310ee074ab6a364597e899a0255dc164f31cc50846851df9ab48195ded7ea1b1d510bd7ee74d73faf36bc31ecfa268359046f4eb879f924009438b481c6cd7889a002ed5ee382bc9190da6fc026e479558e4475677e9aa9e3050e2765694dfc81f56e880b96e7160c980dd98edd3dfffffffffffffffff"}}');
 
 });
 
@@ -18764,30 +18759,30 @@ var $j89TZ = parcelRequire("j89TZ");
 var $94o1H = parcelRequire("94o1H");
 module.exports = $c0a4cf0a474304c9$var$DH;
 function $c0a4cf0a474304c9$var$setPublicKey(pub, enc) {
-    enc = enc || 'utf8';
+    enc = enc || "utf8";
     if (!$c0a4cf0a474304c9$require$Buffer.isBuffer(pub)) pub = new $c0a4cf0a474304c9$require$Buffer(pub, enc);
     this._pub = new $ifKRX(pub);
     return this;
 }
 function $c0a4cf0a474304c9$var$setPrivateKey(priv, enc) {
-    enc = enc || 'utf8';
+    enc = enc || "utf8";
     if (!$c0a4cf0a474304c9$require$Buffer.isBuffer(priv)) priv = new $c0a4cf0a474304c9$require$Buffer(priv, enc);
     this._priv = new $ifKRX(priv);
     return this;
 }
 var $c0a4cf0a474304c9$var$primeCache = {};
 function $c0a4cf0a474304c9$var$checkPrime(prime, generator) {
-    var gen = generator.toString('hex');
+    var gen = generator.toString("hex");
     var hex = [
         gen,
         prime.toString(16)
-    ].join('_');
+    ].join("_");
     if (hex in $c0a4cf0a474304c9$var$primeCache) return $c0a4cf0a474304c9$var$primeCache[hex];
     var error = 0;
     if (prime.isEven() || !$j89TZ.simpleSieve || !$j89TZ.fermatTest(prime) || !$c0a4cf0a474304c9$var$millerRabin.test(prime)) {
         //not a prime so +1
         error += 1;
-        if (gen === '02' || gen === '05') // we'd be able to check the generator
+        if (gen === "02" || gen === "05") // we'd be able to check the generator
         // it would fail so +8
         error += 8;
         else //we wouldn't be able to test the generator
@@ -18800,11 +18795,11 @@ function $c0a4cf0a474304c9$var$checkPrime(prime, generator) {
     error += 2;
     var rem;
     switch(gen){
-        case '02':
+        case "02":
             if (prime.mod($c0a4cf0a474304c9$var$TWENTYFOUR).cmp($c0a4cf0a474304c9$var$ELEVEN)) // unsuidable generator
             error += 8;
             break;
-        case '05':
+        case "05":
             rem = prime.mod($c0a4cf0a474304c9$var$TEN);
             if (rem.cmp($c0a4cf0a474304c9$var$THREE) && rem.cmp($c0a4cf0a474304c9$var$SEVEN)) // prime mod 10 needs to equal 3 or 7
             error += 8;
@@ -18828,10 +18823,10 @@ function $c0a4cf0a474304c9$var$DH(prime, generator, malleable) {
         this.setPrivateKey = $c0a4cf0a474304c9$var$setPrivateKey;
     } else this._primeCode = 8;
 }
-Object.defineProperty($c0a4cf0a474304c9$var$DH.prototype, 'verifyError', {
+Object.defineProperty($c0a4cf0a474304c9$var$DH.prototype, "verifyError", {
     enumerable: true,
     get: function() {
-        if (typeof this._primeCode !== 'number') this._primeCode = $c0a4cf0a474304c9$var$checkPrime(this.__prime, this.__gen);
+        if (typeof this._primeCode !== "number") this._primeCode = $c0a4cf0a474304c9$var$checkPrime(this.__prime, this.__gen);
         return this._primeCode;
     }
 });
@@ -18869,7 +18864,7 @@ $c0a4cf0a474304c9$var$DH.prototype.getGenerator = function(enc) {
     return $c0a4cf0a474304c9$var$formatReturnValue(this._gen, enc);
 };
 $c0a4cf0a474304c9$var$DH.prototype.setGenerator = function(gen, enc) {
-    enc = enc || 'utf8';
+    enc = enc || "utf8";
     if (!$c0a4cf0a474304c9$require$Buffer.isBuffer(gen)) gen = new $c0a4cf0a474304c9$require$Buffer(gen, enc);
     this.__gen = gen;
     this._gen = new $ifKRX(gen);
@@ -18901,13 +18896,13 @@ var $aznpG = parcelRequire("aznpG");
 
 var $bPHlq = parcelRequire("bPHlq");
 Object.keys($bPHlq).forEach(function(key) {
-    $bPHlq[key].id = $2e9dadee67a5ccc5$require$Buffer.from($bPHlq[key].id, 'hex');
+    $bPHlq[key].id = $2e9dadee67a5ccc5$require$Buffer.from($bPHlq[key].id, "hex");
     $bPHlq[key.toLowerCase()] = $bPHlq[key];
 });
 function $2e9dadee67a5ccc5$var$Sign(algorithm) {
     $8jMh9.Writable.call(this);
     var data = $bPHlq[algorithm];
-    if (!data) throw new Error('Unknown message digest');
+    if (!data) throw new Error("Unknown message digest");
     this._hashType = data.hash;
     this._hash = $cv73a(data.hash);
     this._tag = data.id;
@@ -18919,7 +18914,7 @@ $2e9dadee67a5ccc5$var$Sign.prototype._write = function _write(data, _, done) {
     done();
 };
 $2e9dadee67a5ccc5$var$Sign.prototype.update = function update(data, enc) {
-    if (typeof data === 'string') data = $2e9dadee67a5ccc5$require$Buffer.from(data, enc);
+    if (typeof data === "string") data = $2e9dadee67a5ccc5$require$Buffer.from(data, enc);
     this._hash.update(data);
     return this;
 };
@@ -18932,7 +18927,7 @@ $2e9dadee67a5ccc5$var$Sign.prototype.sign = function signMethod(key, enc) {
 function $2e9dadee67a5ccc5$var$Verify(algorithm) {
     $8jMh9.Writable.call(this);
     var data = $bPHlq[algorithm];
-    if (!data) throw new Error('Unknown message digest');
+    if (!data) throw new Error("Unknown message digest");
     this._hash = $cv73a(data.hash);
     this._tag = data.id;
     this._signType = data.sign;
@@ -18943,12 +18938,12 @@ $2e9dadee67a5ccc5$var$Verify.prototype._write = function _write(data, _, done) {
     done();
 };
 $2e9dadee67a5ccc5$var$Verify.prototype.update = function update(data, enc) {
-    if (typeof data === 'string') data = $2e9dadee67a5ccc5$require$Buffer.from(data, enc);
+    if (typeof data === "string") data = $2e9dadee67a5ccc5$require$Buffer.from(data, enc);
     this._hash.update(data);
     return this;
 };
 $2e9dadee67a5ccc5$var$Verify.prototype.verify = function verifyMethod(key, sig, enc) {
-    if (typeof sig === 'string') sig = $2e9dadee67a5ccc5$require$Buffer.from(sig, enc);
+    if (typeof sig === "string") sig = $2e9dadee67a5ccc5$require$Buffer.from(sig, enc);
     this.end();
     var hash = this._hash.digest();
     return $aznpG(sig, hash, key, this._signType, this._tag);
@@ -18988,13 +18983,13 @@ function $771f08c4b26066d5$var$sign(hash, key, hashType, signType, tag) {
     var priv = $8NP2t(key);
     if (priv.curve) {
         // rsa keys can be interpreted as ecdsa ones in openssl
-        if (signType !== 'ecdsa' && signType !== 'ecdsa/rsa') throw new Error('wrong private key type');
+        if (signType !== "ecdsa" && signType !== "ecdsa/rsa") throw new Error("wrong private key type");
         return $771f08c4b26066d5$var$ecSign(hash, priv);
-    } else if (priv.type === 'dsa') {
-        if (signType !== 'dsa') throw new Error('wrong private key type');
+    } else if (priv.type === "dsa") {
+        if (signType !== "dsa") throw new Error("wrong private key type");
         return $771f08c4b26066d5$var$dsaSign(hash, priv, hashType);
     } else {
-        if (signType !== 'rsa' && signType !== 'ecdsa/rsa') throw new Error('wrong private key type');
+        if (signType !== "rsa" && signType !== "ecdsa/rsa") throw new Error("wrong private key type");
     }
     hash = $771f08c4b26066d5$require$Buffer.concat([
         tag,
@@ -19013,8 +19008,8 @@ function $771f08c4b26066d5$var$sign(hash, key, hashType, signType, tag) {
     return out;
 }
 function $771f08c4b26066d5$var$ecSign(hash, priv) {
-    var curveId = $21yZU[priv.curve.join('.')];
-    if (!curveId) throw new Error('unknown curve ' + priv.curve.join('.'));
+    var curveId = $21yZU[priv.curve.join(".")];
+    if (!curveId) throw new Error("unknown curve " + priv.curve.join("."));
     var curve = new $771f08c4b26066d5$require$EC(curveId);
     var key = curve.keyFromPrivate(priv.privateKey);
     var out = key.sign(hash);
@@ -19127,7 +19122,7 @@ function $771f08c4b26066d5$var$makeKey(q, kv, algo) {
             0
         ])).digest();
         kv.v = $dA0oy(algo, kv.k).update(kv.v).digest();
-    }while (k.cmp(q) !== -1)
+    }while (k.cmp(q) !== -1);
     return k;
 }
 function $771f08c4b26066d5$var$makeR(g, k, p, q) {
@@ -19158,7 +19153,7 @@ function $d71dd453f6fd8253$var$getr(priv) {
     var len = priv.modulus.byteLength();
     var r;
     do r = new $3wN9B($94o1H(len));
-    while (r.cmp(priv.modulus) >= 0 || !r.umod(priv.prime1) || !r.umod(priv.prime2))
+    while (r.cmp(priv.modulus) >= 0 || !r.umod(priv.prime1) || !r.umod(priv.prime2));
     return r;
 }
 function $d71dd453f6fd8253$var$crt(msg, priv) {
@@ -19173,7 +19168,7 @@ function $d71dd453f6fd8253$var$crt(msg, priv) {
     var m1 = c1.redPow(priv.exponent1).fromRed();
     var m2 = c2.redPow(priv.exponent2).fromRed();
     var h = m1.isub(m2).imul(qinv).umod(p).imul(q);
-    return m2.iadd(h).imul(blinds.unblinder).umod(priv.modulus).toArrayLike($d71dd453f6fd8253$require$Buffer, 'be', len);
+    return m2.iadd(h).imul(blinds.unblinder).umod(priv.modulus).toArrayLike($d71dd453f6fd8253$require$Buffer, "be", len);
 }
 $d71dd453f6fd8253$var$crt.getr = $d71dd453f6fd8253$var$getr;
 module.exports = $d71dd453f6fd8253$var$crt;
@@ -19182,9 +19177,10 @@ module.exports = $d71dd453f6fd8253$var$crt;
 parcelRequire.register("3wN9B", function(module, exports) {
 
 (function(module, exports) {
+    "use strict";
     // Utils
     function assert(val, msg) {
-        if (!val) throw new Error(msg || 'Assertion failed');
+        if (!val) throw new Error(msg || "Assertion failed");
     }
     // Could use `inherits` module, but don't want to move from single file
     // architecture yet.
@@ -19204,25 +19200,25 @@ parcelRequire.register("3wN9B", function(module, exports) {
         // Reduction context
         this.red = null;
         if (number !== null) {
-            if (base === 'le' || base === 'be') {
+            if (base === "le" || base === "be") {
                 endian = base;
                 base = 10;
             }
-            this._init(number || 0, base || 10, endian || 'be');
+            this._init(number || 0, base || 10, endian || "be");
         }
     }
-    if (typeof module === 'object') module.exports = BN;
+    if (typeof module === "object") module.exports = BN;
     else exports.BN = BN;
     BN.BN = BN;
     BN.wordSize = 26;
     var Buffer;
     try {
-        if (typeof window !== 'undefined' && typeof window.Buffer !== 'undefined') Buffer = window.Buffer;
+        if (typeof window !== "undefined" && typeof window.Buffer !== "undefined") Buffer = window.Buffer;
         else Buffer = (parcelRequire("c7mcJ")).Buffer;
     } catch (e) {}
     BN.isBN = function isBN(num) {
         if (num instanceof BN) return true;
-        return num !== null && typeof num === 'object' && num.constructor.wordSize === BN.wordSize && Array.isArray(num.words);
+        return num !== null && typeof num === "object" && num.constructor.wordSize === BN.wordSize && Array.isArray(num.words);
     };
     BN.max = function max(left, right) {
         if (left.cmp(right) > 0) return left;
@@ -19233,13 +19229,13 @@ parcelRequire.register("3wN9B", function(module, exports) {
         return right;
     };
     BN.prototype._init = function init(number, base, endian) {
-        if (typeof number === 'number') return this._initNumber(number, base, endian);
-        if (typeof number === 'object') return this._initArray(number, base, endian);
-        if (base === 'hex') base = 16;
+        if (typeof number === "number") return this._initNumber(number, base, endian);
+        if (typeof number === "object") return this._initArray(number, base, endian);
+        if (base === "hex") base = 16;
         assert(base === (base | 0) && base >= 2 && base <= 36);
-        number = number.toString().replace(/\s+/g, '');
+        number = number.toString().replace(/\s+/g, "");
         var start = 0;
-        if (number[0] === '-') {
+        if (number[0] === "-") {
             start++;
             this.negative = 1;
         }
@@ -19247,7 +19243,7 @@ parcelRequire.register("3wN9B", function(module, exports) {
             if (base === 16) this._parseHex(number, start, endian);
             else {
                 this._parseBase(number, base, start);
-                if (endian === 'le') this._initArray(this.toArray(), base, endian);
+                if (endian === "le") this._initArray(this.toArray(), base, endian);
             }
         }
     };
@@ -19276,13 +19272,13 @@ parcelRequire.register("3wN9B", function(module, exports) {
             ];
             this.length = 3;
         }
-        if (endian !== 'le') return;
+        if (endian !== "le") return;
         // Reverse the bytes
         this._initArray(this.toArray(), base, endian);
     };
     BN.prototype._initArray = function _initArray(number, base, endian) {
         // Perhaps a Uint8Array
-        assert(typeof number.length === 'number');
+        assert(typeof number.length === "number");
         if (number.length <= 0) {
             this.words = [
                 0
@@ -19295,7 +19291,7 @@ parcelRequire.register("3wN9B", function(module, exports) {
         for(var i = 0; i < this.length; i++)this.words[i] = 0;
         var j, w;
         var off = 0;
-        if (endian === 'be') for(i = number.length - 1, j = 0; i >= 0; i -= 3){
+        if (endian === "be") for(i = number.length - 1, j = 0; i >= 0; i -= 3){
             w = number[i] | number[i - 1] << 8 | number[i - 2] << 16;
             this.words[j] |= w << off & 0x3ffffff;
             this.words[j + 1] = w >>> 26 - off & 0x3ffffff;
@@ -19305,7 +19301,7 @@ parcelRequire.register("3wN9B", function(module, exports) {
                 j++;
             }
         }
-        else if (endian === 'le') for(i = 0, j = 0; i < number.length; i += 3){
+        else if (endian === "le") for(i = 0, j = 0; i < number.length; i += 3){
             w = number[i] | number[i + 1] << 8 | number[i + 2] << 16;
             this.words[j] |= w << off & 0x3ffffff;
             this.words[j + 1] = w >>> 26 - off & 0x3ffffff;
@@ -19323,7 +19319,7 @@ parcelRequire.register("3wN9B", function(module, exports) {
         if (c >= 48 && c <= 57) return c - 48;
         else if (c >= 65 && c <= 70) return c - 55;
         else if (c >= 97 && c <= 102) return c - 87;
-        else assert(false, 'Invalid character in ' + string);
+        else assert(false, "Invalid character in " + string);
     }
     function parseHexByte(string, lowerBound, index) {
         var r = parseHex4Bits(string, index);
@@ -19339,7 +19335,7 @@ parcelRequire.register("3wN9B", function(module, exports) {
         var off = 0;
         var j = 0;
         var w;
-        if (endian === 'be') for(i = number.length - 1; i >= start; i -= 2){
+        if (endian === "be") for(i = number.length - 1; i >= start; i -= 2){
             w = parseHexByte(number, start, i) << off;
             this.words[j] |= w & 0x3ffffff;
             if (off >= 18) {
@@ -19373,7 +19369,7 @@ parcelRequire.register("3wN9B", function(module, exports) {
             if (c >= 49) b = c - 49 + 0xa;
             else if (c >= 17) b = c - 17 + 0xa;
             else b = c;
-            assert(c >= 0 && b < mul, 'Invalid character');
+            assert(c >= 0 && b < mul, "Invalid character");
             r += b;
         }
         return r;
@@ -19445,14 +19441,14 @@ parcelRequire.register("3wN9B", function(module, exports) {
     };
     // Check Symbol.for because not everywhere where Symbol defined
     // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol#Browser_compatibility
-    if (typeof Symbol !== 'undefined' && typeof Symbol.for === 'function') try {
-        BN.prototype[Symbol.for('nodejs.util.inspect.custom')] = inspect;
+    if (typeof Symbol !== "undefined" && typeof Symbol.for === "function") try {
+        BN.prototype[Symbol.for("nodejs.util.inspect.custom")] = inspect;
     } catch (e1) {
         BN.prototype.inspect = inspect;
     }
     else BN.prototype.inspect = inspect;
     function inspect() {
-        return (this.red ? '<BN-R: ' : '<BN: ') + this.toString(16) + '>';
+        return (this.red ? "<BN-R: " : "<BN: ") + this.toString(16) + ">";
     }
     /*
 
@@ -19483,32 +19479,32 @@ parcelRequire.register("3wN9B", function(module, exports) {
   }
 
   */ var zeros = [
-        '',
-        '0',
-        '00',
-        '000',
-        '0000',
-        '00000',
-        '000000',
-        '0000000',
-        '00000000',
-        '000000000',
-        '0000000000',
-        '00000000000',
-        '000000000000',
-        '0000000000000',
-        '00000000000000',
-        '000000000000000',
-        '0000000000000000',
-        '00000000000000000',
-        '000000000000000000',
-        '0000000000000000000',
-        '00000000000000000000',
-        '000000000000000000000',
-        '0000000000000000000000',
-        '00000000000000000000000',
-        '000000000000000000000000',
-        '0000000000000000000000000'
+        "",
+        "0",
+        "00",
+        "000",
+        "0000",
+        "00000",
+        "000000",
+        "0000000",
+        "00000000",
+        "000000000",
+        "0000000000",
+        "00000000000",
+        "000000000000",
+        "0000000000000",
+        "00000000000000",
+        "000000000000000",
+        "0000000000000000",
+        "00000000000000000",
+        "000000000000000000",
+        "0000000000000000000",
+        "00000000000000000000",
+        "000000000000000000000",
+        "0000000000000000000000",
+        "00000000000000000000000",
+        "000000000000000000000000",
+        "0000000000000000000000000"
     ];
     var groupSizes = [
         0,
@@ -19592,8 +19588,8 @@ parcelRequire.register("3wN9B", function(module, exports) {
         base = base || 10;
         padding = padding | 0 || 1;
         var out;
-        if (base === 16 || base === 'hex') {
-            out = '';
+        if (base === 16 || base === "hex") {
+            out = "";
             var off = 0;
             var carry = 0;
             for(var i = 0; i < this.length; i++){
@@ -19609,8 +19605,8 @@ parcelRequire.register("3wN9B", function(module, exports) {
                 else out = word + out;
             }
             if (carry !== 0) out = carry.toString(16) + out;
-            while(out.length % padding !== 0)out = '0' + out;
-            if (this.negative !== 0) out = '-' + out;
+            while(out.length % padding !== 0)out = "0" + out;
+            if (this.negative !== 0) out = "-" + out;
             return out;
         }
         if (base === (base | 0) && base >= 2 && base <= 36) {
@@ -19618,7 +19614,7 @@ parcelRequire.register("3wN9B", function(module, exports) {
             var groupSize = groupSizes[base];
             // var groupBase = Math.pow(base, groupSize);
             var groupBase = groupBases[base];
-            out = '';
+            out = "";
             var c = this.clone();
             c.negative = 0;
             while(!c.isZero()){
@@ -19627,19 +19623,19 @@ parcelRequire.register("3wN9B", function(module, exports) {
                 if (!c.isZero()) out = zeros[groupSize - r.length] + r + out;
                 else out = r + out;
             }
-            if (this.isZero()) out = '0' + out;
-            while(out.length % padding !== 0)out = '0' + out;
-            if (this.negative !== 0) out = '-' + out;
+            if (this.isZero()) out = "0" + out;
+            while(out.length % padding !== 0)out = "0" + out;
+            if (this.negative !== 0) out = "-" + out;
             return out;
         }
-        assert(false, 'Base should be between 2 and 36');
+        assert(false, "Base should be between 2 and 36");
     };
     BN.prototype.toNumber = function toNumber() {
         var ret = this.words[0];
         if (this.length === 2) ret += this.words[1] * 0x4000000;
         else if (this.length === 3 && this.words[2] === 0x01) // NOTE: at this stage it is known that the top bit is set
         ret += 0x10000000000000 + this.words[1] * 0x4000000;
-        else if (this.length > 2) assert(false, 'Number can only safely store up to 53 bits');
+        else if (this.length > 2) assert(false, "Number can only safely store up to 53 bits");
         return this.negative !== 0 ? -ret : ret;
     };
     BN.prototype.toJSON = function toJSON() {
@@ -19659,11 +19655,11 @@ parcelRequire.register("3wN9B", function(module, exports) {
         this._strip();
         var byteLength = this.byteLength();
         var reqLength = length || Math.max(1, byteLength);
-        assert(byteLength <= reqLength, 'byte array longer than desired length');
-        assert(reqLength > 0, 'Requested array length <= 0');
+        assert(byteLength <= reqLength, "byte array longer than desired length");
+        assert(reqLength > 0, "Requested array length <= 0");
         var res = allocate(ArrayType, reqLength);
-        var postfix = endian === 'le' ? 'LE' : 'BE';
-        this['_toArrayLike' + postfix](res, byteLength);
+        var postfix = endian === "le" ? "LE" : "BE";
+        this["_toArrayLike" + postfix](res, byteLength);
         return res;
     };
     BN.prototype._toArrayLikeLE = function _toArrayLikeLE(res, byteLength) {
@@ -19880,7 +19876,7 @@ parcelRequire.register("3wN9B", function(module, exports) {
     };
     // Not ``this`` with ``width`` bitwidth
     BN.prototype.inotn = function inotn(width) {
-        assert(typeof width === 'number' && width >= 0);
+        assert(typeof width === "number" && width >= 0);
         var bytesNeeded = Math.ceil(width / 26) | 0;
         var bitsLeft = width % 26;
         // Extend the buffer with leading zeroes
@@ -19898,7 +19894,7 @@ parcelRequire.register("3wN9B", function(module, exports) {
     };
     // Set `bit` of `this`
     BN.prototype.setn = function setn(bit, val) {
-        assert(typeof bit === 'number' && bit >= 0);
+        assert(typeof bit === "number" && bit >= 0);
         var off = bit / 26 | 0;
         var wbit = bit % 26;
         this._expand(off + 1);
@@ -20814,7 +20810,7 @@ parcelRequire.register("3wN9B", function(module, exports) {
     BN.prototype.imuln = function imuln(num) {
         var isNegNum = num < 0;
         if (isNegNum) num = -num;
-        assert(typeof num === 'number');
+        assert(typeof num === "number");
         assert(num < 0x4000000);
         // Carry
         var carry = 0;
@@ -20861,7 +20857,7 @@ parcelRequire.register("3wN9B", function(module, exports) {
     };
     // Shift-left in-place
     BN.prototype.iushln = function iushln(bits) {
-        assert(typeof bits === 'number' && bits >= 0);
+        assert(typeof bits === "number" && bits >= 0);
         var r = bits % 26;
         var s = (bits - r) / 26;
         var carryMask = 0x3ffffff >>> 26 - r << 26 - r;
@@ -20895,7 +20891,7 @@ parcelRequire.register("3wN9B", function(module, exports) {
     // NOTE: `hint` is a lowest bit before trailing zeroes
     // NOTE: if `extended` is present - it will be filled with destroyed bits
     BN.prototype.iushrn = function iushrn(bits, hint, extended) {
-        assert(typeof bits === 'number' && bits >= 0);
+        assert(typeof bits === "number" && bits >= 0);
         var h;
         if (hint) h = (hint - hint % 26) / 26;
         else h = 0;
@@ -20953,7 +20949,7 @@ parcelRequire.register("3wN9B", function(module, exports) {
     };
     // Test if n bit is set
     BN.prototype.testn = function testn(bit) {
-        assert(typeof bit === 'number' && bit >= 0);
+        assert(typeof bit === "number" && bit >= 0);
         var r = bit % 26;
         var s = (bit - r) / 26;
         var q = 1 << r;
@@ -20965,10 +20961,10 @@ parcelRequire.register("3wN9B", function(module, exports) {
     };
     // Return only lowers bits of number (in-place)
     BN.prototype.imaskn = function imaskn(bits) {
-        assert(typeof bits === 'number' && bits >= 0);
+        assert(typeof bits === "number" && bits >= 0);
         var r = bits % 26;
         var s = (bits - r) / 26;
-        assert(this.negative === 0, 'imaskn works only with positive numbers');
+        assert(this.negative === 0, "imaskn works only with positive numbers");
         if (this.length <= s) return this;
         if (r !== 0) s++;
         this.length = Math.min(s, this.length);
@@ -20984,7 +20980,7 @@ parcelRequire.register("3wN9B", function(module, exports) {
     };
     // Add plain number `num` to `this`
     BN.prototype.iaddn = function iaddn(num) {
-        assert(typeof num === 'number');
+        assert(typeof num === "number");
         assert(num < 0x4000000);
         if (num < 0) return this.isubn(-num);
         // Possible sign change
@@ -21015,7 +21011,7 @@ parcelRequire.register("3wN9B", function(module, exports) {
     };
     // Subtract plain number `num` from `this`
     BN.prototype.isubn = function isubn(num) {
-        assert(typeof num === 'number');
+        assert(typeof num === "number");
         assert(num < 0x4000000);
         if (num < 0) return this.iaddn(-num);
         if (this.negative !== 0) {
@@ -21094,7 +21090,7 @@ parcelRequire.register("3wN9B", function(module, exports) {
         // Initialize quotient
         var m = a.length - b.length;
         var q;
-        if (mode !== 'mod') {
+        if (mode !== "mod") {
             q = new BN(null);
             q.length = m + 1;
             q.words = new Array(q.length);
@@ -21122,7 +21118,7 @@ parcelRequire.register("3wN9B", function(module, exports) {
         if (q) q._strip();
         a._strip();
         // Denormalize
-        if (mode !== 'div' && shift !== 0) a.iushrn(shift);
+        if (mode !== "div" && shift !== 0) a.iushrn(shift);
         return {
             div: q || null,
             mod: a
@@ -21141,8 +21137,8 @@ parcelRequire.register("3wN9B", function(module, exports) {
         var div, mod, res;
         if (this.negative !== 0 && num.negative === 0) {
             res = this.neg().divmod(num, mode);
-            if (mode !== 'mod') div = res.div.neg();
-            if (mode !== 'div') {
+            if (mode !== "mod") div = res.div.neg();
+            if (mode !== "div") {
                 mod = res.mod.neg();
                 if (positive && mod.negative !== 0) mod.iadd(num);
             }
@@ -21153,7 +21149,7 @@ parcelRequire.register("3wN9B", function(module, exports) {
         }
         if (this.negative === 0 && num.negative !== 0) {
             res = this.divmod(num.neg(), mode);
-            if (mode !== 'mod') div = res.div.neg();
+            if (mode !== "mod") div = res.div.neg();
             return {
                 div: div,
                 mod: res.mod
@@ -21161,7 +21157,7 @@ parcelRequire.register("3wN9B", function(module, exports) {
         }
         if ((this.negative & num.negative) !== 0) {
             res = this.neg().divmod(num.neg(), mode);
-            if (mode !== 'div') {
+            if (mode !== "div") {
                 mod = res.mod.neg();
                 if (positive && mod.negative !== 0) mod.isub(num);
             }
@@ -21178,11 +21174,11 @@ parcelRequire.register("3wN9B", function(module, exports) {
         };
         // Very short reduction
         if (num.length === 1) {
-            if (mode === 'div') return {
+            if (mode === "div") return {
                 div: this.divn(num.words[0]),
                 mod: null
             };
-            if (mode === 'mod') return {
+            if (mode === "mod") return {
                 div: null,
                 mod: new BN(this.modrn(num.words[0]))
             };
@@ -21195,14 +21191,14 @@ parcelRequire.register("3wN9B", function(module, exports) {
     };
     // Find `this` / `num`
     BN.prototype.div = function div(num) {
-        return this.divmod(num, 'div', false).div;
+        return this.divmod(num, "div", false).div;
     };
     // Find `this` % `num`
     BN.prototype.mod = function mod(num) {
-        return this.divmod(num, 'mod', false).mod;
+        return this.divmod(num, "mod", false).mod;
     };
     BN.prototype.umod = function umod(num) {
-        return this.divmod(num, 'mod', true).mod;
+        return this.divmod(num, "mod", true).mod;
     };
     // Find Round(`this` / `num`)
     BN.prototype.divRound = function divRound(num) {
@@ -21377,7 +21373,7 @@ parcelRequire.register("3wN9B", function(module, exports) {
                 b = t;
             } else if (r === 0 || b.cmpn(1) === 0) break;
             a.isub(b);
-        }while (true)
+        }while (true);
         return b.iushln(shift);
     };
     // Invert number in the field F(num)
@@ -21396,7 +21392,7 @@ parcelRequire.register("3wN9B", function(module, exports) {
     };
     // Increment at the bit position in-line
     BN.prototype.bincn = function bincn(bit) {
-        assert(typeof bit === 'number');
+        assert(typeof bit === "number");
         var r = bit % 26;
         var s = (bit - r) / 26;
         var q = 1 << r;
@@ -21433,7 +21429,7 @@ parcelRequire.register("3wN9B", function(module, exports) {
         if (this.length > 1) res = 1;
         else {
             if (negative) num = -num;
-            assert(num <= 0x3ffffff, 'Number is too big');
+            assert(num <= 0x3ffffff, "Number is too big");
             var w = this.words[0] | 0;
             res = w === num ? 0 : w < num ? -1 : 1;
         }
@@ -21505,12 +21501,12 @@ parcelRequire.register("3wN9B", function(module, exports) {
         return new Red(num);
     };
     BN.prototype.toRed = function toRed(ctx) {
-        assert(!this.red, 'Already a number in reduction context');
-        assert(this.negative === 0, 'red works only with positives');
+        assert(!this.red, "Already a number in reduction context");
+        assert(this.negative === 0, "red works only with positives");
         return ctx.convertTo(this)._forceRed(ctx);
     };
     BN.prototype.fromRed = function fromRed() {
-        assert(this.red, 'fromRed works only with numbers in reduction context');
+        assert(this.red, "fromRed works only with numbers in reduction context");
         return this.red.convertFrom(this);
     };
     BN.prototype._forceRed = function _forceRed(ctx) {
@@ -21518,68 +21514,68 @@ parcelRequire.register("3wN9B", function(module, exports) {
         return this;
     };
     BN.prototype.forceRed = function forceRed(ctx) {
-        assert(!this.red, 'Already a number in reduction context');
+        assert(!this.red, "Already a number in reduction context");
         return this._forceRed(ctx);
     };
     BN.prototype.redAdd = function redAdd(num) {
-        assert(this.red, 'redAdd works only with red numbers');
+        assert(this.red, "redAdd works only with red numbers");
         return this.red.add(this, num);
     };
     BN.prototype.redIAdd = function redIAdd(num) {
-        assert(this.red, 'redIAdd works only with red numbers');
+        assert(this.red, "redIAdd works only with red numbers");
         return this.red.iadd(this, num);
     };
     BN.prototype.redSub = function redSub(num) {
-        assert(this.red, 'redSub works only with red numbers');
+        assert(this.red, "redSub works only with red numbers");
         return this.red.sub(this, num);
     };
     BN.prototype.redISub = function redISub(num) {
-        assert(this.red, 'redISub works only with red numbers');
+        assert(this.red, "redISub works only with red numbers");
         return this.red.isub(this, num);
     };
     BN.prototype.redShl = function redShl(num) {
-        assert(this.red, 'redShl works only with red numbers');
+        assert(this.red, "redShl works only with red numbers");
         return this.red.shl(this, num);
     };
     BN.prototype.redMul = function redMul(num) {
-        assert(this.red, 'redMul works only with red numbers');
+        assert(this.red, "redMul works only with red numbers");
         this.red._verify2(this, num);
         return this.red.mul(this, num);
     };
     BN.prototype.redIMul = function redIMul(num) {
-        assert(this.red, 'redMul works only with red numbers');
+        assert(this.red, "redMul works only with red numbers");
         this.red._verify2(this, num);
         return this.red.imul(this, num);
     };
     BN.prototype.redSqr = function redSqr() {
-        assert(this.red, 'redSqr works only with red numbers');
+        assert(this.red, "redSqr works only with red numbers");
         this.red._verify1(this);
         return this.red.sqr(this);
     };
     BN.prototype.redISqr = function redISqr() {
-        assert(this.red, 'redISqr works only with red numbers');
+        assert(this.red, "redISqr works only with red numbers");
         this.red._verify1(this);
         return this.red.isqr(this);
     };
     // Square root over p
     BN.prototype.redSqrt = function redSqrt() {
-        assert(this.red, 'redSqrt works only with red numbers');
+        assert(this.red, "redSqrt works only with red numbers");
         this.red._verify1(this);
         return this.red.sqrt(this);
     };
     BN.prototype.redInvm = function redInvm() {
-        assert(this.red, 'redInvm works only with red numbers');
+        assert(this.red, "redInvm works only with red numbers");
         this.red._verify1(this);
         return this.red.invm(this);
     };
     // Return negative clone of `this` % `red modulo`
     BN.prototype.redNeg = function redNeg() {
-        assert(this.red, 'redNeg works only with red numbers');
+        assert(this.red, "redNeg works only with red numbers");
         this.red._verify1(this);
         return this.red.neg(this);
     };
     BN.prototype.redPow = function redPow(num) {
-        assert(this.red && !num.red, 'redPow(normalNum)');
+        assert(this.red && !num.red, "redPow(normalNum)");
         this.red._verify1(this);
         return this.red.pow(this, num);
     };
@@ -21614,7 +21610,7 @@ parcelRequire.register("3wN9B", function(module, exports) {
             r = this.imulK(r);
             r = r.iadd(this.tmp);
             rlen = r.bitLength();
-        }while (rlen > this.n)
+        }while (rlen > this.n);
         var cmp = rlen < this.n ? -1 : r.ucmp(this.p);
         if (cmp === 0) {
             r.words[0] = 0;
@@ -21633,7 +21629,7 @@ parcelRequire.register("3wN9B", function(module, exports) {
         return num.imul(this.k);
     };
     function K256() {
-        MPrime.call(this, 'k256', 'ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff fffffffe fffffc2f');
+        MPrime.call(this, "k256", "ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff fffffffe fffffc2f");
     }
     inherits(K256, MPrime);
     K256.prototype.split = function split(input, output) {
@@ -21681,16 +21677,16 @@ parcelRequire.register("3wN9B", function(module, exports) {
         return num;
     };
     function P224() {
-        MPrime.call(this, 'p224', 'ffffffff ffffffff ffffffff ffffffff 00000000 00000000 00000001');
+        MPrime.call(this, "p224", "ffffffff ffffffff ffffffff ffffffff 00000000 00000000 00000001");
     }
     inherits(P224, MPrime);
     function P192() {
-        MPrime.call(this, 'p192', 'ffffffff ffffffff ffffffff fffffffe ffffffff ffffffff');
+        MPrime.call(this, "p192", "ffffffff ffffffff ffffffff fffffffe ffffffff ffffffff");
     }
     inherits(P192, MPrime);
     function P25519() {
         // 2 ^ 255 - 19
-        MPrime.call(this, '25519', '7fffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffed');
+        MPrime.call(this, "25519", "7fffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffed");
     }
     inherits(P25519, MPrime);
     P25519.prototype.imulK = function imulK(num) {
@@ -21711,11 +21707,11 @@ parcelRequire.register("3wN9B", function(module, exports) {
         // Cached version of prime
         if (primes[name]) return primes[name];
         var prime;
-        if (name === 'k256') prime = new K256();
-        else if (name === 'p224') prime = new P224();
-        else if (name === 'p192') prime = new P192();
-        else if (name === 'p25519') prime = new P25519();
-        else throw new Error('Unknown prime ' + name);
+        if (name === "k256") prime = new K256();
+        else if (name === "p224") prime = new P224();
+        else if (name === "p192") prime = new P192();
+        else if (name === "p25519") prime = new P25519();
+        else throw new Error("Unknown prime " + name);
         primes[name] = prime;
         return prime;
     };
@@ -21723,23 +21719,23 @@ parcelRequire.register("3wN9B", function(module, exports) {
     // Base reduction engine
     //
     function Red(m) {
-        if (typeof m === 'string') {
+        if (typeof m === "string") {
             var prime = BN._prime(m);
             this.m = prime.p;
             this.prime = prime;
         } else {
-            assert(m.gtn(1), 'modulus must be greater than 1');
+            assert(m.gtn(1), "modulus must be greater than 1");
             this.m = m;
             this.prime = null;
         }
     }
     Red.prototype._verify1 = function _verify1(a) {
-        assert(a.negative === 0, 'red works only with positives');
-        assert(a.red, 'red works only with red numbers');
+        assert(a.negative === 0, "red works only with positives");
+        assert(a.red, "red works only with red numbers");
     };
     Red.prototype._verify2 = function _verify2(a, b) {
-        assert((a.negative | b.negative) === 0, 'red works only with positives');
-        assert(a.red && a.red === b.red, 'red works only with red numbers');
+        assert((a.negative | b.negative) === 0, "red works only with positives");
+        assert(a.red && a.red === b.red, "red works only with red numbers");
     };
     Red.prototype.imod = function imod(a) {
         if (this.prime) return this.prime.ireduce(a)._forceRed(this);
@@ -21946,7 +21942,7 @@ parcelRequire.register("3wN9B", function(module, exports) {
 
 
 parcelRequire.register("2Tmp9", function(module, exports) {
-'use strict';
+"use strict";
 var $21b218e8c46b8219$var$elliptic = module.exports;
 
 $21b218e8c46b8219$var$elliptic.version = (parcelRequire("6ebIM")).version;
@@ -21966,12 +21962,12 @@ $21b218e8c46b8219$var$elliptic.eddsa = (parcelRequire("4tVTF"));
 
 });
 parcelRequire.register("6ebIM", function(module, exports) {
-module.exports = JSON.parse("{\"name\":\"elliptic\",\"version\":\"6.5.4\",\"description\":\"EC cryptography\",\"main\":\"lib/elliptic.js\",\"files\":[\"lib\"],\"scripts\":{\"lint\":\"eslint lib test\",\"lint:fix\":\"npm run lint -- --fix\",\"unit\":\"istanbul test _mocha --reporter=spec test/index.js\",\"test\":\"npm run lint && npm run unit\",\"version\":\"grunt dist && git add dist/\"},\"repository\":{\"type\":\"git\",\"url\":\"git@github.com:indutny/elliptic\"},\"keywords\":[\"EC\",\"Elliptic\",\"curve\",\"Cryptography\"],\"author\":\"Fedor Indutny <fedor@indutny.com>\",\"license\":\"MIT\",\"bugs\":{\"url\":\"https://github.com/indutny/elliptic/issues\"},\"homepage\":\"https://github.com/indutny/elliptic\",\"devDependencies\":{\"brfs\":\"^2.0.2\",\"coveralls\":\"^3.1.0\",\"eslint\":\"^7.6.0\",\"grunt\":\"^1.2.1\",\"grunt-browserify\":\"^5.3.0\",\"grunt-cli\":\"^1.3.2\",\"grunt-contrib-connect\":\"^3.0.0\",\"grunt-contrib-copy\":\"^1.0.0\",\"grunt-contrib-uglify\":\"^5.0.0\",\"grunt-mocha-istanbul\":\"^5.0.2\",\"grunt-saucelabs\":\"^9.0.1\",\"istanbul\":\"^0.4.5\",\"mocha\":\"^8.0.1\"},\"dependencies\":{\"bn.js\":\"^4.11.9\",\"brorand\":\"^1.1.0\",\"hash.js\":\"^1.0.0\",\"hmac-drbg\":\"^1.0.1\",\"inherits\":\"^2.0.4\",\"minimalistic-assert\":\"^1.0.1\",\"minimalistic-crypto-utils\":\"^1.0.1\"}}");
+module.exports = JSON.parse('{"name":"elliptic","version":"6.5.4","description":"EC cryptography","main":"lib/elliptic.js","files":["lib"],"scripts":{"lint":"eslint lib test","lint:fix":"npm run lint -- --fix","unit":"istanbul test _mocha --reporter=spec test/index.js","test":"npm run lint && npm run unit","version":"grunt dist && git add dist/"},"repository":{"type":"git","url":"git@github.com:indutny/elliptic"},"keywords":["EC","Elliptic","curve","Cryptography"],"author":"Fedor Indutny <fedor@indutny.com>","license":"MIT","bugs":{"url":"https://github.com/indutny/elliptic/issues"},"homepage":"https://github.com/indutny/elliptic","devDependencies":{"brfs":"^2.0.2","coveralls":"^3.1.0","eslint":"^7.6.0","grunt":"^1.2.1","grunt-browserify":"^5.3.0","grunt-cli":"^1.3.2","grunt-contrib-connect":"^3.0.0","grunt-contrib-copy":"^1.0.0","grunt-contrib-uglify":"^5.0.0","grunt-mocha-istanbul":"^5.0.2","grunt-saucelabs":"^9.0.1","istanbul":"^0.4.5","mocha":"^8.0.1"},"dependencies":{"bn.js":"^4.11.9","brorand":"^1.1.0","hash.js":"^1.0.0","hmac-drbg":"^1.0.1","inherits":"^2.0.4","minimalistic-assert":"^1.0.1","minimalistic-crypto-utils":"^1.0.1"}}');
 
 });
 
 parcelRequire.register("frLve", function(module, exports) {
-'use strict';
+"use strict";
 var $b3ee39ae062919b7$var$utils = module.exports;
 
 var $jBtqe = parcelRequire("jBtqe");
@@ -22047,18 +22043,18 @@ function $b3ee39ae062919b7$var$getJSF(k1, k2) {
 }
 $b3ee39ae062919b7$var$utils.getJSF = $b3ee39ae062919b7$var$getJSF;
 function $b3ee39ae062919b7$var$cachedProperty(obj, name, computer) {
-    var key = '_' + name;
+    var key = "_" + name;
     obj.prototype[name] = function cachedProperty() {
         return this[key] !== undefined ? this[key] : this[key] = computer.call(this);
     };
 }
 $b3ee39ae062919b7$var$utils.cachedProperty = $b3ee39ae062919b7$var$cachedProperty;
 function $b3ee39ae062919b7$var$parseBytes(bytes) {
-    return typeof bytes === 'string' ? $b3ee39ae062919b7$var$utils.toArray(bytes, 'hex') : bytes;
+    return typeof bytes === "string" ? $b3ee39ae062919b7$var$utils.toArray(bytes, "hex") : bytes;
 }
 $b3ee39ae062919b7$var$utils.parseBytes = $b3ee39ae062919b7$var$parseBytes;
 function $b3ee39ae062919b7$var$intFromLE(bytes) {
-    return new $jBtqe(bytes, 'hex', 'le');
+    return new $jBtqe(bytes, "hex", "le");
 }
 $b3ee39ae062919b7$var$utils.intFromLE = $b3ee39ae062919b7$var$intFromLE;
 
@@ -22066,9 +22062,10 @@ $b3ee39ae062919b7$var$utils.intFromLE = $b3ee39ae062919b7$var$intFromLE;
 parcelRequire.register("jBtqe", function(module, exports) {
 
 (function(module, exports) {
+    "use strict";
     // Utils
     function assert(val, msg) {
-        if (!val) throw new Error(msg || 'Assertion failed');
+        if (!val) throw new Error(msg || "Assertion failed");
     }
     // Could use `inherits` module, but don't want to move from single file
     // architecture yet.
@@ -22088,25 +22085,25 @@ parcelRequire.register("jBtqe", function(module, exports) {
         // Reduction context
         this.red = null;
         if (number !== null) {
-            if (base === 'le' || base === 'be') {
+            if (base === "le" || base === "be") {
                 endian = base;
                 base = 10;
             }
-            this._init(number || 0, base || 10, endian || 'be');
+            this._init(number || 0, base || 10, endian || "be");
         }
     }
-    if (typeof module === 'object') module.exports = BN;
+    if (typeof module === "object") module.exports = BN;
     else exports.BN = BN;
     BN.BN = BN;
     BN.wordSize = 26;
     var Buffer;
     try {
-        if (typeof window !== 'undefined' && typeof window.Buffer !== 'undefined') Buffer = window.Buffer;
+        if (typeof window !== "undefined" && typeof window.Buffer !== "undefined") Buffer = window.Buffer;
         else Buffer = (parcelRequire("c7mcJ")).Buffer;
     } catch (e) {}
     BN.isBN = function isBN(num) {
         if (num instanceof BN) return true;
-        return num !== null && typeof num === 'object' && num.constructor.wordSize === BN.wordSize && Array.isArray(num.words);
+        return num !== null && typeof num === "object" && num.constructor.wordSize === BN.wordSize && Array.isArray(num.words);
     };
     BN.max = function max(left, right) {
         if (left.cmp(right) > 0) return left;
@@ -22117,13 +22114,13 @@ parcelRequire.register("jBtqe", function(module, exports) {
         return right;
     };
     BN.prototype._init = function init(number, base, endian) {
-        if (typeof number === 'number') return this._initNumber(number, base, endian);
-        if (typeof number === 'object') return this._initArray(number, base, endian);
-        if (base === 'hex') base = 16;
+        if (typeof number === "number") return this._initNumber(number, base, endian);
+        if (typeof number === "object") return this._initArray(number, base, endian);
+        if (base === "hex") base = 16;
         assert(base === (base | 0) && base >= 2 && base <= 36);
-        number = number.toString().replace(/\s+/g, '');
+        number = number.toString().replace(/\s+/g, "");
         var start = 0;
-        if (number[0] === '-') {
+        if (number[0] === "-") {
             start++;
             this.negative = 1;
         }
@@ -22131,7 +22128,7 @@ parcelRequire.register("jBtqe", function(module, exports) {
             if (base === 16) this._parseHex(number, start, endian);
             else {
                 this._parseBase(number, base, start);
-                if (endian === 'le') this._initArray(this.toArray(), base, endian);
+                if (endian === "le") this._initArray(this.toArray(), base, endian);
             }
         }
     };
@@ -22160,13 +22157,13 @@ parcelRequire.register("jBtqe", function(module, exports) {
             ];
             this.length = 3;
         }
-        if (endian !== 'le') return;
+        if (endian !== "le") return;
         // Reverse the bytes
         this._initArray(this.toArray(), base, endian);
     };
     BN.prototype._initArray = function _initArray(number, base, endian) {
         // Perhaps a Uint8Array
-        assert(typeof number.length === 'number');
+        assert(typeof number.length === "number");
         if (number.length <= 0) {
             this.words = [
                 0
@@ -22179,7 +22176,7 @@ parcelRequire.register("jBtqe", function(module, exports) {
         for(var i = 0; i < this.length; i++)this.words[i] = 0;
         var j, w;
         var off = 0;
-        if (endian === 'be') for(i = number.length - 1, j = 0; i >= 0; i -= 3){
+        if (endian === "be") for(i = number.length - 1, j = 0; i >= 0; i -= 3){
             w = number[i] | number[i - 1] << 8 | number[i - 2] << 16;
             this.words[j] |= w << off & 0x3ffffff;
             this.words[j + 1] = w >>> 26 - off & 0x3ffffff;
@@ -22189,7 +22186,7 @@ parcelRequire.register("jBtqe", function(module, exports) {
                 j++;
             }
         }
-        else if (endian === 'le') for(i = 0, j = 0; i < number.length; i += 3){
+        else if (endian === "le") for(i = 0, j = 0; i < number.length; i += 3){
             w = number[i] | number[i + 1] << 8 | number[i + 2] << 16;
             this.words[j] |= w << off & 0x3ffffff;
             this.words[j + 1] = w >>> 26 - off & 0x3ffffff;
@@ -22222,7 +22219,7 @@ parcelRequire.register("jBtqe", function(module, exports) {
         var off = 0;
         var j = 0;
         var w;
-        if (endian === 'be') for(i = number.length - 1; i >= start; i -= 2){
+        if (endian === "be") for(i = number.length - 1; i >= start; i -= 2){
             w = parseHexByte(number, start, i) << off;
             this.words[j] |= w & 0x3ffffff;
             if (off >= 18) {
@@ -22315,7 +22312,7 @@ parcelRequire.register("jBtqe", function(module, exports) {
         return this;
     };
     BN.prototype.inspect = function inspect() {
-        return (this.red ? '<BN-R: ' : '<BN: ') + this.toString(16) + '>';
+        return (this.red ? "<BN-R: " : "<BN: ") + this.toString(16) + ">";
     };
     /*
 
@@ -22346,32 +22343,32 @@ parcelRequire.register("jBtqe", function(module, exports) {
   }
 
   */ var zeros = [
-        '',
-        '0',
-        '00',
-        '000',
-        '0000',
-        '00000',
-        '000000',
-        '0000000',
-        '00000000',
-        '000000000',
-        '0000000000',
-        '00000000000',
-        '000000000000',
-        '0000000000000',
-        '00000000000000',
-        '000000000000000',
-        '0000000000000000',
-        '00000000000000000',
-        '000000000000000000',
-        '0000000000000000000',
-        '00000000000000000000',
-        '000000000000000000000',
-        '0000000000000000000000',
-        '00000000000000000000000',
-        '000000000000000000000000',
-        '0000000000000000000000000'
+        "",
+        "0",
+        "00",
+        "000",
+        "0000",
+        "00000",
+        "000000",
+        "0000000",
+        "00000000",
+        "000000000",
+        "0000000000",
+        "00000000000",
+        "000000000000",
+        "0000000000000",
+        "00000000000000",
+        "000000000000000",
+        "0000000000000000",
+        "00000000000000000",
+        "000000000000000000",
+        "0000000000000000000",
+        "00000000000000000000",
+        "000000000000000000000",
+        "0000000000000000000000",
+        "00000000000000000000000",
+        "000000000000000000000000",
+        "0000000000000000000000000"
     ];
     var groupSizes = [
         0,
@@ -22455,8 +22452,8 @@ parcelRequire.register("jBtqe", function(module, exports) {
         base = base || 10;
         padding = padding | 0 || 1;
         var out;
-        if (base === 16 || base === 'hex') {
-            out = '';
+        if (base === 16 || base === "hex") {
+            out = "";
             var off = 0;
             var carry = 0;
             for(var i = 0; i < this.length; i++){
@@ -22472,8 +22469,8 @@ parcelRequire.register("jBtqe", function(module, exports) {
                 }
             }
             if (carry !== 0) out = carry.toString(16) + out;
-            while(out.length % padding !== 0)out = '0' + out;
-            if (this.negative !== 0) out = '-' + out;
+            while(out.length % padding !== 0)out = "0" + out;
+            if (this.negative !== 0) out = "-" + out;
             return out;
         }
         if (base === (base | 0) && base >= 2 && base <= 36) {
@@ -22481,7 +22478,7 @@ parcelRequire.register("jBtqe", function(module, exports) {
             var groupSize = groupSizes[base];
             // var groupBase = Math.pow(base, groupSize);
             var groupBase = groupBases[base];
-            out = '';
+            out = "";
             var c = this.clone();
             c.negative = 0;
             while(!c.isZero()){
@@ -22490,26 +22487,26 @@ parcelRequire.register("jBtqe", function(module, exports) {
                 if (!c.isZero()) out = zeros[groupSize - r.length] + r + out;
                 else out = r + out;
             }
-            if (this.isZero()) out = '0' + out;
-            while(out.length % padding !== 0)out = '0' + out;
-            if (this.negative !== 0) out = '-' + out;
+            if (this.isZero()) out = "0" + out;
+            while(out.length % padding !== 0)out = "0" + out;
+            if (this.negative !== 0) out = "-" + out;
             return out;
         }
-        assert(false, 'Base should be between 2 and 36');
+        assert(false, "Base should be between 2 and 36");
     };
     BN.prototype.toNumber = function toNumber() {
         var ret = this.words[0];
         if (this.length === 2) ret += this.words[1] * 0x4000000;
         else if (this.length === 3 && this.words[2] === 0x01) // NOTE: at this stage it is known that the top bit is set
         ret += 0x10000000000000 + this.words[1] * 0x4000000;
-        else if (this.length > 2) assert(false, 'Number can only safely store up to 53 bits');
+        else if (this.length > 2) assert(false, "Number can only safely store up to 53 bits");
         return this.negative !== 0 ? -ret : ret;
     };
     BN.prototype.toJSON = function toJSON() {
         return this.toString(16);
     };
     BN.prototype.toBuffer = function toBuffer(endian, length) {
-        assert(typeof Buffer !== 'undefined');
+        assert(typeof Buffer !== "undefined");
         return this.toArrayLike(Buffer, endian, length);
     };
     BN.prototype.toArray = function toArray(endian, length) {
@@ -22518,10 +22515,10 @@ parcelRequire.register("jBtqe", function(module, exports) {
     BN.prototype.toArrayLike = function toArrayLike(ArrayType, endian, length) {
         var byteLength = this.byteLength();
         var reqLength = length || Math.max(1, byteLength);
-        assert(byteLength <= reqLength, 'byte array longer than desired length');
-        assert(reqLength > 0, 'Requested array length <= 0');
+        assert(byteLength <= reqLength, "byte array longer than desired length");
+        assert(reqLength > 0, "Requested array length <= 0");
         this.strip();
-        var littleEndian = endian === 'le';
+        var littleEndian = endian === "le";
         var res = new ArrayType(reqLength);
         var b, i;
         var q = this.clone();
@@ -22713,7 +22710,7 @@ parcelRequire.register("jBtqe", function(module, exports) {
     };
     // Not ``this`` with ``width`` bitwidth
     BN.prototype.inotn = function inotn(width) {
-        assert(typeof width === 'number' && width >= 0);
+        assert(typeof width === "number" && width >= 0);
         var bytesNeeded = Math.ceil(width / 26) | 0;
         var bitsLeft = width % 26;
         // Extend the buffer with leading zeroes
@@ -22731,7 +22728,7 @@ parcelRequire.register("jBtqe", function(module, exports) {
     };
     // Set `bit` of `this`
     BN.prototype.setn = function setn(bit, val) {
-        assert(typeof bit === 'number' && bit >= 0);
+        assert(typeof bit === "number" && bit >= 0);
         var off = bit / 26 | 0;
         var wbit = bit % 26;
         this._expand(off + 1);
@@ -23643,7 +23640,7 @@ parcelRequire.register("jBtqe", function(module, exports) {
         return this.clone().mulTo(num, this);
     };
     BN.prototype.imuln = function imuln(num) {
-        assert(typeof num === 'number');
+        assert(typeof num === "number");
         assert(num < 0x4000000);
         // Carry
         var carry = 0;
@@ -23690,7 +23687,7 @@ parcelRequire.register("jBtqe", function(module, exports) {
     };
     // Shift-left in-place
     BN.prototype.iushln = function iushln(bits) {
-        assert(typeof bits === 'number' && bits >= 0);
+        assert(typeof bits === "number" && bits >= 0);
         var r = bits % 26;
         var s = (bits - r) / 26;
         var carryMask = 0x3ffffff >>> 26 - r << 26 - r;
@@ -23724,7 +23721,7 @@ parcelRequire.register("jBtqe", function(module, exports) {
     // NOTE: `hint` is a lowest bit before trailing zeroes
     // NOTE: if `extended` is present - it will be filled with destroyed bits
     BN.prototype.iushrn = function iushrn(bits, hint, extended) {
-        assert(typeof bits === 'number' && bits >= 0);
+        assert(typeof bits === "number" && bits >= 0);
         var h;
         if (hint) h = (hint - hint % 26) / 26;
         else h = 0;
@@ -23782,7 +23779,7 @@ parcelRequire.register("jBtqe", function(module, exports) {
     };
     // Test if n bit is set
     BN.prototype.testn = function testn(bit) {
-        assert(typeof bit === 'number' && bit >= 0);
+        assert(typeof bit === "number" && bit >= 0);
         var r = bit % 26;
         var s = (bit - r) / 26;
         var q = 1 << r;
@@ -23794,10 +23791,10 @@ parcelRequire.register("jBtqe", function(module, exports) {
     };
     // Return only lowers bits of number (in-place)
     BN.prototype.imaskn = function imaskn(bits) {
-        assert(typeof bits === 'number' && bits >= 0);
+        assert(typeof bits === "number" && bits >= 0);
         var r = bits % 26;
         var s = (bits - r) / 26;
-        assert(this.negative === 0, 'imaskn works only with positive numbers');
+        assert(this.negative === 0, "imaskn works only with positive numbers");
         if (this.length <= s) return this;
         if (r !== 0) s++;
         this.length = Math.min(s, this.length);
@@ -23813,7 +23810,7 @@ parcelRequire.register("jBtqe", function(module, exports) {
     };
     // Add plain number `num` to `this`
     BN.prototype.iaddn = function iaddn(num) {
-        assert(typeof num === 'number');
+        assert(typeof num === "number");
         assert(num < 0x4000000);
         if (num < 0) return this.isubn(-num);
         // Possible sign change
@@ -23844,7 +23841,7 @@ parcelRequire.register("jBtqe", function(module, exports) {
     };
     // Subtract plain number `num` from `this`
     BN.prototype.isubn = function isubn(num) {
-        assert(typeof num === 'number');
+        assert(typeof num === "number");
         assert(num < 0x4000000);
         if (num < 0) return this.iaddn(-num);
         if (this.negative !== 0) {
@@ -23923,7 +23920,7 @@ parcelRequire.register("jBtqe", function(module, exports) {
         // Initialize quotient
         var m = a.length - b.length;
         var q;
-        if (mode !== 'mod') {
+        if (mode !== "mod") {
             q = new BN(null);
             q.length = m + 1;
             q.words = new Array(q.length);
@@ -23951,7 +23948,7 @@ parcelRequire.register("jBtqe", function(module, exports) {
         if (q) q.strip();
         a.strip();
         // Denormalize
-        if (mode !== 'div' && shift !== 0) a.iushrn(shift);
+        if (mode !== "div" && shift !== 0) a.iushrn(shift);
         return {
             div: q || null,
             mod: a
@@ -23970,8 +23967,8 @@ parcelRequire.register("jBtqe", function(module, exports) {
         var div, mod, res;
         if (this.negative !== 0 && num.negative === 0) {
             res = this.neg().divmod(num, mode);
-            if (mode !== 'mod') div = res.div.neg();
-            if (mode !== 'div') {
+            if (mode !== "mod") div = res.div.neg();
+            if (mode !== "div") {
                 mod = res.mod.neg();
                 if (positive && mod.negative !== 0) mod.iadd(num);
             }
@@ -23982,7 +23979,7 @@ parcelRequire.register("jBtqe", function(module, exports) {
         }
         if (this.negative === 0 && num.negative !== 0) {
             res = this.divmod(num.neg(), mode);
-            if (mode !== 'mod') div = res.div.neg();
+            if (mode !== "mod") div = res.div.neg();
             return {
                 div: div,
                 mod: res.mod
@@ -23990,7 +23987,7 @@ parcelRequire.register("jBtqe", function(module, exports) {
         }
         if ((this.negative & num.negative) !== 0) {
             res = this.neg().divmod(num.neg(), mode);
-            if (mode !== 'div') {
+            if (mode !== "div") {
                 mod = res.mod.neg();
                 if (positive && mod.negative !== 0) mod.isub(num);
             }
@@ -24007,11 +24004,11 @@ parcelRequire.register("jBtqe", function(module, exports) {
         };
         // Very short reduction
         if (num.length === 1) {
-            if (mode === 'div') return {
+            if (mode === "div") return {
                 div: this.divn(num.words[0]),
                 mod: null
             };
-            if (mode === 'mod') return {
+            if (mode === "mod") return {
                 div: null,
                 mod: new BN(this.modn(num.words[0]))
             };
@@ -24024,14 +24021,14 @@ parcelRequire.register("jBtqe", function(module, exports) {
     };
     // Find `this` / `num`
     BN.prototype.div = function div(num) {
-        return this.divmod(num, 'div', false).div;
+        return this.divmod(num, "div", false).div;
     };
     // Find `this` % `num`
     BN.prototype.mod = function mod(num) {
-        return this.divmod(num, 'mod', false).mod;
+        return this.divmod(num, "mod", false).mod;
     };
     BN.prototype.umod = function umod(num) {
-        return this.divmod(num, 'mod', true).mod;
+        return this.divmod(num, "mod", true).mod;
     };
     // Find Round(`this` / `num`)
     BN.prototype.divRound = function divRound(num) {
@@ -24197,7 +24194,7 @@ parcelRequire.register("jBtqe", function(module, exports) {
                 b = t;
             } else if (r === 0 || b.cmpn(1) === 0) break;
             a.isub(b);
-        }while (true)
+        }while (true);
         return b.iushln(shift);
     };
     // Invert number in the field F(num)
@@ -24216,7 +24213,7 @@ parcelRequire.register("jBtqe", function(module, exports) {
     };
     // Increment at the bit position in-line
     BN.prototype.bincn = function bincn(bit) {
-        assert(typeof bit === 'number');
+        assert(typeof bit === "number");
         var r = bit % 26;
         var s = (bit - r) / 26;
         var q = 1 << r;
@@ -24253,7 +24250,7 @@ parcelRequire.register("jBtqe", function(module, exports) {
         if (this.length > 1) res = 1;
         else {
             if (negative) num = -num;
-            assert(num <= 0x3ffffff, 'Number is too big');
+            assert(num <= 0x3ffffff, "Number is too big");
             var w = this.words[0] | 0;
             res = w === num ? 0 : w < num ? -1 : 1;
         }
@@ -24325,12 +24322,12 @@ parcelRequire.register("jBtqe", function(module, exports) {
         return new Red(num);
     };
     BN.prototype.toRed = function toRed(ctx) {
-        assert(!this.red, 'Already a number in reduction context');
-        assert(this.negative === 0, 'red works only with positives');
+        assert(!this.red, "Already a number in reduction context");
+        assert(this.negative === 0, "red works only with positives");
         return ctx.convertTo(this)._forceRed(ctx);
     };
     BN.prototype.fromRed = function fromRed() {
-        assert(this.red, 'fromRed works only with numbers in reduction context');
+        assert(this.red, "fromRed works only with numbers in reduction context");
         return this.red.convertFrom(this);
     };
     BN.prototype._forceRed = function _forceRed(ctx) {
@@ -24338,68 +24335,68 @@ parcelRequire.register("jBtqe", function(module, exports) {
         return this;
     };
     BN.prototype.forceRed = function forceRed(ctx) {
-        assert(!this.red, 'Already a number in reduction context');
+        assert(!this.red, "Already a number in reduction context");
         return this._forceRed(ctx);
     };
     BN.prototype.redAdd = function redAdd(num) {
-        assert(this.red, 'redAdd works only with red numbers');
+        assert(this.red, "redAdd works only with red numbers");
         return this.red.add(this, num);
     };
     BN.prototype.redIAdd = function redIAdd(num) {
-        assert(this.red, 'redIAdd works only with red numbers');
+        assert(this.red, "redIAdd works only with red numbers");
         return this.red.iadd(this, num);
     };
     BN.prototype.redSub = function redSub(num) {
-        assert(this.red, 'redSub works only with red numbers');
+        assert(this.red, "redSub works only with red numbers");
         return this.red.sub(this, num);
     };
     BN.prototype.redISub = function redISub(num) {
-        assert(this.red, 'redISub works only with red numbers');
+        assert(this.red, "redISub works only with red numbers");
         return this.red.isub(this, num);
     };
     BN.prototype.redShl = function redShl(num) {
-        assert(this.red, 'redShl works only with red numbers');
+        assert(this.red, "redShl works only with red numbers");
         return this.red.shl(this, num);
     };
     BN.prototype.redMul = function redMul(num) {
-        assert(this.red, 'redMul works only with red numbers');
+        assert(this.red, "redMul works only with red numbers");
         this.red._verify2(this, num);
         return this.red.mul(this, num);
     };
     BN.prototype.redIMul = function redIMul(num) {
-        assert(this.red, 'redMul works only with red numbers');
+        assert(this.red, "redMul works only with red numbers");
         this.red._verify2(this, num);
         return this.red.imul(this, num);
     };
     BN.prototype.redSqr = function redSqr() {
-        assert(this.red, 'redSqr works only with red numbers');
+        assert(this.red, "redSqr works only with red numbers");
         this.red._verify1(this);
         return this.red.sqr(this);
     };
     BN.prototype.redISqr = function redISqr() {
-        assert(this.red, 'redISqr works only with red numbers');
+        assert(this.red, "redISqr works only with red numbers");
         this.red._verify1(this);
         return this.red.isqr(this);
     };
     // Square root over p
     BN.prototype.redSqrt = function redSqrt() {
-        assert(this.red, 'redSqrt works only with red numbers');
+        assert(this.red, "redSqrt works only with red numbers");
         this.red._verify1(this);
         return this.red.sqrt(this);
     };
     BN.prototype.redInvm = function redInvm() {
-        assert(this.red, 'redInvm works only with red numbers');
+        assert(this.red, "redInvm works only with red numbers");
         this.red._verify1(this);
         return this.red.invm(this);
     };
     // Return negative clone of `this` % `red modulo`
     BN.prototype.redNeg = function redNeg() {
-        assert(this.red, 'redNeg works only with red numbers');
+        assert(this.red, "redNeg works only with red numbers");
         this.red._verify1(this);
         return this.red.neg(this);
     };
     BN.prototype.redPow = function redPow(num) {
-        assert(this.red && !num.red, 'redPow(normalNum)');
+        assert(this.red && !num.red, "redPow(normalNum)");
         this.red._verify1(this);
         return this.red.pow(this, num);
     };
@@ -24434,7 +24431,7 @@ parcelRequire.register("jBtqe", function(module, exports) {
             r = this.imulK(r);
             r = r.iadd(this.tmp);
             rlen = r.bitLength();
-        }while (rlen > this.n)
+        }while (rlen > this.n);
         var cmp = rlen < this.n ? -1 : r.ucmp(this.p);
         if (cmp === 0) {
             r.words[0] = 0;
@@ -24453,7 +24450,7 @@ parcelRequire.register("jBtqe", function(module, exports) {
         return num.imul(this.k);
     };
     function K256() {
-        MPrime.call(this, 'k256', 'ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff fffffffe fffffc2f');
+        MPrime.call(this, "k256", "ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff fffffffe fffffc2f");
     }
     inherits(K256, MPrime);
     K256.prototype.split = function split(input, output) {
@@ -24501,16 +24498,16 @@ parcelRequire.register("jBtqe", function(module, exports) {
         return num;
     };
     function P224() {
-        MPrime.call(this, 'p224', 'ffffffff ffffffff ffffffff ffffffff 00000000 00000000 00000001');
+        MPrime.call(this, "p224", "ffffffff ffffffff ffffffff ffffffff 00000000 00000000 00000001");
     }
     inherits(P224, MPrime);
     function P192() {
-        MPrime.call(this, 'p192', 'ffffffff ffffffff ffffffff fffffffe ffffffff ffffffff');
+        MPrime.call(this, "p192", "ffffffff ffffffff ffffffff fffffffe ffffffff ffffffff");
     }
     inherits(P192, MPrime);
     function P25519() {
         // 2 ^ 255 - 19
-        MPrime.call(this, '25519', '7fffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffed');
+        MPrime.call(this, "25519", "7fffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffed");
     }
     inherits(P25519, MPrime);
     P25519.prototype.imulK = function imulK(num) {
@@ -24531,11 +24528,11 @@ parcelRequire.register("jBtqe", function(module, exports) {
         // Cached version of prime
         if (primes[name]) return primes[name];
         var prime;
-        if (name === 'k256') prime = new K256();
-        else if (name === 'p224') prime = new P224();
-        else if (name === 'p192') prime = new P192();
-        else if (name === 'p25519') prime = new P25519();
-        else throw new Error('Unknown prime ' + name);
+        if (name === "k256") prime = new K256();
+        else if (name === "p224") prime = new P224();
+        else if (name === "p192") prime = new P192();
+        else if (name === "p25519") prime = new P25519();
+        else throw new Error("Unknown prime " + name);
         primes[name] = prime;
         return prime;
     };
@@ -24543,23 +24540,23 @@ parcelRequire.register("jBtqe", function(module, exports) {
     // Base reduction engine
     //
     function Red(m) {
-        if (typeof m === 'string') {
+        if (typeof m === "string") {
             var prime = BN._prime(m);
             this.m = prime.p;
             this.prime = prime;
         } else {
-            assert(m.gtn(1), 'modulus must be greater than 1');
+            assert(m.gtn(1), "modulus must be greater than 1");
             this.m = m;
             this.prime = null;
         }
     }
     Red.prototype._verify1 = function _verify1(a) {
-        assert(a.negative === 0, 'red works only with positives');
-        assert(a.red, 'red works only with red numbers');
+        assert(a.negative === 0, "red works only with positives");
+        assert(a.red, "red works only with red numbers");
     };
     Red.prototype._verify2 = function _verify2(a, b) {
-        assert((a.negative | b.negative) === 0, 'red works only with positives');
-        assert(a.red && a.red === b.red, 'red works only with red numbers');
+        assert((a.negative | b.negative) === 0, "red works only with positives");
+        assert(a.red && a.red === b.red, "red works only with red numbers");
     };
     Red.prototype.imod = function imod(a) {
         if (this.prime) return this.prime.ireduce(a)._forceRed(this);
@@ -24764,19 +24761,19 @@ parcelRequire.register("jBtqe", function(module, exports) {
 });
 
 parcelRequire.register("3xppW", function(module, exports) {
-'use strict';
+"use strict";
 var $29382b869e14dd93$var$utils = module.exports;
 function $29382b869e14dd93$var$toArray(msg, enc) {
     if (Array.isArray(msg)) return msg.slice();
     if (!msg) return [];
     var res = [];
-    if (typeof msg !== 'string') {
+    if (typeof msg !== "string") {
         for(var i = 0; i < msg.length; i++)res[i] = msg[i] | 0;
         return res;
     }
-    if (enc === 'hex') {
-        msg = msg.replace(/[^a-z0-9]+/ig, '');
-        if (msg.length % 2 !== 0) msg = '0' + msg;
+    if (enc === "hex") {
+        msg = msg.replace(/[^a-z0-9]+/ig, "");
+        if (msg.length % 2 !== 0) msg = "0" + msg;
         for(var i = 0; i < msg.length; i += 2)res.push(parseInt(msg[i] + msg[i + 1], 16));
     } else for(var i = 0; i < msg.length; i++){
         var c = msg.charCodeAt(i);
@@ -24789,18 +24786,18 @@ function $29382b869e14dd93$var$toArray(msg, enc) {
 }
 $29382b869e14dd93$var$utils.toArray = $29382b869e14dd93$var$toArray;
 function $29382b869e14dd93$var$zero2(word) {
-    if (word.length === 1) return '0' + word;
+    if (word.length === 1) return "0" + word;
     else return word;
 }
 $29382b869e14dd93$var$utils.zero2 = $29382b869e14dd93$var$zero2;
 function $29382b869e14dd93$var$toHex(msg) {
-    var res = '';
+    var res = "";
     for(var i = 0; i < msg.length; i++)res += $29382b869e14dd93$var$zero2(msg[i].toString(16));
     return res;
 }
 $29382b869e14dd93$var$utils.toHex = $29382b869e14dd93$var$toHex;
 $29382b869e14dd93$var$utils.encode = function encode(arr, enc) {
-    if (enc === 'hex') return $29382b869e14dd93$var$toHex(arr);
+    if (enc === "hex") return $29382b869e14dd93$var$toHex(arr);
     else return arr;
 };
 
@@ -24808,7 +24805,7 @@ $29382b869e14dd93$var$utils.encode = function encode(arr, enc) {
 
 
 parcelRequire.register("eb0RN", function(module, exports) {
-'use strict';
+"use strict";
 var $02a9d9de804f9b3e$var$curve = module.exports;
 
 $02a9d9de804f9b3e$var$curve.base = (parcelRequire("6EQXx"));
@@ -24821,7 +24818,7 @@ $02a9d9de804f9b3e$var$curve.edwards = (parcelRequire("43aj5"));
 
 });
 parcelRequire.register("6EQXx", function(module, exports) {
-'use strict';
+"use strict";
 
 var $jBtqe = parcelRequire("jBtqe");
 
@@ -24857,10 +24854,10 @@ function $4d8f8f1c493d6c5b$var$BaseCurve(type, conf) {
 }
 module.exports = $4d8f8f1c493d6c5b$var$BaseCurve;
 $4d8f8f1c493d6c5b$var$BaseCurve.prototype.point = function point() {
-    throw new Error('Not implemented');
+    throw new Error("Not implemented");
 };
 $4d8f8f1c493d6c5b$var$BaseCurve.prototype.validate = function validate() {
-    throw new Error('Not implemented');
+    throw new Error("Not implemented");
 };
 $4d8f8f1c493d6c5b$var$BaseCurve.prototype._fixedNafMul = function _fixedNafMul(p, k) {
     $4d8f8f1c493d6c5b$var$assert(p.precomputed);
@@ -24907,7 +24904,7 @@ $4d8f8f1c493d6c5b$var$BaseCurve.prototype._wnafMul = function _wnafMul(p, k) {
         if (i < 0) break;
         var z = naf[i];
         $4d8f8f1c493d6c5b$var$assert(z !== 0);
-        if (p.type === 'affine') {
+        if (p.type === "affine") {
             // J +- P
             if (z > 0) acc = acc.mixedAdd(wnd[z - 1 >> 1]);
             else acc = acc.mixedAdd(wnd[-z - 1 >> 1].neg());
@@ -24915,7 +24912,7 @@ $4d8f8f1c493d6c5b$var$BaseCurve.prototype._wnafMul = function _wnafMul(p, k) {
         if (z > 0) acc = acc.add(wnd[z - 1 >> 1]);
         else acc = acc.add(wnd[-z - 1 >> 1].neg());
     }
-    return p.type === 'affine' ? acc.toP() : acc;
+    return p.type === "affine" ? acc.toP() : acc;
 };
 $4d8f8f1c493d6c5b$var$BaseCurve.prototype._wnafMulAdd = function _wnafMulAdd(defW, points, coeffs, len, jacobianResult) {
     var wndWidth = this._wnafT1;
@@ -25002,10 +24999,11 @@ $4d8f8f1c493d6c5b$var$BaseCurve.prototype._wnafMulAdd = function _wnafMulAdd(def
         if (i < 0) break;
         for(j = 0; j < len; j++){
             var z = tmp[j];
+            p;
             if (z === 0) continue;
             else if (z > 0) p = wnd[j][z - 1 >> 1];
             else if (z < 0) p = wnd[j][-z - 1 >> 1].neg();
-            if (p.type === 'affine') acc = acc.mixedAdd(p);
+            if (p.type === "affine") acc = acc.mixedAdd(p);
             else acc = acc.add(p);
         }
     }
@@ -25021,7 +25019,7 @@ function $4d8f8f1c493d6c5b$var$BasePoint(curve, type) {
 }
 $4d8f8f1c493d6c5b$var$BaseCurve.BasePoint = $4d8f8f1c493d6c5b$var$BasePoint;
 $4d8f8f1c493d6c5b$var$BasePoint.prototype.eq = function eq() {
-    throw new Error('Not implemented');
+    throw new Error("Not implemented");
 };
 $4d8f8f1c493d6c5b$var$BasePoint.prototype.validate = function validate() {
     return this.curve.validate(this);
@@ -25036,20 +25034,20 @@ $4d8f8f1c493d6c5b$var$BaseCurve.prototype.decodePoint = function decodePoint(byt
         var res = this.point(bytes.slice(1, 1 + len), bytes.slice(1 + len, 1 + 2 * len));
         return res;
     } else if ((bytes[0] === 0x02 || bytes[0] === 0x03) && bytes.length - 1 === len) return this.pointFromX(bytes.slice(1, 1 + len), bytes[0] === 0x03);
-    throw new Error('Unknown point format');
+    throw new Error("Unknown point format");
 };
 $4d8f8f1c493d6c5b$var$BasePoint.prototype.encodeCompressed = function encodeCompressed(enc) {
     return this.encode(enc, true);
 };
 $4d8f8f1c493d6c5b$var$BasePoint.prototype._encode = function _encode(compact) {
     var len = this.curve.p.byteLength();
-    var x = this.getX().toArray('be', len);
+    var x = this.getX().toArray("be", len);
     if (compact) return [
         this.getY().isEven() ? 0x02 : 0x03
     ].concat(x);
     return [
         0x04
-    ].concat(x, this.getY().toArray('be', len));
+    ].concat(x, this.getY().toArray("be", len));
 };
 $4d8f8f1c493d6c5b$var$BasePoint.prototype.encode = function encode(enc, compact) {
     return $frLve.encode(this._encode(compact), enc);
@@ -25113,7 +25111,7 @@ $4d8f8f1c493d6c5b$var$BasePoint.prototype.dblp = function dblp(k) {
 });
 
 parcelRequire.register("h3spS", function(module, exports) {
-'use strict';
+"use strict";
 
 var $frLve = parcelRequire("frLve");
 
@@ -25124,7 +25122,7 @@ var $baEok = parcelRequire("baEok");
 var $6EQXx = parcelRequire("6EQXx");
 var $c6a8c25dd87d6a96$var$assert = $frLve.assert;
 function $c6a8c25dd87d6a96$var$ShortCurve(conf) {
-    $6EQXx.call(this, 'short', conf);
+    $6EQXx.call(this, "short", conf);
     this.a = new $jBtqe(conf.a, 16).toRed(this.red);
     this.b = new $jBtqe(conf.b, 16).toRed(this.red);
     this.tinv = this.two.redInvm();
@@ -25284,7 +25282,7 @@ $c6a8c25dd87d6a96$var$ShortCurve.prototype.pointFromX = function pointFromX(x, o
     if (!x.red) x = x.toRed(this.red);
     var y2 = x.redSqr().redMul(x).redIAdd(x.redMul(this.a)).redIAdd(this.b);
     var y = y2.redSqrt();
-    if (y.redSqr().redSub(y2).cmp(this.zero) !== 0) throw new Error('invalid point');
+    if (y.redSqr().redSub(y2).cmp(this.zero) !== 0) throw new Error("invalid point");
     // XXX Is there any way to tell if the number is odd without converting it
     // to non-red form?
     var isOdd = y.fromRed().isOdd();
@@ -25328,7 +25326,7 @@ $c6a8c25dd87d6a96$var$ShortCurve.prototype._endoWnafMulAdd = function _endoWnafM
     return res;
 };
 function $c6a8c25dd87d6a96$var$Point(curve, x, y, isRed) {
-    $6EQXx.BasePoint.call(this, curve, 'affine');
+    $6EQXx.BasePoint.call(this, curve, "affine");
     if (x === null && y === null) {
         this.x = null;
         this.y = null;
@@ -25399,7 +25397,7 @@ $c6a8c25dd87d6a96$var$Point.prototype.toJSON = function toJSON() {
     ];
 };
 $c6a8c25dd87d6a96$var$Point.fromJSON = function fromJSON(curve, obj1, red) {
-    if (typeof obj1 === 'string') obj1 = JSON.parse(obj1);
+    if (typeof obj1 === "string") obj1 = JSON.parse(obj1);
     var res = curve.point(obj1[0], obj1[1], red);
     if (!obj1[2]) return res;
     function obj2point(obj) {
@@ -25424,8 +25422,8 @@ $c6a8c25dd87d6a96$var$Point.fromJSON = function fromJSON(curve, obj1, red) {
     return res;
 };
 $c6a8c25dd87d6a96$var$Point.prototype.inspect = function inspect() {
-    if (this.isInfinity()) return '<EC Point Infinity>';
-    return '<EC Point x: ' + this.x.fromRed().toString(16, 2) + ' y: ' + this.y.fromRed().toString(16, 2) + '>';
+    if (this.isInfinity()) return "<EC Point Infinity>";
+    return "<EC Point x: " + this.x.fromRed().toString(16, 2) + " y: " + this.y.fromRed().toString(16, 2) + ">";
 };
 $c6a8c25dd87d6a96$var$Point.prototype.isInfinity = function isInfinity() {
     return this.inf;
@@ -25531,7 +25529,7 @@ $c6a8c25dd87d6a96$var$Point.prototype.toJ = function toJ() {
     return res;
 };
 function $c6a8c25dd87d6a96$var$JPoint(curve, x, y, z) {
-    $6EQXx.BasePoint.call(this, curve, 'jacobian');
+    $6EQXx.BasePoint.call(this, curve, "jacobian");
     if (x === null && y === null && z === null) {
         this.x = this.curve.one;
         this.y = this.curve.one;
@@ -25852,7 +25850,7 @@ $c6a8c25dd87d6a96$var$JPoint.prototype.mul = function mul(k, kbase) {
     return this.curve._wnafMul(this, k);
 };
 $c6a8c25dd87d6a96$var$JPoint.prototype.eq = function eq(p) {
-    if (p.type === 'affine') return this.eq(p.toJ());
+    if (p.type === "affine") return this.eq(p.toJ());
     if (this === p) return true;
     // x1 * z2^2 == x2 * z1^2
     var z2 = this.z.redSqr();
@@ -25877,8 +25875,8 @@ $c6a8c25dd87d6a96$var$JPoint.prototype.eqXToP = function eqXToP(x) {
     }
 };
 $c6a8c25dd87d6a96$var$JPoint.prototype.inspect = function inspect() {
-    if (this.isInfinity()) return '<EC JPoint Infinity>';
-    return '<EC JPoint x: ' + this.x.toString(16, 2) + ' y: ' + this.y.toString(16, 2) + ' z: ' + this.z.toString(16, 2) + '>';
+    if (this.isInfinity()) return "<EC JPoint Infinity>";
+    return "<EC JPoint x: " + this.x.toString(16, 2) + " y: " + this.y.toString(16, 2) + " z: " + this.z.toString(16, 2) + ">";
 };
 $c6a8c25dd87d6a96$var$JPoint.prototype.isInfinity = function isInfinity() {
     // XXX This code assumes that zero is always zero in red
@@ -25888,7 +25886,7 @@ $c6a8c25dd87d6a96$var$JPoint.prototype.isInfinity = function isInfinity() {
 });
 
 parcelRequire.register("iysLf", function(module, exports) {
-'use strict';
+"use strict";
 
 var $jBtqe = parcelRequire("jBtqe");
 
@@ -25898,7 +25896,7 @@ var $6EQXx = parcelRequire("6EQXx");
 
 var $frLve = parcelRequire("frLve");
 function $d821b657e61f3c9b$var$MontCurve(conf) {
-    $6EQXx.call(this, 'mont', conf);
+    $6EQXx.call(this, "mont", conf);
     this.a = new $jBtqe(conf.a, 16).toRed(this.red);
     this.b = new $jBtqe(conf.b, 16).toRed(this.red);
     this.i4 = new $jBtqe(4).toRed(this.red).redInvm();
@@ -25915,7 +25913,7 @@ $d821b657e61f3c9b$var$MontCurve.prototype.validate = function validate(point) {
     return y.redSqr().cmp(rhs) === 0;
 };
 function $d821b657e61f3c9b$var$Point(curve, x, z) {
-    $6EQXx.BasePoint.call(this, curve, 'projective');
+    $6EQXx.BasePoint.call(this, curve, "projective");
     if (x === null && z === null) {
         this.x = this.curve.one;
         this.z = this.curve.zero;
@@ -25940,14 +25938,14 @@ $d821b657e61f3c9b$var$Point.prototype.precompute = function precompute() {
 // No-op
 };
 $d821b657e61f3c9b$var$Point.prototype._encode = function _encode() {
-    return this.getX().toArray('be', this.curve.p.byteLength());
+    return this.getX().toArray("be", this.curve.p.byteLength());
 };
 $d821b657e61f3c9b$var$Point.fromJSON = function fromJSON(curve, obj) {
     return new $d821b657e61f3c9b$var$Point(curve, obj[0], obj[1] || curve.one);
 };
 $d821b657e61f3c9b$var$Point.prototype.inspect = function inspect() {
-    if (this.isInfinity()) return '<EC Point Infinity>';
-    return '<EC Point x: ' + this.x.fromRed().toString(16, 2) + ' z: ' + this.z.fromRed().toString(16, 2) + '>';
+    if (this.isInfinity()) return "<EC Point Infinity>";
+    return "<EC Point x: " + this.x.fromRed().toString(16, 2) + " z: " + this.z.fromRed().toString(16, 2) + ">";
 };
 $d821b657e61f3c9b$var$Point.prototype.isInfinity = function isInfinity() {
     // XXX This code assumes that zero is always zero in red
@@ -25973,7 +25971,7 @@ $d821b657e61f3c9b$var$Point.prototype.dbl = function dbl() {
     return this.curve.point(nx, nz);
 };
 $d821b657e61f3c9b$var$Point.prototype.add = function add() {
-    throw new Error('Not supported on Montgomery curve');
+    throw new Error("Not supported on Montgomery curve");
 };
 $d821b657e61f3c9b$var$Point.prototype.diffAdd = function diffAdd(p, diff) {
     // http://hyperelliptic.org/EFD/g1p/auto-montgom-xz.html#diffadd-dadd-1987-m-3
@@ -26016,10 +26014,10 @@ $d821b657e61f3c9b$var$Point.prototype.mul = function mul(k) {
     return b;
 };
 $d821b657e61f3c9b$var$Point.prototype.mulAdd = function mulAdd() {
-    throw new Error('Not supported on Montgomery curve');
+    throw new Error("Not supported on Montgomery curve");
 };
 $d821b657e61f3c9b$var$Point.prototype.jumlAdd = function jumlAdd() {
-    throw new Error('Not supported on Montgomery curve');
+    throw new Error("Not supported on Montgomery curve");
 };
 $d821b657e61f3c9b$var$Point.prototype.eq = function eq(other) {
     return this.getX().cmp(other.getX()) === 0;
@@ -26038,7 +26036,7 @@ $d821b657e61f3c9b$var$Point.prototype.getX = function getX() {
 });
 
 parcelRequire.register("43aj5", function(module, exports) {
-'use strict';
+"use strict";
 
 var $frLve = parcelRequire("frLve");
 
@@ -26053,7 +26051,7 @@ function $2f2f6ff03f151bef$var$EdwardsCurve(conf) {
     this.twisted = (conf.a | 0) !== 1;
     this.mOneA = this.twisted && (conf.a | 0) === -1;
     this.extended = this.mOneA;
-    $6EQXx.call(this, 'edwards', conf);
+    $6EQXx.call(this, "edwards", conf);
     this.a = new $jBtqe(conf.a, 16).umod(this.red.m);
     this.a = this.a.toRed(this.red);
     this.c = new $jBtqe(conf.c, 16).toRed(this.red);
@@ -26085,7 +26083,7 @@ $2f2f6ff03f151bef$var$EdwardsCurve.prototype.pointFromX = function pointFromX(x,
     var lhs = this.one.redSub(this.c2.redMul(this.d).redMul(x2));
     var y2 = rhs.redMul(lhs.redInvm());
     var y = y2.redSqrt();
-    if (y.redSqr().redSub(y2).cmp(this.zero) !== 0) throw new Error('invalid point');
+    if (y.redSqr().redSub(y2).cmp(this.zero) !== 0) throw new Error("invalid point");
     var isOdd = y.fromRed().isOdd();
     if (odd && !isOdd || !odd && isOdd) y = y.redNeg();
     return this.point(x, y);
@@ -26099,11 +26097,11 @@ $2f2f6ff03f151bef$var$EdwardsCurve.prototype.pointFromY = function pointFromY(y,
     var rhs = y2.redMul(this.d).redMul(this.c2).redSub(this.a);
     var x2 = lhs.redMul(rhs.redInvm());
     if (x2.cmp(this.zero) === 0) {
-        if (odd) throw new Error('invalid point');
+        if (odd) throw new Error("invalid point");
         else return this.point(this.zero, y);
     }
     var x = x2.redSqrt();
-    if (x.redSqr().redSub(x2).cmp(this.zero) !== 0) throw new Error('invalid point');
+    if (x.redSqr().redSub(x2).cmp(this.zero) !== 0) throw new Error("invalid point");
     if (x.fromRed().isOdd() !== odd) x = x.redNeg();
     return this.point(x, y);
 };
@@ -26118,7 +26116,7 @@ $2f2f6ff03f151bef$var$EdwardsCurve.prototype.validate = function validate(point)
     return lhs.cmp(rhs) === 0;
 };
 function $2f2f6ff03f151bef$var$Point(curve, x, y, z, t) {
-    $6EQXx.BasePoint.call(this, curve, 'projective');
+    $6EQXx.BasePoint.call(this, curve, "projective");
     if (x === null && y === null && z === null) {
         this.x = this.curve.zero;
         this.y = this.curve.one;
@@ -26153,8 +26151,8 @@ $2f2f6ff03f151bef$var$Point.fromJSON = function fromJSON(curve, obj) {
     return new $2f2f6ff03f151bef$var$Point(curve, obj[0], obj[1], obj[2]);
 };
 $2f2f6ff03f151bef$var$Point.prototype.inspect = function inspect() {
-    if (this.isInfinity()) return '<EC Point Infinity>';
-    return '<EC Point x: ' + this.x.fromRed().toString(16, 2) + ' y: ' + this.y.fromRed().toString(16, 2) + ' z: ' + this.z.fromRed().toString(16, 2) + '>';
+    if (this.isInfinity()) return "<EC Point Infinity>";
+    return "<EC Point x: " + this.x.fromRed().toString(16, 2) + " y: " + this.y.fromRed().toString(16, 2) + " z: " + this.z.fromRed().toString(16, 2) + ">";
 };
 $2f2f6ff03f151bef$var$Point.prototype.isInfinity = function isInfinity() {
     // XXX This code assumes that zero is always zero in red
@@ -26395,7 +26393,7 @@ $2f2f6ff03f151bef$var$Point.prototype.mixedAdd = $2f2f6ff03f151bef$var$Point.pro
 
 
 parcelRequire.register("3J9Yr", function(module, exports) {
-'use strict';
+"use strict";
 var $2b6d4faa53388540$var$curves = module.exports;
 
 var $hv5Fa = parcelRequire("hv5Fa");
@@ -26405,14 +26403,14 @@ var $eb0RN = parcelRequire("eb0RN");
 var $frLve = parcelRequire("frLve");
 var $2b6d4faa53388540$var$assert = $frLve.assert;
 function $2b6d4faa53388540$var$PresetCurve(options) {
-    if (options.type === 'short') this.curve = new $eb0RN.short(options);
-    else if (options.type === 'edwards') this.curve = new $eb0RN.edwards(options);
+    if (options.type === "short") this.curve = new $eb0RN.short(options);
+    else if (options.type === "edwards") this.curve = new $eb0RN.edwards(options);
     else this.curve = new $eb0RN.mont(options);
     this.g = this.curve.g;
     this.n = this.curve.n;
     this.hash = options.hash;
-    $2b6d4faa53388540$var$assert(this.g.validate(), 'Invalid curve');
-    $2b6d4faa53388540$var$assert(this.g.mul(this.n).isInfinity(), 'Invalid curve, G*N != O');
+    $2b6d4faa53388540$var$assert(this.g.validate(), "Invalid curve");
+    $2b6d4faa53388540$var$assert(this.g.mul(this.n).isInfinity(), "Invalid curve, G*N != O");
 }
 $2b6d4faa53388540$var$curves.PresetCurve = $2b6d4faa53388540$var$PresetCurve;
 function $2b6d4faa53388540$var$defineCurve(name, options) {
@@ -26420,60 +26418,60 @@ function $2b6d4faa53388540$var$defineCurve(name, options) {
         configurable: true,
         enumerable: true,
         get: function() {
-            var curve = new $2b6d4faa53388540$var$PresetCurve(options);
+            var curve1 = new $2b6d4faa53388540$var$PresetCurve(options);
             Object.defineProperty($2b6d4faa53388540$var$curves, name, {
                 configurable: true,
                 enumerable: true,
-                value: curve
+                value: curve1
             });
-            return curve;
+            return curve1;
         }
     });
 }
-$2b6d4faa53388540$var$defineCurve('p192', {
-    type: 'short',
-    prime: 'p192',
-    p: 'ffffffff ffffffff ffffffff fffffffe ffffffff ffffffff',
-    a: 'ffffffff ffffffff ffffffff fffffffe ffffffff fffffffc',
-    b: '64210519 e59c80e7 0fa7e9ab 72243049 feb8deec c146b9b1',
-    n: 'ffffffff ffffffff ffffffff 99def836 146bc9b1 b4d22831',
+$2b6d4faa53388540$var$defineCurve("p192", {
+    type: "short",
+    prime: "p192",
+    p: "ffffffff ffffffff ffffffff fffffffe ffffffff ffffffff",
+    a: "ffffffff ffffffff ffffffff fffffffe ffffffff fffffffc",
+    b: "64210519 e59c80e7 0fa7e9ab 72243049 feb8deec c146b9b1",
+    n: "ffffffff ffffffff ffffffff 99def836 146bc9b1 b4d22831",
     hash: $hv5Fa.sha256,
     gRed: false,
     g: [
-        '188da80e b03090f6 7cbf20eb 43a18800 f4ff0afd 82ff1012',
-        '07192b95 ffc8da78 631011ed 6b24cdd5 73f977a1 1e794811', 
+        "188da80e b03090f6 7cbf20eb 43a18800 f4ff0afd 82ff1012",
+        "07192b95 ffc8da78 631011ed 6b24cdd5 73f977a1 1e794811", 
     ]
 });
-$2b6d4faa53388540$var$defineCurve('p224', {
-    type: 'short',
-    prime: 'p224',
-    p: 'ffffffff ffffffff ffffffff ffffffff 00000000 00000000 00000001',
-    a: 'ffffffff ffffffff ffffffff fffffffe ffffffff ffffffff fffffffe',
-    b: 'b4050a85 0c04b3ab f5413256 5044b0b7 d7bfd8ba 270b3943 2355ffb4',
-    n: 'ffffffff ffffffff ffffffff ffff16a2 e0b8f03e 13dd2945 5c5c2a3d',
+$2b6d4faa53388540$var$defineCurve("p224", {
+    type: "short",
+    prime: "p224",
+    p: "ffffffff ffffffff ffffffff ffffffff 00000000 00000000 00000001",
+    a: "ffffffff ffffffff ffffffff fffffffe ffffffff ffffffff fffffffe",
+    b: "b4050a85 0c04b3ab f5413256 5044b0b7 d7bfd8ba 270b3943 2355ffb4",
+    n: "ffffffff ffffffff ffffffff ffff16a2 e0b8f03e 13dd2945 5c5c2a3d",
     hash: $hv5Fa.sha256,
     gRed: false,
     g: [
-        'b70e0cbd 6bb4bf7f 321390b9 4a03c1d3 56c21122 343280d6 115c1d21',
-        'bd376388 b5f723fb 4c22dfe6 cd4375a0 5a074764 44d58199 85007e34', 
+        "b70e0cbd 6bb4bf7f 321390b9 4a03c1d3 56c21122 343280d6 115c1d21",
+        "bd376388 b5f723fb 4c22dfe6 cd4375a0 5a074764 44d58199 85007e34", 
     ]
 });
-$2b6d4faa53388540$var$defineCurve('p256', {
-    type: 'short',
+$2b6d4faa53388540$var$defineCurve("p256", {
+    type: "short",
     prime: null,
-    p: 'ffffffff 00000001 00000000 00000000 00000000 ffffffff ffffffff ffffffff',
-    a: 'ffffffff 00000001 00000000 00000000 00000000 ffffffff ffffffff fffffffc',
-    b: '5ac635d8 aa3a93e7 b3ebbd55 769886bc 651d06b0 cc53b0f6 3bce3c3e 27d2604b',
-    n: 'ffffffff 00000000 ffffffff ffffffff bce6faad a7179e84 f3b9cac2 fc632551',
+    p: "ffffffff 00000001 00000000 00000000 00000000 ffffffff ffffffff ffffffff",
+    a: "ffffffff 00000001 00000000 00000000 00000000 ffffffff ffffffff fffffffc",
+    b: "5ac635d8 aa3a93e7 b3ebbd55 769886bc 651d06b0 cc53b0f6 3bce3c3e 27d2604b",
+    n: "ffffffff 00000000 ffffffff ffffffff bce6faad a7179e84 f3b9cac2 fc632551",
     hash: $hv5Fa.sha256,
     gRed: false,
     g: [
-        '6b17d1f2 e12c4247 f8bce6e5 63a440f2 77037d81 2deb33a0 f4a13945 d898c296',
-        '4fe342e2 fe1a7f9b 8ee7eb4a 7c0f9e16 2bce3357 6b315ece cbb64068 37bf51f5', 
+        "6b17d1f2 e12c4247 f8bce6e5 63a440f2 77037d81 2deb33a0 f4a13945 d898c296",
+        "4fe342e2 fe1a7f9b 8ee7eb4a 7c0f9e16 2bce3357 6b315ece cbb64068 37bf51f5", 
     ]
 });
-$2b6d4faa53388540$var$defineCurve('p384', {
-    type: 'short',
+$2b6d4faa53388540$var$defineCurve("p384", {
+    type: "short",
     prime: null,
     p: "ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff fffffffe ffffffff 00000000 00000000 ffffffff",
     a: "ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff fffffffe ffffffff 00000000 00000000 fffffffc",
@@ -26486,8 +26484,8 @@ $2b6d4faa53388540$var$defineCurve('p384', {
         "3617de4a 96262c6f 5d9e98bf 9292dc29 f8f41dbd 289a147c e9da3113 b5f0b8c0 0a60b1ce 1d7e819d 7a431d7c 90ea0e5f", 
     ]
 });
-$2b6d4faa53388540$var$defineCurve('p521', {
-    type: 'short',
+$2b6d4faa53388540$var$defineCurve("p521", {
+    type: "short",
     prime: null,
     p: "000001ff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff",
     a: "000001ff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff fffffffc",
@@ -26500,34 +26498,34 @@ $2b6d4faa53388540$var$defineCurve('p521', {
         "00000118 39296a78 9a3bc004 5c8a5fb4 2c7d1bd9 98f54449 579b4468 17afbd17 273e662c 97ee7299 5ef42640 c550b901 3fad0761 353c7086 a272c240 88be9476 9fd16650", 
     ]
 });
-$2b6d4faa53388540$var$defineCurve('curve25519', {
-    type: 'mont',
-    prime: 'p25519',
-    p: '7fffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffed',
-    a: '76d06',
-    b: '1',
-    n: '1000000000000000 0000000000000000 14def9dea2f79cd6 5812631a5cf5d3ed',
+$2b6d4faa53388540$var$defineCurve("curve25519", {
+    type: "mont",
+    prime: "p25519",
+    p: "7fffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffed",
+    a: "76d06",
+    b: "1",
+    n: "1000000000000000 0000000000000000 14def9dea2f79cd6 5812631a5cf5d3ed",
     hash: $hv5Fa.sha256,
     gRed: false,
     g: [
-        '9', 
+        "9", 
     ]
 });
-$2b6d4faa53388540$var$defineCurve('ed25519', {
-    type: 'edwards',
-    prime: 'p25519',
-    p: '7fffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffed',
-    a: '-1',
-    c: '1',
+$2b6d4faa53388540$var$defineCurve("ed25519", {
+    type: "edwards",
+    prime: "p25519",
+    p: "7fffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffed",
+    a: "-1",
+    c: "1",
     // -121665 * (121666^(-1)) (mod P)
-    d: '52036cee2b6ffe73 8cc740797779e898 00700a4d4141d8ab 75eb4dca135978a3',
-    n: '1000000000000000 0000000000000000 14def9dea2f79cd6 5812631a5cf5d3ed',
+    d: "52036cee2b6ffe73 8cc740797779e898 00700a4d4141d8ab 75eb4dca135978a3",
+    n: "1000000000000000 0000000000000000 14def9dea2f79cd6 5812631a5cf5d3ed",
     hash: $hv5Fa.sha256,
     gRed: false,
     g: [
-        '216936d3cd6e53fec0a4e231fdd6dc5c692cc7609525a7b2c9562d608f25d51a',
+        "216936d3cd6e53fec0a4e231fdd6dc5c692cc7609525a7b2c9562d608f25d51a",
         // 4/5
-        '6666666666666666666666666666666666666666666666666666666666666658', 
+        "6666666666666666666666666666666666666666666666666666666666666658", 
     ]
 });
 var $2b6d4faa53388540$var$pre;
@@ -26537,32 +26535,32 @@ try {
 } catch (e) {
     $2b6d4faa53388540$var$pre = undefined;
 }
-$2b6d4faa53388540$var$defineCurve('secp256k1', {
-    type: 'short',
-    prime: 'k256',
-    p: 'ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff fffffffe fffffc2f',
-    a: '0',
-    b: '7',
-    n: 'ffffffff ffffffff ffffffff fffffffe baaedce6 af48a03b bfd25e8c d0364141',
-    h: '1',
+$2b6d4faa53388540$var$defineCurve("secp256k1", {
+    type: "short",
+    prime: "k256",
+    p: "ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff fffffffe fffffc2f",
+    a: "0",
+    b: "7",
+    n: "ffffffff ffffffff ffffffff fffffffe baaedce6 af48a03b bfd25e8c d0364141",
+    h: "1",
     hash: $hv5Fa.sha256,
     // Precomputed endomorphism
-    beta: '7ae96a2b657c07106e64479eac3434e99cf0497512f58995c1396c28719501ee',
-    lambda: '5363ad4cc05c30e0a5261c028812645a122e22ea20816678df02967c1b23bd72',
+    beta: "7ae96a2b657c07106e64479eac3434e99cf0497512f58995c1396c28719501ee",
+    lambda: "5363ad4cc05c30e0a5261c028812645a122e22ea20816678df02967c1b23bd72",
     basis: [
         {
-            a: '3086d221a7d46bcde86c90e49284eb15',
-            b: '-e4437ed6010e88286f547fa90abfe4c3'
+            a: "3086d221a7d46bcde86c90e49284eb15",
+            b: "-e4437ed6010e88286f547fa90abfe4c3"
         },
         {
-            a: '114ca50f7a8e2f3f657c1108d9d44cfd8',
-            b: '3086d221a7d46bcde86c90e49284eb15'
+            a: "114ca50f7a8e2f3f657c1108d9d44cfd8",
+            b: "3086d221a7d46bcde86c90e49284eb15"
         }, 
     ],
     gRed: false,
     g: [
-        '79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798',
-        '483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8',
+        "79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798",
+        "483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8",
         $2b6d4faa53388540$var$pre, 
     ]
 });
@@ -26643,7 +26641,7 @@ var $5a1efe64814a8c7b$export$bb7c616f719ad9c;
 var $5a1efe64814a8c7b$export$4d63290824f9d7df;
 var $5a1efe64814a8c7b$export$2f64ceb90ef28ea1;
 var $5a1efe64814a8c7b$export$8d2089d465f6d10d;
-'use strict';
+"use strict";
 
 var $dN0Q4 = parcelRequire("dN0Q4");
 
@@ -26658,7 +26656,7 @@ function $5a1efe64814a8c7b$var$toArray(msg, enc) {
     if (Array.isArray(msg)) return msg.slice();
     if (!msg) return [];
     var res = [];
-    if (typeof msg === 'string') {
+    if (typeof msg === "string") {
         if (!enc) {
             // Inspired by stringToUtf8ByteArray() in closure-library by Google
             // https://github.com/google/closure-library/blob/8598d87242af59aac233270742c8984e2b2bdbe0/closure/goog/crypt/crypt.js#L117-L143
@@ -26683,9 +26681,9 @@ function $5a1efe64814a8c7b$var$toArray(msg, enc) {
                     res[p++] = c & 63 | 128;
                 }
             }
-        } else if (enc === 'hex') {
-            msg = msg.replace(/[^a-z0-9]+/ig, '');
-            if (msg.length % 2 !== 0) msg = '0' + msg;
+        } else if (enc === "hex") {
+            msg = msg.replace(/[^a-z0-9]+/ig, "");
+            if (msg.length % 2 !== 0) msg = "0" + msg;
             for(i = 0; i < msg.length; i += 2)res.push(parseInt(msg[i] + msg[i + 1], 16));
         }
     } else for(i = 0; i < msg.length; i++)res[i] = msg[i] | 0;
@@ -26693,7 +26691,7 @@ function $5a1efe64814a8c7b$var$toArray(msg, enc) {
 }
 $5a1efe64814a8c7b$export$45b10814cc054894 = $5a1efe64814a8c7b$var$toArray;
 function $5a1efe64814a8c7b$var$toHex(msg) {
-    var res = '';
+    var res = "";
     for(var i = 0; i < msg.length; i++)res += $5a1efe64814a8c7b$var$zero2(msg[i].toString(16));
     return res;
 }
@@ -26704,28 +26702,28 @@ function $5a1efe64814a8c7b$var$htonl(w) {
 }
 $5a1efe64814a8c7b$export$34a52f00f601f6f1 = $5a1efe64814a8c7b$var$htonl;
 function $5a1efe64814a8c7b$var$toHex32(msg, endian) {
-    var res = '';
+    var res = "";
     for(var i = 0; i < msg.length; i++){
         var w = msg[i];
-        if (endian === 'little') w = $5a1efe64814a8c7b$var$htonl(w);
+        if (endian === "little") w = $5a1efe64814a8c7b$var$htonl(w);
         res += $5a1efe64814a8c7b$var$zero8(w.toString(16));
     }
     return res;
 }
 $5a1efe64814a8c7b$export$812b0cbd5e8a72ab = $5a1efe64814a8c7b$var$toHex32;
 function $5a1efe64814a8c7b$var$zero2(word) {
-    if (word.length === 1) return '0' + word;
+    if (word.length === 1) return "0" + word;
     else return word;
 }
 $5a1efe64814a8c7b$export$f24f9e11d63bb314 = $5a1efe64814a8c7b$var$zero2;
 function $5a1efe64814a8c7b$var$zero8(word) {
-    if (word.length === 7) return '0' + word;
-    else if (word.length === 6) return '00' + word;
-    else if (word.length === 5) return '000' + word;
-    else if (word.length === 4) return '0000' + word;
-    else if (word.length === 3) return '00000' + word;
-    else if (word.length === 2) return '000000' + word;
-    else if (word.length === 1) return '0000000' + word;
+    if (word.length === 7) return "0" + word;
+    else if (word.length === 6) return "00" + word;
+    else if (word.length === 5) return "000" + word;
+    else if (word.length === 4) return "0000" + word;
+    else if (word.length === 3) return "00000" + word;
+    else if (word.length === 2) return "000000" + word;
+    else if (word.length === 1) return "0000000" + word;
     else return word;
 }
 $5a1efe64814a8c7b$export$b71357c7e07ca1f1 = $5a1efe64814a8c7b$var$zero8;
@@ -26735,7 +26733,7 @@ function $5a1efe64814a8c7b$var$join32(msg, start, end, endian) {
     var res = new Array(len / 4);
     for(var i = 0, k = start; i < res.length; i++, k += 4){
         var w;
-        if (endian === 'big') w = msg[k] << 24 | msg[k + 1] << 16 | msg[k + 2] << 8 | msg[k + 3];
+        if (endian === "big") w = msg[k] << 24 | msg[k + 1] << 16 | msg[k + 2] << 8 | msg[k + 3];
         else w = msg[k + 3] << 24 | msg[k + 2] << 16 | msg[k + 1] << 8 | msg[k];
         res[i] = w >>> 0;
     }
@@ -26746,7 +26744,7 @@ function $5a1efe64814a8c7b$var$split32(msg, endian) {
     var res = new Array(msg.length * 4);
     for(var i = 0, k = 0; i < msg.length; i++, k += 4){
         var m = msg[i];
-        if (endian === 'big') {
+        if (endian === "big") {
             res[k] = m >>> 24;
             res[k + 1] = m >>> 16 & 0xff;
             res[k + 2] = m >>> 8 & 0xff;
@@ -26869,7 +26867,7 @@ parcelRequire.register("ab6am", function(module, exports) {
 
 $parcel$export(module.exports, "BlockHash", function () { return $768fb6ec7fd9dee2$export$8687658379b577e6; }, function (v) { return $768fb6ec7fd9dee2$export$8687658379b577e6 = v; });
 var $768fb6ec7fd9dee2$export$8687658379b577e6;
-'use strict';
+"use strict";
 
 var $7JIad = parcelRequire("7JIad");
 
@@ -26881,7 +26879,7 @@ function $768fb6ec7fd9dee2$var$BlockHash() {
     this.outSize = this.constructor.outSize;
     this.hmacStrength = this.constructor.hmacStrength;
     this.padLength = this.constructor.padLength / 8;
-    this.endian = 'big';
+    this.endian = "big";
     this._delta8 = this.blockSize / 8;
     this._delta32 = this.blockSize / 32;
 }
@@ -26918,7 +26916,7 @@ $768fb6ec7fd9dee2$var$BlockHash.prototype._pad = function pad() {
     for(var i = 1; i < k; i++)res[i] = 0;
     // Append length
     len <<= 3;
-    if (this.endian === 'big') {
+    if (this.endian === "big") {
         for(var t = 8; t < this.padLength; t++)res[i++] = 0;
         res[i++] = 0;
         res[i++] = 0;
@@ -26956,7 +26954,7 @@ var $84633f39a729bcd2$export$97b70509d4e397ea;
 var $84633f39a729bcd2$export$bced8d2aada2d1c9;
 var $84633f39a729bcd2$export$612d47d55dedde45;
 var $84633f39a729bcd2$export$a888d2532e6dc7bb;
-'use strict';
+"use strict";
 
 $84633f39a729bcd2$export$5091bdda49ba90f5 = (parcelRequire("6HzRz"));
 
@@ -26970,7 +26968,7 @@ $84633f39a729bcd2$export$a888d2532e6dc7bb = (parcelRequire("cA7O6"));
 
 });
 parcelRequire.register("6HzRz", function(module, exports) {
-'use strict';
+"use strict";
 
 var $7JIad = parcelRequire("7JIad");
 
@@ -27031,8 +27029,8 @@ $4e1293e644c7cf96$var$SHA1.prototype._update = function _update(msg, start) {
     this.h[4] = $4e1293e644c7cf96$var$sum32(this.h[4], e);
 };
 $4e1293e644c7cf96$var$SHA1.prototype._digest = function digest(enc) {
-    if (enc === 'hex') return $7JIad.toHex32(this.h, 'big');
-    else return $7JIad.split32(this.h, 'big');
+    if (enc === "hex") return $7JIad.toHex32(this.h, "big");
+    else return $7JIad.split32(this.h, "big");
 };
 
 });
@@ -27053,7 +27051,7 @@ var $9b58bbef1b9ccccd$export$14a4a98e063b1999;
 var $9b58bbef1b9ccccd$export$d20cecfa1564c686;
 var $9b58bbef1b9ccccd$export$44fd472a12fc6db;
 var $9b58bbef1b9ccccd$export$1ed238bb6ea1dd47;
-'use strict';
+"use strict";
 
 var $7JIad = parcelRequire("7JIad");
 var $9b58bbef1b9ccccd$var$rotr32 = $7JIad.rotr32;
@@ -27096,7 +27094,7 @@ $9b58bbef1b9ccccd$export$1ed238bb6ea1dd47 = $9b58bbef1b9ccccd$var$g1_256;
 
 
 parcelRequire.register("kd2Qw", function(module, exports) {
-'use strict';
+"use strict";
 
 var $7JIad = parcelRequire("7JIad");
 
@@ -27123,13 +27121,13 @@ $eb673ac053c71d62$var$SHA224.hmacStrength = 192;
 $eb673ac053c71d62$var$SHA224.padLength = 64;
 $eb673ac053c71d62$var$SHA224.prototype._digest = function digest(enc) {
     // Just truncate output
-    if (enc === 'hex') return $7JIad.toHex32(this.h.slice(0, 7), 'big');
-    else return $7JIad.split32(this.h.slice(0, 7), 'big');
+    if (enc === "hex") return $7JIad.toHex32(this.h.slice(0, 7), "big");
+    else return $7JIad.split32(this.h.slice(0, 7), "big");
 };
 
 });
 parcelRequire.register("gCSsQ", function(module, exports) {
-'use strict';
+"use strict";
 
 var $7JIad = parcelRequire("7JIad");
 
@@ -27271,15 +27269,15 @@ $c1aa716abf2b7af1$var$SHA256.prototype._update = function _update(msg, start) {
     this.h[7] = $c1aa716abf2b7af1$var$sum32(this.h[7], h);
 };
 $c1aa716abf2b7af1$var$SHA256.prototype._digest = function digest(enc) {
-    if (enc === 'hex') return $7JIad.toHex32(this.h, 'big');
-    else return $7JIad.split32(this.h, 'big');
+    if (enc === "hex") return $7JIad.toHex32(this.h, "big");
+    else return $7JIad.split32(this.h, "big");
 };
 
 });
 
 
 parcelRequire.register("aUDnG", function(module, exports) {
-'use strict';
+"use strict";
 
 var $7JIad = parcelRequire("7JIad");
 
@@ -27313,13 +27311,13 @@ $7f1dae9734e6698d$var$SHA384.outSize = 384;
 $7f1dae9734e6698d$var$SHA384.hmacStrength = 192;
 $7f1dae9734e6698d$var$SHA384.padLength = 128;
 $7f1dae9734e6698d$var$SHA384.prototype._digest = function digest(enc) {
-    if (enc === 'hex') return $7JIad.toHex32(this.h.slice(0, 12), 'big');
-    else return $7JIad.split32(this.h.slice(0, 12), 'big');
+    if (enc === "hex") return $7JIad.toHex32(this.h.slice(0, 12), "big");
+    else return $7JIad.split32(this.h.slice(0, 12), "big");
 };
 
 });
 parcelRequire.register("cA7O6", function(module, exports) {
-'use strict';
+"use strict";
 
 var $7JIad = parcelRequire("7JIad");
 
@@ -27613,8 +27611,8 @@ $928ee72dcabd90e3$var$SHA512.prototype._update = function _update(msg, start) {
     $928ee72dcabd90e3$var$sum64(this.h, 14, hh, hl);
 };
 $928ee72dcabd90e3$var$SHA512.prototype._digest = function digest(enc) {
-    if (enc === 'hex') return $7JIad.toHex32(this.h, 'big');
-    else return $7JIad.split32(this.h, 'big');
+    if (enc === "hex") return $7JIad.toHex32(this.h, "big");
+    else return $7JIad.split32(this.h, "big");
 };
 function $928ee72dcabd90e3$var$ch64_hi(xh, xl, yh, yl, zh) {
     var r = xh & yh ^ ~xh & zh;
@@ -27709,7 +27707,7 @@ parcelRequire.register("idr5w", function(module, exports) {
 
 $parcel$export(module.exports, "ripemd160", function () { return $d42e74058f4ca7d4$export$d1cea0ee4e3f0d3e; }, function (v) { return $d42e74058f4ca7d4$export$d1cea0ee4e3f0d3e = v; });
 var $d42e74058f4ca7d4$export$d1cea0ee4e3f0d3e;
-'use strict';
+"use strict";
 
 var $7JIad = parcelRequire("7JIad");
 
@@ -27729,7 +27727,7 @@ function $d42e74058f4ca7d4$var$RIPEMD160() {
         0x10325476,
         0xc3d2e1f0
     ];
-    this.endian = 'little';
+    this.endian = "little";
 }
 $7JIad.inherits($d42e74058f4ca7d4$var$RIPEMD160, $d42e74058f4ca7d4$var$BlockHash);
 $d42e74058f4ca7d4$export$d1cea0ee4e3f0d3e = $d42e74058f4ca7d4$var$RIPEMD160;
@@ -27770,8 +27768,8 @@ $d42e74058f4ca7d4$var$RIPEMD160.prototype._update = function update(msg, start) 
     this.h[0] = T;
 };
 $d42e74058f4ca7d4$var$RIPEMD160.prototype._digest = function digest(enc) {
-    if (enc === 'hex') return $7JIad.toHex32(this.h, 'little');
-    else return $7JIad.split32(this.h, 'little');
+    if (enc === "hex") return $7JIad.toHex32(this.h, "little");
+    else return $7JIad.split32(this.h, "little");
 };
 function $d42e74058f4ca7d4$var$f(j, x, y, z) {
     if (j <= 15) return x ^ y ^ z;
@@ -28126,7 +28124,7 @@ var $d42e74058f4ca7d4$var$sh = [
 });
 
 parcelRequire.register("hR5UO", function(module, exports) {
-'use strict';
+"use strict";
 
 var $7JIad = parcelRequire("7JIad");
 
@@ -28171,264 +28169,264 @@ module.exports = {
         step: 4,
         points: [
             [
-                'e60fce93b59e9ec53011aabc21c23e97b2a31369b87a5ae9c44ee89e2a6dec0a',
-                'f7e3507399e595929db99f34f57937101296891e44d23f0be1f32cce69616821', 
+                "e60fce93b59e9ec53011aabc21c23e97b2a31369b87a5ae9c44ee89e2a6dec0a",
+                "f7e3507399e595929db99f34f57937101296891e44d23f0be1f32cce69616821", 
             ],
             [
-                '8282263212c609d9ea2a6e3e172de238d8c39cabd5ac1ca10646e23fd5f51508',
-                '11f8a8098557dfe45e8256e830b60ace62d613ac2f7b17bed31b6eaff6e26caf', 
+                "8282263212c609d9ea2a6e3e172de238d8c39cabd5ac1ca10646e23fd5f51508",
+                "11f8a8098557dfe45e8256e830b60ace62d613ac2f7b17bed31b6eaff6e26caf", 
             ],
             [
-                '175e159f728b865a72f99cc6c6fc846de0b93833fd2222ed73fce5b551e5b739',
-                'd3506e0d9e3c79eba4ef97a51ff71f5eacb5955add24345c6efa6ffee9fed695', 
+                "175e159f728b865a72f99cc6c6fc846de0b93833fd2222ed73fce5b551e5b739",
+                "d3506e0d9e3c79eba4ef97a51ff71f5eacb5955add24345c6efa6ffee9fed695", 
             ],
             [
-                '363d90d447b00c9c99ceac05b6262ee053441c7e55552ffe526bad8f83ff4640',
-                '4e273adfc732221953b445397f3363145b9a89008199ecb62003c7f3bee9de9', 
+                "363d90d447b00c9c99ceac05b6262ee053441c7e55552ffe526bad8f83ff4640",
+                "4e273adfc732221953b445397f3363145b9a89008199ecb62003c7f3bee9de9", 
             ],
             [
-                '8b4b5f165df3c2be8c6244b5b745638843e4a781a15bcd1b69f79a55dffdf80c',
-                '4aad0a6f68d308b4b3fbd7813ab0da04f9e336546162ee56b3eff0c65fd4fd36', 
+                "8b4b5f165df3c2be8c6244b5b745638843e4a781a15bcd1b69f79a55dffdf80c",
+                "4aad0a6f68d308b4b3fbd7813ab0da04f9e336546162ee56b3eff0c65fd4fd36", 
             ],
             [
-                '723cbaa6e5db996d6bf771c00bd548c7b700dbffa6c0e77bcb6115925232fcda',
-                '96e867b5595cc498a921137488824d6e2660a0653779494801dc069d9eb39f5f', 
+                "723cbaa6e5db996d6bf771c00bd548c7b700dbffa6c0e77bcb6115925232fcda",
+                "96e867b5595cc498a921137488824d6e2660a0653779494801dc069d9eb39f5f", 
             ],
             [
-                'eebfa4d493bebf98ba5feec812c2d3b50947961237a919839a533eca0e7dd7fa',
-                '5d9a8ca3970ef0f269ee7edaf178089d9ae4cdc3a711f712ddfd4fdae1de8999', 
+                "eebfa4d493bebf98ba5feec812c2d3b50947961237a919839a533eca0e7dd7fa",
+                "5d9a8ca3970ef0f269ee7edaf178089d9ae4cdc3a711f712ddfd4fdae1de8999", 
             ],
             [
-                '100f44da696e71672791d0a09b7bde459f1215a29b3c03bfefd7835b39a48db0',
-                'cdd9e13192a00b772ec8f3300c090666b7ff4a18ff5195ac0fbd5cd62bc65a09', 
+                "100f44da696e71672791d0a09b7bde459f1215a29b3c03bfefd7835b39a48db0",
+                "cdd9e13192a00b772ec8f3300c090666b7ff4a18ff5195ac0fbd5cd62bc65a09", 
             ],
             [
-                'e1031be262c7ed1b1dc9227a4a04c017a77f8d4464f3b3852c8acde6e534fd2d',
-                '9d7061928940405e6bb6a4176597535af292dd419e1ced79a44f18f29456a00d', 
+                "e1031be262c7ed1b1dc9227a4a04c017a77f8d4464f3b3852c8acde6e534fd2d",
+                "9d7061928940405e6bb6a4176597535af292dd419e1ced79a44f18f29456a00d", 
             ],
             [
-                'feea6cae46d55b530ac2839f143bd7ec5cf8b266a41d6af52d5e688d9094696d',
-                'e57c6b6c97dce1bab06e4e12bf3ecd5c981c8957cc41442d3155debf18090088', 
+                "feea6cae46d55b530ac2839f143bd7ec5cf8b266a41d6af52d5e688d9094696d",
+                "e57c6b6c97dce1bab06e4e12bf3ecd5c981c8957cc41442d3155debf18090088", 
             ],
             [
-                'da67a91d91049cdcb367be4be6ffca3cfeed657d808583de33fa978bc1ec6cb1',
-                '9bacaa35481642bc41f463f7ec9780e5dec7adc508f740a17e9ea8e27a68be1d', 
+                "da67a91d91049cdcb367be4be6ffca3cfeed657d808583de33fa978bc1ec6cb1",
+                "9bacaa35481642bc41f463f7ec9780e5dec7adc508f740a17e9ea8e27a68be1d", 
             ],
             [
-                '53904faa0b334cdda6e000935ef22151ec08d0f7bb11069f57545ccc1a37b7c0',
-                '5bc087d0bc80106d88c9eccac20d3c1c13999981e14434699dcb096b022771c8', 
+                "53904faa0b334cdda6e000935ef22151ec08d0f7bb11069f57545ccc1a37b7c0",
+                "5bc087d0bc80106d88c9eccac20d3c1c13999981e14434699dcb096b022771c8", 
             ],
             [
-                '8e7bcd0bd35983a7719cca7764ca906779b53a043a9b8bcaeff959f43ad86047',
-                '10b7770b2a3da4b3940310420ca9514579e88e2e47fd68b3ea10047e8460372a', 
+                "8e7bcd0bd35983a7719cca7764ca906779b53a043a9b8bcaeff959f43ad86047",
+                "10b7770b2a3da4b3940310420ca9514579e88e2e47fd68b3ea10047e8460372a", 
             ],
             [
-                '385eed34c1cdff21e6d0818689b81bde71a7f4f18397e6690a841e1599c43862',
-                '283bebc3e8ea23f56701de19e9ebf4576b304eec2086dc8cc0458fe5542e5453', 
+                "385eed34c1cdff21e6d0818689b81bde71a7f4f18397e6690a841e1599c43862",
+                "283bebc3e8ea23f56701de19e9ebf4576b304eec2086dc8cc0458fe5542e5453", 
             ],
             [
-                '6f9d9b803ecf191637c73a4413dfa180fddf84a5947fbc9c606ed86c3fac3a7',
-                '7c80c68e603059ba69b8e2a30e45c4d47ea4dd2f5c281002d86890603a842160', 
+                "6f9d9b803ecf191637c73a4413dfa180fddf84a5947fbc9c606ed86c3fac3a7",
+                "7c80c68e603059ba69b8e2a30e45c4d47ea4dd2f5c281002d86890603a842160", 
             ],
             [
-                '3322d401243c4e2582a2147c104d6ecbf774d163db0f5e5313b7e0e742d0e6bd',
-                '56e70797e9664ef5bfb019bc4ddaf9b72805f63ea2873af624f3a2e96c28b2a0', 
+                "3322d401243c4e2582a2147c104d6ecbf774d163db0f5e5313b7e0e742d0e6bd",
+                "56e70797e9664ef5bfb019bc4ddaf9b72805f63ea2873af624f3a2e96c28b2a0", 
             ],
             [
-                '85672c7d2de0b7da2bd1770d89665868741b3f9af7643397721d74d28134ab83',
-                '7c481b9b5b43b2eb6374049bfa62c2e5e77f17fcc5298f44c8e3094f790313a6', 
+                "85672c7d2de0b7da2bd1770d89665868741b3f9af7643397721d74d28134ab83",
+                "7c481b9b5b43b2eb6374049bfa62c2e5e77f17fcc5298f44c8e3094f790313a6", 
             ],
             [
-                '948bf809b1988a46b06c9f1919413b10f9226c60f668832ffd959af60c82a0a',
-                '53a562856dcb6646dc6b74c5d1c3418c6d4dff08c97cd2bed4cb7f88d8c8e589', 
+                "948bf809b1988a46b06c9f1919413b10f9226c60f668832ffd959af60c82a0a",
+                "53a562856dcb6646dc6b74c5d1c3418c6d4dff08c97cd2bed4cb7f88d8c8e589", 
             ],
             [
-                '6260ce7f461801c34f067ce0f02873a8f1b0e44dfc69752accecd819f38fd8e8',
-                'bc2da82b6fa5b571a7f09049776a1ef7ecd292238051c198c1a84e95b2b4ae17', 
+                "6260ce7f461801c34f067ce0f02873a8f1b0e44dfc69752accecd819f38fd8e8",
+                "bc2da82b6fa5b571a7f09049776a1ef7ecd292238051c198c1a84e95b2b4ae17", 
             ],
             [
-                'e5037de0afc1d8d43d8348414bbf4103043ec8f575bfdc432953cc8d2037fa2d',
-                '4571534baa94d3b5f9f98d09fb990bddbd5f5b03ec481f10e0e5dc841d755bda', 
+                "e5037de0afc1d8d43d8348414bbf4103043ec8f575bfdc432953cc8d2037fa2d",
+                "4571534baa94d3b5f9f98d09fb990bddbd5f5b03ec481f10e0e5dc841d755bda", 
             ],
             [
-                'e06372b0f4a207adf5ea905e8f1771b4e7e8dbd1c6a6c5b725866a0ae4fce725',
-                '7a908974bce18cfe12a27bb2ad5a488cd7484a7787104870b27034f94eee31dd', 
+                "e06372b0f4a207adf5ea905e8f1771b4e7e8dbd1c6a6c5b725866a0ae4fce725",
+                "7a908974bce18cfe12a27bb2ad5a488cd7484a7787104870b27034f94eee31dd", 
             ],
             [
-                '213c7a715cd5d45358d0bbf9dc0ce02204b10bdde2a3f58540ad6908d0559754',
-                '4b6dad0b5ae462507013ad06245ba190bb4850f5f36a7eeddff2c27534b458f2', 
+                "213c7a715cd5d45358d0bbf9dc0ce02204b10bdde2a3f58540ad6908d0559754",
+                "4b6dad0b5ae462507013ad06245ba190bb4850f5f36a7eeddff2c27534b458f2", 
             ],
             [
-                '4e7c272a7af4b34e8dbb9352a5419a87e2838c70adc62cddf0cc3a3b08fbd53c',
-                '17749c766c9d0b18e16fd09f6def681b530b9614bff7dd33e0b3941817dcaae6', 
+                "4e7c272a7af4b34e8dbb9352a5419a87e2838c70adc62cddf0cc3a3b08fbd53c",
+                "17749c766c9d0b18e16fd09f6def681b530b9614bff7dd33e0b3941817dcaae6", 
             ],
             [
-                'fea74e3dbe778b1b10f238ad61686aa5c76e3db2be43057632427e2840fb27b6',
-                '6e0568db9b0b13297cf674deccb6af93126b596b973f7b77701d3db7f23cb96f', 
+                "fea74e3dbe778b1b10f238ad61686aa5c76e3db2be43057632427e2840fb27b6",
+                "6e0568db9b0b13297cf674deccb6af93126b596b973f7b77701d3db7f23cb96f", 
             ],
             [
-                '76e64113f677cf0e10a2570d599968d31544e179b760432952c02a4417bdde39',
-                'c90ddf8dee4e95cf577066d70681f0d35e2a33d2b56d2032b4b1752d1901ac01', 
+                "76e64113f677cf0e10a2570d599968d31544e179b760432952c02a4417bdde39",
+                "c90ddf8dee4e95cf577066d70681f0d35e2a33d2b56d2032b4b1752d1901ac01", 
             ],
             [
-                'c738c56b03b2abe1e8281baa743f8f9a8f7cc643df26cbee3ab150242bcbb891',
-                '893fb578951ad2537f718f2eacbfbbbb82314eef7880cfe917e735d9699a84c3', 
+                "c738c56b03b2abe1e8281baa743f8f9a8f7cc643df26cbee3ab150242bcbb891",
+                "893fb578951ad2537f718f2eacbfbbbb82314eef7880cfe917e735d9699a84c3", 
             ],
             [
-                'd895626548b65b81e264c7637c972877d1d72e5f3a925014372e9f6588f6c14b',
-                'febfaa38f2bc7eae728ec60818c340eb03428d632bb067e179363ed75d7d991f', 
+                "d895626548b65b81e264c7637c972877d1d72e5f3a925014372e9f6588f6c14b",
+                "febfaa38f2bc7eae728ec60818c340eb03428d632bb067e179363ed75d7d991f", 
             ],
             [
-                'b8da94032a957518eb0f6433571e8761ceffc73693e84edd49150a564f676e03',
-                '2804dfa44805a1e4d7c99cc9762808b092cc584d95ff3b511488e4e74efdf6e7', 
+                "b8da94032a957518eb0f6433571e8761ceffc73693e84edd49150a564f676e03",
+                "2804dfa44805a1e4d7c99cc9762808b092cc584d95ff3b511488e4e74efdf6e7", 
             ],
             [
-                'e80fea14441fb33a7d8adab9475d7fab2019effb5156a792f1a11778e3c0df5d',
-                'eed1de7f638e00771e89768ca3ca94472d155e80af322ea9fcb4291b6ac9ec78', 
+                "e80fea14441fb33a7d8adab9475d7fab2019effb5156a792f1a11778e3c0df5d",
+                "eed1de7f638e00771e89768ca3ca94472d155e80af322ea9fcb4291b6ac9ec78", 
             ],
             [
-                'a301697bdfcd704313ba48e51d567543f2a182031efd6915ddc07bbcc4e16070',
-                '7370f91cfb67e4f5081809fa25d40f9b1735dbf7c0a11a130c0d1a041e177ea1', 
+                "a301697bdfcd704313ba48e51d567543f2a182031efd6915ddc07bbcc4e16070",
+                "7370f91cfb67e4f5081809fa25d40f9b1735dbf7c0a11a130c0d1a041e177ea1", 
             ],
             [
-                '90ad85b389d6b936463f9d0512678de208cc330b11307fffab7ac63e3fb04ed4',
-                'e507a3620a38261affdcbd9427222b839aefabe1582894d991d4d48cb6ef150', 
+                "90ad85b389d6b936463f9d0512678de208cc330b11307fffab7ac63e3fb04ed4",
+                "e507a3620a38261affdcbd9427222b839aefabe1582894d991d4d48cb6ef150", 
             ],
             [
-                '8f68b9d2f63b5f339239c1ad981f162ee88c5678723ea3351b7b444c9ec4c0da',
-                '662a9f2dba063986de1d90c2b6be215dbbea2cfe95510bfdf23cbf79501fff82', 
+                "8f68b9d2f63b5f339239c1ad981f162ee88c5678723ea3351b7b444c9ec4c0da",
+                "662a9f2dba063986de1d90c2b6be215dbbea2cfe95510bfdf23cbf79501fff82", 
             ],
             [
-                'e4f3fb0176af85d65ff99ff9198c36091f48e86503681e3e6686fd5053231e11',
-                '1e63633ad0ef4f1c1661a6d0ea02b7286cc7e74ec951d1c9822c38576feb73bc', 
+                "e4f3fb0176af85d65ff99ff9198c36091f48e86503681e3e6686fd5053231e11",
+                "1e63633ad0ef4f1c1661a6d0ea02b7286cc7e74ec951d1c9822c38576feb73bc", 
             ],
             [
-                '8c00fa9b18ebf331eb961537a45a4266c7034f2f0d4e1d0716fb6eae20eae29e',
-                'efa47267fea521a1a9dc343a3736c974c2fadafa81e36c54e7d2a4c66702414b', 
+                "8c00fa9b18ebf331eb961537a45a4266c7034f2f0d4e1d0716fb6eae20eae29e",
+                "efa47267fea521a1a9dc343a3736c974c2fadafa81e36c54e7d2a4c66702414b", 
             ],
             [
-                'e7a26ce69dd4829f3e10cec0a9e98ed3143d084f308b92c0997fddfc60cb3e41',
-                '2a758e300fa7984b471b006a1aafbb18d0a6b2c0420e83e20e8a9421cf2cfd51', 
+                "e7a26ce69dd4829f3e10cec0a9e98ed3143d084f308b92c0997fddfc60cb3e41",
+                "2a758e300fa7984b471b006a1aafbb18d0a6b2c0420e83e20e8a9421cf2cfd51", 
             ],
             [
-                'b6459e0ee3662ec8d23540c223bcbdc571cbcb967d79424f3cf29eb3de6b80ef',
-                '67c876d06f3e06de1dadf16e5661db3c4b3ae6d48e35b2ff30bf0b61a71ba45', 
+                "b6459e0ee3662ec8d23540c223bcbdc571cbcb967d79424f3cf29eb3de6b80ef",
+                "67c876d06f3e06de1dadf16e5661db3c4b3ae6d48e35b2ff30bf0b61a71ba45", 
             ],
             [
-                'd68a80c8280bb840793234aa118f06231d6f1fc67e73c5a5deda0f5b496943e8',
-                'db8ba9fff4b586d00c4b1f9177b0e28b5b0e7b8f7845295a294c84266b133120', 
+                "d68a80c8280bb840793234aa118f06231d6f1fc67e73c5a5deda0f5b496943e8",
+                "db8ba9fff4b586d00c4b1f9177b0e28b5b0e7b8f7845295a294c84266b133120", 
             ],
             [
-                '324aed7df65c804252dc0270907a30b09612aeb973449cea4095980fc28d3d5d',
-                '648a365774b61f2ff130c0c35aec1f4f19213b0c7e332843967224af96ab7c84', 
+                "324aed7df65c804252dc0270907a30b09612aeb973449cea4095980fc28d3d5d",
+                "648a365774b61f2ff130c0c35aec1f4f19213b0c7e332843967224af96ab7c84", 
             ],
             [
-                '4df9c14919cde61f6d51dfdbe5fee5dceec4143ba8d1ca888e8bd373fd054c96',
-                '35ec51092d8728050974c23a1d85d4b5d506cdc288490192ebac06cad10d5d', 
+                "4df9c14919cde61f6d51dfdbe5fee5dceec4143ba8d1ca888e8bd373fd054c96",
+                "35ec51092d8728050974c23a1d85d4b5d506cdc288490192ebac06cad10d5d", 
             ],
             [
-                '9c3919a84a474870faed8a9c1cc66021523489054d7f0308cbfc99c8ac1f98cd',
-                'ddb84f0f4a4ddd57584f044bf260e641905326f76c64c8e6be7e5e03d4fc599d', 
+                "9c3919a84a474870faed8a9c1cc66021523489054d7f0308cbfc99c8ac1f98cd",
+                "ddb84f0f4a4ddd57584f044bf260e641905326f76c64c8e6be7e5e03d4fc599d", 
             ],
             [
-                '6057170b1dd12fdf8de05f281d8e06bb91e1493a8b91d4cc5a21382120a959e5',
-                '9a1af0b26a6a4807add9a2daf71df262465152bc3ee24c65e899be932385a2a8', 
+                "6057170b1dd12fdf8de05f281d8e06bb91e1493a8b91d4cc5a21382120a959e5",
+                "9a1af0b26a6a4807add9a2daf71df262465152bc3ee24c65e899be932385a2a8", 
             ],
             [
-                'a576df8e23a08411421439a4518da31880cef0fba7d4df12b1a6973eecb94266',
-                '40a6bf20e76640b2c92b97afe58cd82c432e10a7f514d9f3ee8be11ae1b28ec8', 
+                "a576df8e23a08411421439a4518da31880cef0fba7d4df12b1a6973eecb94266",
+                "40a6bf20e76640b2c92b97afe58cd82c432e10a7f514d9f3ee8be11ae1b28ec8", 
             ],
             [
-                '7778a78c28dec3e30a05fe9629de8c38bb30d1f5cf9a3a208f763889be58ad71',
-                '34626d9ab5a5b22ff7098e12f2ff580087b38411ff24ac563b513fc1fd9f43ac', 
+                "7778a78c28dec3e30a05fe9629de8c38bb30d1f5cf9a3a208f763889be58ad71",
+                "34626d9ab5a5b22ff7098e12f2ff580087b38411ff24ac563b513fc1fd9f43ac", 
             ],
             [
-                '928955ee637a84463729fd30e7afd2ed5f96274e5ad7e5cb09eda9c06d903ac',
-                'c25621003d3f42a827b78a13093a95eeac3d26efa8a8d83fc5180e935bcd091f', 
+                "928955ee637a84463729fd30e7afd2ed5f96274e5ad7e5cb09eda9c06d903ac",
+                "c25621003d3f42a827b78a13093a95eeac3d26efa8a8d83fc5180e935bcd091f", 
             ],
             [
-                '85d0fef3ec6db109399064f3a0e3b2855645b4a907ad354527aae75163d82751',
-                '1f03648413a38c0be29d496e582cf5663e8751e96877331582c237a24eb1f962', 
+                "85d0fef3ec6db109399064f3a0e3b2855645b4a907ad354527aae75163d82751",
+                "1f03648413a38c0be29d496e582cf5663e8751e96877331582c237a24eb1f962", 
             ],
             [
-                'ff2b0dce97eece97c1c9b6041798b85dfdfb6d8882da20308f5404824526087e',
-                '493d13fef524ba188af4c4dc54d07936c7b7ed6fb90e2ceb2c951e01f0c29907', 
+                "ff2b0dce97eece97c1c9b6041798b85dfdfb6d8882da20308f5404824526087e",
+                "493d13fef524ba188af4c4dc54d07936c7b7ed6fb90e2ceb2c951e01f0c29907", 
             ],
             [
-                '827fbbe4b1e880ea9ed2b2e6301b212b57f1ee148cd6dd28780e5e2cf856e241',
-                'c60f9c923c727b0b71bef2c67d1d12687ff7a63186903166d605b68baec293ec', 
+                "827fbbe4b1e880ea9ed2b2e6301b212b57f1ee148cd6dd28780e5e2cf856e241",
+                "c60f9c923c727b0b71bef2c67d1d12687ff7a63186903166d605b68baec293ec", 
             ],
             [
-                'eaa649f21f51bdbae7be4ae34ce6e5217a58fdce7f47f9aa7f3b58fa2120e2b3',
-                'be3279ed5bbbb03ac69a80f89879aa5a01a6b965f13f7e59d47a5305ba5ad93d', 
+                "eaa649f21f51bdbae7be4ae34ce6e5217a58fdce7f47f9aa7f3b58fa2120e2b3",
+                "be3279ed5bbbb03ac69a80f89879aa5a01a6b965f13f7e59d47a5305ba5ad93d", 
             ],
             [
-                'e4a42d43c5cf169d9391df6decf42ee541b6d8f0c9a137401e23632dda34d24f',
-                '4d9f92e716d1c73526fc99ccfb8ad34ce886eedfa8d8e4f13a7f7131deba9414', 
+                "e4a42d43c5cf169d9391df6decf42ee541b6d8f0c9a137401e23632dda34d24f",
+                "4d9f92e716d1c73526fc99ccfb8ad34ce886eedfa8d8e4f13a7f7131deba9414", 
             ],
             [
-                '1ec80fef360cbdd954160fadab352b6b92b53576a88fea4947173b9d4300bf19',
-                'aeefe93756b5340d2f3a4958a7abbf5e0146e77f6295a07b671cdc1cc107cefd', 
+                "1ec80fef360cbdd954160fadab352b6b92b53576a88fea4947173b9d4300bf19",
+                "aeefe93756b5340d2f3a4958a7abbf5e0146e77f6295a07b671cdc1cc107cefd", 
             ],
             [
-                '146a778c04670c2f91b00af4680dfa8bce3490717d58ba889ddb5928366642be',
-                'b318e0ec3354028add669827f9d4b2870aaa971d2f7e5ed1d0b297483d83efd0', 
+                "146a778c04670c2f91b00af4680dfa8bce3490717d58ba889ddb5928366642be",
+                "b318e0ec3354028add669827f9d4b2870aaa971d2f7e5ed1d0b297483d83efd0", 
             ],
             [
-                'fa50c0f61d22e5f07e3acebb1aa07b128d0012209a28b9776d76a8793180eef9',
-                '6b84c6922397eba9b72cd2872281a68a5e683293a57a213b38cd8d7d3f4f2811', 
+                "fa50c0f61d22e5f07e3acebb1aa07b128d0012209a28b9776d76a8793180eef9",
+                "6b84c6922397eba9b72cd2872281a68a5e683293a57a213b38cd8d7d3f4f2811", 
             ],
             [
-                'da1d61d0ca721a11b1a5bf6b7d88e8421a288ab5d5bba5220e53d32b5f067ec2',
-                '8157f55a7c99306c79c0766161c91e2966a73899d279b48a655fba0f1ad836f1', 
+                "da1d61d0ca721a11b1a5bf6b7d88e8421a288ab5d5bba5220e53d32b5f067ec2",
+                "8157f55a7c99306c79c0766161c91e2966a73899d279b48a655fba0f1ad836f1", 
             ],
             [
-                'a8e282ff0c9706907215ff98e8fd416615311de0446f1e062a73b0610d064e13',
-                '7f97355b8db81c09abfb7f3c5b2515888b679a3e50dd6bd6cef7c73111f4cc0c', 
+                "a8e282ff0c9706907215ff98e8fd416615311de0446f1e062a73b0610d064e13",
+                "7f97355b8db81c09abfb7f3c5b2515888b679a3e50dd6bd6cef7c73111f4cc0c", 
             ],
             [
-                '174a53b9c9a285872d39e56e6913cab15d59b1fa512508c022f382de8319497c',
-                'ccc9dc37abfc9c1657b4155f2c47f9e6646b3a1d8cb9854383da13ac079afa73', 
+                "174a53b9c9a285872d39e56e6913cab15d59b1fa512508c022f382de8319497c",
+                "ccc9dc37abfc9c1657b4155f2c47f9e6646b3a1d8cb9854383da13ac079afa73", 
             ],
             [
-                '959396981943785c3d3e57edf5018cdbe039e730e4918b3d884fdff09475b7ba',
-                '2e7e552888c331dd8ba0386a4b9cd6849c653f64c8709385e9b8abf87524f2fd', 
+                "959396981943785c3d3e57edf5018cdbe039e730e4918b3d884fdff09475b7ba",
+                "2e7e552888c331dd8ba0386a4b9cd6849c653f64c8709385e9b8abf87524f2fd", 
             ],
             [
-                'd2a63a50ae401e56d645a1153b109a8fcca0a43d561fba2dbb51340c9d82b151',
-                'e82d86fb6443fcb7565aee58b2948220a70f750af484ca52d4142174dcf89405', 
+                "d2a63a50ae401e56d645a1153b109a8fcca0a43d561fba2dbb51340c9d82b151",
+                "e82d86fb6443fcb7565aee58b2948220a70f750af484ca52d4142174dcf89405", 
             ],
             [
-                '64587e2335471eb890ee7896d7cfdc866bacbdbd3839317b3436f9b45617e073',
-                'd99fcdd5bf6902e2ae96dd6447c299a185b90a39133aeab358299e5e9faf6589', 
+                "64587e2335471eb890ee7896d7cfdc866bacbdbd3839317b3436f9b45617e073",
+                "d99fcdd5bf6902e2ae96dd6447c299a185b90a39133aeab358299e5e9faf6589", 
             ],
             [
-                '8481bde0e4e4d885b3a546d3e549de042f0aa6cea250e7fd358d6c86dd45e458',
-                '38ee7b8cba5404dd84a25bf39cecb2ca900a79c42b262e556d64b1b59779057e', 
+                "8481bde0e4e4d885b3a546d3e549de042f0aa6cea250e7fd358d6c86dd45e458",
+                "38ee7b8cba5404dd84a25bf39cecb2ca900a79c42b262e556d64b1b59779057e", 
             ],
             [
-                '13464a57a78102aa62b6979ae817f4637ffcfed3c4b1ce30bcd6303f6caf666b',
-                '69be159004614580ef7e433453ccb0ca48f300a81d0942e13f495a907f6ecc27', 
+                "13464a57a78102aa62b6979ae817f4637ffcfed3c4b1ce30bcd6303f6caf666b",
+                "69be159004614580ef7e433453ccb0ca48f300a81d0942e13f495a907f6ecc27", 
             ],
             [
-                'bc4a9df5b713fe2e9aef430bcc1dc97a0cd9ccede2f28588cada3a0d2d83f366',
-                'd3a81ca6e785c06383937adf4b798caa6e8a9fbfa547b16d758d666581f33c1', 
+                "bc4a9df5b713fe2e9aef430bcc1dc97a0cd9ccede2f28588cada3a0d2d83f366",
+                "d3a81ca6e785c06383937adf4b798caa6e8a9fbfa547b16d758d666581f33c1", 
             ],
             [
-                '8c28a97bf8298bc0d23d8c749452a32e694b65e30a9472a3954ab30fe5324caa',
-                '40a30463a3305193378fedf31f7cc0eb7ae784f0451cb9459e71dc73cbef9482', 
+                "8c28a97bf8298bc0d23d8c749452a32e694b65e30a9472a3954ab30fe5324caa",
+                "40a30463a3305193378fedf31f7cc0eb7ae784f0451cb9459e71dc73cbef9482", 
             ],
             [
-                '8ea9666139527a8c1dd94ce4f071fd23c8b350c5a4bb33748c4ba111faccae0',
-                '620efabbc8ee2782e24e7c0cfb95c5d735b783be9cf0f8e955af34a30e62b945', 
+                "8ea9666139527a8c1dd94ce4f071fd23c8b350c5a4bb33748c4ba111faccae0",
+                "620efabbc8ee2782e24e7c0cfb95c5d735b783be9cf0f8e955af34a30e62b945", 
             ],
             [
-                'dd3625faef5ba06074669716bbd3788d89bdde815959968092f76cc4eb9a9787',
-                '7a188fa3520e30d461da2501045731ca941461982883395937f68d00c644a573', 
+                "dd3625faef5ba06074669716bbd3788d89bdde815959968092f76cc4eb9a9787",
+                "7a188fa3520e30d461da2501045731ca941461982883395937f68d00c644a573", 
             ],
             [
-                'f710d79d9eb962297e4f6232b40e8f7feb2bc63814614d692c12de752408221e',
-                'ea98e67232d3b3295d3b535532115ccac8612c721851617526ae47a9c77bfc82', 
+                "f710d79d9eb962297e4f6232b40e8f7feb2bc63814614d692c12de752408221e",
+                "ea98e67232d3b3295d3b535532115ccac8612c721851617526ae47a9c77bfc82", 
             ], 
         ]
     },
@@ -28436,512 +28434,512 @@ module.exports = {
         wnd: 7,
         points: [
             [
-                'f9308a019258c31049344f85f89d5229b531c845836f99b08601f113bce036f9',
-                '388f7b0f632de8140fe337e62a37f3566500a99934c2231b6cb9fd7584b8e672', 
+                "f9308a019258c31049344f85f89d5229b531c845836f99b08601f113bce036f9",
+                "388f7b0f632de8140fe337e62a37f3566500a99934c2231b6cb9fd7584b8e672", 
             ],
             [
-                '2f8bde4d1a07209355b4a7250a5c5128e88b84bddc619ab7cba8d569b240efe4',
-                'd8ac222636e5e3d6d4dba9dda6c9c426f788271bab0d6840dca87d3aa6ac62d6', 
+                "2f8bde4d1a07209355b4a7250a5c5128e88b84bddc619ab7cba8d569b240efe4",
+                "d8ac222636e5e3d6d4dba9dda6c9c426f788271bab0d6840dca87d3aa6ac62d6", 
             ],
             [
-                '5cbdf0646e5db4eaa398f365f2ea7a0e3d419b7e0330e39ce92bddedcac4f9bc',
-                '6aebca40ba255960a3178d6d861a54dba813d0b813fde7b5a5082628087264da', 
+                "5cbdf0646e5db4eaa398f365f2ea7a0e3d419b7e0330e39ce92bddedcac4f9bc",
+                "6aebca40ba255960a3178d6d861a54dba813d0b813fde7b5a5082628087264da", 
             ],
             [
-                'acd484e2f0c7f65309ad178a9f559abde09796974c57e714c35f110dfc27ccbe',
-                'cc338921b0a7d9fd64380971763b61e9add888a4375f8e0f05cc262ac64f9c37', 
+                "acd484e2f0c7f65309ad178a9f559abde09796974c57e714c35f110dfc27ccbe",
+                "cc338921b0a7d9fd64380971763b61e9add888a4375f8e0f05cc262ac64f9c37", 
             ],
             [
-                '774ae7f858a9411e5ef4246b70c65aac5649980be5c17891bbec17895da008cb',
-                'd984a032eb6b5e190243dd56d7b7b365372db1e2dff9d6a8301d74c9c953c61b', 
+                "774ae7f858a9411e5ef4246b70c65aac5649980be5c17891bbec17895da008cb",
+                "d984a032eb6b5e190243dd56d7b7b365372db1e2dff9d6a8301d74c9c953c61b", 
             ],
             [
-                'f28773c2d975288bc7d1d205c3748651b075fbc6610e58cddeeddf8f19405aa8',
-                'ab0902e8d880a89758212eb65cdaf473a1a06da521fa91f29b5cb52db03ed81', 
+                "f28773c2d975288bc7d1d205c3748651b075fbc6610e58cddeeddf8f19405aa8",
+                "ab0902e8d880a89758212eb65cdaf473a1a06da521fa91f29b5cb52db03ed81", 
             ],
             [
-                'd7924d4f7d43ea965a465ae3095ff41131e5946f3c85f79e44adbcf8e27e080e',
-                '581e2872a86c72a683842ec228cc6defea40af2bd896d3a5c504dc9ff6a26b58', 
+                "d7924d4f7d43ea965a465ae3095ff41131e5946f3c85f79e44adbcf8e27e080e",
+                "581e2872a86c72a683842ec228cc6defea40af2bd896d3a5c504dc9ff6a26b58", 
             ],
             [
-                'defdea4cdb677750a420fee807eacf21eb9898ae79b9768766e4faa04a2d4a34',
-                '4211ab0694635168e997b0ead2a93daeced1f4a04a95c0f6cfb199f69e56eb77', 
+                "defdea4cdb677750a420fee807eacf21eb9898ae79b9768766e4faa04a2d4a34",
+                "4211ab0694635168e997b0ead2a93daeced1f4a04a95c0f6cfb199f69e56eb77", 
             ],
             [
-                '2b4ea0a797a443d293ef5cff444f4979f06acfebd7e86d277475656138385b6c',
-                '85e89bc037945d93b343083b5a1c86131a01f60c50269763b570c854e5c09b7a', 
+                "2b4ea0a797a443d293ef5cff444f4979f06acfebd7e86d277475656138385b6c",
+                "85e89bc037945d93b343083b5a1c86131a01f60c50269763b570c854e5c09b7a", 
             ],
             [
-                '352bbf4a4cdd12564f93fa332ce333301d9ad40271f8107181340aef25be59d5',
-                '321eb4075348f534d59c18259dda3e1f4a1b3b2e71b1039c67bd3d8bcf81998c', 
+                "352bbf4a4cdd12564f93fa332ce333301d9ad40271f8107181340aef25be59d5",
+                "321eb4075348f534d59c18259dda3e1f4a1b3b2e71b1039c67bd3d8bcf81998c", 
             ],
             [
-                '2fa2104d6b38d11b0230010559879124e42ab8dfeff5ff29dc9cdadd4ecacc3f',
-                '2de1068295dd865b64569335bd5dd80181d70ecfc882648423ba76b532b7d67', 
+                "2fa2104d6b38d11b0230010559879124e42ab8dfeff5ff29dc9cdadd4ecacc3f",
+                "2de1068295dd865b64569335bd5dd80181d70ecfc882648423ba76b532b7d67", 
             ],
             [
-                '9248279b09b4d68dab21a9b066edda83263c3d84e09572e269ca0cd7f5453714',
-                '73016f7bf234aade5d1aa71bdea2b1ff3fc0de2a887912ffe54a32ce97cb3402', 
+                "9248279b09b4d68dab21a9b066edda83263c3d84e09572e269ca0cd7f5453714",
+                "73016f7bf234aade5d1aa71bdea2b1ff3fc0de2a887912ffe54a32ce97cb3402", 
             ],
             [
-                'daed4f2be3a8bf278e70132fb0beb7522f570e144bf615c07e996d443dee8729',
-                'a69dce4a7d6c98e8d4a1aca87ef8d7003f83c230f3afa726ab40e52290be1c55', 
+                "daed4f2be3a8bf278e70132fb0beb7522f570e144bf615c07e996d443dee8729",
+                "a69dce4a7d6c98e8d4a1aca87ef8d7003f83c230f3afa726ab40e52290be1c55", 
             ],
             [
-                'c44d12c7065d812e8acf28d7cbb19f9011ecd9e9fdf281b0e6a3b5e87d22e7db',
-                '2119a460ce326cdc76c45926c982fdac0e106e861edf61c5a039063f0e0e6482', 
+                "c44d12c7065d812e8acf28d7cbb19f9011ecd9e9fdf281b0e6a3b5e87d22e7db",
+                "2119a460ce326cdc76c45926c982fdac0e106e861edf61c5a039063f0e0e6482", 
             ],
             [
-                '6a245bf6dc698504c89a20cfded60853152b695336c28063b61c65cbd269e6b4',
-                'e022cf42c2bd4a708b3f5126f16a24ad8b33ba48d0423b6efd5e6348100d8a82', 
+                "6a245bf6dc698504c89a20cfded60853152b695336c28063b61c65cbd269e6b4",
+                "e022cf42c2bd4a708b3f5126f16a24ad8b33ba48d0423b6efd5e6348100d8a82", 
             ],
             [
-                '1697ffa6fd9de627c077e3d2fe541084ce13300b0bec1146f95ae57f0d0bd6a5',
-                'b9c398f186806f5d27561506e4557433a2cf15009e498ae7adee9d63d01b2396', 
+                "1697ffa6fd9de627c077e3d2fe541084ce13300b0bec1146f95ae57f0d0bd6a5",
+                "b9c398f186806f5d27561506e4557433a2cf15009e498ae7adee9d63d01b2396", 
             ],
             [
-                '605bdb019981718b986d0f07e834cb0d9deb8360ffb7f61df982345ef27a7479',
-                '2972d2de4f8d20681a78d93ec96fe23c26bfae84fb14db43b01e1e9056b8c49', 
+                "605bdb019981718b986d0f07e834cb0d9deb8360ffb7f61df982345ef27a7479",
+                "2972d2de4f8d20681a78d93ec96fe23c26bfae84fb14db43b01e1e9056b8c49", 
             ],
             [
-                '62d14dab4150bf497402fdc45a215e10dcb01c354959b10cfe31c7e9d87ff33d',
-                '80fc06bd8cc5b01098088a1950eed0db01aa132967ab472235f5642483b25eaf', 
+                "62d14dab4150bf497402fdc45a215e10dcb01c354959b10cfe31c7e9d87ff33d",
+                "80fc06bd8cc5b01098088a1950eed0db01aa132967ab472235f5642483b25eaf", 
             ],
             [
-                '80c60ad0040f27dade5b4b06c408e56b2c50e9f56b9b8b425e555c2f86308b6f',
-                '1c38303f1cc5c30f26e66bad7fe72f70a65eed4cbe7024eb1aa01f56430bd57a', 
+                "80c60ad0040f27dade5b4b06c408e56b2c50e9f56b9b8b425e555c2f86308b6f",
+                "1c38303f1cc5c30f26e66bad7fe72f70a65eed4cbe7024eb1aa01f56430bd57a", 
             ],
             [
-                '7a9375ad6167ad54aa74c6348cc54d344cc5dc9487d847049d5eabb0fa03c8fb',
-                'd0e3fa9eca8726909559e0d79269046bdc59ea10c70ce2b02d499ec224dc7f7', 
+                "7a9375ad6167ad54aa74c6348cc54d344cc5dc9487d847049d5eabb0fa03c8fb",
+                "d0e3fa9eca8726909559e0d79269046bdc59ea10c70ce2b02d499ec224dc7f7", 
             ],
             [
-                'd528ecd9b696b54c907a9ed045447a79bb408ec39b68df504bb51f459bc3ffc9',
-                'eecf41253136e5f99966f21881fd656ebc4345405c520dbc063465b521409933', 
+                "d528ecd9b696b54c907a9ed045447a79bb408ec39b68df504bb51f459bc3ffc9",
+                "eecf41253136e5f99966f21881fd656ebc4345405c520dbc063465b521409933", 
             ],
             [
-                '49370a4b5f43412ea25f514e8ecdad05266115e4a7ecb1387231808f8b45963',
-                '758f3f41afd6ed428b3081b0512fd62a54c3f3afbb5b6764b653052a12949c9a', 
+                "49370a4b5f43412ea25f514e8ecdad05266115e4a7ecb1387231808f8b45963",
+                "758f3f41afd6ed428b3081b0512fd62a54c3f3afbb5b6764b653052a12949c9a", 
             ],
             [
-                '77f230936ee88cbbd73df930d64702ef881d811e0e1498e2f1c13eb1fc345d74',
-                '958ef42a7886b6400a08266e9ba1b37896c95330d97077cbbe8eb3c7671c60d6', 
+                "77f230936ee88cbbd73df930d64702ef881d811e0e1498e2f1c13eb1fc345d74",
+                "958ef42a7886b6400a08266e9ba1b37896c95330d97077cbbe8eb3c7671c60d6", 
             ],
             [
-                'f2dac991cc4ce4b9ea44887e5c7c0bce58c80074ab9d4dbaeb28531b7739f530',
-                'e0dedc9b3b2f8dad4da1f32dec2531df9eb5fbeb0598e4fd1a117dba703a3c37', 
+                "f2dac991cc4ce4b9ea44887e5c7c0bce58c80074ab9d4dbaeb28531b7739f530",
+                "e0dedc9b3b2f8dad4da1f32dec2531df9eb5fbeb0598e4fd1a117dba703a3c37", 
             ],
             [
-                '463b3d9f662621fb1b4be8fbbe2520125a216cdfc9dae3debcba4850c690d45b',
-                '5ed430d78c296c3543114306dd8622d7c622e27c970a1de31cb377b01af7307e', 
+                "463b3d9f662621fb1b4be8fbbe2520125a216cdfc9dae3debcba4850c690d45b",
+                "5ed430d78c296c3543114306dd8622d7c622e27c970a1de31cb377b01af7307e", 
             ],
             [
-                'f16f804244e46e2a09232d4aff3b59976b98fac14328a2d1a32496b49998f247',
-                'cedabd9b82203f7e13d206fcdf4e33d92a6c53c26e5cce26d6579962c4e31df6', 
+                "f16f804244e46e2a09232d4aff3b59976b98fac14328a2d1a32496b49998f247",
+                "cedabd9b82203f7e13d206fcdf4e33d92a6c53c26e5cce26d6579962c4e31df6", 
             ],
             [
-                'caf754272dc84563b0352b7a14311af55d245315ace27c65369e15f7151d41d1',
-                'cb474660ef35f5f2a41b643fa5e460575f4fa9b7962232a5c32f908318a04476', 
+                "caf754272dc84563b0352b7a14311af55d245315ace27c65369e15f7151d41d1",
+                "cb474660ef35f5f2a41b643fa5e460575f4fa9b7962232a5c32f908318a04476", 
             ],
             [
-                '2600ca4b282cb986f85d0f1709979d8b44a09c07cb86d7c124497bc86f082120',
-                '4119b88753c15bd6a693b03fcddbb45d5ac6be74ab5f0ef44b0be9475a7e4b40', 
+                "2600ca4b282cb986f85d0f1709979d8b44a09c07cb86d7c124497bc86f082120",
+                "4119b88753c15bd6a693b03fcddbb45d5ac6be74ab5f0ef44b0be9475a7e4b40", 
             ],
             [
-                '7635ca72d7e8432c338ec53cd12220bc01c48685e24f7dc8c602a7746998e435',
-                '91b649609489d613d1d5e590f78e6d74ecfc061d57048bad9e76f302c5b9c61', 
+                "7635ca72d7e8432c338ec53cd12220bc01c48685e24f7dc8c602a7746998e435",
+                "91b649609489d613d1d5e590f78e6d74ecfc061d57048bad9e76f302c5b9c61", 
             ],
             [
-                '754e3239f325570cdbbf4a87deee8a66b7f2b33479d468fbc1a50743bf56cc18',
-                '673fb86e5bda30fb3cd0ed304ea49a023ee33d0197a695d0c5d98093c536683', 
+                "754e3239f325570cdbbf4a87deee8a66b7f2b33479d468fbc1a50743bf56cc18",
+                "673fb86e5bda30fb3cd0ed304ea49a023ee33d0197a695d0c5d98093c536683", 
             ],
             [
-                'e3e6bd1071a1e96aff57859c82d570f0330800661d1c952f9fe2694691d9b9e8',
-                '59c9e0bba394e76f40c0aa58379a3cb6a5a2283993e90c4167002af4920e37f5', 
+                "e3e6bd1071a1e96aff57859c82d570f0330800661d1c952f9fe2694691d9b9e8",
+                "59c9e0bba394e76f40c0aa58379a3cb6a5a2283993e90c4167002af4920e37f5", 
             ],
             [
-                '186b483d056a033826ae73d88f732985c4ccb1f32ba35f4b4cc47fdcf04aa6eb',
-                '3b952d32c67cf77e2e17446e204180ab21fb8090895138b4a4a797f86e80888b', 
+                "186b483d056a033826ae73d88f732985c4ccb1f32ba35f4b4cc47fdcf04aa6eb",
+                "3b952d32c67cf77e2e17446e204180ab21fb8090895138b4a4a797f86e80888b", 
             ],
             [
-                'df9d70a6b9876ce544c98561f4be4f725442e6d2b737d9c91a8321724ce0963f',
-                '55eb2dafd84d6ccd5f862b785dc39d4ab157222720ef9da217b8c45cf2ba2417', 
+                "df9d70a6b9876ce544c98561f4be4f725442e6d2b737d9c91a8321724ce0963f",
+                "55eb2dafd84d6ccd5f862b785dc39d4ab157222720ef9da217b8c45cf2ba2417", 
             ],
             [
-                '5edd5cc23c51e87a497ca815d5dce0f8ab52554f849ed8995de64c5f34ce7143',
-                'efae9c8dbc14130661e8cec030c89ad0c13c66c0d17a2905cdc706ab7399a868', 
+                "5edd5cc23c51e87a497ca815d5dce0f8ab52554f849ed8995de64c5f34ce7143",
+                "efae9c8dbc14130661e8cec030c89ad0c13c66c0d17a2905cdc706ab7399a868", 
             ],
             [
-                '290798c2b6476830da12fe02287e9e777aa3fba1c355b17a722d362f84614fba',
-                'e38da76dcd440621988d00bcf79af25d5b29c094db2a23146d003afd41943e7a', 
+                "290798c2b6476830da12fe02287e9e777aa3fba1c355b17a722d362f84614fba",
+                "e38da76dcd440621988d00bcf79af25d5b29c094db2a23146d003afd41943e7a", 
             ],
             [
-                'af3c423a95d9f5b3054754efa150ac39cd29552fe360257362dfdecef4053b45',
-                'f98a3fd831eb2b749a93b0e6f35cfb40c8cd5aa667a15581bc2feded498fd9c6', 
+                "af3c423a95d9f5b3054754efa150ac39cd29552fe360257362dfdecef4053b45",
+                "f98a3fd831eb2b749a93b0e6f35cfb40c8cd5aa667a15581bc2feded498fd9c6", 
             ],
             [
-                '766dbb24d134e745cccaa28c99bf274906bb66b26dcf98df8d2fed50d884249a',
-                '744b1152eacbe5e38dcc887980da38b897584a65fa06cedd2c924f97cbac5996', 
+                "766dbb24d134e745cccaa28c99bf274906bb66b26dcf98df8d2fed50d884249a",
+                "744b1152eacbe5e38dcc887980da38b897584a65fa06cedd2c924f97cbac5996", 
             ],
             [
-                '59dbf46f8c94759ba21277c33784f41645f7b44f6c596a58ce92e666191abe3e',
-                'c534ad44175fbc300f4ea6ce648309a042ce739a7919798cd85e216c4a307f6e', 
+                "59dbf46f8c94759ba21277c33784f41645f7b44f6c596a58ce92e666191abe3e",
+                "c534ad44175fbc300f4ea6ce648309a042ce739a7919798cd85e216c4a307f6e", 
             ],
             [
-                'f13ada95103c4537305e691e74e9a4a8dd647e711a95e73cb62dc6018cfd87b8',
-                'e13817b44ee14de663bf4bc808341f326949e21a6a75c2570778419bdaf5733d', 
+                "f13ada95103c4537305e691e74e9a4a8dd647e711a95e73cb62dc6018cfd87b8",
+                "e13817b44ee14de663bf4bc808341f326949e21a6a75c2570778419bdaf5733d", 
             ],
             [
-                '7754b4fa0e8aced06d4167a2c59cca4cda1869c06ebadfb6488550015a88522c',
-                '30e93e864e669d82224b967c3020b8fa8d1e4e350b6cbcc537a48b57841163a2', 
+                "7754b4fa0e8aced06d4167a2c59cca4cda1869c06ebadfb6488550015a88522c",
+                "30e93e864e669d82224b967c3020b8fa8d1e4e350b6cbcc537a48b57841163a2", 
             ],
             [
-                '948dcadf5990e048aa3874d46abef9d701858f95de8041d2a6828c99e2262519',
-                'e491a42537f6e597d5d28a3224b1bc25df9154efbd2ef1d2cbba2cae5347d57e', 
+                "948dcadf5990e048aa3874d46abef9d701858f95de8041d2a6828c99e2262519",
+                "e491a42537f6e597d5d28a3224b1bc25df9154efbd2ef1d2cbba2cae5347d57e", 
             ],
             [
-                '7962414450c76c1689c7b48f8202ec37fb224cf5ac0bfa1570328a8a3d7c77ab',
-                '100b610ec4ffb4760d5c1fc133ef6f6b12507a051f04ac5760afa5b29db83437', 
+                "7962414450c76c1689c7b48f8202ec37fb224cf5ac0bfa1570328a8a3d7c77ab",
+                "100b610ec4ffb4760d5c1fc133ef6f6b12507a051f04ac5760afa5b29db83437", 
             ],
             [
-                '3514087834964b54b15b160644d915485a16977225b8847bb0dd085137ec47ca',
-                'ef0afbb2056205448e1652c48e8127fc6039e77c15c2378b7e7d15a0de293311', 
+                "3514087834964b54b15b160644d915485a16977225b8847bb0dd085137ec47ca",
+                "ef0afbb2056205448e1652c48e8127fc6039e77c15c2378b7e7d15a0de293311", 
             ],
             [
-                'd3cc30ad6b483e4bc79ce2c9dd8bc54993e947eb8df787b442943d3f7b527eaf',
-                '8b378a22d827278d89c5e9be8f9508ae3c2ad46290358630afb34db04eede0a4', 
+                "d3cc30ad6b483e4bc79ce2c9dd8bc54993e947eb8df787b442943d3f7b527eaf",
+                "8b378a22d827278d89c5e9be8f9508ae3c2ad46290358630afb34db04eede0a4", 
             ],
             [
-                '1624d84780732860ce1c78fcbfefe08b2b29823db913f6493975ba0ff4847610',
-                '68651cf9b6da903e0914448c6cd9d4ca896878f5282be4c8cc06e2a404078575', 
+                "1624d84780732860ce1c78fcbfefe08b2b29823db913f6493975ba0ff4847610",
+                "68651cf9b6da903e0914448c6cd9d4ca896878f5282be4c8cc06e2a404078575", 
             ],
             [
-                '733ce80da955a8a26902c95633e62a985192474b5af207da6df7b4fd5fc61cd4',
-                'f5435a2bd2badf7d485a4d8b8db9fcce3e1ef8e0201e4578c54673bc1dc5ea1d', 
+                "733ce80da955a8a26902c95633e62a985192474b5af207da6df7b4fd5fc61cd4",
+                "f5435a2bd2badf7d485a4d8b8db9fcce3e1ef8e0201e4578c54673bc1dc5ea1d", 
             ],
             [
-                '15d9441254945064cf1a1c33bbd3b49f8966c5092171e699ef258dfab81c045c',
-                'd56eb30b69463e7234f5137b73b84177434800bacebfc685fc37bbe9efe4070d', 
+                "15d9441254945064cf1a1c33bbd3b49f8966c5092171e699ef258dfab81c045c",
+                "d56eb30b69463e7234f5137b73b84177434800bacebfc685fc37bbe9efe4070d", 
             ],
             [
-                'a1d0fcf2ec9de675b612136e5ce70d271c21417c9d2b8aaaac138599d0717940',
-                'edd77f50bcb5a3cab2e90737309667f2641462a54070f3d519212d39c197a629', 
+                "a1d0fcf2ec9de675b612136e5ce70d271c21417c9d2b8aaaac138599d0717940",
+                "edd77f50bcb5a3cab2e90737309667f2641462a54070f3d519212d39c197a629", 
             ],
             [
-                'e22fbe15c0af8ccc5780c0735f84dbe9a790badee8245c06c7ca37331cb36980',
-                'a855babad5cd60c88b430a69f53a1a7a38289154964799be43d06d77d31da06', 
+                "e22fbe15c0af8ccc5780c0735f84dbe9a790badee8245c06c7ca37331cb36980",
+                "a855babad5cd60c88b430a69f53a1a7a38289154964799be43d06d77d31da06", 
             ],
             [
-                '311091dd9860e8e20ee13473c1155f5f69635e394704eaa74009452246cfa9b3',
-                '66db656f87d1f04fffd1f04788c06830871ec5a64feee685bd80f0b1286d8374', 
+                "311091dd9860e8e20ee13473c1155f5f69635e394704eaa74009452246cfa9b3",
+                "66db656f87d1f04fffd1f04788c06830871ec5a64feee685bd80f0b1286d8374", 
             ],
             [
-                '34c1fd04d301be89b31c0442d3e6ac24883928b45a9340781867d4232ec2dbdf',
-                '9414685e97b1b5954bd46f730174136d57f1ceeb487443dc5321857ba73abee', 
+                "34c1fd04d301be89b31c0442d3e6ac24883928b45a9340781867d4232ec2dbdf",
+                "9414685e97b1b5954bd46f730174136d57f1ceeb487443dc5321857ba73abee", 
             ],
             [
-                'f219ea5d6b54701c1c14de5b557eb42a8d13f3abbcd08affcc2a5e6b049b8d63',
-                '4cb95957e83d40b0f73af4544cccf6b1f4b08d3c07b27fb8d8c2962a400766d1', 
+                "f219ea5d6b54701c1c14de5b557eb42a8d13f3abbcd08affcc2a5e6b049b8d63",
+                "4cb95957e83d40b0f73af4544cccf6b1f4b08d3c07b27fb8d8c2962a400766d1", 
             ],
             [
-                'd7b8740f74a8fbaab1f683db8f45de26543a5490bca627087236912469a0b448',
-                'fa77968128d9c92ee1010f337ad4717eff15db5ed3c049b3411e0315eaa4593b', 
+                "d7b8740f74a8fbaab1f683db8f45de26543a5490bca627087236912469a0b448",
+                "fa77968128d9c92ee1010f337ad4717eff15db5ed3c049b3411e0315eaa4593b", 
             ],
             [
-                '32d31c222f8f6f0ef86f7c98d3a3335ead5bcd32abdd94289fe4d3091aa824bf',
-                '5f3032f5892156e39ccd3d7915b9e1da2e6dac9e6f26e961118d14b8462e1661', 
+                "32d31c222f8f6f0ef86f7c98d3a3335ead5bcd32abdd94289fe4d3091aa824bf",
+                "5f3032f5892156e39ccd3d7915b9e1da2e6dac9e6f26e961118d14b8462e1661", 
             ],
             [
-                '7461f371914ab32671045a155d9831ea8793d77cd59592c4340f86cbc18347b5',
-                '8ec0ba238b96bec0cbdddcae0aa442542eee1ff50c986ea6b39847b3cc092ff6', 
+                "7461f371914ab32671045a155d9831ea8793d77cd59592c4340f86cbc18347b5",
+                "8ec0ba238b96bec0cbdddcae0aa442542eee1ff50c986ea6b39847b3cc092ff6", 
             ],
             [
-                'ee079adb1df1860074356a25aa38206a6d716b2c3e67453d287698bad7b2b2d6',
-                '8dc2412aafe3be5c4c5f37e0ecc5f9f6a446989af04c4e25ebaac479ec1c8c1e', 
+                "ee079adb1df1860074356a25aa38206a6d716b2c3e67453d287698bad7b2b2d6",
+                "8dc2412aafe3be5c4c5f37e0ecc5f9f6a446989af04c4e25ebaac479ec1c8c1e", 
             ],
             [
-                '16ec93e447ec83f0467b18302ee620f7e65de331874c9dc72bfd8616ba9da6b5',
-                '5e4631150e62fb40d0e8c2a7ca5804a39d58186a50e497139626778e25b0674d', 
+                "16ec93e447ec83f0467b18302ee620f7e65de331874c9dc72bfd8616ba9da6b5",
+                "5e4631150e62fb40d0e8c2a7ca5804a39d58186a50e497139626778e25b0674d", 
             ],
             [
-                'eaa5f980c245f6f038978290afa70b6bd8855897f98b6aa485b96065d537bd99',
-                'f65f5d3e292c2e0819a528391c994624d784869d7e6ea67fb18041024edc07dc', 
+                "eaa5f980c245f6f038978290afa70b6bd8855897f98b6aa485b96065d537bd99",
+                "f65f5d3e292c2e0819a528391c994624d784869d7e6ea67fb18041024edc07dc", 
             ],
             [
-                '78c9407544ac132692ee1910a02439958ae04877151342ea96c4b6b35a49f51',
-                'f3e0319169eb9b85d5404795539a5e68fa1fbd583c064d2462b675f194a3ddb4', 
+                "78c9407544ac132692ee1910a02439958ae04877151342ea96c4b6b35a49f51",
+                "f3e0319169eb9b85d5404795539a5e68fa1fbd583c064d2462b675f194a3ddb4", 
             ],
             [
-                '494f4be219a1a77016dcd838431aea0001cdc8ae7a6fc688726578d9702857a5',
-                '42242a969283a5f339ba7f075e36ba2af925ce30d767ed6e55f4b031880d562c', 
+                "494f4be219a1a77016dcd838431aea0001cdc8ae7a6fc688726578d9702857a5",
+                "42242a969283a5f339ba7f075e36ba2af925ce30d767ed6e55f4b031880d562c", 
             ],
             [
-                'a598a8030da6d86c6bc7f2f5144ea549d28211ea58faa70ebf4c1e665c1fe9b5',
-                '204b5d6f84822c307e4b4a7140737aec23fc63b65b35f86a10026dbd2d864e6b', 
+                "a598a8030da6d86c6bc7f2f5144ea549d28211ea58faa70ebf4c1e665c1fe9b5",
+                "204b5d6f84822c307e4b4a7140737aec23fc63b65b35f86a10026dbd2d864e6b", 
             ],
             [
-                'c41916365abb2b5d09192f5f2dbeafec208f020f12570a184dbadc3e58595997',
-                '4f14351d0087efa49d245b328984989d5caf9450f34bfc0ed16e96b58fa9913', 
+                "c41916365abb2b5d09192f5f2dbeafec208f020f12570a184dbadc3e58595997",
+                "4f14351d0087efa49d245b328984989d5caf9450f34bfc0ed16e96b58fa9913", 
             ],
             [
-                '841d6063a586fa475a724604da03bc5b92a2e0d2e0a36acfe4c73a5514742881',
-                '73867f59c0659e81904f9a1c7543698e62562d6744c169ce7a36de01a8d6154', 
+                "841d6063a586fa475a724604da03bc5b92a2e0d2e0a36acfe4c73a5514742881",
+                "73867f59c0659e81904f9a1c7543698e62562d6744c169ce7a36de01a8d6154", 
             ],
             [
-                '5e95bb399a6971d376026947f89bde2f282b33810928be4ded112ac4d70e20d5',
-                '39f23f366809085beebfc71181313775a99c9aed7d8ba38b161384c746012865', 
+                "5e95bb399a6971d376026947f89bde2f282b33810928be4ded112ac4d70e20d5",
+                "39f23f366809085beebfc71181313775a99c9aed7d8ba38b161384c746012865", 
             ],
             [
-                '36e4641a53948fd476c39f8a99fd974e5ec07564b5315d8bf99471bca0ef2f66',
-                'd2424b1b1abe4eb8164227b085c9aa9456ea13493fd563e06fd51cf5694c78fc', 
+                "36e4641a53948fd476c39f8a99fd974e5ec07564b5315d8bf99471bca0ef2f66",
+                "d2424b1b1abe4eb8164227b085c9aa9456ea13493fd563e06fd51cf5694c78fc", 
             ],
             [
-                '336581ea7bfbbb290c191a2f507a41cf5643842170e914faeab27c2c579f726',
-                'ead12168595fe1be99252129b6e56b3391f7ab1410cd1e0ef3dcdcabd2fda224', 
+                "336581ea7bfbbb290c191a2f507a41cf5643842170e914faeab27c2c579f726",
+                "ead12168595fe1be99252129b6e56b3391f7ab1410cd1e0ef3dcdcabd2fda224", 
             ],
             [
-                '8ab89816dadfd6b6a1f2634fcf00ec8403781025ed6890c4849742706bd43ede',
-                '6fdcef09f2f6d0a044e654aef624136f503d459c3e89845858a47a9129cdd24e', 
+                "8ab89816dadfd6b6a1f2634fcf00ec8403781025ed6890c4849742706bd43ede",
+                "6fdcef09f2f6d0a044e654aef624136f503d459c3e89845858a47a9129cdd24e", 
             ],
             [
-                '1e33f1a746c9c5778133344d9299fcaa20b0938e8acff2544bb40284b8c5fb94',
-                '60660257dd11b3aa9c8ed618d24edff2306d320f1d03010e33a7d2057f3b3b6', 
+                "1e33f1a746c9c5778133344d9299fcaa20b0938e8acff2544bb40284b8c5fb94",
+                "60660257dd11b3aa9c8ed618d24edff2306d320f1d03010e33a7d2057f3b3b6", 
             ],
             [
-                '85b7c1dcb3cec1b7ee7f30ded79dd20a0ed1f4cc18cbcfcfa410361fd8f08f31',
-                '3d98a9cdd026dd43f39048f25a8847f4fcafad1895d7a633c6fed3c35e999511', 
+                "85b7c1dcb3cec1b7ee7f30ded79dd20a0ed1f4cc18cbcfcfa410361fd8f08f31",
+                "3d98a9cdd026dd43f39048f25a8847f4fcafad1895d7a633c6fed3c35e999511", 
             ],
             [
-                '29df9fbd8d9e46509275f4b125d6d45d7fbe9a3b878a7af872a2800661ac5f51',
-                'b4c4fe99c775a606e2d8862179139ffda61dc861c019e55cd2876eb2a27d84b', 
+                "29df9fbd8d9e46509275f4b125d6d45d7fbe9a3b878a7af872a2800661ac5f51",
+                "b4c4fe99c775a606e2d8862179139ffda61dc861c019e55cd2876eb2a27d84b", 
             ],
             [
-                'a0b1cae06b0a847a3fea6e671aaf8adfdfe58ca2f768105c8082b2e449fce252',
-                'ae434102edde0958ec4b19d917a6a28e6b72da1834aff0e650f049503a296cf2', 
+                "a0b1cae06b0a847a3fea6e671aaf8adfdfe58ca2f768105c8082b2e449fce252",
+                "ae434102edde0958ec4b19d917a6a28e6b72da1834aff0e650f049503a296cf2", 
             ],
             [
-                '4e8ceafb9b3e9a136dc7ff67e840295b499dfb3b2133e4ba113f2e4c0e121e5',
-                'cf2174118c8b6d7a4b48f6d534ce5c79422c086a63460502b827ce62a326683c', 
+                "4e8ceafb9b3e9a136dc7ff67e840295b499dfb3b2133e4ba113f2e4c0e121e5",
+                "cf2174118c8b6d7a4b48f6d534ce5c79422c086a63460502b827ce62a326683c", 
             ],
             [
-                'd24a44e047e19b6f5afb81c7ca2f69080a5076689a010919f42725c2b789a33b',
-                '6fb8d5591b466f8fc63db50f1c0f1c69013f996887b8244d2cdec417afea8fa3', 
+                "d24a44e047e19b6f5afb81c7ca2f69080a5076689a010919f42725c2b789a33b",
+                "6fb8d5591b466f8fc63db50f1c0f1c69013f996887b8244d2cdec417afea8fa3", 
             ],
             [
-                'ea01606a7a6c9cdd249fdfcfacb99584001edd28abbab77b5104e98e8e3b35d4',
-                '322af4908c7312b0cfbfe369f7a7b3cdb7d4494bc2823700cfd652188a3ea98d', 
+                "ea01606a7a6c9cdd249fdfcfacb99584001edd28abbab77b5104e98e8e3b35d4",
+                "322af4908c7312b0cfbfe369f7a7b3cdb7d4494bc2823700cfd652188a3ea98d", 
             ],
             [
-                'af8addbf2b661c8a6c6328655eb96651252007d8c5ea31be4ad196de8ce2131f',
-                '6749e67c029b85f52a034eafd096836b2520818680e26ac8f3dfbcdb71749700', 
+                "af8addbf2b661c8a6c6328655eb96651252007d8c5ea31be4ad196de8ce2131f",
+                "6749e67c029b85f52a034eafd096836b2520818680e26ac8f3dfbcdb71749700", 
             ],
             [
-                'e3ae1974566ca06cc516d47e0fb165a674a3dabcfca15e722f0e3450f45889',
-                '2aeabe7e4531510116217f07bf4d07300de97e4874f81f533420a72eeb0bd6a4', 
+                "e3ae1974566ca06cc516d47e0fb165a674a3dabcfca15e722f0e3450f45889",
+                "2aeabe7e4531510116217f07bf4d07300de97e4874f81f533420a72eeb0bd6a4", 
             ],
             [
-                '591ee355313d99721cf6993ffed1e3e301993ff3ed258802075ea8ced397e246',
-                'b0ea558a113c30bea60fc4775460c7901ff0b053d25ca2bdeee98f1a4be5d196', 
+                "591ee355313d99721cf6993ffed1e3e301993ff3ed258802075ea8ced397e246",
+                "b0ea558a113c30bea60fc4775460c7901ff0b053d25ca2bdeee98f1a4be5d196", 
             ],
             [
-                '11396d55fda54c49f19aa97318d8da61fa8584e47b084945077cf03255b52984',
-                '998c74a8cd45ac01289d5833a7beb4744ff536b01b257be4c5767bea93ea57a4', 
+                "11396d55fda54c49f19aa97318d8da61fa8584e47b084945077cf03255b52984",
+                "998c74a8cd45ac01289d5833a7beb4744ff536b01b257be4c5767bea93ea57a4", 
             ],
             [
-                '3c5d2a1ba39c5a1790000738c9e0c40b8dcdfd5468754b6405540157e017aa7a',
-                'b2284279995a34e2f9d4de7396fc18b80f9b8b9fdd270f6661f79ca4c81bd257', 
+                "3c5d2a1ba39c5a1790000738c9e0c40b8dcdfd5468754b6405540157e017aa7a",
+                "b2284279995a34e2f9d4de7396fc18b80f9b8b9fdd270f6661f79ca4c81bd257", 
             ],
             [
-                'cc8704b8a60a0defa3a99a7299f2e9c3fbc395afb04ac078425ef8a1793cc030',
-                'bdd46039feed17881d1e0862db347f8cf395b74fc4bcdc4e940b74e3ac1f1b13', 
+                "cc8704b8a60a0defa3a99a7299f2e9c3fbc395afb04ac078425ef8a1793cc030",
+                "bdd46039feed17881d1e0862db347f8cf395b74fc4bcdc4e940b74e3ac1f1b13", 
             ],
             [
-                'c533e4f7ea8555aacd9777ac5cad29b97dd4defccc53ee7ea204119b2889b197',
-                '6f0a256bc5efdf429a2fb6242f1a43a2d9b925bb4a4b3a26bb8e0f45eb596096', 
+                "c533e4f7ea8555aacd9777ac5cad29b97dd4defccc53ee7ea204119b2889b197",
+                "6f0a256bc5efdf429a2fb6242f1a43a2d9b925bb4a4b3a26bb8e0f45eb596096", 
             ],
             [
-                'c14f8f2ccb27d6f109f6d08d03cc96a69ba8c34eec07bbcf566d48e33da6593',
-                'c359d6923bb398f7fd4473e16fe1c28475b740dd098075e6c0e8649113dc3a38', 
+                "c14f8f2ccb27d6f109f6d08d03cc96a69ba8c34eec07bbcf566d48e33da6593",
+                "c359d6923bb398f7fd4473e16fe1c28475b740dd098075e6c0e8649113dc3a38", 
             ],
             [
-                'a6cbc3046bc6a450bac24789fa17115a4c9739ed75f8f21ce441f72e0b90e6ef',
-                '21ae7f4680e889bb130619e2c0f95a360ceb573c70603139862afd617fa9b9f', 
+                "a6cbc3046bc6a450bac24789fa17115a4c9739ed75f8f21ce441f72e0b90e6ef",
+                "21ae7f4680e889bb130619e2c0f95a360ceb573c70603139862afd617fa9b9f", 
             ],
             [
-                '347d6d9a02c48927ebfb86c1359b1caf130a3c0267d11ce6344b39f99d43cc38',
-                '60ea7f61a353524d1c987f6ecec92f086d565ab687870cb12689ff1e31c74448', 
+                "347d6d9a02c48927ebfb86c1359b1caf130a3c0267d11ce6344b39f99d43cc38",
+                "60ea7f61a353524d1c987f6ecec92f086d565ab687870cb12689ff1e31c74448", 
             ],
             [
-                'da6545d2181db8d983f7dcb375ef5866d47c67b1bf31c8cf855ef7437b72656a',
-                '49b96715ab6878a79e78f07ce5680c5d6673051b4935bd897fea824b77dc208a', 
+                "da6545d2181db8d983f7dcb375ef5866d47c67b1bf31c8cf855ef7437b72656a",
+                "49b96715ab6878a79e78f07ce5680c5d6673051b4935bd897fea824b77dc208a", 
             ],
             [
-                'c40747cc9d012cb1a13b8148309c6de7ec25d6945d657146b9d5994b8feb1111',
-                '5ca560753be2a12fc6de6caf2cb489565db936156b9514e1bb5e83037e0fa2d4', 
+                "c40747cc9d012cb1a13b8148309c6de7ec25d6945d657146b9d5994b8feb1111",
+                "5ca560753be2a12fc6de6caf2cb489565db936156b9514e1bb5e83037e0fa2d4", 
             ],
             [
-                '4e42c8ec82c99798ccf3a610be870e78338c7f713348bd34c8203ef4037f3502',
-                '7571d74ee5e0fb92a7a8b33a07783341a5492144cc54bcc40a94473693606437', 
+                "4e42c8ec82c99798ccf3a610be870e78338c7f713348bd34c8203ef4037f3502",
+                "7571d74ee5e0fb92a7a8b33a07783341a5492144cc54bcc40a94473693606437", 
             ],
             [
-                '3775ab7089bc6af823aba2e1af70b236d251cadb0c86743287522a1b3b0dedea',
-                'be52d107bcfa09d8bcb9736a828cfa7fac8db17bf7a76a2c42ad961409018cf7', 
+                "3775ab7089bc6af823aba2e1af70b236d251cadb0c86743287522a1b3b0dedea",
+                "be52d107bcfa09d8bcb9736a828cfa7fac8db17bf7a76a2c42ad961409018cf7", 
             ],
             [
-                'cee31cbf7e34ec379d94fb814d3d775ad954595d1314ba8846959e3e82f74e26',
-                '8fd64a14c06b589c26b947ae2bcf6bfa0149ef0be14ed4d80f448a01c43b1c6d', 
+                "cee31cbf7e34ec379d94fb814d3d775ad954595d1314ba8846959e3e82f74e26",
+                "8fd64a14c06b589c26b947ae2bcf6bfa0149ef0be14ed4d80f448a01c43b1c6d", 
             ],
             [
-                'b4f9eaea09b6917619f6ea6a4eb5464efddb58fd45b1ebefcdc1a01d08b47986',
-                '39e5c9925b5a54b07433a4f18c61726f8bb131c012ca542eb24a8ac07200682a', 
+                "b4f9eaea09b6917619f6ea6a4eb5464efddb58fd45b1ebefcdc1a01d08b47986",
+                "39e5c9925b5a54b07433a4f18c61726f8bb131c012ca542eb24a8ac07200682a", 
             ],
             [
-                'd4263dfc3d2df923a0179a48966d30ce84e2515afc3dccc1b77907792ebcc60e',
-                '62dfaf07a0f78feb30e30d6295853ce189e127760ad6cf7fae164e122a208d54', 
+                "d4263dfc3d2df923a0179a48966d30ce84e2515afc3dccc1b77907792ebcc60e",
+                "62dfaf07a0f78feb30e30d6295853ce189e127760ad6cf7fae164e122a208d54", 
             ],
             [
-                '48457524820fa65a4f8d35eb6930857c0032acc0a4a2de422233eeda897612c4',
-                '25a748ab367979d98733c38a1fa1c2e7dc6cc07db2d60a9ae7a76aaa49bd0f77', 
+                "48457524820fa65a4f8d35eb6930857c0032acc0a4a2de422233eeda897612c4",
+                "25a748ab367979d98733c38a1fa1c2e7dc6cc07db2d60a9ae7a76aaa49bd0f77", 
             ],
             [
-                'dfeeef1881101f2cb11644f3a2afdfc2045e19919152923f367a1767c11cceda',
-                'ecfb7056cf1de042f9420bab396793c0c390bde74b4bbdff16a83ae09a9a7517', 
+                "dfeeef1881101f2cb11644f3a2afdfc2045e19919152923f367a1767c11cceda",
+                "ecfb7056cf1de042f9420bab396793c0c390bde74b4bbdff16a83ae09a9a7517", 
             ],
             [
-                '6d7ef6b17543f8373c573f44e1f389835d89bcbc6062ced36c82df83b8fae859',
-                'cd450ec335438986dfefa10c57fea9bcc521a0959b2d80bbf74b190dca712d10', 
+                "6d7ef6b17543f8373c573f44e1f389835d89bcbc6062ced36c82df83b8fae859",
+                "cd450ec335438986dfefa10c57fea9bcc521a0959b2d80bbf74b190dca712d10", 
             ],
             [
-                'e75605d59102a5a2684500d3b991f2e3f3c88b93225547035af25af66e04541f',
-                'f5c54754a8f71ee540b9b48728473e314f729ac5308b06938360990e2bfad125', 
+                "e75605d59102a5a2684500d3b991f2e3f3c88b93225547035af25af66e04541f",
+                "f5c54754a8f71ee540b9b48728473e314f729ac5308b06938360990e2bfad125", 
             ],
             [
-                'eb98660f4c4dfaa06a2be453d5020bc99a0c2e60abe388457dd43fefb1ed620c',
-                '6cb9a8876d9cb8520609af3add26cd20a0a7cd8a9411131ce85f44100099223e', 
+                "eb98660f4c4dfaa06a2be453d5020bc99a0c2e60abe388457dd43fefb1ed620c",
+                "6cb9a8876d9cb8520609af3add26cd20a0a7cd8a9411131ce85f44100099223e", 
             ],
             [
-                '13e87b027d8514d35939f2e6892b19922154596941888336dc3563e3b8dba942',
-                'fef5a3c68059a6dec5d624114bf1e91aac2b9da568d6abeb2570d55646b8adf1', 
+                "13e87b027d8514d35939f2e6892b19922154596941888336dc3563e3b8dba942",
+                "fef5a3c68059a6dec5d624114bf1e91aac2b9da568d6abeb2570d55646b8adf1", 
             ],
             [
-                'ee163026e9fd6fe017c38f06a5be6fc125424b371ce2708e7bf4491691e5764a',
-                '1acb250f255dd61c43d94ccc670d0f58f49ae3fa15b96623e5430da0ad6c62b2', 
+                "ee163026e9fd6fe017c38f06a5be6fc125424b371ce2708e7bf4491691e5764a",
+                "1acb250f255dd61c43d94ccc670d0f58f49ae3fa15b96623e5430da0ad6c62b2", 
             ],
             [
-                'b268f5ef9ad51e4d78de3a750c2dc89b1e626d43505867999932e5db33af3d80',
-                '5f310d4b3c99b9ebb19f77d41c1dee018cf0d34fd4191614003e945a1216e423', 
+                "b268f5ef9ad51e4d78de3a750c2dc89b1e626d43505867999932e5db33af3d80",
+                "5f310d4b3c99b9ebb19f77d41c1dee018cf0d34fd4191614003e945a1216e423", 
             ],
             [
-                'ff07f3118a9df035e9fad85eb6c7bfe42b02f01ca99ceea3bf7ffdba93c4750d',
-                '438136d603e858a3a5c440c38eccbaddc1d2942114e2eddd4740d098ced1f0d8', 
+                "ff07f3118a9df035e9fad85eb6c7bfe42b02f01ca99ceea3bf7ffdba93c4750d",
+                "438136d603e858a3a5c440c38eccbaddc1d2942114e2eddd4740d098ced1f0d8", 
             ],
             [
-                '8d8b9855c7c052a34146fd20ffb658bea4b9f69e0d825ebec16e8c3ce2b526a1',
-                'cdb559eedc2d79f926baf44fb84ea4d44bcf50fee51d7ceb30e2e7f463036758', 
+                "8d8b9855c7c052a34146fd20ffb658bea4b9f69e0d825ebec16e8c3ce2b526a1",
+                "cdb559eedc2d79f926baf44fb84ea4d44bcf50fee51d7ceb30e2e7f463036758", 
             ],
             [
-                '52db0b5384dfbf05bfa9d472d7ae26dfe4b851ceca91b1eba54263180da32b63',
-                'c3b997d050ee5d423ebaf66a6db9f57b3180c902875679de924b69d84a7b375', 
+                "52db0b5384dfbf05bfa9d472d7ae26dfe4b851ceca91b1eba54263180da32b63",
+                "c3b997d050ee5d423ebaf66a6db9f57b3180c902875679de924b69d84a7b375", 
             ],
             [
-                'e62f9490d3d51da6395efd24e80919cc7d0f29c3f3fa48c6fff543becbd43352',
-                '6d89ad7ba4876b0b22c2ca280c682862f342c8591f1daf5170e07bfd9ccafa7d', 
+                "e62f9490d3d51da6395efd24e80919cc7d0f29c3f3fa48c6fff543becbd43352",
+                "6d89ad7ba4876b0b22c2ca280c682862f342c8591f1daf5170e07bfd9ccafa7d", 
             ],
             [
-                '7f30ea2476b399b4957509c88f77d0191afa2ff5cb7b14fd6d8e7d65aaab1193',
-                'ca5ef7d4b231c94c3b15389a5f6311e9daff7bb67b103e9880ef4bff637acaec', 
+                "7f30ea2476b399b4957509c88f77d0191afa2ff5cb7b14fd6d8e7d65aaab1193",
+                "ca5ef7d4b231c94c3b15389a5f6311e9daff7bb67b103e9880ef4bff637acaec", 
             ],
             [
-                '5098ff1e1d9f14fb46a210fada6c903fef0fb7b4a1dd1d9ac60a0361800b7a00',
-                '9731141d81fc8f8084d37c6e7542006b3ee1b40d60dfe5362a5b132fd17ddc0', 
+                "5098ff1e1d9f14fb46a210fada6c903fef0fb7b4a1dd1d9ac60a0361800b7a00",
+                "9731141d81fc8f8084d37c6e7542006b3ee1b40d60dfe5362a5b132fd17ddc0", 
             ],
             [
-                '32b78c7de9ee512a72895be6b9cbefa6e2f3c4ccce445c96b9f2c81e2778ad58',
-                'ee1849f513df71e32efc3896ee28260c73bb80547ae2275ba497237794c8753c', 
+                "32b78c7de9ee512a72895be6b9cbefa6e2f3c4ccce445c96b9f2c81e2778ad58",
+                "ee1849f513df71e32efc3896ee28260c73bb80547ae2275ba497237794c8753c", 
             ],
             [
-                'e2cb74fddc8e9fbcd076eef2a7c72b0ce37d50f08269dfc074b581550547a4f7',
-                'd3aa2ed71c9dd2247a62df062736eb0baddea9e36122d2be8641abcb005cc4a4', 
+                "e2cb74fddc8e9fbcd076eef2a7c72b0ce37d50f08269dfc074b581550547a4f7",
+                "d3aa2ed71c9dd2247a62df062736eb0baddea9e36122d2be8641abcb005cc4a4", 
             ],
             [
-                '8438447566d4d7bedadc299496ab357426009a35f235cb141be0d99cd10ae3a8',
-                'c4e1020916980a4da5d01ac5e6ad330734ef0d7906631c4f2390426b2edd791f', 
+                "8438447566d4d7bedadc299496ab357426009a35f235cb141be0d99cd10ae3a8",
+                "c4e1020916980a4da5d01ac5e6ad330734ef0d7906631c4f2390426b2edd791f", 
             ],
             [
-                '4162d488b89402039b584c6fc6c308870587d9c46f660b878ab65c82c711d67e',
-                '67163e903236289f776f22c25fb8a3afc1732f2b84b4e95dbda47ae5a0852649', 
+                "4162d488b89402039b584c6fc6c308870587d9c46f660b878ab65c82c711d67e",
+                "67163e903236289f776f22c25fb8a3afc1732f2b84b4e95dbda47ae5a0852649", 
             ],
             [
-                '3fad3fa84caf0f34f0f89bfd2dcf54fc175d767aec3e50684f3ba4a4bf5f683d',
-                'cd1bc7cb6cc407bb2f0ca647c718a730cf71872e7d0d2a53fa20efcdfe61826', 
+                "3fad3fa84caf0f34f0f89bfd2dcf54fc175d767aec3e50684f3ba4a4bf5f683d",
+                "cd1bc7cb6cc407bb2f0ca647c718a730cf71872e7d0d2a53fa20efcdfe61826", 
             ],
             [
-                '674f2600a3007a00568c1a7ce05d0816c1fb84bf1370798f1c69532faeb1a86b',
-                '299d21f9413f33b3edf43b257004580b70db57da0b182259e09eecc69e0d38a5', 
+                "674f2600a3007a00568c1a7ce05d0816c1fb84bf1370798f1c69532faeb1a86b",
+                "299d21f9413f33b3edf43b257004580b70db57da0b182259e09eecc69e0d38a5", 
             ],
             [
-                'd32f4da54ade74abb81b815ad1fb3b263d82d6c692714bcff87d29bd5ee9f08f',
-                'f9429e738b8e53b968e99016c059707782e14f4535359d582fc416910b3eea87', 
+                "d32f4da54ade74abb81b815ad1fb3b263d82d6c692714bcff87d29bd5ee9f08f",
+                "f9429e738b8e53b968e99016c059707782e14f4535359d582fc416910b3eea87", 
             ],
             [
-                '30e4e670435385556e593657135845d36fbb6931f72b08cb1ed954f1e3ce3ff6',
-                '462f9bce619898638499350113bbc9b10a878d35da70740dc695a559eb88db7b', 
+                "30e4e670435385556e593657135845d36fbb6931f72b08cb1ed954f1e3ce3ff6",
+                "462f9bce619898638499350113bbc9b10a878d35da70740dc695a559eb88db7b", 
             ],
             [
-                'be2062003c51cc3004682904330e4dee7f3dcd10b01e580bf1971b04d4cad297',
-                '62188bc49d61e5428573d48a74e1c655b1c61090905682a0d5558ed72dccb9bc', 
+                "be2062003c51cc3004682904330e4dee7f3dcd10b01e580bf1971b04d4cad297",
+                "62188bc49d61e5428573d48a74e1c655b1c61090905682a0d5558ed72dccb9bc", 
             ],
             [
-                '93144423ace3451ed29e0fb9ac2af211cb6e84a601df5993c419859fff5df04a',
-                '7c10dfb164c3425f5c71a3f9d7992038f1065224f72bb9d1d902a6d13037b47c', 
+                "93144423ace3451ed29e0fb9ac2af211cb6e84a601df5993c419859fff5df04a",
+                "7c10dfb164c3425f5c71a3f9d7992038f1065224f72bb9d1d902a6d13037b47c", 
             ],
             [
-                'b015f8044f5fcbdcf21ca26d6c34fb8197829205c7b7d2a7cb66418c157b112c',
-                'ab8c1e086d04e813744a655b2df8d5f83b3cdc6faa3088c1d3aea1454e3a1d5f', 
+                "b015f8044f5fcbdcf21ca26d6c34fb8197829205c7b7d2a7cb66418c157b112c",
+                "ab8c1e086d04e813744a655b2df8d5f83b3cdc6faa3088c1d3aea1454e3a1d5f", 
             ],
             [
-                'd5e9e1da649d97d89e4868117a465a3a4f8a18de57a140d36b3f2af341a21b52',
-                '4cb04437f391ed73111a13cc1d4dd0db1693465c2240480d8955e8592f27447a', 
+                "d5e9e1da649d97d89e4868117a465a3a4f8a18de57a140d36b3f2af341a21b52",
+                "4cb04437f391ed73111a13cc1d4dd0db1693465c2240480d8955e8592f27447a", 
             ],
             [
-                'd3ae41047dd7ca065dbf8ed77b992439983005cd72e16d6f996a5316d36966bb',
-                'bd1aeb21ad22ebb22a10f0303417c6d964f8cdd7df0aca614b10dc14d125ac46', 
+                "d3ae41047dd7ca065dbf8ed77b992439983005cd72e16d6f996a5316d36966bb",
+                "bd1aeb21ad22ebb22a10f0303417c6d964f8cdd7df0aca614b10dc14d125ac46", 
             ],
             [
-                '463e2763d885f958fc66cdd22800f0a487197d0a82e377b49f80af87c897b065',
-                'bfefacdb0e5d0fd7df3a311a94de062b26b80c61fbc97508b79992671ef7ca7f', 
+                "463e2763d885f958fc66cdd22800f0a487197d0a82e377b49f80af87c897b065",
+                "bfefacdb0e5d0fd7df3a311a94de062b26b80c61fbc97508b79992671ef7ca7f", 
             ],
             [
-                '7985fdfd127c0567c6f53ec1bb63ec3158e597c40bfe747c83cddfc910641917',
-                '603c12daf3d9862ef2b25fe1de289aed24ed291e0ec6708703a5bd567f32ed03', 
+                "7985fdfd127c0567c6f53ec1bb63ec3158e597c40bfe747c83cddfc910641917",
+                "603c12daf3d9862ef2b25fe1de289aed24ed291e0ec6708703a5bd567f32ed03", 
             ],
             [
-                '74a1ad6b5f76e39db2dd249410eac7f99e74c59cb83d2d0ed5ff1543da7703e9',
-                'cc6157ef18c9c63cd6193d83631bbea0093e0968942e8c33d5737fd790e0db08', 
+                "74a1ad6b5f76e39db2dd249410eac7f99e74c59cb83d2d0ed5ff1543da7703e9",
+                "cc6157ef18c9c63cd6193d83631bbea0093e0968942e8c33d5737fd790e0db08", 
             ],
             [
-                '30682a50703375f602d416664ba19b7fc9bab42c72747463a71d0896b22f6da3',
-                '553e04f6b018b4fa6c8f39e7f311d3176290d0e0f19ca73f17714d9977a22ff8', 
+                "30682a50703375f602d416664ba19b7fc9bab42c72747463a71d0896b22f6da3",
+                "553e04f6b018b4fa6c8f39e7f311d3176290d0e0f19ca73f17714d9977a22ff8", 
             ],
             [
-                '9e2158f0d7c0d5f26c3791efefa79597654e7a2b2464f52b1ee6c1347769ef57',
-                '712fcdd1b9053f09003a3481fa7762e9ffd7c8ef35a38509e2fbf2629008373', 
+                "9e2158f0d7c0d5f26c3791efefa79597654e7a2b2464f52b1ee6c1347769ef57",
+                "712fcdd1b9053f09003a3481fa7762e9ffd7c8ef35a38509e2fbf2629008373", 
             ],
             [
-                '176e26989a43c9cfeba4029c202538c28172e566e3c4fce7322857f3be327d66',
-                'ed8cc9d04b29eb877d270b4878dc43c19aefd31f4eee09ee7b47834c1fa4b1c3', 
+                "176e26989a43c9cfeba4029c202538c28172e566e3c4fce7322857f3be327d66",
+                "ed8cc9d04b29eb877d270b4878dc43c19aefd31f4eee09ee7b47834c1fa4b1c3", 
             ],
             [
-                '75d46efea3771e6e68abb89a13ad747ecf1892393dfc4f1b7004788c50374da8',
-                '9852390a99507679fd0b86fd2b39a868d7efc22151346e1a3ca4726586a6bed8', 
+                "75d46efea3771e6e68abb89a13ad747ecf1892393dfc4f1b7004788c50374da8",
+                "9852390a99507679fd0b86fd2b39a868d7efc22151346e1a3ca4726586a6bed8", 
             ],
             [
-                '809a20c67d64900ffb698c4c825f6d5f2310fb0451c869345b7319f645605721',
-                '9e994980d9917e22b76b061927fa04143d096ccc54963e6a5ebfa5f3f8e286c1', 
+                "809a20c67d64900ffb698c4c825f6d5f2310fb0451c869345b7319f645605721",
+                "9e994980d9917e22b76b061927fa04143d096ccc54963e6a5ebfa5f3f8e286c1", 
             ],
             [
-                '1b38903a43f7f114ed4500b4eac7083fdefece1cf29c63528d563446f972c180',
-                '4036edc931a60ae889353f77fd53de4a2708b26b6f5da72ad3394119daf408f9', 
+                "1b38903a43f7f114ed4500b4eac7083fdefece1cf29c63528d563446f972c180",
+                "4036edc931a60ae889353f77fd53de4a2708b26b6f5da72ad3394119daf408f9", 
             ], 
         ]
     }
@@ -28951,7 +28949,7 @@ module.exports = {
 
 
 parcelRequire.register("70bli", function(module, exports) {
-'use strict';
+"use strict";
 
 var $jBtqe = parcelRequire("jBtqe");
 
@@ -28970,8 +28968,8 @@ var $638Zq = parcelRequire("638Zq");
 function $519154d9dc50807e$var$EC(options) {
     if (!(this instanceof $519154d9dc50807e$var$EC)) return new $519154d9dc50807e$var$EC(options);
     // Shortcut `elliptic.ec(curve-name)`
-    if (typeof options === 'string') {
-        $519154d9dc50807e$var$assert(Object.prototype.hasOwnProperty.call($3J9Yr, options), 'Unknown curve ' + options);
+    if (typeof options === "string") {
+        $519154d9dc50807e$var$assert(Object.prototype.hasOwnProperty.call($3J9Yr, options), "Unknown curve " + options);
         options = $3J9Yr[options];
     }
     // Shortcut for `elliptic.ec(elliptic.curves.curveName)`
@@ -29004,9 +29002,9 @@ $519154d9dc50807e$var$EC.prototype.genKeyPair = function genKeyPair(options) {
     var drbg = new $6X5ci({
         hash: this.hash,
         pers: options.pers,
-        persEnc: options.persEnc || 'utf8',
+        persEnc: options.persEnc || "utf8",
         entropy: options.entropy || $0dAuo(this.hash.hmacStrength),
-        entropyEnc: options.entropy && options.entropyEnc || 'utf8',
+        entropyEnc: options.entropy && options.entropyEnc || "utf8",
         nonce: this.n.toArray()
     });
     var bytes = this.n.byteLength();
@@ -29025,7 +29023,7 @@ $519154d9dc50807e$var$EC.prototype._truncateToN = function _truncateToN(msg, tru
     else return msg;
 };
 $519154d9dc50807e$var$EC.prototype.sign = function sign(msg, key, enc, options) {
-    if (typeof enc === 'object') {
+    if (typeof enc === "object") {
         options = enc;
         enc = null;
     }
@@ -29034,16 +29032,16 @@ $519154d9dc50807e$var$EC.prototype.sign = function sign(msg, key, enc, options) 
     msg = this._truncateToN(new $jBtqe(msg, 16));
     // Zero-extend key to provide enough entropy
     var bytes = this.n.byteLength();
-    var bkey = key.getPrivate().toArray('be', bytes);
+    var bkey = key.getPrivate().toArray("be", bytes);
     // Zero-extend nonce to have the same byte size as N
-    var nonce = msg.toArray('be', bytes);
+    var nonce = msg.toArray("be", bytes);
     // Instantiate Hmac_DRBG
     var drbg = new $6X5ci({
         hash: this.hash,
         entropy: bkey,
         nonce: nonce,
         pers: options.pers,
-        persEnc: options.persEnc || 'utf8'
+        persEnc: options.persEnc || "utf8"
     });
     // Number of bytes to generate
     var ns1 = this.n.sub(new $jBtqe(1));
@@ -29075,7 +29073,7 @@ $519154d9dc50807e$var$EC.prototype.sign = function sign(msg, key, enc, options) 
 $519154d9dc50807e$var$EC.prototype.verify = function verify(msg, signature, key, enc) {
     msg = this._truncateToN(new $jBtqe(msg, 16));
     key = this.keyFromPublic(key, enc);
-    signature = new $638Zq(signature, 'hex');
+    signature = new $638Zq(signature, "hex");
     // Perform primitive values validation
     var r = signature.r;
     var s = signature.s;
@@ -29101,7 +29099,7 @@ $519154d9dc50807e$var$EC.prototype.verify = function verify(msg, signature, key,
     return p.eqXToP(r);
 };
 $519154d9dc50807e$var$EC.prototype.recoverPubKey = function(msg, signature, j, enc) {
-    $519154d9dc50807e$var$assert((3 & j) === j, 'The recovery param is more than two bits');
+    $519154d9dc50807e$var$assert((3 & j) === j, "The recovery param is more than two bits");
     signature = new $638Zq(signature, enc);
     var n = this.n;
     var e = new $jBtqe(msg);
@@ -29110,7 +29108,7 @@ $519154d9dc50807e$var$EC.prototype.recoverPubKey = function(msg, signature, j, e
     // A set LSB signifies that the y-coordinate is odd
     var isYOdd = j & 1;
     var isSecondKey = j >> 1;
-    if (r.cmp(this.curve.p.umod(this.curve.n)) >= 0 && isSecondKey) throw new Error('Unable to find sencond key candinate');
+    if (r.cmp(this.curve.p.umod(this.curve.n)) >= 0 && isSecondKey) throw new Error("Unable to find sencond key candinate");
     // 1.1. Let x = r + jn.
     if (isSecondKey) r = this.curve.pointFromX(r.add(this.curve.n), isYOdd);
     else r = this.curve.pointFromX(r, isYOdd);
@@ -29133,12 +29131,12 @@ $519154d9dc50807e$var$EC.prototype.getKeyRecoveryParam = function(e, signature, 
         }
         if (Qprime.eq(Q)) return i;
     }
-    throw new Error('Unable to find valid recovery factor');
+    throw new Error("Unable to find valid recovery factor");
 };
 
 });
 parcelRequire.register("6X5ci", function(module, exports) {
-'use strict';
+"use strict";
 
 var $hv5Fa = parcelRequire("hv5Fa");
 
@@ -29155,10 +29153,10 @@ function $50fc48d35c5347a0$var$HmacDRBG(options) {
     this.reseedInterval = null;
     this.K = null;
     this.V = null;
-    var entropy = $3xppW.toArray(options.entropy, options.entropyEnc || 'hex');
-    var nonce = $3xppW.toArray(options.nonce, options.nonceEnc || 'hex');
-    var pers = $3xppW.toArray(options.pers, options.persEnc || 'hex');
-    $dN0Q4(entropy.length >= this.minEntropy / 8, 'Not enough entropy. Minimum is: ' + this.minEntropy + ' bits');
+    var entropy = $3xppW.toArray(options.entropy, options.entropyEnc || "hex");
+    var nonce = $3xppW.toArray(options.nonce, options.nonceEnc || "hex");
+    var pers = $3xppW.toArray(options.pers, options.persEnc || "hex");
+    $dN0Q4(entropy.length >= this.minEntropy / 8, "Not enough entropy. Minimum is: " + this.minEntropy + " bits");
     this._init(entropy, nonce, pers);
 }
 module.exports = $50fc48d35c5347a0$var$HmacDRBG;
@@ -29192,28 +29190,28 @@ $50fc48d35c5347a0$var$HmacDRBG.prototype._update = function update(seed) {
 };
 $50fc48d35c5347a0$var$HmacDRBG.prototype.reseed = function reseed(entropy, entropyEnc, add, addEnc) {
     // Optional entropy enc
-    if (typeof entropyEnc !== 'string') {
+    if (typeof entropyEnc !== "string") {
         addEnc = add;
         add = entropyEnc;
         entropyEnc = null;
     }
     entropy = $3xppW.toArray(entropy, entropyEnc);
     add = $3xppW.toArray(add, addEnc);
-    $dN0Q4(entropy.length >= this.minEntropy / 8, 'Not enough entropy. Minimum is: ' + this.minEntropy + ' bits');
+    $dN0Q4(entropy.length >= this.minEntropy / 8, "Not enough entropy. Minimum is: " + this.minEntropy + " bits");
     this._update(entropy.concat(add || []));
     this._reseed = 1;
 };
 $50fc48d35c5347a0$var$HmacDRBG.prototype.generate = function generate(len, enc, add, addEnc) {
-    if (this._reseed > this.reseedInterval) throw new Error('Reseed is required');
+    if (this._reseed > this.reseedInterval) throw new Error("Reseed is required");
     // Optional encoding
-    if (typeof enc !== 'string') {
+    if (typeof enc !== "string") {
         addEnc = add;
         add = enc;
         enc = null;
     }
     // Optional additional data
     if (add) {
-        add = $3xppW.toArray(add, addEnc || 'hex');
+        add = $3xppW.toArray(add, addEnc || "hex");
         this._update(add);
     }
     var temp = [];
@@ -29230,7 +29228,7 @@ $50fc48d35c5347a0$var$HmacDRBG.prototype.generate = function generate(len, enc, 
 });
 
 parcelRequire.register("7sQNP", function(module, exports) {
-'use strict';
+"use strict";
 
 var $jBtqe = parcelRequire("jBtqe");
 
@@ -29263,15 +29261,15 @@ $56f41b6c5effc9ed$var$KeyPair.prototype.validate = function validate() {
     var pub = this.getPublic();
     if (pub.isInfinity()) return {
         result: false,
-        reason: 'Invalid public key'
+        reason: "Invalid public key"
     };
     if (!pub.validate()) return {
         result: false,
-        reason: 'Public key is not a point'
+        reason: "Public key is not a point"
     };
     if (!pub.mul(this.ec.curve.n).isInfinity()) return {
         result: false,
-        reason: 'Public key * N != O'
+        reason: "Public key * N != O"
     };
     return {
         result: true,
@@ -29280,7 +29278,7 @@ $56f41b6c5effc9ed$var$KeyPair.prototype.validate = function validate() {
 };
 $56f41b6c5effc9ed$var$KeyPair.prototype.getPublic = function getPublic(compact, enc) {
     // compact is optional argument
-    if (typeof compact === 'string') {
+    if (typeof compact === "string") {
         enc = compact;
         compact = null;
     }
@@ -29289,7 +29287,7 @@ $56f41b6c5effc9ed$var$KeyPair.prototype.getPublic = function getPublic(compact, 
     return this.pub.encode(enc, compact);
 };
 $56f41b6c5effc9ed$var$KeyPair.prototype.getPrivate = function getPrivate(enc) {
-    if (enc === 'hex') return this.priv.toString(16, 2);
+    if (enc === "hex") return this.priv.toString(16, 2);
     else return this.priv;
 };
 $56f41b6c5effc9ed$var$KeyPair.prototype._importPrivate = function _importPrivate(key, enc) {
@@ -29303,8 +29301,8 @@ $56f41b6c5effc9ed$var$KeyPair.prototype._importPublic = function _importPublic(k
         // Montgomery points only have an `x` coordinate.
         // Weierstrass/Edwards points on the other hand have both `x` and
         // `y` coordinates.
-        if (this.ec.curve.type === 'mont') $56f41b6c5effc9ed$var$assert(key.x, 'Need x coordinate');
-        else if (this.ec.curve.type === 'short' || this.ec.curve.type === 'edwards') $56f41b6c5effc9ed$var$assert(key.x && key.y, 'Need both x and y coordinate');
+        if (this.ec.curve.type === "mont") $56f41b6c5effc9ed$var$assert(key.x, "Need x coordinate");
+        else if (this.ec.curve.type === "short" || this.ec.curve.type === "edwards") $56f41b6c5effc9ed$var$assert(key.x && key.y, "Need both x and y coordinate");
         this.pub = this.ec.curve.point(key.x, key.y);
         return;
     }
@@ -29312,7 +29310,7 @@ $56f41b6c5effc9ed$var$KeyPair.prototype._importPublic = function _importPublic(k
 };
 // ECDH
 $56f41b6c5effc9ed$var$KeyPair.prototype.derive = function derive(pub) {
-    if (!pub.validate()) $56f41b6c5effc9ed$var$assert(pub.validate(), 'public point not validated');
+    if (!pub.validate()) $56f41b6c5effc9ed$var$assert(pub.validate(), "public point not validated");
     return pub.mul(this.priv).getX();
 };
 // ECDSA
@@ -29323,13 +29321,13 @@ $56f41b6c5effc9ed$var$KeyPair.prototype.verify = function verify(msg, signature)
     return this.ec.verify(msg, signature, this);
 };
 $56f41b6c5effc9ed$var$KeyPair.prototype.inspect = function inspect() {
-    return '<Key priv: ' + (this.priv && this.priv.toString(16, 2)) + ' pub: ' + (this.pub && this.pub.inspect()) + ' >';
+    return "<Key priv: " + (this.priv && this.priv.toString(16, 2)) + " pub: " + (this.pub && this.pub.inspect()) + " >";
 };
 
 });
 
 parcelRequire.register("638Zq", function(module, exports) {
-'use strict';
+"use strict";
 
 var $jBtqe = parcelRequire("jBtqe");
 
@@ -29338,7 +29336,7 @@ var $4679ff0db22b6955$var$assert = $frLve.assert;
 function $4679ff0db22b6955$var$Signature(options, enc) {
     if (options instanceof $4679ff0db22b6955$var$Signature) return options;
     if (this._importDER(options, enc)) return;
-    $4679ff0db22b6955$var$assert(options.r && options.s, 'Signature without r or s');
+    $4679ff0db22b6955$var$assert(options.r && options.s, "Signature without r or s");
     this.r = new $jBtqe(options.r, 16);
     this.s = new $jBtqe(options.s, 16);
     if (options.recoveryParam === undefined) this.recoveryParam = null;
@@ -29448,7 +29446,7 @@ $4679ff0db22b6955$var$Signature.prototype.toDER = function toDER(enc) {
 
 
 parcelRequire.register("4tVTF", function(module, exports) {
-'use strict';
+"use strict";
 
 var $hv5Fa = parcelRequire("hv5Fa");
 
@@ -29462,7 +29460,7 @@ var $hZoRa = parcelRequire("hZoRa");
 
 var $ixIYD = parcelRequire("ixIYD");
 function $3436c7fe3bb2577f$var$EDDSA(curve) {
-    $3436c7fe3bb2577f$var$assert(curve === 'ed25519', 'only tested with ed25519 so far');
+    $3436c7fe3bb2577f$var$assert(curve === "ed25519", "only tested with ed25519 so far");
     if (!(this instanceof $3436c7fe3bb2577f$var$EDDSA)) return new $3436c7fe3bb2577f$var$EDDSA(curve);
     curve = $3J9Yr[curve].curve;
     this.curve = curve;
@@ -29506,9 +29504,9 @@ module.exports = $3436c7fe3bb2577f$var$EDDSA;
     return RplusAh.eq(SG);
 };
 $3436c7fe3bb2577f$var$EDDSA.prototype.hashInt = function hashInt() {
-    var hash = this.hash();
-    for(var i = 0; i < arguments.length; i++)hash.update(arguments[i]);
-    return $frLve.intFromLE(hash.digest()).umod(this.curve.n);
+    var hash1 = this.hash();
+    for(var i = 0; i < arguments.length; i++)hash1.update(arguments[i]);
+    return $frLve.intFromLE(hash1.digest()).umod(this.curve.n);
 };
 $3436c7fe3bb2577f$var$EDDSA.prototype.keyFromPublic = function keyFromPublic(pub) {
     return $hZoRa.fromPublic(this, pub);
@@ -29528,7 +29526,7 @@ $3436c7fe3bb2577f$var$EDDSA.prototype.makeSignature = function makeSignature(sig
 * parameters.
 *
 */ $3436c7fe3bb2577f$var$EDDSA.prototype.encodePoint = function encodePoint(point) {
-    var enc = point.getY().toArray('le', this.encodingLength);
+    var enc = point.getY().toArray("le", this.encodingLength);
     enc[this.encodingLength - 1] |= point.getX().isOdd() ? 0x80 : 0;
     return enc;
 };
@@ -29541,7 +29539,7 @@ $3436c7fe3bb2577f$var$EDDSA.prototype.decodePoint = function decodePoint(bytes) 
     return this.curve.pointFromY(y, xIsOdd);
 };
 $3436c7fe3bb2577f$var$EDDSA.prototype.encodeInt = function encodeInt(num) {
-    return num.toArray('le', this.encodingLength);
+    return num.toArray("le", this.encodingLength);
 };
 $3436c7fe3bb2577f$var$EDDSA.prototype.decodeInt = function decodeInt(bytes) {
     return $frLve.intFromLE(bytes);
@@ -29552,7 +29550,7 @@ $3436c7fe3bb2577f$var$EDDSA.prototype.isPoint = function isPoint(val) {
 
 });
 parcelRequire.register("hZoRa", function(module, exports) {
-'use strict';
+"use strict";
 
 var $frLve = parcelRequire("frLve");
 var $d18b6a285efdac11$var$assert = $frLve.assert;
@@ -29587,14 +29585,14 @@ $d18b6a285efdac11$var$KeyPair.fromSecret = function fromSecret(eddsa, secret) {
 $d18b6a285efdac11$var$KeyPair.prototype.secret = function secret() {
     return this._secret;
 };
-$d18b6a285efdac11$var$cachedProperty($d18b6a285efdac11$var$KeyPair, 'pubBytes', function pubBytes() {
+$d18b6a285efdac11$var$cachedProperty($d18b6a285efdac11$var$KeyPair, "pubBytes", function pubBytes() {
     return this.eddsa.encodePoint(this.pub());
 });
-$d18b6a285efdac11$var$cachedProperty($d18b6a285efdac11$var$KeyPair, 'pub', function pub() {
+$d18b6a285efdac11$var$cachedProperty($d18b6a285efdac11$var$KeyPair, "pub", function pub() {
     if (this._pubBytes) return this.eddsa.decodePoint(this._pubBytes);
     return this.eddsa.g.mul(this.priv());
 });
-$d18b6a285efdac11$var$cachedProperty($d18b6a285efdac11$var$KeyPair, 'privBytes', function privBytes() {
+$d18b6a285efdac11$var$cachedProperty($d18b6a285efdac11$var$KeyPair, "privBytes", function privBytes() {
     var eddsa = this.eddsa;
     var hash = this.hash();
     var lastIx = eddsa.encodingLength - 1;
@@ -29604,24 +29602,24 @@ $d18b6a285efdac11$var$cachedProperty($d18b6a285efdac11$var$KeyPair, 'privBytes',
     a[lastIx] |= 64;
     return a;
 });
-$d18b6a285efdac11$var$cachedProperty($d18b6a285efdac11$var$KeyPair, 'priv', function priv() {
+$d18b6a285efdac11$var$cachedProperty($d18b6a285efdac11$var$KeyPair, "priv", function priv() {
     return this.eddsa.decodeInt(this.privBytes());
 });
-$d18b6a285efdac11$var$cachedProperty($d18b6a285efdac11$var$KeyPair, 'hash', function hash() {
+$d18b6a285efdac11$var$cachedProperty($d18b6a285efdac11$var$KeyPair, "hash", function hash() {
     return this.eddsa.hash().update(this.secret()).digest();
 });
-$d18b6a285efdac11$var$cachedProperty($d18b6a285efdac11$var$KeyPair, 'messagePrefix', function messagePrefix() {
+$d18b6a285efdac11$var$cachedProperty($d18b6a285efdac11$var$KeyPair, "messagePrefix", function messagePrefix() {
     return this.hash().slice(this.eddsa.encodingLength);
 });
 $d18b6a285efdac11$var$KeyPair.prototype.sign = function sign(message) {
-    $d18b6a285efdac11$var$assert(this._secret, 'KeyPair can only verify');
+    $d18b6a285efdac11$var$assert(this._secret, "KeyPair can only verify");
     return this.eddsa.sign(message, this);
 };
 $d18b6a285efdac11$var$KeyPair.prototype.verify = function verify(message, sig) {
     return this.eddsa.verify(message, sig, this);
 };
 $d18b6a285efdac11$var$KeyPair.prototype.getSecret = function getSecret(enc) {
-    $d18b6a285efdac11$var$assert(this._secret, 'KeyPair is public only');
+    $d18b6a285efdac11$var$assert(this._secret, "KeyPair is public only");
     return $frLve.encode(this.secret(), enc);
 };
 $d18b6a285efdac11$var$KeyPair.prototype.getPublic = function getPublic(enc) {
@@ -29632,7 +29630,7 @@ module.exports = $d18b6a285efdac11$var$KeyPair;
 });
 
 parcelRequire.register("ixIYD", function(module, exports) {
-'use strict';
+"use strict";
 
 var $jBtqe = parcelRequire("jBtqe");
 
@@ -29649,34 +29647,34 @@ var $037bd78656a24c6e$var$parseBytes = $frLve.parseBytes;
 * @param {Array<Bytes>} [sig.Sencoded] - S scalar encoded
 */ function $037bd78656a24c6e$var$Signature(eddsa, sig) {
     this.eddsa = eddsa;
-    if (typeof sig !== 'object') sig = $037bd78656a24c6e$var$parseBytes(sig);
+    if (typeof sig !== "object") sig = $037bd78656a24c6e$var$parseBytes(sig);
     if (Array.isArray(sig)) sig = {
         R: sig.slice(0, eddsa.encodingLength),
         S: sig.slice(eddsa.encodingLength)
     };
-    $037bd78656a24c6e$var$assert(sig.R && sig.S, 'Signature without R or S');
+    $037bd78656a24c6e$var$assert(sig.R && sig.S, "Signature without R or S");
     if (eddsa.isPoint(sig.R)) this._R = sig.R;
     if (sig.S instanceof $jBtqe) this._S = sig.S;
     this._Rencoded = Array.isArray(sig.R) ? sig.R : sig.Rencoded;
     this._Sencoded = Array.isArray(sig.S) ? sig.S : sig.Sencoded;
 }
-$037bd78656a24c6e$var$cachedProperty($037bd78656a24c6e$var$Signature, 'S', function S() {
+$037bd78656a24c6e$var$cachedProperty($037bd78656a24c6e$var$Signature, "S", function S() {
     return this.eddsa.decodeInt(this.Sencoded());
 });
-$037bd78656a24c6e$var$cachedProperty($037bd78656a24c6e$var$Signature, 'R', function R() {
+$037bd78656a24c6e$var$cachedProperty($037bd78656a24c6e$var$Signature, "R", function R() {
     return this.eddsa.decodePoint(this.Rencoded());
 });
-$037bd78656a24c6e$var$cachedProperty($037bd78656a24c6e$var$Signature, 'Rencoded', function Rencoded() {
+$037bd78656a24c6e$var$cachedProperty($037bd78656a24c6e$var$Signature, "Rencoded", function Rencoded() {
     return this.eddsa.encodePoint(this.R());
 });
-$037bd78656a24c6e$var$cachedProperty($037bd78656a24c6e$var$Signature, 'Sencoded', function Sencoded() {
+$037bd78656a24c6e$var$cachedProperty($037bd78656a24c6e$var$Signature, "Sencoded", function Sencoded() {
     return this.eddsa.encodeInt(this.S());
 });
 $037bd78656a24c6e$var$Signature.prototype.toBytes = function toBytes() {
     return this.Rencoded().concat(this.Sencoded());
 };
 $037bd78656a24c6e$var$Signature.prototype.toHex = function toHex() {
-    return $frLve.encode(this.toBytes(), 'hex').toUpperCase();
+    return $frLve.encode(this.toBytes(), "hex").toUpperCase();
 };
 module.exports = $037bd78656a24c6e$var$Signature;
 
@@ -29701,94 +29699,94 @@ var $668a7d92865c2bd7$require$Buffer = $8k9oS.Buffer;
 module.exports = $668a7d92865c2bd7$var$parseKeys;
 function $668a7d92865c2bd7$var$parseKeys(buffer) {
     var password;
-    if (typeof buffer === 'object' && !$668a7d92865c2bd7$require$Buffer.isBuffer(buffer)) {
+    if (typeof buffer === "object" && !$668a7d92865c2bd7$require$Buffer.isBuffer(buffer)) {
         password = buffer.passphrase;
         buffer = buffer.key;
     }
-    if (typeof buffer === 'string') buffer = $668a7d92865c2bd7$require$Buffer.from(buffer);
+    if (typeof buffer === "string") buffer = $668a7d92865c2bd7$require$Buffer.from(buffer);
     var stripped = $bxCSe(buffer, password);
     var type = stripped.tag;
     var data = stripped.data;
     var subtype, ndata;
     switch(type){
-        case 'CERTIFICATE':
-            ndata = $h8RWs.certificate.decode(data, 'der').tbsCertificate.subjectPublicKeyInfo;
+        case "CERTIFICATE":
+            ndata = $h8RWs.certificate.decode(data, "der").tbsCertificate.subjectPublicKeyInfo;
         // falls through
-        case 'PUBLIC KEY':
-            if (!ndata) ndata = $h8RWs.PublicKey.decode(data, 'der');
-            subtype = ndata.algorithm.algorithm.join('.');
+        case "PUBLIC KEY":
+            if (!ndata) ndata = $h8RWs.PublicKey.decode(data, "der");
+            subtype = ndata.algorithm.algorithm.join(".");
             switch(subtype){
-                case '1.2.840.113549.1.1.1':
-                    return $h8RWs.RSAPublicKey.decode(ndata.subjectPublicKey.data, 'der');
-                case '1.2.840.10045.2.1':
+                case "1.2.840.113549.1.1.1":
+                    return $h8RWs.RSAPublicKey.decode(ndata.subjectPublicKey.data, "der");
+                case "1.2.840.10045.2.1":
                     ndata.subjectPrivateKey = ndata.subjectPublicKey;
                     return {
-                        type: 'ec',
+                        type: "ec",
                         data: ndata
                     };
-                case '1.2.840.10040.4.1':
-                    ndata.algorithm.params.pub_key = $h8RWs.DSAparam.decode(ndata.subjectPublicKey.data, 'der');
+                case "1.2.840.10040.4.1":
+                    ndata.algorithm.params.pub_key = $h8RWs.DSAparam.decode(ndata.subjectPublicKey.data, "der");
                     return {
-                        type: 'dsa',
+                        type: "dsa",
                         data: ndata.algorithm.params
                     };
                 default:
-                    throw new Error('unknown key id ' + subtype);
+                    throw new Error("unknown key id " + subtype);
             }
         // throw new Error('unknown key type ' + type)
-        case 'ENCRYPTED PRIVATE KEY':
-            data = $h8RWs.EncryptedPrivateKey.decode(data, 'der');
+        case "ENCRYPTED PRIVATE KEY":
+            data = $h8RWs.EncryptedPrivateKey.decode(data, "der");
             data = $668a7d92865c2bd7$var$decrypt(data, password);
         // falls through
-        case 'PRIVATE KEY':
-            ndata = $h8RWs.PrivateKey.decode(data, 'der');
-            subtype = ndata.algorithm.algorithm.join('.');
+        case "PRIVATE KEY":
+            ndata = $h8RWs.PrivateKey.decode(data, "der");
+            subtype = ndata.algorithm.algorithm.join(".");
             switch(subtype){
-                case '1.2.840.113549.1.1.1':
-                    return $h8RWs.RSAPrivateKey.decode(ndata.subjectPrivateKey, 'der');
-                case '1.2.840.10045.2.1':
+                case "1.2.840.113549.1.1.1":
+                    return $h8RWs.RSAPrivateKey.decode(ndata.subjectPrivateKey, "der");
+                case "1.2.840.10045.2.1":
                     return {
                         curve: ndata.algorithm.curve,
-                        privateKey: $h8RWs.ECPrivateKey.decode(ndata.subjectPrivateKey, 'der').privateKey
+                        privateKey: $h8RWs.ECPrivateKey.decode(ndata.subjectPrivateKey, "der").privateKey
                     };
-                case '1.2.840.10040.4.1':
-                    ndata.algorithm.params.priv_key = $h8RWs.DSAparam.decode(ndata.subjectPrivateKey, 'der');
+                case "1.2.840.10040.4.1":
+                    ndata.algorithm.params.priv_key = $h8RWs.DSAparam.decode(ndata.subjectPrivateKey, "der");
                     return {
-                        type: 'dsa',
+                        type: "dsa",
                         params: ndata.algorithm.params
                     };
                 default:
-                    throw new Error('unknown key id ' + subtype);
+                    throw new Error("unknown key id " + subtype);
             }
         // throw new Error('unknown key type ' + type)
-        case 'RSA PUBLIC KEY':
-            return $h8RWs.RSAPublicKey.decode(data, 'der');
-        case 'RSA PRIVATE KEY':
-            return $h8RWs.RSAPrivateKey.decode(data, 'der');
-        case 'DSA PRIVATE KEY':
+        case "RSA PUBLIC KEY":
+            return $h8RWs.RSAPublicKey.decode(data, "der");
+        case "RSA PRIVATE KEY":
+            return $h8RWs.RSAPrivateKey.decode(data, "der");
+        case "DSA PRIVATE KEY":
             return {
-                type: 'dsa',
-                params: $h8RWs.DSAPrivateKey.decode(data, 'der')
+                type: "dsa",
+                params: $h8RWs.DSAPrivateKey.decode(data, "der")
             };
-        case 'EC PRIVATE KEY':
-            data = $h8RWs.ECPrivateKey.decode(data, 'der');
+        case "EC PRIVATE KEY":
+            data = $h8RWs.ECPrivateKey.decode(data, "der");
             return {
                 curve: data.parameters.value,
                 privateKey: data.privateKey
             };
         default:
-            throw new Error('unknown key type ' + type);
+            throw new Error("unknown key type " + type);
     }
 }
 $668a7d92865c2bd7$var$parseKeys.signature = $h8RWs.signature;
 function $668a7d92865c2bd7$var$decrypt(data, password) {
     var salt = data.algorithm.decrypt.kde.kdeparams.salt;
     var iters = parseInt(data.algorithm.decrypt.kde.kdeparams.iters.toString(), 10);
-    var algo = $f0e0R[data.algorithm.decrypt.cipher.algo.join('.')];
+    var algo = $f0e0R[data.algorithm.decrypt.cipher.algo.join(".")];
     var iv = data.algorithm.decrypt.cipher.iv;
     var cipherText = data.subjectPrivateKey;
-    var keylen = parseInt(algo.split('-')[1], 10) / 8;
-    var key = $6Cw3h.pbkdf2Sync(password, salt, iters, keylen, 'sha1');
+    var keylen = parseInt(algo.split("-")[1], 10) / 8;
+    var key = $6Cw3h.pbkdf2Sync(password, salt, iters, keylen, "sha1");
     var cipher = $jEWuG.createDecipheriv(algo, key, iv);
     var out = [];
     out.push(cipher.update(cipherText));
@@ -29821,57 +29819,57 @@ var $c7ad06c22e45d69a$export$32ef6f92e22c6ab0;
 var $c7ad06c22e45d69a$export$c9cd164b539ebb63;
 // from https://github.com/indutny/self-signed/blob/gh-pages/lib/asn1.js
 // Fedor, you are amazing.
-'use strict';
+"use strict";
 
 var $8ul9W = parcelRequire("8ul9W");
 
 $c7ad06c22e45d69a$export$c98397a6eb8d0678 = (parcelRequire("dWLj3"));
-var $c7ad06c22e45d69a$var$RSAPrivateKey = $8ul9W.define('RSAPrivateKey', function() {
-    this.seq().obj(this.key('version').int(), this.key('modulus').int(), this.key('publicExponent').int(), this.key('privateExponent').int(), this.key('prime1').int(), this.key('prime2').int(), this.key('exponent1').int(), this.key('exponent2').int(), this.key('coefficient').int());
+var $c7ad06c22e45d69a$var$RSAPrivateKey = $8ul9W.define("RSAPrivateKey", function() {
+    this.seq().obj(this.key("version").int(), this.key("modulus").int(), this.key("publicExponent").int(), this.key("privateExponent").int(), this.key("prime1").int(), this.key("prime2").int(), this.key("exponent1").int(), this.key("exponent2").int(), this.key("coefficient").int());
 });
 $c7ad06c22e45d69a$export$f4aab6816f64fa6b = $c7ad06c22e45d69a$var$RSAPrivateKey;
-var $c7ad06c22e45d69a$var$RSAPublicKey = $8ul9W.define('RSAPublicKey', function() {
-    this.seq().obj(this.key('modulus').int(), this.key('publicExponent').int());
+var $c7ad06c22e45d69a$var$RSAPublicKey = $8ul9W.define("RSAPublicKey", function() {
+    this.seq().obj(this.key("modulus").int(), this.key("publicExponent").int());
 });
 $c7ad06c22e45d69a$export$4471f5c65d097c11 = $c7ad06c22e45d69a$var$RSAPublicKey;
-var $c7ad06c22e45d69a$var$PublicKey = $8ul9W.define('SubjectPublicKeyInfo', function() {
-    this.seq().obj(this.key('algorithm').use($c7ad06c22e45d69a$var$AlgorithmIdentifier), this.key('subjectPublicKey').bitstr());
+var $c7ad06c22e45d69a$var$PublicKey = $8ul9W.define("SubjectPublicKeyInfo", function() {
+    this.seq().obj(this.key("algorithm").use($c7ad06c22e45d69a$var$AlgorithmIdentifier), this.key("subjectPublicKey").bitstr());
 });
 $c7ad06c22e45d69a$export$ca8b6604d6ce14de = $c7ad06c22e45d69a$var$PublicKey;
-var $c7ad06c22e45d69a$var$AlgorithmIdentifier = $8ul9W.define('AlgorithmIdentifier', function() {
-    this.seq().obj(this.key('algorithm').objid(), this.key('none').null_().optional(), this.key('curve').objid().optional(), this.key('params').seq().obj(this.key('p').int(), this.key('q').int(), this.key('g').int()).optional());
+var $c7ad06c22e45d69a$var$AlgorithmIdentifier = $8ul9W.define("AlgorithmIdentifier", function() {
+    this.seq().obj(this.key("algorithm").objid(), this.key("none").null_().optional(), this.key("curve").objid().optional(), this.key("params").seq().obj(this.key("p").int(), this.key("q").int(), this.key("g").int()).optional());
 });
-var $c7ad06c22e45d69a$var$PrivateKeyInfo = $8ul9W.define('PrivateKeyInfo', function() {
-    this.seq().obj(this.key('version').int(), this.key('algorithm').use($c7ad06c22e45d69a$var$AlgorithmIdentifier), this.key('subjectPrivateKey').octstr());
+var $c7ad06c22e45d69a$var$PrivateKeyInfo = $8ul9W.define("PrivateKeyInfo", function() {
+    this.seq().obj(this.key("version").int(), this.key("algorithm").use($c7ad06c22e45d69a$var$AlgorithmIdentifier), this.key("subjectPrivateKey").octstr());
 });
 $c7ad06c22e45d69a$export$8f54525b330fd87b = $c7ad06c22e45d69a$var$PrivateKeyInfo;
-var $c7ad06c22e45d69a$var$EncryptedPrivateKeyInfo = $8ul9W.define('EncryptedPrivateKeyInfo', function() {
-    this.seq().obj(this.key('algorithm').seq().obj(this.key('id').objid(), this.key('decrypt').seq().obj(this.key('kde').seq().obj(this.key('id').objid(), this.key('kdeparams').seq().obj(this.key('salt').octstr(), this.key('iters').int())), this.key('cipher').seq().obj(this.key('algo').objid(), this.key('iv').octstr()))), this.key('subjectPrivateKey').octstr());
+var $c7ad06c22e45d69a$var$EncryptedPrivateKeyInfo = $8ul9W.define("EncryptedPrivateKeyInfo", function() {
+    this.seq().obj(this.key("algorithm").seq().obj(this.key("id").objid(), this.key("decrypt").seq().obj(this.key("kde").seq().obj(this.key("id").objid(), this.key("kdeparams").seq().obj(this.key("salt").octstr(), this.key("iters").int())), this.key("cipher").seq().obj(this.key("algo").objid(), this.key("iv").octstr()))), this.key("subjectPrivateKey").octstr());
 });
 $c7ad06c22e45d69a$export$23cd2842b44ca3e7 = $c7ad06c22e45d69a$var$EncryptedPrivateKeyInfo;
-var $c7ad06c22e45d69a$var$DSAPrivateKey = $8ul9W.define('DSAPrivateKey', function() {
-    this.seq().obj(this.key('version').int(), this.key('p').int(), this.key('q').int(), this.key('g').int(), this.key('pub_key').int(), this.key('priv_key').int());
+var $c7ad06c22e45d69a$var$DSAPrivateKey = $8ul9W.define("DSAPrivateKey", function() {
+    this.seq().obj(this.key("version").int(), this.key("p").int(), this.key("q").int(), this.key("g").int(), this.key("pub_key").int(), this.key("priv_key").int());
 });
 $c7ad06c22e45d69a$export$245c9aaa9f5ce4ce = $c7ad06c22e45d69a$var$DSAPrivateKey;
-$c7ad06c22e45d69a$export$8ad762e3e6399afe = $8ul9W.define('DSAparam', function() {
+$c7ad06c22e45d69a$export$8ad762e3e6399afe = $8ul9W.define("DSAparam", function() {
     this.int();
 });
-var $c7ad06c22e45d69a$var$ECPrivateKey = $8ul9W.define('ECPrivateKey', function() {
-    this.seq().obj(this.key('version').int(), this.key('privateKey').octstr(), this.key('parameters').optional().explicit(0).use($c7ad06c22e45d69a$var$ECParameters), this.key('publicKey').optional().explicit(1).bitstr());
+var $c7ad06c22e45d69a$var$ECPrivateKey = $8ul9W.define("ECPrivateKey", function() {
+    this.seq().obj(this.key("version").int(), this.key("privateKey").octstr(), this.key("parameters").optional().explicit(0).use($c7ad06c22e45d69a$var$ECParameters), this.key("publicKey").optional().explicit(1).bitstr());
 });
 $c7ad06c22e45d69a$export$32ef6f92e22c6ab0 = $c7ad06c22e45d69a$var$ECPrivateKey;
-var $c7ad06c22e45d69a$var$ECParameters = $8ul9W.define('ECParameters', function() {
+var $c7ad06c22e45d69a$var$ECParameters = $8ul9W.define("ECParameters", function() {
     this.choice({
         namedCurve: this.objid()
     });
 });
-$c7ad06c22e45d69a$export$c9cd164b539ebb63 = $8ul9W.define('signature', function() {
-    this.seq().obj(this.key('r').int(), this.key('s').int());
+$c7ad06c22e45d69a$export$c9cd164b539ebb63 = $8ul9W.define("signature", function() {
+    this.seq().obj(this.key("r").int(), this.key("s").int());
 });
 
 });
 parcelRequire.register("8ul9W", function(module, exports) {
-'use strict';
+"use strict";
 const $62e189e199c934b0$var$asn1 = module.exports;
 
 $62e189e199c934b0$var$asn1.bignum = (parcelRequire("8Riw1"));
@@ -29890,9 +29888,10 @@ $62e189e199c934b0$var$asn1.encoders = (parcelRequire("AAzYW"));
 parcelRequire.register("8Riw1", function(module, exports) {
 
 (function(module, exports) {
+    "use strict";
     // Utils
     function assert(val, msg) {
-        if (!val) throw new Error(msg || 'Assertion failed');
+        if (!val) throw new Error(msg || "Assertion failed");
     }
     // Could use `inherits` module, but don't want to move from single file
     // architecture yet.
@@ -29912,25 +29911,25 @@ parcelRequire.register("8Riw1", function(module, exports) {
         // Reduction context
         this.red = null;
         if (number !== null) {
-            if (base === 'le' || base === 'be') {
+            if (base === "le" || base === "be") {
                 endian = base;
                 base = 10;
             }
-            this._init(number || 0, base || 10, endian || 'be');
+            this._init(number || 0, base || 10, endian || "be");
         }
     }
-    if (typeof module === 'object') module.exports = BN;
+    if (typeof module === "object") module.exports = BN;
     else exports.BN = BN;
     BN.BN = BN;
     BN.wordSize = 26;
     var Buffer;
     try {
-        if (typeof window !== 'undefined' && typeof window.Buffer !== 'undefined') Buffer = window.Buffer;
+        if (typeof window !== "undefined" && typeof window.Buffer !== "undefined") Buffer = window.Buffer;
         else Buffer = (parcelRequire("c7mcJ")).Buffer;
     } catch (e) {}
     BN.isBN = function isBN(num) {
         if (num instanceof BN) return true;
-        return num !== null && typeof num === 'object' && num.constructor.wordSize === BN.wordSize && Array.isArray(num.words);
+        return num !== null && typeof num === "object" && num.constructor.wordSize === BN.wordSize && Array.isArray(num.words);
     };
     BN.max = function max(left, right) {
         if (left.cmp(right) > 0) return left;
@@ -29941,13 +29940,13 @@ parcelRequire.register("8Riw1", function(module, exports) {
         return right;
     };
     BN.prototype._init = function init(number, base, endian) {
-        if (typeof number === 'number') return this._initNumber(number, base, endian);
-        if (typeof number === 'object') return this._initArray(number, base, endian);
-        if (base === 'hex') base = 16;
+        if (typeof number === "number") return this._initNumber(number, base, endian);
+        if (typeof number === "object") return this._initArray(number, base, endian);
+        if (base === "hex") base = 16;
         assert(base === (base | 0) && base >= 2 && base <= 36);
-        number = number.toString().replace(/\s+/g, '');
+        number = number.toString().replace(/\s+/g, "");
         var start = 0;
-        if (number[0] === '-') {
+        if (number[0] === "-") {
             start++;
             this.negative = 1;
         }
@@ -29955,7 +29954,7 @@ parcelRequire.register("8Riw1", function(module, exports) {
             if (base === 16) this._parseHex(number, start, endian);
             else {
                 this._parseBase(number, base, start);
-                if (endian === 'le') this._initArray(this.toArray(), base, endian);
+                if (endian === "le") this._initArray(this.toArray(), base, endian);
             }
         }
     };
@@ -29984,13 +29983,13 @@ parcelRequire.register("8Riw1", function(module, exports) {
             ];
             this.length = 3;
         }
-        if (endian !== 'le') return;
+        if (endian !== "le") return;
         // Reverse the bytes
         this._initArray(this.toArray(), base, endian);
     };
     BN.prototype._initArray = function _initArray(number, base, endian) {
         // Perhaps a Uint8Array
-        assert(typeof number.length === 'number');
+        assert(typeof number.length === "number");
         if (number.length <= 0) {
             this.words = [
                 0
@@ -30003,7 +30002,7 @@ parcelRequire.register("8Riw1", function(module, exports) {
         for(var i = 0; i < this.length; i++)this.words[i] = 0;
         var j, w;
         var off = 0;
-        if (endian === 'be') for(i = number.length - 1, j = 0; i >= 0; i -= 3){
+        if (endian === "be") for(i = number.length - 1, j = 0; i >= 0; i -= 3){
             w = number[i] | number[i - 1] << 8 | number[i - 2] << 16;
             this.words[j] |= w << off & 0x3ffffff;
             this.words[j + 1] = w >>> 26 - off & 0x3ffffff;
@@ -30013,7 +30012,7 @@ parcelRequire.register("8Riw1", function(module, exports) {
                 j++;
             }
         }
-        else if (endian === 'le') for(i = 0, j = 0; i < number.length; i += 3){
+        else if (endian === "le") for(i = 0, j = 0; i < number.length; i += 3){
             w = number[i] | number[i + 1] << 8 | number[i + 2] << 16;
             this.words[j] |= w << off & 0x3ffffff;
             this.words[j + 1] = w >>> 26 - off & 0x3ffffff;
@@ -30046,7 +30045,7 @@ parcelRequire.register("8Riw1", function(module, exports) {
         var off = 0;
         var j = 0;
         var w;
-        if (endian === 'be') for(i = number.length - 1; i >= start; i -= 2){
+        if (endian === "be") for(i = number.length - 1; i >= start; i -= 2){
             w = parseHexByte(number, start, i) << off;
             this.words[j] |= w & 0x3ffffff;
             if (off >= 18) {
@@ -30139,7 +30138,7 @@ parcelRequire.register("8Riw1", function(module, exports) {
         return this;
     };
     BN.prototype.inspect = function inspect() {
-        return (this.red ? '<BN-R: ' : '<BN: ') + this.toString(16) + '>';
+        return (this.red ? "<BN-R: " : "<BN: ") + this.toString(16) + ">";
     };
     /*
 
@@ -30170,32 +30169,32 @@ parcelRequire.register("8Riw1", function(module, exports) {
   }
 
   */ var zeros = [
-        '',
-        '0',
-        '00',
-        '000',
-        '0000',
-        '00000',
-        '000000',
-        '0000000',
-        '00000000',
-        '000000000',
-        '0000000000',
-        '00000000000',
-        '000000000000',
-        '0000000000000',
-        '00000000000000',
-        '000000000000000',
-        '0000000000000000',
-        '00000000000000000',
-        '000000000000000000',
-        '0000000000000000000',
-        '00000000000000000000',
-        '000000000000000000000',
-        '0000000000000000000000',
-        '00000000000000000000000',
-        '000000000000000000000000',
-        '0000000000000000000000000'
+        "",
+        "0",
+        "00",
+        "000",
+        "0000",
+        "00000",
+        "000000",
+        "0000000",
+        "00000000",
+        "000000000",
+        "0000000000",
+        "00000000000",
+        "000000000000",
+        "0000000000000",
+        "00000000000000",
+        "000000000000000",
+        "0000000000000000",
+        "00000000000000000",
+        "000000000000000000",
+        "0000000000000000000",
+        "00000000000000000000",
+        "000000000000000000000",
+        "0000000000000000000000",
+        "00000000000000000000000",
+        "000000000000000000000000",
+        "0000000000000000000000000"
     ];
     var groupSizes = [
         0,
@@ -30279,8 +30278,8 @@ parcelRequire.register("8Riw1", function(module, exports) {
         base = base || 10;
         padding = padding | 0 || 1;
         var out;
-        if (base === 16 || base === 'hex') {
-            out = '';
+        if (base === 16 || base === "hex") {
+            out = "";
             var off = 0;
             var carry = 0;
             for(var i = 0; i < this.length; i++){
@@ -30296,8 +30295,8 @@ parcelRequire.register("8Riw1", function(module, exports) {
                 }
             }
             if (carry !== 0) out = carry.toString(16) + out;
-            while(out.length % padding !== 0)out = '0' + out;
-            if (this.negative !== 0) out = '-' + out;
+            while(out.length % padding !== 0)out = "0" + out;
+            if (this.negative !== 0) out = "-" + out;
             return out;
         }
         if (base === (base | 0) && base >= 2 && base <= 36) {
@@ -30305,7 +30304,7 @@ parcelRequire.register("8Riw1", function(module, exports) {
             var groupSize = groupSizes[base];
             // var groupBase = Math.pow(base, groupSize);
             var groupBase = groupBases[base];
-            out = '';
+            out = "";
             var c = this.clone();
             c.negative = 0;
             while(!c.isZero()){
@@ -30314,26 +30313,26 @@ parcelRequire.register("8Riw1", function(module, exports) {
                 if (!c.isZero()) out = zeros[groupSize - r.length] + r + out;
                 else out = r + out;
             }
-            if (this.isZero()) out = '0' + out;
-            while(out.length % padding !== 0)out = '0' + out;
-            if (this.negative !== 0) out = '-' + out;
+            if (this.isZero()) out = "0" + out;
+            while(out.length % padding !== 0)out = "0" + out;
+            if (this.negative !== 0) out = "-" + out;
             return out;
         }
-        assert(false, 'Base should be between 2 and 36');
+        assert(false, "Base should be between 2 and 36");
     };
     BN.prototype.toNumber = function toNumber() {
         var ret = this.words[0];
         if (this.length === 2) ret += this.words[1] * 0x4000000;
         else if (this.length === 3 && this.words[2] === 0x01) // NOTE: at this stage it is known that the top bit is set
         ret += 0x10000000000000 + this.words[1] * 0x4000000;
-        else if (this.length > 2) assert(false, 'Number can only safely store up to 53 bits');
+        else if (this.length > 2) assert(false, "Number can only safely store up to 53 bits");
         return this.negative !== 0 ? -ret : ret;
     };
     BN.prototype.toJSON = function toJSON() {
         return this.toString(16);
     };
     BN.prototype.toBuffer = function toBuffer(endian, length) {
-        assert(typeof Buffer !== 'undefined');
+        assert(typeof Buffer !== "undefined");
         return this.toArrayLike(Buffer, endian, length);
     };
     BN.prototype.toArray = function toArray(endian, length) {
@@ -30342,10 +30341,10 @@ parcelRequire.register("8Riw1", function(module, exports) {
     BN.prototype.toArrayLike = function toArrayLike(ArrayType, endian, length) {
         var byteLength = this.byteLength();
         var reqLength = length || Math.max(1, byteLength);
-        assert(byteLength <= reqLength, 'byte array longer than desired length');
-        assert(reqLength > 0, 'Requested array length <= 0');
+        assert(byteLength <= reqLength, "byte array longer than desired length");
+        assert(reqLength > 0, "Requested array length <= 0");
         this.strip();
-        var littleEndian = endian === 'le';
+        var littleEndian = endian === "le";
         var res = new ArrayType(reqLength);
         var b, i;
         var q = this.clone();
@@ -30537,7 +30536,7 @@ parcelRequire.register("8Riw1", function(module, exports) {
     };
     // Not ``this`` with ``width`` bitwidth
     BN.prototype.inotn = function inotn(width) {
-        assert(typeof width === 'number' && width >= 0);
+        assert(typeof width === "number" && width >= 0);
         var bytesNeeded = Math.ceil(width / 26) | 0;
         var bitsLeft = width % 26;
         // Extend the buffer with leading zeroes
@@ -30555,7 +30554,7 @@ parcelRequire.register("8Riw1", function(module, exports) {
     };
     // Set `bit` of `this`
     BN.prototype.setn = function setn(bit, val) {
-        assert(typeof bit === 'number' && bit >= 0);
+        assert(typeof bit === "number" && bit >= 0);
         var off = bit / 26 | 0;
         var wbit = bit % 26;
         this._expand(off + 1);
@@ -31467,7 +31466,7 @@ parcelRequire.register("8Riw1", function(module, exports) {
         return this.clone().mulTo(num, this);
     };
     BN.prototype.imuln = function imuln(num) {
-        assert(typeof num === 'number');
+        assert(typeof num === "number");
         assert(num < 0x4000000);
         // Carry
         var carry = 0;
@@ -31514,7 +31513,7 @@ parcelRequire.register("8Riw1", function(module, exports) {
     };
     // Shift-left in-place
     BN.prototype.iushln = function iushln(bits) {
-        assert(typeof bits === 'number' && bits >= 0);
+        assert(typeof bits === "number" && bits >= 0);
         var r = bits % 26;
         var s = (bits - r) / 26;
         var carryMask = 0x3ffffff >>> 26 - r << 26 - r;
@@ -31548,7 +31547,7 @@ parcelRequire.register("8Riw1", function(module, exports) {
     // NOTE: `hint` is a lowest bit before trailing zeroes
     // NOTE: if `extended` is present - it will be filled with destroyed bits
     BN.prototype.iushrn = function iushrn(bits, hint, extended) {
-        assert(typeof bits === 'number' && bits >= 0);
+        assert(typeof bits === "number" && bits >= 0);
         var h;
         if (hint) h = (hint - hint % 26) / 26;
         else h = 0;
@@ -31606,7 +31605,7 @@ parcelRequire.register("8Riw1", function(module, exports) {
     };
     // Test if n bit is set
     BN.prototype.testn = function testn(bit) {
-        assert(typeof bit === 'number' && bit >= 0);
+        assert(typeof bit === "number" && bit >= 0);
         var r = bit % 26;
         var s = (bit - r) / 26;
         var q = 1 << r;
@@ -31618,10 +31617,10 @@ parcelRequire.register("8Riw1", function(module, exports) {
     };
     // Return only lowers bits of number (in-place)
     BN.prototype.imaskn = function imaskn(bits) {
-        assert(typeof bits === 'number' && bits >= 0);
+        assert(typeof bits === "number" && bits >= 0);
         var r = bits % 26;
         var s = (bits - r) / 26;
-        assert(this.negative === 0, 'imaskn works only with positive numbers');
+        assert(this.negative === 0, "imaskn works only with positive numbers");
         if (this.length <= s) return this;
         if (r !== 0) s++;
         this.length = Math.min(s, this.length);
@@ -31637,7 +31636,7 @@ parcelRequire.register("8Riw1", function(module, exports) {
     };
     // Add plain number `num` to `this`
     BN.prototype.iaddn = function iaddn(num) {
-        assert(typeof num === 'number');
+        assert(typeof num === "number");
         assert(num < 0x4000000);
         if (num < 0) return this.isubn(-num);
         // Possible sign change
@@ -31668,7 +31667,7 @@ parcelRequire.register("8Riw1", function(module, exports) {
     };
     // Subtract plain number `num` from `this`
     BN.prototype.isubn = function isubn(num) {
-        assert(typeof num === 'number');
+        assert(typeof num === "number");
         assert(num < 0x4000000);
         if (num < 0) return this.iaddn(-num);
         if (this.negative !== 0) {
@@ -31747,7 +31746,7 @@ parcelRequire.register("8Riw1", function(module, exports) {
         // Initialize quotient
         var m = a.length - b.length;
         var q;
-        if (mode !== 'mod') {
+        if (mode !== "mod") {
             q = new BN(null);
             q.length = m + 1;
             q.words = new Array(q.length);
@@ -31775,7 +31774,7 @@ parcelRequire.register("8Riw1", function(module, exports) {
         if (q) q.strip();
         a.strip();
         // Denormalize
-        if (mode !== 'div' && shift !== 0) a.iushrn(shift);
+        if (mode !== "div" && shift !== 0) a.iushrn(shift);
         return {
             div: q || null,
             mod: a
@@ -31794,8 +31793,8 @@ parcelRequire.register("8Riw1", function(module, exports) {
         var div, mod, res;
         if (this.negative !== 0 && num.negative === 0) {
             res = this.neg().divmod(num, mode);
-            if (mode !== 'mod') div = res.div.neg();
-            if (mode !== 'div') {
+            if (mode !== "mod") div = res.div.neg();
+            if (mode !== "div") {
                 mod = res.mod.neg();
                 if (positive && mod.negative !== 0) mod.iadd(num);
             }
@@ -31806,7 +31805,7 @@ parcelRequire.register("8Riw1", function(module, exports) {
         }
         if (this.negative === 0 && num.negative !== 0) {
             res = this.divmod(num.neg(), mode);
-            if (mode !== 'mod') div = res.div.neg();
+            if (mode !== "mod") div = res.div.neg();
             return {
                 div: div,
                 mod: res.mod
@@ -31814,7 +31813,7 @@ parcelRequire.register("8Riw1", function(module, exports) {
         }
         if ((this.negative & num.negative) !== 0) {
             res = this.neg().divmod(num.neg(), mode);
-            if (mode !== 'div') {
+            if (mode !== "div") {
                 mod = res.mod.neg();
                 if (positive && mod.negative !== 0) mod.isub(num);
             }
@@ -31831,11 +31830,11 @@ parcelRequire.register("8Riw1", function(module, exports) {
         };
         // Very short reduction
         if (num.length === 1) {
-            if (mode === 'div') return {
+            if (mode === "div") return {
                 div: this.divn(num.words[0]),
                 mod: null
             };
-            if (mode === 'mod') return {
+            if (mode === "mod") return {
                 div: null,
                 mod: new BN(this.modn(num.words[0]))
             };
@@ -31848,14 +31847,14 @@ parcelRequire.register("8Riw1", function(module, exports) {
     };
     // Find `this` / `num`
     BN.prototype.div = function div(num) {
-        return this.divmod(num, 'div', false).div;
+        return this.divmod(num, "div", false).div;
     };
     // Find `this` % `num`
     BN.prototype.mod = function mod(num) {
-        return this.divmod(num, 'mod', false).mod;
+        return this.divmod(num, "mod", false).mod;
     };
     BN.prototype.umod = function umod(num) {
-        return this.divmod(num, 'mod', true).mod;
+        return this.divmod(num, "mod", true).mod;
     };
     // Find Round(`this` / `num`)
     BN.prototype.divRound = function divRound(num) {
@@ -32021,7 +32020,7 @@ parcelRequire.register("8Riw1", function(module, exports) {
                 b = t;
             } else if (r === 0 || b.cmpn(1) === 0) break;
             a.isub(b);
-        }while (true)
+        }while (true);
         return b.iushln(shift);
     };
     // Invert number in the field F(num)
@@ -32040,7 +32039,7 @@ parcelRequire.register("8Riw1", function(module, exports) {
     };
     // Increment at the bit position in-line
     BN.prototype.bincn = function bincn(bit) {
-        assert(typeof bit === 'number');
+        assert(typeof bit === "number");
         var r = bit % 26;
         var s = (bit - r) / 26;
         var q = 1 << r;
@@ -32077,7 +32076,7 @@ parcelRequire.register("8Riw1", function(module, exports) {
         if (this.length > 1) res = 1;
         else {
             if (negative) num = -num;
-            assert(num <= 0x3ffffff, 'Number is too big');
+            assert(num <= 0x3ffffff, "Number is too big");
             var w = this.words[0] | 0;
             res = w === num ? 0 : w < num ? -1 : 1;
         }
@@ -32149,12 +32148,12 @@ parcelRequire.register("8Riw1", function(module, exports) {
         return new Red(num);
     };
     BN.prototype.toRed = function toRed(ctx) {
-        assert(!this.red, 'Already a number in reduction context');
-        assert(this.negative === 0, 'red works only with positives');
+        assert(!this.red, "Already a number in reduction context");
+        assert(this.negative === 0, "red works only with positives");
         return ctx.convertTo(this)._forceRed(ctx);
     };
     BN.prototype.fromRed = function fromRed() {
-        assert(this.red, 'fromRed works only with numbers in reduction context');
+        assert(this.red, "fromRed works only with numbers in reduction context");
         return this.red.convertFrom(this);
     };
     BN.prototype._forceRed = function _forceRed(ctx) {
@@ -32162,68 +32161,68 @@ parcelRequire.register("8Riw1", function(module, exports) {
         return this;
     };
     BN.prototype.forceRed = function forceRed(ctx) {
-        assert(!this.red, 'Already a number in reduction context');
+        assert(!this.red, "Already a number in reduction context");
         return this._forceRed(ctx);
     };
     BN.prototype.redAdd = function redAdd(num) {
-        assert(this.red, 'redAdd works only with red numbers');
+        assert(this.red, "redAdd works only with red numbers");
         return this.red.add(this, num);
     };
     BN.prototype.redIAdd = function redIAdd(num) {
-        assert(this.red, 'redIAdd works only with red numbers');
+        assert(this.red, "redIAdd works only with red numbers");
         return this.red.iadd(this, num);
     };
     BN.prototype.redSub = function redSub(num) {
-        assert(this.red, 'redSub works only with red numbers');
+        assert(this.red, "redSub works only with red numbers");
         return this.red.sub(this, num);
     };
     BN.prototype.redISub = function redISub(num) {
-        assert(this.red, 'redISub works only with red numbers');
+        assert(this.red, "redISub works only with red numbers");
         return this.red.isub(this, num);
     };
     BN.prototype.redShl = function redShl(num) {
-        assert(this.red, 'redShl works only with red numbers');
+        assert(this.red, "redShl works only with red numbers");
         return this.red.shl(this, num);
     };
     BN.prototype.redMul = function redMul(num) {
-        assert(this.red, 'redMul works only with red numbers');
+        assert(this.red, "redMul works only with red numbers");
         this.red._verify2(this, num);
         return this.red.mul(this, num);
     };
     BN.prototype.redIMul = function redIMul(num) {
-        assert(this.red, 'redMul works only with red numbers');
+        assert(this.red, "redMul works only with red numbers");
         this.red._verify2(this, num);
         return this.red.imul(this, num);
     };
     BN.prototype.redSqr = function redSqr() {
-        assert(this.red, 'redSqr works only with red numbers');
+        assert(this.red, "redSqr works only with red numbers");
         this.red._verify1(this);
         return this.red.sqr(this);
     };
     BN.prototype.redISqr = function redISqr() {
-        assert(this.red, 'redISqr works only with red numbers');
+        assert(this.red, "redISqr works only with red numbers");
         this.red._verify1(this);
         return this.red.isqr(this);
     };
     // Square root over p
     BN.prototype.redSqrt = function redSqrt() {
-        assert(this.red, 'redSqrt works only with red numbers');
+        assert(this.red, "redSqrt works only with red numbers");
         this.red._verify1(this);
         return this.red.sqrt(this);
     };
     BN.prototype.redInvm = function redInvm() {
-        assert(this.red, 'redInvm works only with red numbers');
+        assert(this.red, "redInvm works only with red numbers");
         this.red._verify1(this);
         return this.red.invm(this);
     };
     // Return negative clone of `this` % `red modulo`
     BN.prototype.redNeg = function redNeg() {
-        assert(this.red, 'redNeg works only with red numbers');
+        assert(this.red, "redNeg works only with red numbers");
         this.red._verify1(this);
         return this.red.neg(this);
     };
     BN.prototype.redPow = function redPow(num) {
-        assert(this.red && !num.red, 'redPow(normalNum)');
+        assert(this.red && !num.red, "redPow(normalNum)");
         this.red._verify1(this);
         return this.red.pow(this, num);
     };
@@ -32258,7 +32257,7 @@ parcelRequire.register("8Riw1", function(module, exports) {
             r = this.imulK(r);
             r = r.iadd(this.tmp);
             rlen = r.bitLength();
-        }while (rlen > this.n)
+        }while (rlen > this.n);
         var cmp = rlen < this.n ? -1 : r.ucmp(this.p);
         if (cmp === 0) {
             r.words[0] = 0;
@@ -32277,7 +32276,7 @@ parcelRequire.register("8Riw1", function(module, exports) {
         return num.imul(this.k);
     };
     function K256() {
-        MPrime.call(this, 'k256', 'ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff fffffffe fffffc2f');
+        MPrime.call(this, "k256", "ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff fffffffe fffffc2f");
     }
     inherits(K256, MPrime);
     K256.prototype.split = function split(input, output) {
@@ -32325,16 +32324,16 @@ parcelRequire.register("8Riw1", function(module, exports) {
         return num;
     };
     function P224() {
-        MPrime.call(this, 'p224', 'ffffffff ffffffff ffffffff ffffffff 00000000 00000000 00000001');
+        MPrime.call(this, "p224", "ffffffff ffffffff ffffffff ffffffff 00000000 00000000 00000001");
     }
     inherits(P224, MPrime);
     function P192() {
-        MPrime.call(this, 'p192', 'ffffffff ffffffff ffffffff fffffffe ffffffff ffffffff');
+        MPrime.call(this, "p192", "ffffffff ffffffff ffffffff fffffffe ffffffff ffffffff");
     }
     inherits(P192, MPrime);
     function P25519() {
         // 2 ^ 255 - 19
-        MPrime.call(this, '25519', '7fffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffed');
+        MPrime.call(this, "25519", "7fffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffed");
     }
     inherits(P25519, MPrime);
     P25519.prototype.imulK = function imulK(num) {
@@ -32355,11 +32354,11 @@ parcelRequire.register("8Riw1", function(module, exports) {
         // Cached version of prime
         if (primes[name]) return primes[name];
         var prime;
-        if (name === 'k256') prime = new K256();
-        else if (name === 'p224') prime = new P224();
-        else if (name === 'p192') prime = new P192();
-        else if (name === 'p25519') prime = new P25519();
-        else throw new Error('Unknown prime ' + name);
+        if (name === "k256") prime = new K256();
+        else if (name === "p224") prime = new P224();
+        else if (name === "p192") prime = new P192();
+        else if (name === "p25519") prime = new P25519();
+        else throw new Error("Unknown prime " + name);
         primes[name] = prime;
         return prime;
     };
@@ -32367,23 +32366,23 @@ parcelRequire.register("8Riw1", function(module, exports) {
     // Base reduction engine
     //
     function Red(m) {
-        if (typeof m === 'string') {
+        if (typeof m === "string") {
             var prime = BN._prime(m);
             this.m = prime.p;
             this.prime = prime;
         } else {
-            assert(m.gtn(1), 'modulus must be greater than 1');
+            assert(m.gtn(1), "modulus must be greater than 1");
             this.m = m;
             this.prime = null;
         }
     }
     Red.prototype._verify1 = function _verify1(a) {
-        assert(a.negative === 0, 'red works only with positives');
-        assert(a.red, 'red works only with red numbers');
+        assert(a.negative === 0, "red works only with positives");
+        assert(a.red, "red works only with red numbers");
     };
     Red.prototype._verify2 = function _verify2(a, b) {
-        assert((a.negative | b.negative) === 0, 'red works only with positives');
-        assert(a.red && a.red === b.red, 'red works only with red numbers');
+        assert((a.negative | b.negative) === 0, "red works only with positives");
+        assert(a.red && a.red === b.red, "red works only with red numbers");
     };
     Red.prototype.imod = function imod(a) {
         if (this.prime) return this.prime.ireduce(a)._forceRed(this);
@@ -32588,7 +32587,7 @@ parcelRequire.register("8Riw1", function(module, exports) {
 });
 
 parcelRequire.register("eKJX4", function(module, exports) {
-'use strict';
+"use strict";
 
 var $AAzYW = parcelRequire("AAzYW");
 
@@ -32617,7 +32616,7 @@ $abd901a59adfe5f6$var$Entity.prototype._createNamed = function createNamed(Base)
     return new Generated(this);
 };
 $abd901a59adfe5f6$var$Entity.prototype._getDecoder = function _getDecoder(enc) {
-    enc = enc || 'der';
+    enc = enc || "der";
     // Lazily create decoder
     if (!this.decoders.hasOwnProperty(enc)) this.decoders[enc] = this._createNamed($iq7P6[enc]);
     return this.decoders[enc];
@@ -32626,7 +32625,7 @@ $abd901a59adfe5f6$var$Entity.prototype.decode = function decode(data, enc, optio
     return this._getDecoder(enc).decode(data, options);
 };
 $abd901a59adfe5f6$var$Entity.prototype._getEncoder = function _getEncoder(enc) {
-    enc = enc || 'der';
+    enc = enc || "der";
     // Lazily create encoder
     if (!this.encoders.hasOwnProperty(enc)) this.encoders[enc] = this._createNamed($AAzYW[enc]);
     return this.encoders[enc];
@@ -32637,7 +32636,7 @@ $abd901a59adfe5f6$var$Entity.prototype.encode = function encode(data, enc, /* in
 
 });
 parcelRequire.register("AAzYW", function(module, exports) {
-'use strict';
+"use strict";
 const $06dfbcce2f899fd0$var$encoders = module.exports;
 
 $06dfbcce2f899fd0$var$encoders.der = (parcelRequire("aeiSd"));
@@ -32646,7 +32645,7 @@ $06dfbcce2f899fd0$var$encoders.pem = (parcelRequire("9VwZ7"));
 
 });
 parcelRequire.register("aeiSd", function(module, exports) {
-'use strict';
+"use strict";
 
 var $baEok = parcelRequire("baEok");
 
@@ -32657,7 +32656,7 @@ var $gZnnC = parcelRequire("gZnnC");
 
 var $87TbL = parcelRequire("87TbL");
 function $7729da1275a9e77b$var$DEREncoder(entity) {
-    this.enc = 'der';
+    this.enc = "der";
     this.name = entity.name;
     this.entity = entity;
     // Construct base tree
@@ -32670,7 +32669,7 @@ $7729da1275a9e77b$var$DEREncoder.prototype.encode = function encode(data, report
 };
 // Tree methods
 function $7729da1275a9e77b$var$DERNode(parent) {
-    $gZnnC.call(this, 'der', parent);
+    $gZnnC.call(this, "der", parent);
 }
 $baEok($7729da1275a9e77b$var$DERNode, $gZnnC);
 $7729da1275a9e77b$var$DERNode.prototype._encodeComposite = function encodeComposite(tag, primitive, cls, content) {
@@ -32699,28 +32698,28 @@ $7729da1275a9e77b$var$DERNode.prototype._encodeComposite = function encodeCompos
     ]);
 };
 $7729da1275a9e77b$var$DERNode.prototype._encodeStr = function encodeStr(str, tag) {
-    if (tag === 'bitstr') return this._createEncoderBuffer([
+    if (tag === "bitstr") return this._createEncoderBuffer([
         str.unused | 0,
         str.data
     ]);
-    else if (tag === 'bmpstr') {
+    else if (tag === "bmpstr") {
         const buf = $7729da1275a9e77b$require$Buffer.alloc(str.length * 2);
         for(let i = 0; i < str.length; i++)buf.writeUInt16BE(str.charCodeAt(i), i * 2);
         return this._createEncoderBuffer(buf);
-    } else if (tag === 'numstr') {
+    } else if (tag === "numstr") {
         if (!this._isNumstr(str)) return this.reporter.error("Encoding of string type: numstr supports only digits and space");
         return this._createEncoderBuffer(str);
-    } else if (tag === 'printstr') {
+    } else if (tag === "printstr") {
         if (!this._isPrintstr(str)) return this.reporter.error("Encoding of string type: printstr supports only latin upper and lower case letters, digits, space, apostrophe, left and rigth parenthesis, plus sign, comma, hyphen, dot, slash, colon, equal sign, question mark");
         return this._createEncoderBuffer(str);
     } else if (/str$/.test(tag)) return this._createEncoderBuffer(str);
-    else if (tag === 'objDesc') return this._createEncoderBuffer(str);
-    else return this.reporter.error('Encoding of string type: ' + tag + ' unsupported');
+    else if (tag === "objDesc") return this._createEncoderBuffer(str);
+    else return this.reporter.error("Encoding of string type: " + tag + " unsupported");
 };
 $7729da1275a9e77b$var$DERNode.prototype._encodeObjid = function encodeObjid(id, values, relative) {
-    if (typeof id === 'string') {
-        if (!values) return this.reporter.error('string objid given, but no values map found');
-        if (!values.hasOwnProperty(id)) return this.reporter.error('objid not found in values map');
+    if (typeof id === "string") {
+        if (!values) return this.reporter.error("string objid given, but no values map found");
+        if (!values.hasOwnProperty(id)) return this.reporter.error("objid not found in values map");
         id = values[id].split(/[\s.]+/g);
         for(let i = 0; i < id.length; i++)id[i] |= 0;
     } else if (Array.isArray(id)) {
@@ -32729,7 +32728,7 @@ $7729da1275a9e77b$var$DERNode.prototype._encodeObjid = function encodeObjid(id, 
     }
     if (!Array.isArray(id)) return this.reporter.error("objid() should be either array or string, got: " + JSON.stringify(id));
     if (!relative) {
-        if (id[1] >= 40) return this.reporter.error('Second objid identifier OOB');
+        if (id[1] >= 40) return this.reporter.error("Second objid identifier OOB");
         id.splice(0, 2, id[0] * 40 + id[1]);
     }
     // Count number of octets
@@ -32748,44 +32747,44 @@ $7729da1275a9e77b$var$DERNode.prototype._encodeObjid = function encodeObjid(id, 
     return this._createEncoderBuffer(objid);
 };
 function $7729da1275a9e77b$var$two(num) {
-    if (num < 10) return '0' + num;
+    if (num < 10) return "0" + num;
     else return num;
 }
 $7729da1275a9e77b$var$DERNode.prototype._encodeTime = function encodeTime(time, tag) {
     let str;
     const date = new Date(time);
-    if (tag === 'gentime') str = [
+    if (tag === "gentime") str = [
         $7729da1275a9e77b$var$two(date.getUTCFullYear()),
         $7729da1275a9e77b$var$two(date.getUTCMonth() + 1),
         $7729da1275a9e77b$var$two(date.getUTCDate()),
         $7729da1275a9e77b$var$two(date.getUTCHours()),
         $7729da1275a9e77b$var$two(date.getUTCMinutes()),
         $7729da1275a9e77b$var$two(date.getUTCSeconds()),
-        'Z'
-    ].join('');
-    else if (tag === 'utctime') str = [
+        "Z"
+    ].join("");
+    else if (tag === "utctime") str = [
         $7729da1275a9e77b$var$two(date.getUTCFullYear() % 100),
         $7729da1275a9e77b$var$two(date.getUTCMonth() + 1),
         $7729da1275a9e77b$var$two(date.getUTCDate()),
         $7729da1275a9e77b$var$two(date.getUTCHours()),
         $7729da1275a9e77b$var$two(date.getUTCMinutes()),
         $7729da1275a9e77b$var$two(date.getUTCSeconds()),
-        'Z'
-    ].join('');
-    else this.reporter.error('Encoding ' + tag + ' time is not supported yet');
-    return this._encodeStr(str, 'octstr');
+        "Z"
+    ].join("");
+    else this.reporter.error("Encoding " + tag + " time is not supported yet");
+    return this._encodeStr(str, "octstr");
 };
 $7729da1275a9e77b$var$DERNode.prototype._encodeNull = function encodeNull() {
-    return this._createEncoderBuffer('');
+    return this._createEncoderBuffer("");
 };
 $7729da1275a9e77b$var$DERNode.prototype._encodeInt = function encodeInt(num, values) {
-    if (typeof num === 'string') {
-        if (!values) return this.reporter.error('String int or enum given, but no values map');
-        if (!values.hasOwnProperty(num)) return this.reporter.error('Values map doesn\'t contain: ' + JSON.stringify(num));
+    if (typeof num === "string") {
+        if (!values) return this.reporter.error("String int or enum given, but no values map");
+        if (!values.hasOwnProperty(num)) return this.reporter.error("Values map doesn't contain: " + JSON.stringify(num));
         num = values[num];
     }
     // Bignum, assume big endian
-    if (typeof num !== 'number' && !$7729da1275a9e77b$require$Buffer.isBuffer(num)) {
+    if (typeof num !== "number" && !$7729da1275a9e77b$require$Buffer.isBuffer(num)) {
         const numArray = num.toArray();
         if (!num.sign && numArray[0] & 0x80) numArray.unshift(0);
         num = $7729da1275a9e77b$require$Buffer.from(numArray);
@@ -32817,15 +32816,15 @@ $7729da1275a9e77b$var$DERNode.prototype._encodeBool = function encodeBool(value)
     return this._createEncoderBuffer(value ? 0xff : 0);
 };
 $7729da1275a9e77b$var$DERNode.prototype._use = function use(entity, obj) {
-    if (typeof entity === 'function') entity = entity(obj);
-    return entity._getEncoder('der').tree;
+    if (typeof entity === "function") entity = entity(obj);
+    return entity._getEncoder("der").tree;
 };
 $7729da1275a9e77b$var$DERNode.prototype._skipDefault = function skipDefault(dataBuffer, reporter, parent) {
     const state = this._baseState;
     let i;
-    if (state['default'] === null) return false;
+    if (state["default"] === null) return false;
     const data = dataBuffer.join();
-    if (state.defaultBuffer === undefined) state.defaultBuffer = this._encodeValue(state['default'], reporter, parent).join();
+    if (state.defaultBuffer === undefined) state.defaultBuffer = this._encodeValue(state["default"], reporter, parent).join();
     if (data.length !== state.defaultBuffer.length) return false;
     for(i = 0; i < data.length; i++)if (data[i] !== state.defaultBuffer[i]) return false;
     return true;
@@ -32833,20 +32832,20 @@ $7729da1275a9e77b$var$DERNode.prototype._skipDefault = function skipDefault(data
 // Utility methods
 function $7729da1275a9e77b$var$encodeTag(tag, primitive, cls, reporter) {
     let res;
-    if (tag === 'seqof') tag = 'seq';
-    else if (tag === 'setof') tag = 'set';
+    if (tag === "seqof") tag = "seq";
+    else if (tag === "setof") tag = "set";
     if ($87TbL.tagByName.hasOwnProperty(tag)) res = $87TbL.tagByName[tag];
-    else if (typeof tag === 'number' && (tag | 0) === tag) res = tag;
-    else return reporter.error('Unknown tag: ' + tag);
-    if (res >= 0x1f) return reporter.error('Multi-octet tag encoding unsupported');
+    else if (typeof tag === "number" && (tag | 0) === tag) res = tag;
+    else return reporter.error("Unknown tag: " + tag);
+    if (res >= 0x1f) return reporter.error("Multi-octet tag encoding unsupported");
     if (!primitive) res |= 0x20;
-    res |= $87TbL.tagClassByName[cls || 'universal'] << 6;
+    res |= $87TbL.tagClassByName[cls || "universal"] << 6;
     return res;
 }
 
 });
 parcelRequire.register("iEdK1", function(module, exports) {
-/* eslint-disable node/no-deprecated-api */ 'use strict';
+/* eslint-disable node/no-deprecated-api */ "use strict";
 
 var $36zFS = parcelRequire("36zFS");
 
@@ -32856,32 +32855,32 @@ var $d9369f2a2843daa0$var$safer = {};
 var $d9369f2a2843daa0$var$key;
 for($d9369f2a2843daa0$var$key in $gGU47){
     if (!$gGU47.hasOwnProperty($d9369f2a2843daa0$var$key)) continue;
-    if ($d9369f2a2843daa0$var$key === 'SlowBuffer' || $d9369f2a2843daa0$var$key === 'Buffer') continue;
+    if ($d9369f2a2843daa0$var$key === "SlowBuffer" || $d9369f2a2843daa0$var$key === "Buffer") continue;
     $d9369f2a2843daa0$var$safer[$d9369f2a2843daa0$var$key] = $gGU47[$d9369f2a2843daa0$var$key];
 }
 var $d9369f2a2843daa0$var$Safer = $d9369f2a2843daa0$var$safer.Buffer = {};
 for($d9369f2a2843daa0$var$key in $d9369f2a2843daa0$var$Buffer){
     if (!$d9369f2a2843daa0$var$Buffer.hasOwnProperty($d9369f2a2843daa0$var$key)) continue;
-    if ($d9369f2a2843daa0$var$key === 'allocUnsafe' || $d9369f2a2843daa0$var$key === 'allocUnsafeSlow') continue;
+    if ($d9369f2a2843daa0$var$key === "allocUnsafe" || $d9369f2a2843daa0$var$key === "allocUnsafeSlow") continue;
     $d9369f2a2843daa0$var$Safer[$d9369f2a2843daa0$var$key] = $d9369f2a2843daa0$var$Buffer[$d9369f2a2843daa0$var$key];
 }
 $d9369f2a2843daa0$var$safer.Buffer.prototype = $d9369f2a2843daa0$var$Buffer.prototype;
 if (!$d9369f2a2843daa0$var$Safer.from || $d9369f2a2843daa0$var$Safer.from === Uint8Array.from) $d9369f2a2843daa0$var$Safer.from = function(value, encodingOrOffset, length) {
-    if (typeof value === 'number') throw new TypeError('The "value" argument must not be of type number. Received type ' + typeof value);
-    if (value && typeof value.length === 'undefined') throw new TypeError('The first argument must be one of type string, Buffer, ArrayBuffer, Array, or Array-like Object. Received type ' + typeof value);
+    if (typeof value === "number") throw new TypeError('The "value" argument must not be of type number. Received type ' + typeof value);
+    if (value && typeof value.length === "undefined") throw new TypeError("The first argument must be one of type string, Buffer, ArrayBuffer, Array, or Array-like Object. Received type " + typeof value);
     return $d9369f2a2843daa0$var$Buffer(value, encodingOrOffset, length);
 };
 if (!$d9369f2a2843daa0$var$Safer.alloc) $d9369f2a2843daa0$var$Safer.alloc = function(size, fill, encoding) {
-    if (typeof size !== 'number') throw new TypeError('The "size" argument must be of type number. Received type ' + typeof size);
+    if (typeof size !== "number") throw new TypeError('The "size" argument must be of type number. Received type ' + typeof size);
     if (size < 0 || size >= 2147483648) throw new RangeError('The value "' + size + '" is invalid for option "size"');
     var buf = $d9369f2a2843daa0$var$Buffer(size);
     if (!fill || fill.length === 0) buf.fill(0);
-    else if (typeof encoding === 'string') buf.fill(fill, encoding);
+    else if (typeof encoding === "string") buf.fill(fill, encoding);
     else buf.fill(fill);
     return buf;
 };
 if (!$d9369f2a2843daa0$var$safer.kStringMaxLength) try {
-    $d9369f2a2843daa0$var$safer.kStringMaxLength = $36zFS.binding('buffer').kStringMaxLength;
+    $d9369f2a2843daa0$var$safer.kStringMaxLength = $36zFS.binding("buffer").kStringMaxLength;
 } catch (e) {
 // we can't determine kStringMaxLength in environments where process.binding
 // is unsupported, so let's not set it
@@ -32897,7 +32896,7 @@ module.exports = $d9369f2a2843daa0$var$safer;
 });
 
 parcelRequire.register("gZnnC", function(module, exports) {
-'use strict';
+"use strict";
 
 var $1CZyY = parcelRequire("1CZyY");
 var $c5e47aa10856127e$require$Reporter = $1CZyY.Reporter;
@@ -32911,65 +32910,65 @@ var $c5e47aa10856127e$require$DecoderBuffer = $3CNQ0.DecoderBuffer;
 var $dN0Q4 = parcelRequire("dN0Q4");
 // Supported tags
 const $c5e47aa10856127e$var$tags = [
-    'seq',
-    'seqof',
-    'set',
-    'setof',
-    'objid',
-    'bool',
-    'gentime',
-    'utctime',
-    'null_',
-    'enum',
-    'int',
-    'objDesc',
-    'bitstr',
-    'bmpstr',
-    'charstr',
-    'genstr',
-    'graphstr',
-    'ia5str',
-    'iso646str',
-    'numstr',
-    'octstr',
-    'printstr',
-    't61str',
-    'unistr',
-    'utf8str',
-    'videostr'
+    "seq",
+    "seqof",
+    "set",
+    "setof",
+    "objid",
+    "bool",
+    "gentime",
+    "utctime",
+    "null_",
+    "enum",
+    "int",
+    "objDesc",
+    "bitstr",
+    "bmpstr",
+    "charstr",
+    "genstr",
+    "graphstr",
+    "ia5str",
+    "iso646str",
+    "numstr",
+    "octstr",
+    "printstr",
+    "t61str",
+    "unistr",
+    "utf8str",
+    "videostr"
 ];
 // Public methods list
 const $c5e47aa10856127e$var$methods = [
-    'key',
-    'obj',
-    'use',
-    'optional',
-    'explicit',
-    'implicit',
-    'def',
-    'choice',
-    'any',
-    'contains'
+    "key",
+    "obj",
+    "use",
+    "optional",
+    "explicit",
+    "implicit",
+    "def",
+    "choice",
+    "any",
+    "contains"
 ].concat($c5e47aa10856127e$var$tags);
 // Overrided methods list
 const $c5e47aa10856127e$var$overrided = [
-    '_peekTag',
-    '_decodeTag',
-    '_use',
-    '_decodeStr',
-    '_decodeObjid',
-    '_decodeTime',
-    '_decodeNull',
-    '_decodeInt',
-    '_decodeBool',
-    '_decodeList',
-    '_encodeComposite',
-    '_encodeStr',
-    '_encodeObjid',
-    '_encodeTime',
-    '_encodeNull',
-    '_encodeInt',
-    '_encodeBool'
+    "_peekTag",
+    "_decodeTag",
+    "_use",
+    "_decodeStr",
+    "_decodeObjid",
+    "_decodeTime",
+    "_decodeNull",
+    "_decodeInt",
+    "_decodeBool",
+    "_decodeList",
+    "_encodeComposite",
+    "_encodeStr",
+    "_encodeObjid",
+    "_encodeTime",
+    "_encodeNull",
+    "_encodeInt",
+    "_encodeBool"
 ];
 function $c5e47aa10856127e$var$Node(enc, parent, name) {
     const state = {};
@@ -32989,7 +32988,7 @@ function $c5e47aa10856127e$var$Node(enc, parent, name) {
     state.use = null;
     state.useDecoder = null;
     state.key = null;
-    state['default'] = null;
+    state["default"] = null;
     state.explicit = null;
     state.implicit = null;
     state.contains = null;
@@ -33001,23 +33000,23 @@ function $c5e47aa10856127e$var$Node(enc, parent, name) {
 }
 module.exports = $c5e47aa10856127e$var$Node;
 const $c5e47aa10856127e$var$stateProps = [
-    'enc',
-    'parent',
-    'children',
-    'tag',
-    'args',
-    'reverseArgs',
-    'choice',
-    'optional',
-    'any',
-    'obj',
-    'use',
-    'alteredUse',
-    'key',
-    'default',
-    'explicit',
-    'implicit',
-    'contains'
+    "enc",
+    "parent",
+    "children",
+    "tag",
+    "args",
+    "reverseArgs",
+    "choice",
+    "optional",
+    "any",
+    "obj",
+    "use",
+    "alteredUse",
+    "key",
+    "default",
+    "explicit",
+    "implicit",
+    "contains"
 ];
 $c5e47aa10856127e$var$Node.prototype.clone = function clone() {
     const state = this._baseState;
@@ -33047,7 +33046,7 @@ $c5e47aa10856127e$var$Node.prototype._init = function init(body) {
     state.children = state.children.filter(function(child) {
         return child._baseState.parent === this;
     }, this);
-    $dN0Q4.equal(state.children.length, 1, 'Root node can have only one child');
+    $dN0Q4.equal(state.children.length, 1, "Root node can have only one child");
 };
 $c5e47aa10856127e$var$Node.prototype._useArgs = function useArgs(args) {
     const state = this._baseState;
@@ -33070,7 +33069,7 @@ $c5e47aa10856127e$var$Node.prototype._useArgs = function useArgs(args) {
         $dN0Q4(state.args === null);
         state.args = args;
         state.reverseArgs = args.map(function(arg) {
-            if (typeof arg !== 'object' || arg.constructor !== Object) return arg;
+            if (typeof arg !== "object" || arg.constructor !== Object) return arg;
             const res = {};
             Object.keys(arg).forEach(function(key) {
                 if (key == (key | 0)) key |= 0;
@@ -33087,7 +33086,7 @@ $c5e47aa10856127e$var$Node.prototype._useArgs = function useArgs(args) {
 $c5e47aa10856127e$var$overrided.forEach(function(method) {
     $c5e47aa10856127e$var$Node.prototype[method] = function _overrided() {
         const state = this._baseState;
-        throw new Error(method + ' not implemented for encoding: ' + state.enc);
+        throw new Error(method + " not implemented for encoding: " + state.enc);
     };
 });
 //
@@ -33117,8 +33116,8 @@ $c5e47aa10856127e$var$Node.prototype.optional = function optional() {
 };
 $c5e47aa10856127e$var$Node.prototype.def = function def(val) {
     const state = this._baseState;
-    $dN0Q4(state['default'] === null);
-    state['default'] = val;
+    $dN0Q4(state["default"] === null);
+    state["default"] = val;
     state.optional = true;
     return this;
 };
@@ -33174,7 +33173,7 @@ $c5e47aa10856127e$var$Node.prototype._decode = function decode(input, options) {
     const state = this._baseState;
     // Decode root node
     if (state.parent === null) return input.wrapResult(state.children[0]._decode(input, options));
-    let result = state['default'];
+    let result = state["default"];
     let present = true;
     let prevKey = null;
     if (state.key !== null) prevKey = input.enterKey(state.key);
@@ -33220,8 +33219,8 @@ $c5e47aa10856127e$var$Node.prototype._decode = function decode(input, options) {
             if (state.any) result = input.raw(save);
             else input = body;
         }
-        if (options && options.track && state.tag !== null) options.track(input.path(), start, input.length, 'tagged');
-        if (options && options.track && state.tag !== null) options.track(input.path(), input.offset, input.length, 'content');
+        if (options && options.track && state.tag !== null) options.track(input.path(), start, input.length, "tagged");
+        if (options && options.track && state.tag !== null) options.track(input.path(), input.offset, input.length, "content");
         // Select proper method for tag
         if (state.any) ;
         else if (state.choice === null) result = this._decodeGeneric(state.tag, input, options);
@@ -33234,7 +33233,7 @@ $c5e47aa10856127e$var$Node.prototype._decode = function decode(input, options) {
             child._decode(input, options);
         });
         // Decode contained/encoded by schema, only in bit or octet strings
-        if (state.contains && (state.tag === 'octstr' || state.tag === 'bitstr')) {
+        if (state.contains && (state.tag === "octstr" || state.tag === "bitstr")) {
             const data = new $c5e47aa10856127e$require$DecoderBuffer(result);
             result = this._getUse(state.contains, input._reporterState.obj)._decode(data, options);
         }
@@ -33248,18 +33247,18 @@ $c5e47aa10856127e$var$Node.prototype._decode = function decode(input, options) {
 };
 $c5e47aa10856127e$var$Node.prototype._decodeGeneric = function decodeGeneric(tag, input, options) {
     const state = this._baseState;
-    if (tag === 'seq' || tag === 'set') return null;
-    if (tag === 'seqof' || tag === 'setof') return this._decodeList(input, tag, state.args[0], options);
+    if (tag === "seq" || tag === "set") return null;
+    if (tag === "seqof" || tag === "setof") return this._decodeList(input, tag, state.args[0], options);
     else if (/str$/.test(tag)) return this._decodeStr(input, tag, options);
-    else if (tag === 'objid' && state.args) return this._decodeObjid(input, state.args[0], state.args[1], options);
-    else if (tag === 'objid') return this._decodeObjid(input, null, null, options);
-    else if (tag === 'gentime' || tag === 'utctime') return this._decodeTime(input, tag, options);
-    else if (tag === 'null_') return this._decodeNull(input, options);
-    else if (tag === 'bool') return this._decodeBool(input, options);
-    else if (tag === 'objDesc') return this._decodeStr(input, tag, options);
-    else if (tag === 'int' || tag === 'enum') return this._decodeInt(input, state.args && state.args[0], options);
+    else if (tag === "objid" && state.args) return this._decodeObjid(input, state.args[0], state.args[1], options);
+    else if (tag === "objid") return this._decodeObjid(input, null, null, options);
+    else if (tag === "gentime" || tag === "utctime") return this._decodeTime(input, tag, options);
+    else if (tag === "null_") return this._decodeNull(input, options);
+    else if (tag === "bool") return this._decodeBool(input, options);
+    else if (tag === "objDesc") return this._decodeStr(input, tag, options);
+    else if (tag === "int" || tag === "enum") return this._decodeInt(input, state.args && state.args[0], options);
     if (state.use !== null) return this._getUse(state.use, input._reporterState.obj)._decode(input, options);
-    else return input.error('unknown tag: ' + tag);
+    else return input.error("unknown tag: " + tag);
 };
 $c5e47aa10856127e$var$Node.prototype._getUse = function _getUse(entity, obj) {
     const state = this._baseState;
@@ -33294,7 +33293,7 @@ $c5e47aa10856127e$var$Node.prototype._decodeChoice = function decodeChoice(input
         }
         return true;
     }, this);
-    if (!match) return input.error('Choice not matched');
+    if (!match) return input.error("Choice not matched");
     return result;
 };
 //
@@ -33305,7 +33304,7 @@ $c5e47aa10856127e$var$Node.prototype._createEncoderBuffer = function createEncod
 };
 $c5e47aa10856127e$var$Node.prototype._encode = function encode(data, reporter, parent) {
     const state = this._baseState;
-    if (state['default'] !== null && state['default'] === data) return;
+    if (state["default"] !== null && state["default"] === data) return;
     const result = this._encodeValue(data, reporter, parent);
     if (result === undefined) return;
     if (this._skipDefault(result, reporter, parent)) return;
@@ -33320,7 +33319,7 @@ $c5e47aa10856127e$var$Node.prototype._encodeValue = function encode(data, report
     this.reporter = reporter;
     // Check if data is there
     if (state1.optional && data === undefined) {
-        if (state1['default'] !== null) data = state1['default'];
+        if (state1["default"] !== null) data = state1["default"];
         else return;
     }
     // Encode children first
@@ -33334,10 +33333,10 @@ $c5e47aa10856127e$var$Node.prototype._encodeValue = function encode(data, report
         primitive = true;
     } else if (state1.children) {
         content = state1.children.map(function(child) {
-            if (child._baseState.tag === 'null_') return child._encode(null, reporter, data);
-            if (child._baseState.key === null) return reporter.error('Child should have a key');
+            if (child._baseState.tag === "null_") return child._encode(null, reporter, data);
+            if (child._baseState.key === null) return reporter.error("Child should have a key");
             const prevKey = reporter.enterKey(child._baseState.key);
-            if (typeof data !== 'object') return reporter.error('Child expected, but input is not object');
+            if (typeof data !== "object") return reporter.error("Child expected, but input is not object");
             const res = child._encode(data[child._baseState.key], reporter, data);
             reporter.leaveKey(prevKey);
             return res;
@@ -33346,10 +33345,10 @@ $c5e47aa10856127e$var$Node.prototype._encodeValue = function encode(data, report
         });
         content = this._createEncoderBuffer(content);
     } else {
-        if (state1.tag === 'seqof' || state1.tag === 'setof') {
+        if (state1.tag === "seqof" || state1.tag === "setof") {
             // TODO(indutny): this should be thrown on DSL level
-            if (!(state1.args && state1.args.length === 1)) return reporter.error('Too many args for : ' + state1.tag);
-            if (!Array.isArray(data)) return reporter.error('seqof/setof, but data is not Array');
+            if (!(state1.args && state1.args.length === 1)) return reporter.error("Too many args for : " + state1.tag);
+            if (!Array.isArray(data)) return reporter.error("seqof/setof, but data is not Array");
             const child = this.clone();
             child._baseState.implicit = null;
             content = this._createEncoderBuffer(data.map(function(item) {
@@ -33365,32 +33364,32 @@ $c5e47aa10856127e$var$Node.prototype._encodeValue = function encode(data, report
     // Encode data itself
     if (!state1.any && state1.choice === null) {
         const tag = state1.implicit !== null ? state1.implicit : state1.tag;
-        const cls = state1.implicit === null ? 'universal' : 'context';
+        const cls = state1.implicit === null ? "universal" : "context";
         if (tag === null) {
-            if (state1.use === null) reporter.error('Tag could be omitted only for .use()');
+            if (state1.use === null) reporter.error("Tag could be omitted only for .use()");
         } else if (state1.use === null) result = this._encodeComposite(tag, primitive, cls, content);
     }
     // Wrap in explicit
-    if (state1.explicit !== null) result = this._encodeComposite(state1.explicit, false, 'context', result);
+    if (state1.explicit !== null) result = this._encodeComposite(state1.explicit, false, "context", result);
     return result;
 };
 $c5e47aa10856127e$var$Node.prototype._encodeChoice = function encodeChoice(data, reporter) {
     const state = this._baseState;
     const node = state.choice[data.type];
-    if (!node) $dN0Q4(false, data.type + ' not found in ' + JSON.stringify(Object.keys(state.choice)));
+    if (!node) $dN0Q4(false, data.type + " not found in " + JSON.stringify(Object.keys(state.choice)));
     return node._encode(data.value, reporter);
 };
 $c5e47aa10856127e$var$Node.prototype._encodePrimitive = function encodePrimitive(tag, data) {
     const state = this._baseState;
     if (/str$/.test(tag)) return this._encodeStr(data, tag);
-    else if (tag === 'objid' && state.args) return this._encodeObjid(data, state.reverseArgs[0], state.args[1]);
-    else if (tag === 'objid') return this._encodeObjid(data, null, null);
-    else if (tag === 'gentime' || tag === 'utctime') return this._encodeTime(data, tag);
-    else if (tag === 'null_') return this._encodeNull();
-    else if (tag === 'int' || tag === 'enum') return this._encodeInt(data, state.args && state.reverseArgs[0]);
-    else if (tag === 'bool') return this._encodeBool(data);
-    else if (tag === 'objDesc') return this._encodeStr(data, tag);
-    else throw new Error('Unsupported tag: ' + tag);
+    else if (tag === "objid" && state.args) return this._encodeObjid(data, state.reverseArgs[0], state.args[1]);
+    else if (tag === "objid") return this._encodeObjid(data, null, null);
+    else if (tag === "gentime" || tag === "utctime") return this._encodeTime(data, tag);
+    else if (tag === "null_") return this._encodeNull();
+    else if (tag === "int" || tag === "enum") return this._encodeInt(data, state.args && state.reverseArgs[0]);
+    else if (tag === "bool") return this._encodeBool(data);
+    else if (tag === "objDesc") return this._encodeStr(data, tag);
+    else throw new Error("Unsupported tag: " + tag);
 };
 $c5e47aa10856127e$var$Node.prototype._isNumstr = function isNumstr(str) {
     return /^[0-9 ]*$/.test(str);
@@ -33404,7 +33403,7 @@ parcelRequire.register("1CZyY", function(module, exports) {
 
 $parcel$export(module.exports, "Reporter", function () { return $12f9182fe0149d3e$export$957313a2f485e5ed; }, function (v) { return $12f9182fe0149d3e$export$957313a2f485e5ed = v; });
 var $12f9182fe0149d3e$export$957313a2f485e5ed;
-'use strict';
+"use strict";
 
 var $baEok = parcelRequire("baEok");
 function $12f9182fe0149d3e$var$Reporter(options) {
@@ -33444,7 +33443,7 @@ $12f9182fe0149d3e$var$Reporter.prototype.leaveKey = function leaveKey(index, key
     if (state.obj !== null) state.obj[key] = value;
 };
 $12f9182fe0149d3e$var$Reporter.prototype.path = function path() {
-    return this._reporterState.path.join('/');
+    return this._reporterState.path.join("/");
 };
 $12f9182fe0149d3e$var$Reporter.prototype.enterObject = function enterObject() {
     const state = this._reporterState;
@@ -33464,8 +33463,8 @@ $12f9182fe0149d3e$var$Reporter.prototype.error = function error(msg) {
     const inherited = msg instanceof $12f9182fe0149d3e$var$ReporterError;
     if (inherited) err = msg;
     else err = new $12f9182fe0149d3e$var$ReporterError(state.path.map(function(elem) {
-        return '[' + JSON.stringify(elem) + ']';
-    }).join(''), msg.message || msg, msg.stack);
+        return "[" + JSON.stringify(elem) + "]";
+    }).join(""), msg.message || msg, msg.stack);
     if (!state.options.partial) throw err;
     if (!inherited) state.errors.push(err);
     return err;
@@ -33484,7 +33483,7 @@ function $12f9182fe0149d3e$var$ReporterError(path, msg) {
 }
 $baEok($12f9182fe0149d3e$var$ReporterError, Error);
 $12f9182fe0149d3e$var$ReporterError.prototype.rethrow = function rethrow(msg) {
-    this.message = msg + ' at: ' + (this.path || '(shallow)');
+    this.message = msg + " at: " + (this.path || "(shallow)");
     if (Error.captureStackTrace) Error.captureStackTrace(this, $12f9182fe0149d3e$var$ReporterError);
     if (!this.stack) try {
         // IE only adds stack when thrown
@@ -33503,7 +33502,7 @@ $parcel$export(module.exports, "DecoderBuffer", function () { return $2a3b9473d6
 $parcel$export(module.exports, "EncoderBuffer", function () { return $2a3b9473d6493fcf$export$8ff24f7760c7a78e; }, function (v) { return $2a3b9473d6493fcf$export$8ff24f7760c7a78e = v; });
 var $2a3b9473d6493fcf$export$bf9f79cdc4a49163;
 var $2a3b9473d6493fcf$export$8ff24f7760c7a78e;
-'use strict';
+"use strict";
 
 var $baEok = parcelRequire("baEok");
 
@@ -33515,7 +33514,7 @@ var $2a3b9473d6493fcf$require$Buffer = $iEdK1.Buffer;
 function $2a3b9473d6493fcf$var$DecoderBuffer(base, options) {
     $2a3b9473d6493fcf$require$Reporter.call(this, options);
     if (!$2a3b9473d6493fcf$require$Buffer.isBuffer(base)) {
-        this.error('Input not Buffer');
+        this.error("Input not Buffer");
         return;
     }
     this.base = base;
@@ -33527,7 +33526,7 @@ $2a3b9473d6493fcf$export$bf9f79cdc4a49163 = $2a3b9473d6493fcf$var$DecoderBuffer;
 $2a3b9473d6493fcf$var$DecoderBuffer.isDecoderBuffer = function isDecoderBuffer(data) {
     if (data instanceof $2a3b9473d6493fcf$var$DecoderBuffer) return true;
     // Or accept compatible API
-    const isCompatible = typeof data === 'object' && $2a3b9473d6493fcf$require$Buffer.isBuffer(data.base) && data.constructor.name === 'DecoderBuffer' && typeof data.offset === 'number' && typeof data.length === 'number' && typeof data.save === 'function' && typeof data.restore === 'function' && typeof data.isEmpty === 'function' && typeof data.readUInt8 === 'function' && typeof data.skip === 'function' && typeof data.raw === 'function';
+    const isCompatible = typeof data === "object" && $2a3b9473d6493fcf$require$Buffer.isBuffer(data.base) && data.constructor.name === "DecoderBuffer" && typeof data.offset === "number" && typeof data.length === "number" && typeof data.save === "function" && typeof data.restore === "function" && typeof data.isEmpty === "function" && typeof data.readUInt8 === "function" && typeof data.skip === "function" && typeof data.raw === "function";
     return isCompatible;
 };
 $2a3b9473d6493fcf$var$DecoderBuffer.prototype.save = function save() {
@@ -33550,10 +33549,10 @@ $2a3b9473d6493fcf$var$DecoderBuffer.prototype.isEmpty = function isEmpty() {
 };
 $2a3b9473d6493fcf$var$DecoderBuffer.prototype.readUInt8 = function readUInt8(fail) {
     if (this.offset + 1 <= this.length) return this.base.readUInt8(this.offset++, true);
-    else return this.error(fail || 'DecoderBuffer overrun');
+    else return this.error(fail || "DecoderBuffer overrun");
 };
 $2a3b9473d6493fcf$var$DecoderBuffer.prototype.skip = function skip(bytes, fail) {
-    if (!(this.offset + bytes <= this.length)) return this.error(fail || 'DecoderBuffer overrun');
+    if (!(this.offset + bytes <= this.length)) return this.error(fail || "DecoderBuffer overrun");
     const res = new $2a3b9473d6493fcf$var$DecoderBuffer(this.base);
     // Share reporter state
     res._reporterState = this._reporterState;
@@ -33573,23 +33572,23 @@ function $2a3b9473d6493fcf$var$EncoderBuffer(value, reporter) {
             this.length += item.length;
             return item;
         }, this);
-    } else if (typeof value === 'number') {
-        if (!(0 <= value && value <= 0xff)) return reporter.error('non-byte EncoderBuffer value');
+    } else if (typeof value === "number") {
+        if (!(0 <= value && value <= 0xff)) return reporter.error("non-byte EncoderBuffer value");
         this.value = value;
         this.length = 1;
-    } else if (typeof value === 'string') {
+    } else if (typeof value === "string") {
         this.value = value;
         this.length = $2a3b9473d6493fcf$require$Buffer.byteLength(value);
     } else if ($2a3b9473d6493fcf$require$Buffer.isBuffer(value)) {
         this.value = value;
         this.length = value.length;
-    } else return reporter.error('Unsupported type: ' + typeof value);
+    } else return reporter.error("Unsupported type: " + typeof value);
 }
 $2a3b9473d6493fcf$export$8ff24f7760c7a78e = $2a3b9473d6493fcf$var$EncoderBuffer;
 $2a3b9473d6493fcf$var$EncoderBuffer.isEncoderBuffer = function isEncoderBuffer(data) {
     if (data instanceof $2a3b9473d6493fcf$var$EncoderBuffer) return true;
     // Or accept compatible API
-    const isCompatible = typeof data === 'object' && data.constructor.name === 'EncoderBuffer' && typeof data.length === 'number' && typeof data.join === 'function';
+    const isCompatible = typeof data === "object" && data.constructor.name === "EncoderBuffer" && typeof data.length === "number" && typeof data.join === "function";
     return isCompatible;
 };
 $2a3b9473d6493fcf$var$EncoderBuffer.prototype.join = function join(out, offset) {
@@ -33601,8 +33600,8 @@ $2a3b9473d6493fcf$var$EncoderBuffer.prototype.join = function join(out, offset) 
         offset += item.length;
     });
     else {
-        if (typeof this.value === 'number') out[offset] = this.value;
-        else if (typeof this.value === 'string') out.write(this.value, offset);
+        if (typeof this.value === "number") out[offset] = this.value;
+        else if (typeof this.value === "string") out.write(this.value, offset);
         else if ($2a3b9473d6493fcf$require$Buffer.isBuffer(this.value)) this.value.copy(out, offset);
         offset += this.length;
     }
@@ -33622,7 +33621,7 @@ var $5ea9c9874a7fa4e6$export$3584c46ed60baee8;
 var $5ea9c9874a7fa4e6$export$f18596ef8d632e49;
 var $5ea9c9874a7fa4e6$export$2b067c6666111485;
 var $5ea9c9874a7fa4e6$export$f17df38a421ab9e3;
-'use strict';
+"use strict";
 // Helper
 function $5ea9c9874a7fa4e6$var$reverse(map) {
     const res = {};
@@ -33635,42 +33634,42 @@ function $5ea9c9874a7fa4e6$var$reverse(map) {
     return res;
 }
 $5ea9c9874a7fa4e6$export$3584c46ed60baee8 = {
-    0: 'universal',
-    1: 'application',
-    2: 'context',
-    3: 'private'
+    0: "universal",
+    1: "application",
+    2: "context",
+    3: "private"
 };
 $5ea9c9874a7fa4e6$export$f18596ef8d632e49 = $5ea9c9874a7fa4e6$var$reverse($5ea9c9874a7fa4e6$export$3584c46ed60baee8);
 $5ea9c9874a7fa4e6$export$2b067c6666111485 = {
-    0x00: 'end',
-    0x01: 'bool',
-    0x02: 'int',
-    0x03: 'bitstr',
-    0x04: 'octstr',
-    0x05: 'null_',
-    0x06: 'objid',
-    0x07: 'objDesc',
-    0x08: 'external',
-    0x09: 'real',
-    0x0a: 'enum',
-    0x0b: 'embed',
-    0x0c: 'utf8str',
-    0x0d: 'relativeOid',
-    0x10: 'seq',
-    0x11: 'set',
-    0x12: 'numstr',
-    0x13: 'printstr',
-    0x14: 't61str',
-    0x15: 'videostr',
-    0x16: 'ia5str',
-    0x17: 'utctime',
-    0x18: 'gentime',
-    0x19: 'graphstr',
-    0x1a: 'iso646str',
-    0x1b: 'genstr',
-    0x1c: 'unistr',
-    0x1d: 'charstr',
-    0x1e: 'bmpstr'
+    0x00: "end",
+    0x01: "bool",
+    0x02: "int",
+    0x03: "bitstr",
+    0x04: "octstr",
+    0x05: "null_",
+    0x06: "objid",
+    0x07: "objDesc",
+    0x08: "external",
+    0x09: "real",
+    0x0a: "enum",
+    0x0b: "embed",
+    0x0c: "utf8str",
+    0x0d: "relativeOid",
+    0x10: "seq",
+    0x11: "set",
+    0x12: "numstr",
+    0x13: "printstr",
+    0x14: "t61str",
+    0x15: "videostr",
+    0x16: "ia5str",
+    0x17: "utctime",
+    0x18: "gentime",
+    0x19: "graphstr",
+    0x1a: "iso646str",
+    0x1b: "genstr",
+    0x1c: "unistr",
+    0x1d: "charstr",
+    0x1e: "bmpstr"
 };
 $5ea9c9874a7fa4e6$export$f17df38a421ab9e3 = $5ea9c9874a7fa4e6$var$reverse($5ea9c9874a7fa4e6$export$2b067c6666111485);
 
@@ -33678,33 +33677,33 @@ $5ea9c9874a7fa4e6$export$f17df38a421ab9e3 = $5ea9c9874a7fa4e6$var$reverse($5ea9c
 
 
 parcelRequire.register("9VwZ7", function(module, exports) {
-'use strict';
+"use strict";
 
 var $baEok = parcelRequire("baEok");
 
 var $aeiSd = parcelRequire("aeiSd");
 function $73a3060a7b3b8059$var$PEMEncoder(entity) {
     $aeiSd.call(this, entity);
-    this.enc = 'pem';
+    this.enc = "pem";
 }
 $baEok($73a3060a7b3b8059$var$PEMEncoder, $aeiSd);
 module.exports = $73a3060a7b3b8059$var$PEMEncoder;
 $73a3060a7b3b8059$var$PEMEncoder.prototype.encode = function encode(data, options) {
     const buf = $aeiSd.prototype.encode.call(this, data);
-    const p = buf.toString('base64');
+    const p = buf.toString("base64");
     const out = [
-        '-----BEGIN ' + options.label + '-----'
+        "-----BEGIN " + options.label + "-----"
     ];
     for(let i = 0; i < p.length; i += 64)out.push(p.slice(i, i + 64));
-    out.push('-----END ' + options.label + '-----');
-    return out.join('\n');
+    out.push("-----END " + options.label + "-----");
+    return out.join("\n");
 };
 
 });
 
 
 parcelRequire.register("iq7P6", function(module, exports) {
-'use strict';
+"use strict";
 const $d690b93852dd7901$var$decoders = module.exports;
 
 $d690b93852dd7901$var$decoders.der = (parcelRequire("bhkP6"));
@@ -33713,7 +33712,7 @@ $d690b93852dd7901$var$decoders.pem = (parcelRequire("6HyUb"));
 
 });
 parcelRequire.register("bhkP6", function(module, exports) {
-'use strict';
+"use strict";
 
 var $baEok = parcelRequire("baEok");
 
@@ -33726,7 +33725,7 @@ var $gZnnC = parcelRequire("gZnnC");
 
 var $87TbL = parcelRequire("87TbL");
 function $83616f489b52de10$var$DERDecoder(entity) {
-    this.enc = 'der';
+    this.enc = "der";
     this.name = entity.name;
     this.entity = entity;
     // Construct base tree
@@ -33740,7 +33739,7 @@ $83616f489b52de10$var$DERDecoder.prototype.decode = function decode(data, option
 };
 // Tree methods
 function $83616f489b52de10$var$DERNode(parent) {
-    $gZnnC.call(this, 'der', parent);
+    $gZnnC.call(this, "der", parent);
 }
 $baEok($83616f489b52de10$var$DERNode, $gZnnC);
 $83616f489b52de10$var$DERNode.prototype._peekTag = function peekTag(buffer, tag, any) {
@@ -33749,7 +33748,7 @@ $83616f489b52de10$var$DERNode.prototype._peekTag = function peekTag(buffer, tag,
     const decodedTag = $83616f489b52de10$var$derDecodeTag(buffer, 'Failed to peek tag: "' + tag + '"');
     if (buffer.isError(decodedTag)) return decodedTag;
     buffer.restore(state);
-    return decodedTag.tag === tag || decodedTag.tagStr === tag || decodedTag.tagStr + 'of' === tag || any;
+    return decodedTag.tag === tag || decodedTag.tagStr === tag || decodedTag.tagStr + "of" === tag || any;
 };
 $83616f489b52de10$var$DERNode.prototype._decodeTag = function decodeTag(buffer, tag, any) {
     const decodedTag = $83616f489b52de10$var$derDecodeTag(buffer, 'Failed to decode tag of "' + tag + '"');
@@ -33757,7 +33756,7 @@ $83616f489b52de10$var$DERNode.prototype._decodeTag = function decodeTag(buffer, 
     let len = $83616f489b52de10$var$derDecodeLen(buffer, decodedTag.primitive, 'Failed to get length of "' + tag + '"');
     // Failure
     if (buffer.isError(len)) return len;
-    if (!any && decodedTag.tag !== tag && decodedTag.tagStr !== tag && decodedTag.tagStr + 'of' !== tag) return buffer.error('Failed to match tag: "' + tag + '"');
+    if (!any && decodedTag.tag !== tag && decodedTag.tagStr !== tag && decodedTag.tagStr + "of" !== tag) return buffer.error('Failed to match tag: "' + tag + '"');
     if (decodedTag.primitive || len !== null) return buffer.skip(len, 'Failed to match body of: "' + tag + '"');
     // Indefinite length... find END tag
     const state = buffer.save();
@@ -33778,46 +33777,46 @@ $83616f489b52de10$var$DERNode.prototype._skipUntilEnd = function skipUntilEnd(bu
         else res = this._skipUntilEnd(buffer, fail);
         // Failure
         if (buffer.isError(res)) return res;
-        if (tag.tagStr === 'end') break;
+        if (tag.tagStr === "end") break;
     }
 };
 $83616f489b52de10$var$DERNode.prototype._decodeList = function decodeList(buffer, tag, decoder, options) {
     const result = [];
     while(!buffer.isEmpty()){
-        const possibleEnd = this._peekTag(buffer, 'end');
+        const possibleEnd = this._peekTag(buffer, "end");
         if (buffer.isError(possibleEnd)) return possibleEnd;
-        const res = decoder.decode(buffer, 'der', options);
+        const res = decoder.decode(buffer, "der", options);
         if (buffer.isError(res) && possibleEnd) break;
         result.push(res);
     }
     return result;
 };
 $83616f489b52de10$var$DERNode.prototype._decodeStr = function decodeStr(buffer, tag) {
-    if (tag === 'bitstr') {
+    if (tag === "bitstr") {
         const unused = buffer.readUInt8();
         if (buffer.isError(unused)) return unused;
         return {
             unused: unused,
             data: buffer.raw()
         };
-    } else if (tag === 'bmpstr') {
+    } else if (tag === "bmpstr") {
         const raw = buffer.raw();
-        if (raw.length % 2 === 1) return buffer.error('Decoding of string type: bmpstr length mismatch');
-        let str = '';
+        if (raw.length % 2 === 1) return buffer.error("Decoding of string type: bmpstr length mismatch");
+        let str = "";
         for(let i = 0; i < raw.length / 2; i++)str += String.fromCharCode(raw.readUInt16BE(i * 2));
         return str;
-    } else if (tag === 'numstr') {
-        const numstr = buffer.raw().toString('ascii');
+    } else if (tag === "numstr") {
+        const numstr = buffer.raw().toString("ascii");
         if (!this._isNumstr(numstr)) return buffer.error("Decoding of string type: numstr unsupported characters");
         return numstr;
-    } else if (tag === 'octstr') return buffer.raw();
-    else if (tag === 'objDesc') return buffer.raw();
-    else if (tag === 'printstr') {
-        const printstr = buffer.raw().toString('ascii');
+    } else if (tag === "octstr") return buffer.raw();
+    else if (tag === "objDesc") return buffer.raw();
+    else if (tag === "printstr") {
+        const printstr = buffer.raw().toString("ascii");
         if (!this._isPrintstr(printstr)) return buffer.error("Decoding of string type: printstr unsupported characters");
         return printstr;
     } else if (/str$/.test(tag)) return buffer.raw().toString();
-    else return buffer.error('Decoding of string type: ' + tag + ' unsupported');
+    else return buffer.error("Decoding of string type: " + tag + " unsupported");
 };
 $83616f489b52de10$var$DERNode.prototype._decodeObjid = function decodeObjid(buffer, values, relative) {
     let result;
@@ -33842,8 +33841,8 @@ $83616f489b52de10$var$DERNode.prototype._decodeObjid = function decodeObjid(buff
         second
     ].concat(identifiers.slice(1));
     if (values) {
-        let tmp = values[result.join(' ')];
-        if (tmp === undefined) tmp = values[result.join('.')];
+        let tmp = values[result.join(" ")];
+        if (tmp === undefined) tmp = values[result.join(".")];
         if (tmp !== undefined) result = tmp;
     }
     return result;
@@ -33856,14 +33855,14 @@ $83616f489b52de10$var$DERNode.prototype._decodeTime = function decodeTime(buffer
     let hour;
     let min;
     let sec;
-    if (tag === 'gentime') {
+    if (tag === "gentime") {
         year = str.slice(0, 4) | 0;
         mon = str.slice(4, 6) | 0;
         day = str.slice(6, 8) | 0;
         hour = str.slice(8, 10) | 0;
         min = str.slice(10, 12) | 0;
         sec = str.slice(12, 14) | 0;
-    } else if (tag === 'utctime') {
+    } else if (tag === "utctime") {
         year = str.slice(0, 2) | 0;
         mon = str.slice(2, 4) | 0;
         day = str.slice(4, 6) | 0;
@@ -33872,7 +33871,7 @@ $83616f489b52de10$var$DERNode.prototype._decodeTime = function decodeTime(buffer
         sec = str.slice(10, 12) | 0;
         if (year < 70) year = 2000 + year;
         else year = 1900 + year;
-    } else return buffer.error('Decoding ' + tag + ' time is not supported yet');
+    } else return buffer.error("Decoding " + tag + " time is not supported yet");
     return Date.UTC(year, mon - 1, day, hour, min, sec, 0);
 };
 $83616f489b52de10$var$DERNode.prototype._decodeNull = function decodeNull() {
@@ -33891,8 +33890,8 @@ $83616f489b52de10$var$DERNode.prototype._decodeInt = function decodeInt(buffer, 
     return res;
 };
 $83616f489b52de10$var$DERNode.prototype._use = function use(entity, obj) {
-    if (typeof entity === 'function') entity = entity(obj);
-    return entity._getDecoder('der').tree;
+    if (typeof entity === "function") entity = entity(obj);
+    return entity._getDecoder("der").tree;
 };
 // Utility methods
 function $83616f489b52de10$var$derDecodeTag(buf, fail) {
@@ -33929,7 +33928,7 @@ function $83616f489b52de10$var$derDecodeLen(buf, primitive, fail) {
     return len;
     // Long form
     const num = len & 0x7f;
-    if (num > 4) return buf.error('length octect is too long');
+    if (num > 4) return buf.error("length octect is too long");
     len = 0;
     for(let i = 0; i < num; i++){
         len <<= 8;
@@ -33943,7 +33942,7 @@ function $83616f489b52de10$var$derDecodeLen(buf, primitive, fail) {
 });
 
 parcelRequire.register("6HyUb", function(module, exports) {
-'use strict';
+"use strict";
 
 var $baEok = parcelRequire("baEok");
 
@@ -33953,7 +33952,7 @@ var $4e11d5ae80dd944e$require$Buffer = $iEdK1.Buffer;
 var $bhkP6 = parcelRequire("bhkP6");
 function $4e11d5ae80dd944e$var$PEMDecoder(entity) {
     $bhkP6.call(this, entity);
-    this.enc = 'pem';
+    this.enc = "pem";
 }
 $baEok($4e11d5ae80dd944e$var$PEMDecoder, $bhkP6);
 module.exports = $4e11d5ae80dd944e$var$PEMDecoder;
@@ -33968,19 +33967,19 @@ $4e11d5ae80dd944e$var$PEMDecoder.prototype.decode = function decode(data, option
         if (match === null) continue;
         if (match[2] !== label) continue;
         if (start === -1) {
-            if (match[1] !== 'BEGIN') break;
+            if (match[1] !== "BEGIN") break;
             start = i;
         } else {
-            if (match[1] !== 'END') break;
+            if (match[1] !== "END") break;
             end = i;
             break;
         }
     }
-    if (start === -1 || end === -1) throw new Error('PEM section not found for: ' + label);
-    const base64 = lines.slice(start + 1, end).join('');
+    if (start === -1 || end === -1) throw new Error("PEM section not found for: " + label);
+    const base64 = lines.slice(start + 1, end).join("");
     // Remove excessive symbols
-    base64.replace(/[^a-z0-9+/=]+/gi, '');
-    const input = $4e11d5ae80dd944e$require$Buffer.from(base64, 'base64');
+    base64.replace(/[^a-z0-9+/=]+/gi, "");
+    const input = $4e11d5ae80dd944e$require$Buffer.from(base64, "base64");
     return $bhkP6.prototype.decode.call(this, input, options);
 };
 
@@ -33989,7 +33988,7 @@ $4e11d5ae80dd944e$var$PEMDecoder.prototype.decode = function decode(data, option
 
 
 parcelRequire.register("8mBiy", function(module, exports) {
-'use strict';
+"use strict";
 const $616d4f7309640664$var$base = module.exports;
 
 $616d4f7309640664$var$base.Reporter = (parcelRequire("1CZyY")).Reporter;
@@ -34003,7 +34002,7 @@ $616d4f7309640664$var$base.Node = (parcelRequire("gZnnC"));
 });
 
 parcelRequire.register("i3Icg", function(module, exports) {
-'use strict';
+"use strict";
 const $d25aca5b17a38bf1$var$constants = module.exports;
 // Helper
 $d25aca5b17a38bf1$var$constants._reverse = function reverse(map) {
@@ -34025,46 +34024,46 @@ $d25aca5b17a38bf1$var$constants.der = (parcelRequire("87TbL"));
 parcelRequire.register("dWLj3", function(module, exports) {
 // from https://github.com/Rantanen/node-dtls/blob/25a7dc861bda38cfeac93a723500eea4f0ac2e86/Certificate.js
 // thanks to @Rantanen
-'use strict';
+"use strict";
 
 var $8ul9W = parcelRequire("8ul9W");
-var $a275632c621a931d$var$Time = $8ul9W.define('Time', function() {
+var $a275632c621a931d$var$Time = $8ul9W.define("Time", function() {
     this.choice({
         utcTime: this.utctime(),
         generalTime: this.gentime()
     });
 });
-var $a275632c621a931d$var$AttributeTypeValue = $8ul9W.define('AttributeTypeValue', function() {
-    this.seq().obj(this.key('type').objid(), this.key('value').any());
+var $a275632c621a931d$var$AttributeTypeValue = $8ul9W.define("AttributeTypeValue", function() {
+    this.seq().obj(this.key("type").objid(), this.key("value").any());
 });
-var $a275632c621a931d$var$AlgorithmIdentifier = $8ul9W.define('AlgorithmIdentifier', function() {
-    this.seq().obj(this.key('algorithm').objid(), this.key('parameters').optional(), this.key('curve').objid().optional());
+var $a275632c621a931d$var$AlgorithmIdentifier = $8ul9W.define("AlgorithmIdentifier", function() {
+    this.seq().obj(this.key("algorithm").objid(), this.key("parameters").optional(), this.key("curve").objid().optional());
 });
-var $a275632c621a931d$var$SubjectPublicKeyInfo = $8ul9W.define('SubjectPublicKeyInfo', function() {
-    this.seq().obj(this.key('algorithm').use($a275632c621a931d$var$AlgorithmIdentifier), this.key('subjectPublicKey').bitstr());
+var $a275632c621a931d$var$SubjectPublicKeyInfo = $8ul9W.define("SubjectPublicKeyInfo", function() {
+    this.seq().obj(this.key("algorithm").use($a275632c621a931d$var$AlgorithmIdentifier), this.key("subjectPublicKey").bitstr());
 });
-var $a275632c621a931d$var$RelativeDistinguishedName = $8ul9W.define('RelativeDistinguishedName', function() {
+var $a275632c621a931d$var$RelativeDistinguishedName = $8ul9W.define("RelativeDistinguishedName", function() {
     this.setof($a275632c621a931d$var$AttributeTypeValue);
 });
-var $a275632c621a931d$var$RDNSequence = $8ul9W.define('RDNSequence', function() {
+var $a275632c621a931d$var$RDNSequence = $8ul9W.define("RDNSequence", function() {
     this.seqof($a275632c621a931d$var$RelativeDistinguishedName);
 });
-var $a275632c621a931d$var$Name = $8ul9W.define('Name', function() {
+var $a275632c621a931d$var$Name = $8ul9W.define("Name", function() {
     this.choice({
         rdnSequence: this.use($a275632c621a931d$var$RDNSequence)
     });
 });
-var $a275632c621a931d$var$Validity = $8ul9W.define('Validity', function() {
-    this.seq().obj(this.key('notBefore').use($a275632c621a931d$var$Time), this.key('notAfter').use($a275632c621a931d$var$Time));
+var $a275632c621a931d$var$Validity = $8ul9W.define("Validity", function() {
+    this.seq().obj(this.key("notBefore").use($a275632c621a931d$var$Time), this.key("notAfter").use($a275632c621a931d$var$Time));
 });
-var $a275632c621a931d$var$Extension = $8ul9W.define('Extension', function() {
-    this.seq().obj(this.key('extnID').objid(), this.key('critical').bool().def(false), this.key('extnValue').octstr());
+var $a275632c621a931d$var$Extension = $8ul9W.define("Extension", function() {
+    this.seq().obj(this.key("extnID").objid(), this.key("critical").bool().def(false), this.key("extnValue").octstr());
 });
-var $a275632c621a931d$var$TBSCertificate = $8ul9W.define('TBSCertificate', function() {
-    this.seq().obj(this.key('version').explicit(0).int().optional(), this.key('serialNumber').int(), this.key('signature').use($a275632c621a931d$var$AlgorithmIdentifier), this.key('issuer').use($a275632c621a931d$var$Name), this.key('validity').use($a275632c621a931d$var$Validity), this.key('subject').use($a275632c621a931d$var$Name), this.key('subjectPublicKeyInfo').use($a275632c621a931d$var$SubjectPublicKeyInfo), this.key('issuerUniqueID').implicit(1).bitstr().optional(), this.key('subjectUniqueID').implicit(2).bitstr().optional(), this.key('extensions').explicit(3).seqof($a275632c621a931d$var$Extension).optional());
+var $a275632c621a931d$var$TBSCertificate = $8ul9W.define("TBSCertificate", function() {
+    this.seq().obj(this.key("version").explicit(0).int().optional(), this.key("serialNumber").int(), this.key("signature").use($a275632c621a931d$var$AlgorithmIdentifier), this.key("issuer").use($a275632c621a931d$var$Name), this.key("validity").use($a275632c621a931d$var$Validity), this.key("subject").use($a275632c621a931d$var$Name), this.key("subjectPublicKeyInfo").use($a275632c621a931d$var$SubjectPublicKeyInfo), this.key("issuerUniqueID").implicit(1).bitstr().optional(), this.key("subjectUniqueID").implicit(2).bitstr().optional(), this.key("extensions").explicit(3).seqof($a275632c621a931d$var$Extension).optional());
 });
-var $a275632c621a931d$var$X509Certificate = $8ul9W.define('X509Certificate', function() {
-    this.seq().obj(this.key('tbsCertificate').use($a275632c621a931d$var$TBSCertificate), this.key('signatureAlgorithm').use($a275632c621a931d$var$AlgorithmIdentifier), this.key('signatureValue').bitstr());
+var $a275632c621a931d$var$X509Certificate = $8ul9W.define("X509Certificate", function() {
+    this.seq().obj(this.key("tbsCertificate").use($a275632c621a931d$var$TBSCertificate), this.key("signatureAlgorithm").use($a275632c621a931d$var$AlgorithmIdentifier), this.key("signatureValue").bitstr());
 });
 module.exports = $a275632c621a931d$var$X509Certificate;
 
@@ -34072,7 +34071,7 @@ module.exports = $a275632c621a931d$var$X509Certificate;
 
 
 parcelRequire.register("f0e0R", function(module, exports) {
-module.exports = JSON.parse("{\"2.16.840.1.101.3.4.1.1\":\"aes-128-ecb\",\"2.16.840.1.101.3.4.1.2\":\"aes-128-cbc\",\"2.16.840.1.101.3.4.1.3\":\"aes-128-ofb\",\"2.16.840.1.101.3.4.1.4\":\"aes-128-cfb\",\"2.16.840.1.101.3.4.1.21\":\"aes-192-ecb\",\"2.16.840.1.101.3.4.1.22\":\"aes-192-cbc\",\"2.16.840.1.101.3.4.1.23\":\"aes-192-ofb\",\"2.16.840.1.101.3.4.1.24\":\"aes-192-cfb\",\"2.16.840.1.101.3.4.1.41\":\"aes-256-ecb\",\"2.16.840.1.101.3.4.1.42\":\"aes-256-cbc\",\"2.16.840.1.101.3.4.1.43\":\"aes-256-ofb\",\"2.16.840.1.101.3.4.1.44\":\"aes-256-cfb\"}");
+module.exports = JSON.parse('{"2.16.840.1.101.3.4.1.1":"aes-128-ecb","2.16.840.1.101.3.4.1.2":"aes-128-cbc","2.16.840.1.101.3.4.1.3":"aes-128-ofb","2.16.840.1.101.3.4.1.4":"aes-128-cfb","2.16.840.1.101.3.4.1.21":"aes-192-ecb","2.16.840.1.101.3.4.1.22":"aes-192-cbc","2.16.840.1.101.3.4.1.23":"aes-192-ofb","2.16.840.1.101.3.4.1.24":"aes-192-cfb","2.16.840.1.101.3.4.1.41":"aes-256-ecb","2.16.840.1.101.3.4.1.42":"aes-256-cbc","2.16.840.1.101.3.4.1.43":"aes-256-ofb","2.16.840.1.101.3.4.1.44":"aes-256-cfb"}');
 
 });
 
@@ -34094,11 +34093,11 @@ module.exports = function(okey, password) {
     var decrypted;
     if (!match) {
         var match2 = key.match($8670ee4f221001c7$var$fullRegex);
-        decrypted = $8670ee4f221001c7$require$Buffer.from(match2[2].replace(/[\r\n]/g, ''), 'base64');
+        decrypted = $8670ee4f221001c7$require$Buffer.from(match2[2].replace(/[\r\n]/g, ""), "base64");
     } else {
-        var suite = 'aes' + match[1];
-        var iv = $8670ee4f221001c7$require$Buffer.from(match[2], 'hex');
-        var cipherText = $8670ee4f221001c7$require$Buffer.from(match[3].replace(/[\r\n]/g, ''), 'base64');
+        var suite = "aes" + match[1];
+        var iv = $8670ee4f221001c7$require$Buffer.from(match[2], "hex");
+        var cipherText = $8670ee4f221001c7$require$Buffer.from(match[3].replace(/[\r\n]/g, ""), "base64");
         var cipherKey = $l5861(password, iv.slice(0, 8), parseInt(match[1], 10)).key;
         var out = [];
         var cipher = $jEWuG.createDecipheriv(suite, cipherKey, iv);
@@ -34117,7 +34116,7 @@ module.exports = function(okey, password) {
 
 
 parcelRequire.register("21yZU", function(module, exports) {
-module.exports = JSON.parse("{\"1.3.132.0.10\":\"secp256k1\",\"1.3.132.0.33\":\"p224\",\"1.2.840.10045.3.1.1\":\"p192\",\"1.2.840.10045.3.1.7\":\"p256\",\"1.3.132.0.34\":\"p384\",\"1.3.132.0.35\":\"p521\"}");
+module.exports = JSON.parse('{"1.3.132.0.10":"secp256k1","1.3.132.0.33":"p224","1.2.840.10045.3.1.1":"p192","1.2.840.10045.3.1.7":"p256","1.3.132.0.34":"p384","1.3.132.0.35":"p521"}');
 
 });
 
@@ -34137,15 +34136,15 @@ var $8NP2t = parcelRequire("8NP2t");
 var $21yZU = parcelRequire("21yZU");
 function $7b1f55a244b06cb7$var$verify(sig, hash, key, signType, tag) {
     var pub = $8NP2t(key);
-    if (pub.type === 'ec') {
+    if (pub.type === "ec") {
         // rsa keys can be interpreted as ecdsa ones in openssl
-        if (signType !== 'ecdsa' && signType !== 'ecdsa/rsa') throw new Error('wrong public key type');
+        if (signType !== "ecdsa" && signType !== "ecdsa/rsa") throw new Error("wrong public key type");
         return $7b1f55a244b06cb7$var$ecVerify(sig, hash, pub);
-    } else if (pub.type === 'dsa') {
-        if (signType !== 'dsa') throw new Error('wrong public key type');
+    } else if (pub.type === "dsa") {
+        if (signType !== "dsa") throw new Error("wrong public key type");
         return $7b1f55a244b06cb7$var$dsaVerify(sig, hash, pub);
     } else {
-        if (signType !== 'rsa' && signType !== 'ecdsa/rsa') throw new Error('wrong public key type');
+        if (signType !== "rsa" && signType !== "ecdsa/rsa") throw new Error("wrong public key type");
     }
     hash = $7b1f55a244b06cb7$require$Buffer.concat([
         tag,
@@ -34176,8 +34175,8 @@ function $7b1f55a244b06cb7$var$verify(sig, hash, key, signType, tag) {
     return out === 0;
 }
 function $7b1f55a244b06cb7$var$ecVerify(sig, hash, pub) {
-    var curveId = $21yZU[pub.data.algorithm.curve.join('.')];
-    if (!curveId) throw new Error('unknown curve ' + pub.data.algorithm.curve.join('.'));
+    var curveId = $21yZU[pub.data.algorithm.curve.join(".")];
+    if (!curveId) throw new Error("unknown curve " + pub.data.algorithm.curve.join("."));
     var curve = new $7b1f55a244b06cb7$require$EC(curveId);
     var pubkey = pub.data.subjectPrivateKey.data;
     return curve.verify(hash, sig, pubkey);
@@ -34187,7 +34186,7 @@ function $7b1f55a244b06cb7$var$dsaVerify(sig, hash, pub) {
     var q = pub.data.q;
     var g = pub.data.g;
     var y = pub.data.pub_key;
-    var unpacked = $8NP2t.signature.decode(sig, 'der');
+    var unpacked = $8NP2t.signature.decode(sig, "der");
     var s = unpacked.s;
     var r = unpacked.r;
     $7b1f55a244b06cb7$var$checkValue(s, q);
@@ -34198,8 +34197,8 @@ function $7b1f55a244b06cb7$var$dsaVerify(sig, hash, pub) {
     return v.cmp(r) === 0;
 }
 function $7b1f55a244b06cb7$var$checkValue(b, q) {
-    if (b.cmpn(0) <= 0) throw new Error('invalid sig');
-    if (b.cmp(q) >= q) throw new Error('invalid sig');
+    if (b.cmpn(0) <= 0) throw new Error("invalid sig");
+    if (b.cmp(q) >= q) throw new Error("invalid sig");
 }
 module.exports = $7b1f55a244b06cb7$var$verify;
 
@@ -34219,31 +34218,31 @@ module.exports = function createECDH(curve) {
 };
 var $e1532fa80ff8d6bd$var$aliases = {
     secp256k1: {
-        name: 'secp256k1',
+        name: "secp256k1",
         byteLength: 32
     },
     secp224r1: {
-        name: 'p224',
+        name: "p224",
         byteLength: 28
     },
     prime256v1: {
-        name: 'p256',
+        name: "p256",
         byteLength: 32
     },
     prime192v1: {
-        name: 'p192',
+        name: "p192",
         byteLength: 24
     },
     ed25519: {
-        name: 'ed25519',
+        name: "ed25519",
         byteLength: 32
     },
     secp384r1: {
-        name: 'p384',
+        name: "p384",
         byteLength: 48
     },
     secp521r1: {
-        name: 'p521',
+        name: "p521",
         byteLength: 66
     }
 };
@@ -34266,15 +34265,15 @@ $e1532fa80ff8d6bd$var$ECDH.prototype.generateKeys = function(enc, format) {
     return this.getPublicKey(enc, format);
 };
 $e1532fa80ff8d6bd$var$ECDH.prototype.computeSecret = function(other, inenc, enc) {
-    inenc = inenc || 'utf8';
+    inenc = inenc || "utf8";
     if (!$e1532fa80ff8d6bd$require$Buffer.isBuffer(other)) other = new $e1532fa80ff8d6bd$require$Buffer(other, inenc);
     var otherPub = this.curve.keyFromPublic(other).getPublic();
     var out = otherPub.mul(this.keys.getPrivate()).getX();
     return $e1532fa80ff8d6bd$var$formatReturnValue(out, enc, this.curveType.byteLength);
 };
 $e1532fa80ff8d6bd$var$ECDH.prototype.getPublicKey = function(enc, format) {
-    var key = this.keys.getPublic(format === 'compressed', true);
-    if (format === 'hybrid') {
+    var key = this.keys.getPublic(format === "compressed", true);
+    if (format === "hybrid") {
         if (key[key.length - 1] % 2) key[0] = 7;
         else key[0] = 6;
     }
@@ -34284,13 +34283,13 @@ $e1532fa80ff8d6bd$var$ECDH.prototype.getPrivateKey = function(enc) {
     return $e1532fa80ff8d6bd$var$formatReturnValue(this.keys.getPrivate(), enc);
 };
 $e1532fa80ff8d6bd$var$ECDH.prototype.setPublicKey = function(pub, enc) {
-    enc = enc || 'utf8';
+    enc = enc || "utf8";
     if (!$e1532fa80ff8d6bd$require$Buffer.isBuffer(pub)) pub = new $e1532fa80ff8d6bd$require$Buffer(pub, enc);
     this.keys._importPublic(pub);
     return this;
 };
 $e1532fa80ff8d6bd$var$ECDH.prototype.setPrivateKey = function(priv, enc) {
-    enc = enc || 'utf8';
+    enc = enc || "utf8";
     if (!$e1532fa80ff8d6bd$require$Buffer.isBuffer(priv)) priv = new $e1532fa80ff8d6bd$require$Buffer(priv, enc);
     var _priv = new $744G5(priv);
     _priv = _priv.toString(16);
@@ -34317,9 +34316,10 @@ function $e1532fa80ff8d6bd$var$formatReturnValue(bn, enc, len) {
 parcelRequire.register("744G5", function(module, exports) {
 
 (function(module, exports) {
+    "use strict";
     // Utils
     function assert(val, msg) {
-        if (!val) throw new Error(msg || 'Assertion failed');
+        if (!val) throw new Error(msg || "Assertion failed");
     }
     // Could use `inherits` module, but don't want to move from single file
     // architecture yet.
@@ -34339,25 +34339,25 @@ parcelRequire.register("744G5", function(module, exports) {
         // Reduction context
         this.red = null;
         if (number !== null) {
-            if (base === 'le' || base === 'be') {
+            if (base === "le" || base === "be") {
                 endian = base;
                 base = 10;
             }
-            this._init(number || 0, base || 10, endian || 'be');
+            this._init(number || 0, base || 10, endian || "be");
         }
     }
-    if (typeof module === 'object') module.exports = BN;
+    if (typeof module === "object") module.exports = BN;
     else exports.BN = BN;
     BN.BN = BN;
     BN.wordSize = 26;
     var Buffer;
     try {
-        if (typeof window !== 'undefined' && typeof window.Buffer !== 'undefined') Buffer = window.Buffer;
+        if (typeof window !== "undefined" && typeof window.Buffer !== "undefined") Buffer = window.Buffer;
         else Buffer = (parcelRequire("c7mcJ")).Buffer;
     } catch (e) {}
     BN.isBN = function isBN(num) {
         if (num instanceof BN) return true;
-        return num !== null && typeof num === 'object' && num.constructor.wordSize === BN.wordSize && Array.isArray(num.words);
+        return num !== null && typeof num === "object" && num.constructor.wordSize === BN.wordSize && Array.isArray(num.words);
     };
     BN.max = function max(left, right) {
         if (left.cmp(right) > 0) return left;
@@ -34368,13 +34368,13 @@ parcelRequire.register("744G5", function(module, exports) {
         return right;
     };
     BN.prototype._init = function init(number, base, endian) {
-        if (typeof number === 'number') return this._initNumber(number, base, endian);
-        if (typeof number === 'object') return this._initArray(number, base, endian);
-        if (base === 'hex') base = 16;
+        if (typeof number === "number") return this._initNumber(number, base, endian);
+        if (typeof number === "object") return this._initArray(number, base, endian);
+        if (base === "hex") base = 16;
         assert(base === (base | 0) && base >= 2 && base <= 36);
-        number = number.toString().replace(/\s+/g, '');
+        number = number.toString().replace(/\s+/g, "");
         var start = 0;
-        if (number[0] === '-') {
+        if (number[0] === "-") {
             start++;
             this.negative = 1;
         }
@@ -34382,7 +34382,7 @@ parcelRequire.register("744G5", function(module, exports) {
             if (base === 16) this._parseHex(number, start, endian);
             else {
                 this._parseBase(number, base, start);
-                if (endian === 'le') this._initArray(this.toArray(), base, endian);
+                if (endian === "le") this._initArray(this.toArray(), base, endian);
             }
         }
     };
@@ -34411,13 +34411,13 @@ parcelRequire.register("744G5", function(module, exports) {
             ];
             this.length = 3;
         }
-        if (endian !== 'le') return;
+        if (endian !== "le") return;
         // Reverse the bytes
         this._initArray(this.toArray(), base, endian);
     };
     BN.prototype._initArray = function _initArray(number, base, endian) {
         // Perhaps a Uint8Array
-        assert(typeof number.length === 'number');
+        assert(typeof number.length === "number");
         if (number.length <= 0) {
             this.words = [
                 0
@@ -34430,7 +34430,7 @@ parcelRequire.register("744G5", function(module, exports) {
         for(var i = 0; i < this.length; i++)this.words[i] = 0;
         var j, w;
         var off = 0;
-        if (endian === 'be') for(i = number.length - 1, j = 0; i >= 0; i -= 3){
+        if (endian === "be") for(i = number.length - 1, j = 0; i >= 0; i -= 3){
             w = number[i] | number[i - 1] << 8 | number[i - 2] << 16;
             this.words[j] |= w << off & 0x3ffffff;
             this.words[j + 1] = w >>> 26 - off & 0x3ffffff;
@@ -34440,7 +34440,7 @@ parcelRequire.register("744G5", function(module, exports) {
                 j++;
             }
         }
-        else if (endian === 'le') for(i = 0, j = 0; i < number.length; i += 3){
+        else if (endian === "le") for(i = 0, j = 0; i < number.length; i += 3){
             w = number[i] | number[i + 1] << 8 | number[i + 2] << 16;
             this.words[j] |= w << off & 0x3ffffff;
             this.words[j + 1] = w >>> 26 - off & 0x3ffffff;
@@ -34473,7 +34473,7 @@ parcelRequire.register("744G5", function(module, exports) {
         var off = 0;
         var j = 0;
         var w;
-        if (endian === 'be') for(i = number.length - 1; i >= start; i -= 2){
+        if (endian === "be") for(i = number.length - 1; i >= start; i -= 2){
             w = parseHexByte(number, start, i) << off;
             this.words[j] |= w & 0x3ffffff;
             if (off >= 18) {
@@ -34566,7 +34566,7 @@ parcelRequire.register("744G5", function(module, exports) {
         return this;
     };
     BN.prototype.inspect = function inspect() {
-        return (this.red ? '<BN-R: ' : '<BN: ') + this.toString(16) + '>';
+        return (this.red ? "<BN-R: " : "<BN: ") + this.toString(16) + ">";
     };
     /*
 
@@ -34597,32 +34597,32 @@ parcelRequire.register("744G5", function(module, exports) {
   }
 
   */ var zeros = [
-        '',
-        '0',
-        '00',
-        '000',
-        '0000',
-        '00000',
-        '000000',
-        '0000000',
-        '00000000',
-        '000000000',
-        '0000000000',
-        '00000000000',
-        '000000000000',
-        '0000000000000',
-        '00000000000000',
-        '000000000000000',
-        '0000000000000000',
-        '00000000000000000',
-        '000000000000000000',
-        '0000000000000000000',
-        '00000000000000000000',
-        '000000000000000000000',
-        '0000000000000000000000',
-        '00000000000000000000000',
-        '000000000000000000000000',
-        '0000000000000000000000000'
+        "",
+        "0",
+        "00",
+        "000",
+        "0000",
+        "00000",
+        "000000",
+        "0000000",
+        "00000000",
+        "000000000",
+        "0000000000",
+        "00000000000",
+        "000000000000",
+        "0000000000000",
+        "00000000000000",
+        "000000000000000",
+        "0000000000000000",
+        "00000000000000000",
+        "000000000000000000",
+        "0000000000000000000",
+        "00000000000000000000",
+        "000000000000000000000",
+        "0000000000000000000000",
+        "00000000000000000000000",
+        "000000000000000000000000",
+        "0000000000000000000000000"
     ];
     var groupSizes = [
         0,
@@ -34706,8 +34706,8 @@ parcelRequire.register("744G5", function(module, exports) {
         base = base || 10;
         padding = padding | 0 || 1;
         var out;
-        if (base === 16 || base === 'hex') {
-            out = '';
+        if (base === 16 || base === "hex") {
+            out = "";
             var off = 0;
             var carry = 0;
             for(var i = 0; i < this.length; i++){
@@ -34723,8 +34723,8 @@ parcelRequire.register("744G5", function(module, exports) {
                 }
             }
             if (carry !== 0) out = carry.toString(16) + out;
-            while(out.length % padding !== 0)out = '0' + out;
-            if (this.negative !== 0) out = '-' + out;
+            while(out.length % padding !== 0)out = "0" + out;
+            if (this.negative !== 0) out = "-" + out;
             return out;
         }
         if (base === (base | 0) && base >= 2 && base <= 36) {
@@ -34732,7 +34732,7 @@ parcelRequire.register("744G5", function(module, exports) {
             var groupSize = groupSizes[base];
             // var groupBase = Math.pow(base, groupSize);
             var groupBase = groupBases[base];
-            out = '';
+            out = "";
             var c = this.clone();
             c.negative = 0;
             while(!c.isZero()){
@@ -34741,26 +34741,26 @@ parcelRequire.register("744G5", function(module, exports) {
                 if (!c.isZero()) out = zeros[groupSize - r.length] + r + out;
                 else out = r + out;
             }
-            if (this.isZero()) out = '0' + out;
-            while(out.length % padding !== 0)out = '0' + out;
-            if (this.negative !== 0) out = '-' + out;
+            if (this.isZero()) out = "0" + out;
+            while(out.length % padding !== 0)out = "0" + out;
+            if (this.negative !== 0) out = "-" + out;
             return out;
         }
-        assert(false, 'Base should be between 2 and 36');
+        assert(false, "Base should be between 2 and 36");
     };
     BN.prototype.toNumber = function toNumber() {
         var ret = this.words[0];
         if (this.length === 2) ret += this.words[1] * 0x4000000;
         else if (this.length === 3 && this.words[2] === 0x01) // NOTE: at this stage it is known that the top bit is set
         ret += 0x10000000000000 + this.words[1] * 0x4000000;
-        else if (this.length > 2) assert(false, 'Number can only safely store up to 53 bits');
+        else if (this.length > 2) assert(false, "Number can only safely store up to 53 bits");
         return this.negative !== 0 ? -ret : ret;
     };
     BN.prototype.toJSON = function toJSON() {
         return this.toString(16);
     };
     BN.prototype.toBuffer = function toBuffer(endian, length) {
-        assert(typeof Buffer !== 'undefined');
+        assert(typeof Buffer !== "undefined");
         return this.toArrayLike(Buffer, endian, length);
     };
     BN.prototype.toArray = function toArray(endian, length) {
@@ -34769,10 +34769,10 @@ parcelRequire.register("744G5", function(module, exports) {
     BN.prototype.toArrayLike = function toArrayLike(ArrayType, endian, length) {
         var byteLength = this.byteLength();
         var reqLength = length || Math.max(1, byteLength);
-        assert(byteLength <= reqLength, 'byte array longer than desired length');
-        assert(reqLength > 0, 'Requested array length <= 0');
+        assert(byteLength <= reqLength, "byte array longer than desired length");
+        assert(reqLength > 0, "Requested array length <= 0");
         this.strip();
-        var littleEndian = endian === 'le';
+        var littleEndian = endian === "le";
         var res = new ArrayType(reqLength);
         var b, i;
         var q = this.clone();
@@ -34964,7 +34964,7 @@ parcelRequire.register("744G5", function(module, exports) {
     };
     // Not ``this`` with ``width`` bitwidth
     BN.prototype.inotn = function inotn(width) {
-        assert(typeof width === 'number' && width >= 0);
+        assert(typeof width === "number" && width >= 0);
         var bytesNeeded = Math.ceil(width / 26) | 0;
         var bitsLeft = width % 26;
         // Extend the buffer with leading zeroes
@@ -34982,7 +34982,7 @@ parcelRequire.register("744G5", function(module, exports) {
     };
     // Set `bit` of `this`
     BN.prototype.setn = function setn(bit, val) {
-        assert(typeof bit === 'number' && bit >= 0);
+        assert(typeof bit === "number" && bit >= 0);
         var off = bit / 26 | 0;
         var wbit = bit % 26;
         this._expand(off + 1);
@@ -35894,7 +35894,7 @@ parcelRequire.register("744G5", function(module, exports) {
         return this.clone().mulTo(num, this);
     };
     BN.prototype.imuln = function imuln(num) {
-        assert(typeof num === 'number');
+        assert(typeof num === "number");
         assert(num < 0x4000000);
         // Carry
         var carry = 0;
@@ -35941,7 +35941,7 @@ parcelRequire.register("744G5", function(module, exports) {
     };
     // Shift-left in-place
     BN.prototype.iushln = function iushln(bits) {
-        assert(typeof bits === 'number' && bits >= 0);
+        assert(typeof bits === "number" && bits >= 0);
         var r = bits % 26;
         var s = (bits - r) / 26;
         var carryMask = 0x3ffffff >>> 26 - r << 26 - r;
@@ -35975,7 +35975,7 @@ parcelRequire.register("744G5", function(module, exports) {
     // NOTE: `hint` is a lowest bit before trailing zeroes
     // NOTE: if `extended` is present - it will be filled with destroyed bits
     BN.prototype.iushrn = function iushrn(bits, hint, extended) {
-        assert(typeof bits === 'number' && bits >= 0);
+        assert(typeof bits === "number" && bits >= 0);
         var h;
         if (hint) h = (hint - hint % 26) / 26;
         else h = 0;
@@ -36033,7 +36033,7 @@ parcelRequire.register("744G5", function(module, exports) {
     };
     // Test if n bit is set
     BN.prototype.testn = function testn(bit) {
-        assert(typeof bit === 'number' && bit >= 0);
+        assert(typeof bit === "number" && bit >= 0);
         var r = bit % 26;
         var s = (bit - r) / 26;
         var q = 1 << r;
@@ -36045,10 +36045,10 @@ parcelRequire.register("744G5", function(module, exports) {
     };
     // Return only lowers bits of number (in-place)
     BN.prototype.imaskn = function imaskn(bits) {
-        assert(typeof bits === 'number' && bits >= 0);
+        assert(typeof bits === "number" && bits >= 0);
         var r = bits % 26;
         var s = (bits - r) / 26;
-        assert(this.negative === 0, 'imaskn works only with positive numbers');
+        assert(this.negative === 0, "imaskn works only with positive numbers");
         if (this.length <= s) return this;
         if (r !== 0) s++;
         this.length = Math.min(s, this.length);
@@ -36064,7 +36064,7 @@ parcelRequire.register("744G5", function(module, exports) {
     };
     // Add plain number `num` to `this`
     BN.prototype.iaddn = function iaddn(num) {
-        assert(typeof num === 'number');
+        assert(typeof num === "number");
         assert(num < 0x4000000);
         if (num < 0) return this.isubn(-num);
         // Possible sign change
@@ -36095,7 +36095,7 @@ parcelRequire.register("744G5", function(module, exports) {
     };
     // Subtract plain number `num` from `this`
     BN.prototype.isubn = function isubn(num) {
-        assert(typeof num === 'number');
+        assert(typeof num === "number");
         assert(num < 0x4000000);
         if (num < 0) return this.iaddn(-num);
         if (this.negative !== 0) {
@@ -36174,7 +36174,7 @@ parcelRequire.register("744G5", function(module, exports) {
         // Initialize quotient
         var m = a.length - b.length;
         var q;
-        if (mode !== 'mod') {
+        if (mode !== "mod") {
             q = new BN(null);
             q.length = m + 1;
             q.words = new Array(q.length);
@@ -36202,7 +36202,7 @@ parcelRequire.register("744G5", function(module, exports) {
         if (q) q.strip();
         a.strip();
         // Denormalize
-        if (mode !== 'div' && shift !== 0) a.iushrn(shift);
+        if (mode !== "div" && shift !== 0) a.iushrn(shift);
         return {
             div: q || null,
             mod: a
@@ -36221,8 +36221,8 @@ parcelRequire.register("744G5", function(module, exports) {
         var div, mod, res;
         if (this.negative !== 0 && num.negative === 0) {
             res = this.neg().divmod(num, mode);
-            if (mode !== 'mod') div = res.div.neg();
-            if (mode !== 'div') {
+            if (mode !== "mod") div = res.div.neg();
+            if (mode !== "div") {
                 mod = res.mod.neg();
                 if (positive && mod.negative !== 0) mod.iadd(num);
             }
@@ -36233,7 +36233,7 @@ parcelRequire.register("744G5", function(module, exports) {
         }
         if (this.negative === 0 && num.negative !== 0) {
             res = this.divmod(num.neg(), mode);
-            if (mode !== 'mod') div = res.div.neg();
+            if (mode !== "mod") div = res.div.neg();
             return {
                 div: div,
                 mod: res.mod
@@ -36241,7 +36241,7 @@ parcelRequire.register("744G5", function(module, exports) {
         }
         if ((this.negative & num.negative) !== 0) {
             res = this.neg().divmod(num.neg(), mode);
-            if (mode !== 'div') {
+            if (mode !== "div") {
                 mod = res.mod.neg();
                 if (positive && mod.negative !== 0) mod.isub(num);
             }
@@ -36258,11 +36258,11 @@ parcelRequire.register("744G5", function(module, exports) {
         };
         // Very short reduction
         if (num.length === 1) {
-            if (mode === 'div') return {
+            if (mode === "div") return {
                 div: this.divn(num.words[0]),
                 mod: null
             };
-            if (mode === 'mod') return {
+            if (mode === "mod") return {
                 div: null,
                 mod: new BN(this.modn(num.words[0]))
             };
@@ -36275,14 +36275,14 @@ parcelRequire.register("744G5", function(module, exports) {
     };
     // Find `this` / `num`
     BN.prototype.div = function div(num) {
-        return this.divmod(num, 'div', false).div;
+        return this.divmod(num, "div", false).div;
     };
     // Find `this` % `num`
     BN.prototype.mod = function mod(num) {
-        return this.divmod(num, 'mod', false).mod;
+        return this.divmod(num, "mod", false).mod;
     };
     BN.prototype.umod = function umod(num) {
-        return this.divmod(num, 'mod', true).mod;
+        return this.divmod(num, "mod", true).mod;
     };
     // Find Round(`this` / `num`)
     BN.prototype.divRound = function divRound(num) {
@@ -36448,7 +36448,7 @@ parcelRequire.register("744G5", function(module, exports) {
                 b = t;
             } else if (r === 0 || b.cmpn(1) === 0) break;
             a.isub(b);
-        }while (true)
+        }while (true);
         return b.iushln(shift);
     };
     // Invert number in the field F(num)
@@ -36467,7 +36467,7 @@ parcelRequire.register("744G5", function(module, exports) {
     };
     // Increment at the bit position in-line
     BN.prototype.bincn = function bincn(bit) {
-        assert(typeof bit === 'number');
+        assert(typeof bit === "number");
         var r = bit % 26;
         var s = (bit - r) / 26;
         var q = 1 << r;
@@ -36504,7 +36504,7 @@ parcelRequire.register("744G5", function(module, exports) {
         if (this.length > 1) res = 1;
         else {
             if (negative) num = -num;
-            assert(num <= 0x3ffffff, 'Number is too big');
+            assert(num <= 0x3ffffff, "Number is too big");
             var w = this.words[0] | 0;
             res = w === num ? 0 : w < num ? -1 : 1;
         }
@@ -36576,12 +36576,12 @@ parcelRequire.register("744G5", function(module, exports) {
         return new Red(num);
     };
     BN.prototype.toRed = function toRed(ctx) {
-        assert(!this.red, 'Already a number in reduction context');
-        assert(this.negative === 0, 'red works only with positives');
+        assert(!this.red, "Already a number in reduction context");
+        assert(this.negative === 0, "red works only with positives");
         return ctx.convertTo(this)._forceRed(ctx);
     };
     BN.prototype.fromRed = function fromRed() {
-        assert(this.red, 'fromRed works only with numbers in reduction context');
+        assert(this.red, "fromRed works only with numbers in reduction context");
         return this.red.convertFrom(this);
     };
     BN.prototype._forceRed = function _forceRed(ctx) {
@@ -36589,68 +36589,68 @@ parcelRequire.register("744G5", function(module, exports) {
         return this;
     };
     BN.prototype.forceRed = function forceRed(ctx) {
-        assert(!this.red, 'Already a number in reduction context');
+        assert(!this.red, "Already a number in reduction context");
         return this._forceRed(ctx);
     };
     BN.prototype.redAdd = function redAdd(num) {
-        assert(this.red, 'redAdd works only with red numbers');
+        assert(this.red, "redAdd works only with red numbers");
         return this.red.add(this, num);
     };
     BN.prototype.redIAdd = function redIAdd(num) {
-        assert(this.red, 'redIAdd works only with red numbers');
+        assert(this.red, "redIAdd works only with red numbers");
         return this.red.iadd(this, num);
     };
     BN.prototype.redSub = function redSub(num) {
-        assert(this.red, 'redSub works only with red numbers');
+        assert(this.red, "redSub works only with red numbers");
         return this.red.sub(this, num);
     };
     BN.prototype.redISub = function redISub(num) {
-        assert(this.red, 'redISub works only with red numbers');
+        assert(this.red, "redISub works only with red numbers");
         return this.red.isub(this, num);
     };
     BN.prototype.redShl = function redShl(num) {
-        assert(this.red, 'redShl works only with red numbers');
+        assert(this.red, "redShl works only with red numbers");
         return this.red.shl(this, num);
     };
     BN.prototype.redMul = function redMul(num) {
-        assert(this.red, 'redMul works only with red numbers');
+        assert(this.red, "redMul works only with red numbers");
         this.red._verify2(this, num);
         return this.red.mul(this, num);
     };
     BN.prototype.redIMul = function redIMul(num) {
-        assert(this.red, 'redMul works only with red numbers');
+        assert(this.red, "redMul works only with red numbers");
         this.red._verify2(this, num);
         return this.red.imul(this, num);
     };
     BN.prototype.redSqr = function redSqr() {
-        assert(this.red, 'redSqr works only with red numbers');
+        assert(this.red, "redSqr works only with red numbers");
         this.red._verify1(this);
         return this.red.sqr(this);
     };
     BN.prototype.redISqr = function redISqr() {
-        assert(this.red, 'redISqr works only with red numbers');
+        assert(this.red, "redISqr works only with red numbers");
         this.red._verify1(this);
         return this.red.isqr(this);
     };
     // Square root over p
     BN.prototype.redSqrt = function redSqrt() {
-        assert(this.red, 'redSqrt works only with red numbers');
+        assert(this.red, "redSqrt works only with red numbers");
         this.red._verify1(this);
         return this.red.sqrt(this);
     };
     BN.prototype.redInvm = function redInvm() {
-        assert(this.red, 'redInvm works only with red numbers');
+        assert(this.red, "redInvm works only with red numbers");
         this.red._verify1(this);
         return this.red.invm(this);
     };
     // Return negative clone of `this` % `red modulo`
     BN.prototype.redNeg = function redNeg() {
-        assert(this.red, 'redNeg works only with red numbers');
+        assert(this.red, "redNeg works only with red numbers");
         this.red._verify1(this);
         return this.red.neg(this);
     };
     BN.prototype.redPow = function redPow(num) {
-        assert(this.red && !num.red, 'redPow(normalNum)');
+        assert(this.red && !num.red, "redPow(normalNum)");
         this.red._verify1(this);
         return this.red.pow(this, num);
     };
@@ -36685,7 +36685,7 @@ parcelRequire.register("744G5", function(module, exports) {
             r = this.imulK(r);
             r = r.iadd(this.tmp);
             rlen = r.bitLength();
-        }while (rlen > this.n)
+        }while (rlen > this.n);
         var cmp = rlen < this.n ? -1 : r.ucmp(this.p);
         if (cmp === 0) {
             r.words[0] = 0;
@@ -36704,7 +36704,7 @@ parcelRequire.register("744G5", function(module, exports) {
         return num.imul(this.k);
     };
     function K256() {
-        MPrime.call(this, 'k256', 'ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff fffffffe fffffc2f');
+        MPrime.call(this, "k256", "ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff fffffffe fffffc2f");
     }
     inherits(K256, MPrime);
     K256.prototype.split = function split(input, output) {
@@ -36752,16 +36752,16 @@ parcelRequire.register("744G5", function(module, exports) {
         return num;
     };
     function P224() {
-        MPrime.call(this, 'p224', 'ffffffff ffffffff ffffffff ffffffff 00000000 00000000 00000001');
+        MPrime.call(this, "p224", "ffffffff ffffffff ffffffff ffffffff 00000000 00000000 00000001");
     }
     inherits(P224, MPrime);
     function P192() {
-        MPrime.call(this, 'p192', 'ffffffff ffffffff ffffffff fffffffe ffffffff ffffffff');
+        MPrime.call(this, "p192", "ffffffff ffffffff ffffffff fffffffe ffffffff ffffffff");
     }
     inherits(P192, MPrime);
     function P25519() {
         // 2 ^ 255 - 19
-        MPrime.call(this, '25519', '7fffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffed');
+        MPrime.call(this, "25519", "7fffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffed");
     }
     inherits(P25519, MPrime);
     P25519.prototype.imulK = function imulK(num) {
@@ -36782,11 +36782,11 @@ parcelRequire.register("744G5", function(module, exports) {
         // Cached version of prime
         if (primes[name]) return primes[name];
         var prime;
-        if (name === 'k256') prime = new K256();
-        else if (name === 'p224') prime = new P224();
-        else if (name === 'p192') prime = new P192();
-        else if (name === 'p25519') prime = new P25519();
-        else throw new Error('Unknown prime ' + name);
+        if (name === "k256") prime = new K256();
+        else if (name === "p224") prime = new P224();
+        else if (name === "p192") prime = new P192();
+        else if (name === "p25519") prime = new P25519();
+        else throw new Error("Unknown prime " + name);
         primes[name] = prime;
         return prime;
     };
@@ -36794,23 +36794,23 @@ parcelRequire.register("744G5", function(module, exports) {
     // Base reduction engine
     //
     function Red(m) {
-        if (typeof m === 'string') {
+        if (typeof m === "string") {
             var prime = BN._prime(m);
             this.m = prime.p;
             this.prime = prime;
         } else {
-            assert(m.gtn(1), 'modulus must be greater than 1');
+            assert(m.gtn(1), "modulus must be greater than 1");
             this.m = m;
             this.prime = null;
         }
     }
     Red.prototype._verify1 = function _verify1(a) {
-        assert(a.negative === 0, 'red works only with positives');
-        assert(a.red, 'red works only with red numbers');
+        assert(a.negative === 0, "red works only with positives");
+        assert(a.red, "red works only with red numbers");
     };
     Red.prototype._verify2 = function _verify2(a, b) {
-        assert((a.negative | b.negative) === 0, 'red works only with positives');
-        assert(a.red && a.red === b.red, 'red works only with red numbers');
+        assert((a.negative | b.negative) === 0, "red works only with positives");
+        assert(a.red && a.red === b.red, "red works only with red numbers");
     };
     Red.prototype.imod = function imod(a) {
         if (this.prime) return this.prime.ireduce(a)._forceRed(this);
@@ -37068,18 +37068,18 @@ module.exports = function publicEncrypt(publicKey, msg, reverse) {
     else if (padding === 1) paddedMsg = $6c087a5388810e3a$var$pkcs1(key, msg, reverse);
     else if (padding === 3) {
         paddedMsg = new $hOV2p(msg);
-        if (paddedMsg.cmp(key.modulus) >= 0) throw new Error('data too long for modulus');
-    } else throw new Error('unknown padding');
+        if (paddedMsg.cmp(key.modulus) >= 0) throw new Error("data too long for modulus");
+    } else throw new Error("unknown padding");
     if (reverse) return $it3Jn(paddedMsg, key);
     else return $bbNQX(paddedMsg, key);
 };
 function $6c087a5388810e3a$var$oaep(key, msg) {
     var k = key.modulus.byteLength();
     var mLen = msg.length;
-    var iHash = $cv73a('sha1').update($6c087a5388810e3a$require$Buffer.alloc(0)).digest();
+    var iHash = $cv73a("sha1").update($6c087a5388810e3a$require$Buffer.alloc(0)).digest();
     var hLen = iHash.length;
     var hLen2 = 2 * hLen;
-    if (mLen > k - hLen2 - 2) throw new Error('message too long');
+    if (mLen > k - hLen2 - 2) throw new Error("message too long");
     var ps = $6c087a5388810e3a$require$Buffer.alloc(k - mLen - hLen2 - 2);
     var dblen = k - hLen - 1;
     var seed = $94o1H(hLen);
@@ -37099,7 +37099,7 @@ function $6c087a5388810e3a$var$oaep(key, msg) {
 function $6c087a5388810e3a$var$pkcs1(key, msg, reverse) {
     var mLen = msg.length;
     var k = key.modulus.byteLength();
-    if (mLen > k - 11) throw new Error('message too long');
+    if (mLen > k - 11) throw new Error("message too long");
     var ps;
     if (reverse) ps = $6c087a5388810e3a$require$Buffer.alloc(k - mLen - 3, 0xff);
     else ps = $6c087a5388810e3a$var$nonZero(k - mLen - 3);
@@ -37145,7 +37145,7 @@ module.exports = function(seed, len) {
         c = $115e693a74059021$var$i2ops(i++);
         t = $115e693a74059021$require$Buffer.concat([
             t,
-            $cv73a('sha1').update(seed).update(c).digest()
+            $cv73a("sha1").update(seed).update(c).digest()
         ]);
     }
     return t.slice(0, len);
@@ -37171,9 +37171,10 @@ module.exports = function xor(a, b) {
 parcelRequire.register("hOV2p", function(module, exports) {
 
 (function(module, exports) {
+    "use strict";
     // Utils
     function assert(val, msg) {
-        if (!val) throw new Error(msg || 'Assertion failed');
+        if (!val) throw new Error(msg || "Assertion failed");
     }
     // Could use `inherits` module, but don't want to move from single file
     // architecture yet.
@@ -37193,25 +37194,25 @@ parcelRequire.register("hOV2p", function(module, exports) {
         // Reduction context
         this.red = null;
         if (number !== null) {
-            if (base === 'le' || base === 'be') {
+            if (base === "le" || base === "be") {
                 endian = base;
                 base = 10;
             }
-            this._init(number || 0, base || 10, endian || 'be');
+            this._init(number || 0, base || 10, endian || "be");
         }
     }
-    if (typeof module === 'object') module.exports = BN;
+    if (typeof module === "object") module.exports = BN;
     else exports.BN = BN;
     BN.BN = BN;
     BN.wordSize = 26;
     var Buffer;
     try {
-        if (typeof window !== 'undefined' && typeof window.Buffer !== 'undefined') Buffer = window.Buffer;
+        if (typeof window !== "undefined" && typeof window.Buffer !== "undefined") Buffer = window.Buffer;
         else Buffer = (parcelRequire("c7mcJ")).Buffer;
     } catch (e) {}
     BN.isBN = function isBN(num) {
         if (num instanceof BN) return true;
-        return num !== null && typeof num === 'object' && num.constructor.wordSize === BN.wordSize && Array.isArray(num.words);
+        return num !== null && typeof num === "object" && num.constructor.wordSize === BN.wordSize && Array.isArray(num.words);
     };
     BN.max = function max(left, right) {
         if (left.cmp(right) > 0) return left;
@@ -37222,13 +37223,13 @@ parcelRequire.register("hOV2p", function(module, exports) {
         return right;
     };
     BN.prototype._init = function init(number, base, endian) {
-        if (typeof number === 'number') return this._initNumber(number, base, endian);
-        if (typeof number === 'object') return this._initArray(number, base, endian);
-        if (base === 'hex') base = 16;
+        if (typeof number === "number") return this._initNumber(number, base, endian);
+        if (typeof number === "object") return this._initArray(number, base, endian);
+        if (base === "hex") base = 16;
         assert(base === (base | 0) && base >= 2 && base <= 36);
-        number = number.toString().replace(/\s+/g, '');
+        number = number.toString().replace(/\s+/g, "");
         var start = 0;
-        if (number[0] === '-') {
+        if (number[0] === "-") {
             start++;
             this.negative = 1;
         }
@@ -37236,7 +37237,7 @@ parcelRequire.register("hOV2p", function(module, exports) {
             if (base === 16) this._parseHex(number, start, endian);
             else {
                 this._parseBase(number, base, start);
-                if (endian === 'le') this._initArray(this.toArray(), base, endian);
+                if (endian === "le") this._initArray(this.toArray(), base, endian);
             }
         }
     };
@@ -37265,13 +37266,13 @@ parcelRequire.register("hOV2p", function(module, exports) {
             ];
             this.length = 3;
         }
-        if (endian !== 'le') return;
+        if (endian !== "le") return;
         // Reverse the bytes
         this._initArray(this.toArray(), base, endian);
     };
     BN.prototype._initArray = function _initArray(number, base, endian) {
         // Perhaps a Uint8Array
-        assert(typeof number.length === 'number');
+        assert(typeof number.length === "number");
         if (number.length <= 0) {
             this.words = [
                 0
@@ -37284,7 +37285,7 @@ parcelRequire.register("hOV2p", function(module, exports) {
         for(var i = 0; i < this.length; i++)this.words[i] = 0;
         var j, w;
         var off = 0;
-        if (endian === 'be') for(i = number.length - 1, j = 0; i >= 0; i -= 3){
+        if (endian === "be") for(i = number.length - 1, j = 0; i >= 0; i -= 3){
             w = number[i] | number[i - 1] << 8 | number[i - 2] << 16;
             this.words[j] |= w << off & 0x3ffffff;
             this.words[j + 1] = w >>> 26 - off & 0x3ffffff;
@@ -37294,7 +37295,7 @@ parcelRequire.register("hOV2p", function(module, exports) {
                 j++;
             }
         }
-        else if (endian === 'le') for(i = 0, j = 0; i < number.length; i += 3){
+        else if (endian === "le") for(i = 0, j = 0; i < number.length; i += 3){
             w = number[i] | number[i + 1] << 8 | number[i + 2] << 16;
             this.words[j] |= w << off & 0x3ffffff;
             this.words[j + 1] = w >>> 26 - off & 0x3ffffff;
@@ -37327,7 +37328,7 @@ parcelRequire.register("hOV2p", function(module, exports) {
         var off = 0;
         var j = 0;
         var w;
-        if (endian === 'be') for(i = number.length - 1; i >= start; i -= 2){
+        if (endian === "be") for(i = number.length - 1; i >= start; i -= 2){
             w = parseHexByte(number, start, i) << off;
             this.words[j] |= w & 0x3ffffff;
             if (off >= 18) {
@@ -37420,7 +37421,7 @@ parcelRequire.register("hOV2p", function(module, exports) {
         return this;
     };
     BN.prototype.inspect = function inspect() {
-        return (this.red ? '<BN-R: ' : '<BN: ') + this.toString(16) + '>';
+        return (this.red ? "<BN-R: " : "<BN: ") + this.toString(16) + ">";
     };
     /*
 
@@ -37451,32 +37452,32 @@ parcelRequire.register("hOV2p", function(module, exports) {
   }
 
   */ var zeros = [
-        '',
-        '0',
-        '00',
-        '000',
-        '0000',
-        '00000',
-        '000000',
-        '0000000',
-        '00000000',
-        '000000000',
-        '0000000000',
-        '00000000000',
-        '000000000000',
-        '0000000000000',
-        '00000000000000',
-        '000000000000000',
-        '0000000000000000',
-        '00000000000000000',
-        '000000000000000000',
-        '0000000000000000000',
-        '00000000000000000000',
-        '000000000000000000000',
-        '0000000000000000000000',
-        '00000000000000000000000',
-        '000000000000000000000000',
-        '0000000000000000000000000'
+        "",
+        "0",
+        "00",
+        "000",
+        "0000",
+        "00000",
+        "000000",
+        "0000000",
+        "00000000",
+        "000000000",
+        "0000000000",
+        "00000000000",
+        "000000000000",
+        "0000000000000",
+        "00000000000000",
+        "000000000000000",
+        "0000000000000000",
+        "00000000000000000",
+        "000000000000000000",
+        "0000000000000000000",
+        "00000000000000000000",
+        "000000000000000000000",
+        "0000000000000000000000",
+        "00000000000000000000000",
+        "000000000000000000000000",
+        "0000000000000000000000000"
     ];
     var groupSizes = [
         0,
@@ -37560,8 +37561,8 @@ parcelRequire.register("hOV2p", function(module, exports) {
         base = base || 10;
         padding = padding | 0 || 1;
         var out;
-        if (base === 16 || base === 'hex') {
-            out = '';
+        if (base === 16 || base === "hex") {
+            out = "";
             var off = 0;
             var carry = 0;
             for(var i = 0; i < this.length; i++){
@@ -37577,8 +37578,8 @@ parcelRequire.register("hOV2p", function(module, exports) {
                 }
             }
             if (carry !== 0) out = carry.toString(16) + out;
-            while(out.length % padding !== 0)out = '0' + out;
-            if (this.negative !== 0) out = '-' + out;
+            while(out.length % padding !== 0)out = "0" + out;
+            if (this.negative !== 0) out = "-" + out;
             return out;
         }
         if (base === (base | 0) && base >= 2 && base <= 36) {
@@ -37586,7 +37587,7 @@ parcelRequire.register("hOV2p", function(module, exports) {
             var groupSize = groupSizes[base];
             // var groupBase = Math.pow(base, groupSize);
             var groupBase = groupBases[base];
-            out = '';
+            out = "";
             var c = this.clone();
             c.negative = 0;
             while(!c.isZero()){
@@ -37595,26 +37596,26 @@ parcelRequire.register("hOV2p", function(module, exports) {
                 if (!c.isZero()) out = zeros[groupSize - r.length] + r + out;
                 else out = r + out;
             }
-            if (this.isZero()) out = '0' + out;
-            while(out.length % padding !== 0)out = '0' + out;
-            if (this.negative !== 0) out = '-' + out;
+            if (this.isZero()) out = "0" + out;
+            while(out.length % padding !== 0)out = "0" + out;
+            if (this.negative !== 0) out = "-" + out;
             return out;
         }
-        assert(false, 'Base should be between 2 and 36');
+        assert(false, "Base should be between 2 and 36");
     };
     BN.prototype.toNumber = function toNumber() {
         var ret = this.words[0];
         if (this.length === 2) ret += this.words[1] * 0x4000000;
         else if (this.length === 3 && this.words[2] === 0x01) // NOTE: at this stage it is known that the top bit is set
         ret += 0x10000000000000 + this.words[1] * 0x4000000;
-        else if (this.length > 2) assert(false, 'Number can only safely store up to 53 bits');
+        else if (this.length > 2) assert(false, "Number can only safely store up to 53 bits");
         return this.negative !== 0 ? -ret : ret;
     };
     BN.prototype.toJSON = function toJSON() {
         return this.toString(16);
     };
     BN.prototype.toBuffer = function toBuffer(endian, length) {
-        assert(typeof Buffer !== 'undefined');
+        assert(typeof Buffer !== "undefined");
         return this.toArrayLike(Buffer, endian, length);
     };
     BN.prototype.toArray = function toArray(endian, length) {
@@ -37623,10 +37624,10 @@ parcelRequire.register("hOV2p", function(module, exports) {
     BN.prototype.toArrayLike = function toArrayLike(ArrayType, endian, length) {
         var byteLength = this.byteLength();
         var reqLength = length || Math.max(1, byteLength);
-        assert(byteLength <= reqLength, 'byte array longer than desired length');
-        assert(reqLength > 0, 'Requested array length <= 0');
+        assert(byteLength <= reqLength, "byte array longer than desired length");
+        assert(reqLength > 0, "Requested array length <= 0");
         this.strip();
-        var littleEndian = endian === 'le';
+        var littleEndian = endian === "le";
         var res = new ArrayType(reqLength);
         var b, i;
         var q = this.clone();
@@ -37818,7 +37819,7 @@ parcelRequire.register("hOV2p", function(module, exports) {
     };
     // Not ``this`` with ``width`` bitwidth
     BN.prototype.inotn = function inotn(width) {
-        assert(typeof width === 'number' && width >= 0);
+        assert(typeof width === "number" && width >= 0);
         var bytesNeeded = Math.ceil(width / 26) | 0;
         var bitsLeft = width % 26;
         // Extend the buffer with leading zeroes
@@ -37836,7 +37837,7 @@ parcelRequire.register("hOV2p", function(module, exports) {
     };
     // Set `bit` of `this`
     BN.prototype.setn = function setn(bit, val) {
-        assert(typeof bit === 'number' && bit >= 0);
+        assert(typeof bit === "number" && bit >= 0);
         var off = bit / 26 | 0;
         var wbit = bit % 26;
         this._expand(off + 1);
@@ -38748,7 +38749,7 @@ parcelRequire.register("hOV2p", function(module, exports) {
         return this.clone().mulTo(num, this);
     };
     BN.prototype.imuln = function imuln(num) {
-        assert(typeof num === 'number');
+        assert(typeof num === "number");
         assert(num < 0x4000000);
         // Carry
         var carry = 0;
@@ -38795,7 +38796,7 @@ parcelRequire.register("hOV2p", function(module, exports) {
     };
     // Shift-left in-place
     BN.prototype.iushln = function iushln(bits) {
-        assert(typeof bits === 'number' && bits >= 0);
+        assert(typeof bits === "number" && bits >= 0);
         var r = bits % 26;
         var s = (bits - r) / 26;
         var carryMask = 0x3ffffff >>> 26 - r << 26 - r;
@@ -38829,7 +38830,7 @@ parcelRequire.register("hOV2p", function(module, exports) {
     // NOTE: `hint` is a lowest bit before trailing zeroes
     // NOTE: if `extended` is present - it will be filled with destroyed bits
     BN.prototype.iushrn = function iushrn(bits, hint, extended) {
-        assert(typeof bits === 'number' && bits >= 0);
+        assert(typeof bits === "number" && bits >= 0);
         var h;
         if (hint) h = (hint - hint % 26) / 26;
         else h = 0;
@@ -38887,7 +38888,7 @@ parcelRequire.register("hOV2p", function(module, exports) {
     };
     // Test if n bit is set
     BN.prototype.testn = function testn(bit) {
-        assert(typeof bit === 'number' && bit >= 0);
+        assert(typeof bit === "number" && bit >= 0);
         var r = bit % 26;
         var s = (bit - r) / 26;
         var q = 1 << r;
@@ -38899,10 +38900,10 @@ parcelRequire.register("hOV2p", function(module, exports) {
     };
     // Return only lowers bits of number (in-place)
     BN.prototype.imaskn = function imaskn(bits) {
-        assert(typeof bits === 'number' && bits >= 0);
+        assert(typeof bits === "number" && bits >= 0);
         var r = bits % 26;
         var s = (bits - r) / 26;
-        assert(this.negative === 0, 'imaskn works only with positive numbers');
+        assert(this.negative === 0, "imaskn works only with positive numbers");
         if (this.length <= s) return this;
         if (r !== 0) s++;
         this.length = Math.min(s, this.length);
@@ -38918,7 +38919,7 @@ parcelRequire.register("hOV2p", function(module, exports) {
     };
     // Add plain number `num` to `this`
     BN.prototype.iaddn = function iaddn(num) {
-        assert(typeof num === 'number');
+        assert(typeof num === "number");
         assert(num < 0x4000000);
         if (num < 0) return this.isubn(-num);
         // Possible sign change
@@ -38949,7 +38950,7 @@ parcelRequire.register("hOV2p", function(module, exports) {
     };
     // Subtract plain number `num` from `this`
     BN.prototype.isubn = function isubn(num) {
-        assert(typeof num === 'number');
+        assert(typeof num === "number");
         assert(num < 0x4000000);
         if (num < 0) return this.iaddn(-num);
         if (this.negative !== 0) {
@@ -39028,7 +39029,7 @@ parcelRequire.register("hOV2p", function(module, exports) {
         // Initialize quotient
         var m = a.length - b.length;
         var q;
-        if (mode !== 'mod') {
+        if (mode !== "mod") {
             q = new BN(null);
             q.length = m + 1;
             q.words = new Array(q.length);
@@ -39056,7 +39057,7 @@ parcelRequire.register("hOV2p", function(module, exports) {
         if (q) q.strip();
         a.strip();
         // Denormalize
-        if (mode !== 'div' && shift !== 0) a.iushrn(shift);
+        if (mode !== "div" && shift !== 0) a.iushrn(shift);
         return {
             div: q || null,
             mod: a
@@ -39075,8 +39076,8 @@ parcelRequire.register("hOV2p", function(module, exports) {
         var div, mod, res;
         if (this.negative !== 0 && num.negative === 0) {
             res = this.neg().divmod(num, mode);
-            if (mode !== 'mod') div = res.div.neg();
-            if (mode !== 'div') {
+            if (mode !== "mod") div = res.div.neg();
+            if (mode !== "div") {
                 mod = res.mod.neg();
                 if (positive && mod.negative !== 0) mod.iadd(num);
             }
@@ -39087,7 +39088,7 @@ parcelRequire.register("hOV2p", function(module, exports) {
         }
         if (this.negative === 0 && num.negative !== 0) {
             res = this.divmod(num.neg(), mode);
-            if (mode !== 'mod') div = res.div.neg();
+            if (mode !== "mod") div = res.div.neg();
             return {
                 div: div,
                 mod: res.mod
@@ -39095,7 +39096,7 @@ parcelRequire.register("hOV2p", function(module, exports) {
         }
         if ((this.negative & num.negative) !== 0) {
             res = this.neg().divmod(num.neg(), mode);
-            if (mode !== 'div') {
+            if (mode !== "div") {
                 mod = res.mod.neg();
                 if (positive && mod.negative !== 0) mod.isub(num);
             }
@@ -39112,11 +39113,11 @@ parcelRequire.register("hOV2p", function(module, exports) {
         };
         // Very short reduction
         if (num.length === 1) {
-            if (mode === 'div') return {
+            if (mode === "div") return {
                 div: this.divn(num.words[0]),
                 mod: null
             };
-            if (mode === 'mod') return {
+            if (mode === "mod") return {
                 div: null,
                 mod: new BN(this.modn(num.words[0]))
             };
@@ -39129,14 +39130,14 @@ parcelRequire.register("hOV2p", function(module, exports) {
     };
     // Find `this` / `num`
     BN.prototype.div = function div(num) {
-        return this.divmod(num, 'div', false).div;
+        return this.divmod(num, "div", false).div;
     };
     // Find `this` % `num`
     BN.prototype.mod = function mod(num) {
-        return this.divmod(num, 'mod', false).mod;
+        return this.divmod(num, "mod", false).mod;
     };
     BN.prototype.umod = function umod(num) {
-        return this.divmod(num, 'mod', true).mod;
+        return this.divmod(num, "mod", true).mod;
     };
     // Find Round(`this` / `num`)
     BN.prototype.divRound = function divRound(num) {
@@ -39302,7 +39303,7 @@ parcelRequire.register("hOV2p", function(module, exports) {
                 b = t;
             } else if (r === 0 || b.cmpn(1) === 0) break;
             a.isub(b);
-        }while (true)
+        }while (true);
         return b.iushln(shift);
     };
     // Invert number in the field F(num)
@@ -39321,7 +39322,7 @@ parcelRequire.register("hOV2p", function(module, exports) {
     };
     // Increment at the bit position in-line
     BN.prototype.bincn = function bincn(bit) {
-        assert(typeof bit === 'number');
+        assert(typeof bit === "number");
         var r = bit % 26;
         var s = (bit - r) / 26;
         var q = 1 << r;
@@ -39358,7 +39359,7 @@ parcelRequire.register("hOV2p", function(module, exports) {
         if (this.length > 1) res = 1;
         else {
             if (negative) num = -num;
-            assert(num <= 0x3ffffff, 'Number is too big');
+            assert(num <= 0x3ffffff, "Number is too big");
             var w = this.words[0] | 0;
             res = w === num ? 0 : w < num ? -1 : 1;
         }
@@ -39430,12 +39431,12 @@ parcelRequire.register("hOV2p", function(module, exports) {
         return new Red(num);
     };
     BN.prototype.toRed = function toRed(ctx) {
-        assert(!this.red, 'Already a number in reduction context');
-        assert(this.negative === 0, 'red works only with positives');
+        assert(!this.red, "Already a number in reduction context");
+        assert(this.negative === 0, "red works only with positives");
         return ctx.convertTo(this)._forceRed(ctx);
     };
     BN.prototype.fromRed = function fromRed() {
-        assert(this.red, 'fromRed works only with numbers in reduction context');
+        assert(this.red, "fromRed works only with numbers in reduction context");
         return this.red.convertFrom(this);
     };
     BN.prototype._forceRed = function _forceRed(ctx) {
@@ -39443,68 +39444,68 @@ parcelRequire.register("hOV2p", function(module, exports) {
         return this;
     };
     BN.prototype.forceRed = function forceRed(ctx) {
-        assert(!this.red, 'Already a number in reduction context');
+        assert(!this.red, "Already a number in reduction context");
         return this._forceRed(ctx);
     };
     BN.prototype.redAdd = function redAdd(num) {
-        assert(this.red, 'redAdd works only with red numbers');
+        assert(this.red, "redAdd works only with red numbers");
         return this.red.add(this, num);
     };
     BN.prototype.redIAdd = function redIAdd(num) {
-        assert(this.red, 'redIAdd works only with red numbers');
+        assert(this.red, "redIAdd works only with red numbers");
         return this.red.iadd(this, num);
     };
     BN.prototype.redSub = function redSub(num) {
-        assert(this.red, 'redSub works only with red numbers');
+        assert(this.red, "redSub works only with red numbers");
         return this.red.sub(this, num);
     };
     BN.prototype.redISub = function redISub(num) {
-        assert(this.red, 'redISub works only with red numbers');
+        assert(this.red, "redISub works only with red numbers");
         return this.red.isub(this, num);
     };
     BN.prototype.redShl = function redShl(num) {
-        assert(this.red, 'redShl works only with red numbers');
+        assert(this.red, "redShl works only with red numbers");
         return this.red.shl(this, num);
     };
     BN.prototype.redMul = function redMul(num) {
-        assert(this.red, 'redMul works only with red numbers');
+        assert(this.red, "redMul works only with red numbers");
         this.red._verify2(this, num);
         return this.red.mul(this, num);
     };
     BN.prototype.redIMul = function redIMul(num) {
-        assert(this.red, 'redMul works only with red numbers');
+        assert(this.red, "redMul works only with red numbers");
         this.red._verify2(this, num);
         return this.red.imul(this, num);
     };
     BN.prototype.redSqr = function redSqr() {
-        assert(this.red, 'redSqr works only with red numbers');
+        assert(this.red, "redSqr works only with red numbers");
         this.red._verify1(this);
         return this.red.sqr(this);
     };
     BN.prototype.redISqr = function redISqr() {
-        assert(this.red, 'redISqr works only with red numbers');
+        assert(this.red, "redISqr works only with red numbers");
         this.red._verify1(this);
         return this.red.isqr(this);
     };
     // Square root over p
     BN.prototype.redSqrt = function redSqrt() {
-        assert(this.red, 'redSqrt works only with red numbers');
+        assert(this.red, "redSqrt works only with red numbers");
         this.red._verify1(this);
         return this.red.sqrt(this);
     };
     BN.prototype.redInvm = function redInvm() {
-        assert(this.red, 'redInvm works only with red numbers');
+        assert(this.red, "redInvm works only with red numbers");
         this.red._verify1(this);
         return this.red.invm(this);
     };
     // Return negative clone of `this` % `red modulo`
     BN.prototype.redNeg = function redNeg() {
-        assert(this.red, 'redNeg works only with red numbers');
+        assert(this.red, "redNeg works only with red numbers");
         this.red._verify1(this);
         return this.red.neg(this);
     };
     BN.prototype.redPow = function redPow(num) {
-        assert(this.red && !num.red, 'redPow(normalNum)');
+        assert(this.red && !num.red, "redPow(normalNum)");
         this.red._verify1(this);
         return this.red.pow(this, num);
     };
@@ -39539,7 +39540,7 @@ parcelRequire.register("hOV2p", function(module, exports) {
             r = this.imulK(r);
             r = r.iadd(this.tmp);
             rlen = r.bitLength();
-        }while (rlen > this.n)
+        }while (rlen > this.n);
         var cmp = rlen < this.n ? -1 : r.ucmp(this.p);
         if (cmp === 0) {
             r.words[0] = 0;
@@ -39558,7 +39559,7 @@ parcelRequire.register("hOV2p", function(module, exports) {
         return num.imul(this.k);
     };
     function K256() {
-        MPrime.call(this, 'k256', 'ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff fffffffe fffffc2f');
+        MPrime.call(this, "k256", "ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff fffffffe fffffc2f");
     }
     inherits(K256, MPrime);
     K256.prototype.split = function split(input, output) {
@@ -39606,16 +39607,16 @@ parcelRequire.register("hOV2p", function(module, exports) {
         return num;
     };
     function P224() {
-        MPrime.call(this, 'p224', 'ffffffff ffffffff ffffffff ffffffff 00000000 00000000 00000001');
+        MPrime.call(this, "p224", "ffffffff ffffffff ffffffff ffffffff 00000000 00000000 00000001");
     }
     inherits(P224, MPrime);
     function P192() {
-        MPrime.call(this, 'p192', 'ffffffff ffffffff ffffffff fffffffe ffffffff ffffffff');
+        MPrime.call(this, "p192", "ffffffff ffffffff ffffffff fffffffe ffffffff ffffffff");
     }
     inherits(P192, MPrime);
     function P25519() {
         // 2 ^ 255 - 19
-        MPrime.call(this, '25519', '7fffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffed');
+        MPrime.call(this, "25519", "7fffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffed");
     }
     inherits(P25519, MPrime);
     P25519.prototype.imulK = function imulK(num) {
@@ -39636,11 +39637,11 @@ parcelRequire.register("hOV2p", function(module, exports) {
         // Cached version of prime
         if (primes[name]) return primes[name];
         var prime;
-        if (name === 'k256') prime = new K256();
-        else if (name === 'p224') prime = new P224();
-        else if (name === 'p192') prime = new P192();
-        else if (name === 'p25519') prime = new P25519();
-        else throw new Error('Unknown prime ' + name);
+        if (name === "k256") prime = new K256();
+        else if (name === "p224") prime = new P224();
+        else if (name === "p192") prime = new P192();
+        else if (name === "p25519") prime = new P25519();
+        else throw new Error("Unknown prime " + name);
         primes[name] = prime;
         return prime;
     };
@@ -39648,23 +39649,23 @@ parcelRequire.register("hOV2p", function(module, exports) {
     // Base reduction engine
     //
     function Red(m) {
-        if (typeof m === 'string') {
+        if (typeof m === "string") {
             var prime = BN._prime(m);
             this.m = prime.p;
             this.prime = prime;
         } else {
-            assert(m.gtn(1), 'modulus must be greater than 1');
+            assert(m.gtn(1), "modulus must be greater than 1");
             this.m = m;
             this.prime = null;
         }
     }
     Red.prototype._verify1 = function _verify1(a) {
-        assert(a.negative === 0, 'red works only with positives');
-        assert(a.red, 'red works only with red numbers');
+        assert(a.negative === 0, "red works only with positives");
+        assert(a.red, "red works only with red numbers");
     };
     Red.prototype._verify2 = function _verify2(a, b) {
-        assert((a.negative | b.negative) === 0, 'red works only with positives');
-        assert(a.red && a.red === b.red, 'red works only with red numbers');
+        assert((a.negative | b.negative) === 0, "red works only with positives");
+        assert(a.red && a.red === b.red, "red works only with red numbers");
     };
     Red.prototype.imod = function imod(a) {
         if (this.prime) return this.prime.ireduce(a)._forceRed(this);
@@ -39907,7 +39908,7 @@ module.exports = function privateDecrypt(privateKey, enc, reverse) {
     else padding = 4;
     var key = $8NP2t(privateKey);
     var k = key.modulus.byteLength();
-    if (enc.length > k || new $hOV2p(enc).cmp(key.modulus) >= 0) throw new Error('decryption error');
+    if (enc.length > k || new $hOV2p(enc).cmp(key.modulus) >= 0) throw new Error("decryption error");
     var msg;
     if (reverse) msg = $bbNQX(new $hOV2p(enc), key);
     else msg = $it3Jn(enc, key);
@@ -39919,21 +39920,21 @@ module.exports = function privateDecrypt(privateKey, enc, reverse) {
     if (padding === 4) return $28d263a86c3e8397$var$oaep(key, msg);
     else if (padding === 1) return $28d263a86c3e8397$var$pkcs1(key, msg, reverse);
     else if (padding === 3) return msg;
-    else throw new Error('unknown padding');
+    else throw new Error("unknown padding");
 };
 function $28d263a86c3e8397$var$oaep(key, msg) {
     var k = key.modulus.byteLength();
-    var iHash = $cv73a('sha1').update($28d263a86c3e8397$require$Buffer.alloc(0)).digest();
+    var iHash = $cv73a("sha1").update($28d263a86c3e8397$require$Buffer.alloc(0)).digest();
     var hLen = iHash.length;
-    if (msg[0] !== 0) throw new Error('decryption error');
+    if (msg[0] !== 0) throw new Error("decryption error");
     var maskedSeed = msg.slice(1, hLen + 1);
     var maskedDb = msg.slice(hLen + 1);
     var seed = $72llI(maskedSeed, $1us7W(maskedDb, hLen));
     var db = $72llI(maskedDb, $1us7W(seed, k - hLen - 1));
-    if ($28d263a86c3e8397$var$compare(iHash, db.slice(0, hLen))) throw new Error('decryption error');
+    if ($28d263a86c3e8397$var$compare(iHash, db.slice(0, hLen))) throw new Error("decryption error");
     var i = hLen;
     while(db[i] === 0)i++;
-    if (db[i++] !== 1) throw new Error('decryption error');
+    if (db[i++] !== 1) throw new Error("decryption error");
     return db.slice(i);
 }
 function $28d263a86c3e8397$var$pkcs1(key, msg, reverse) {
@@ -39945,9 +39946,9 @@ function $28d263a86c3e8397$var$pkcs1(key, msg, reverse) {
         break;
     }
     var ps = msg.slice(2, i - 1);
-    if (p1.toString('hex') !== '0002' && !reverse || p1.toString('hex') !== '0001' && reverse) status++;
+    if (p1.toString("hex") !== "0002" && !reverse || p1.toString("hex") !== "0001" && reverse) status++;
     if (ps.length < 8) status++;
-    if (status) throw new Error('decryption error');
+    if (status) throw new Error("decryption error");
     return msg.slice(i);
 }
 function $28d263a86c3e8397$var$compare(a, b) {
@@ -39973,11 +39974,11 @@ $parcel$export(module.exports, "randomFill", function () { return $49b47840967a4
 $parcel$export(module.exports, "randomFillSync", function () { return $49b47840967a495a$export$2f7171e78e524d5e; }, function (v) { return $49b47840967a495a$export$2f7171e78e524d5e = v; });
 var $49b47840967a495a$export$bb1abf2ce84fc7e8;
 var $49b47840967a495a$export$2f7171e78e524d5e;
-'use strict';
+"use strict";
 
 var $36zFS = parcelRequire("36zFS");
 function $49b47840967a495a$var$oldBrowser() {
-    throw new Error('secure random number generation not supported by this browser\nuse chrome, FireFox or Internet Explorer 11');
+    throw new Error("secure random number generation not supported by this browser\nuse chrome, FireFox or Internet Explorer 11");
 }
 
 var $8k9oS = parcelRequire("8k9oS");
@@ -39988,14 +39989,14 @@ var $49b47840967a495a$var$kBufferMaxLength = $8k9oS.kMaxLength;
 var $49b47840967a495a$var$crypto = $parcel$global.crypto || $parcel$global.msCrypto;
 var $49b47840967a495a$var$kMaxUint32 = Math.pow(2, 32) - 1;
 function $49b47840967a495a$var$assertOffset(offset, length) {
-    if (typeof offset !== 'number' || offset !== offset) throw new TypeError('offset must be a number');
-    if (offset > $49b47840967a495a$var$kMaxUint32 || offset < 0) throw new TypeError('offset must be a uint32');
-    if (offset > $49b47840967a495a$var$kBufferMaxLength || offset > length) throw new RangeError('offset out of range');
+    if (typeof offset !== "number" || offset !== offset) throw new TypeError("offset must be a number");
+    if (offset > $49b47840967a495a$var$kMaxUint32 || offset < 0) throw new TypeError("offset must be a uint32");
+    if (offset > $49b47840967a495a$var$kBufferMaxLength || offset > length) throw new RangeError("offset out of range");
 }
 function $49b47840967a495a$var$assertSize(size, offset, length) {
-    if (typeof size !== 'number' || size !== size) throw new TypeError('size must be a number');
-    if (size > $49b47840967a495a$var$kMaxUint32 || size < 0) throw new TypeError('size must be a uint32');
-    if (size + offset > length || size > $49b47840967a495a$var$kBufferMaxLength) throw new RangeError('buffer too small');
+    if (typeof size !== "number" || size !== size) throw new TypeError("size must be a number");
+    if (size > $49b47840967a495a$var$kMaxUint32 || size < 0) throw new TypeError("size must be a uint32");
+    if (size + offset > length || size > $49b47840967a495a$var$kBufferMaxLength) throw new RangeError("buffer too small");
 }
 if ($49b47840967a495a$var$crypto && $49b47840967a495a$var$crypto.getRandomValues || false) {
     $49b47840967a495a$export$bb1abf2ce84fc7e8 = $49b47840967a495a$var$randomFill;
@@ -40006,14 +40007,14 @@ if ($49b47840967a495a$var$crypto && $49b47840967a495a$var$crypto.getRandomValues
 }
 function $49b47840967a495a$var$randomFill(buf, offset, size, cb) {
     if (!$49b47840967a495a$var$Buffer.isBuffer(buf) && !(buf instanceof $parcel$global.Uint8Array)) throw new TypeError('"buf" argument must be a Buffer or Uint8Array');
-    if (typeof offset === 'function') {
+    if (typeof offset === "function") {
         cb = offset;
         offset = 0;
         size = buf.length;
-    } else if (typeof size === 'function') {
+    } else if (typeof size === "function") {
         cb = size;
         size = buf.length - offset;
-    } else if (typeof cb !== 'function') throw new TypeError('"cb" argument must be a function');
+    } else if (typeof cb !== "function") throw new TypeError('"cb" argument must be a function');
     $49b47840967a495a$var$assertOffset(offset, buf.length);
     $49b47840967a495a$var$assertSize(size, offset, buf.length);
     return $49b47840967a495a$var$actualFill(buf, offset, size, cb);
@@ -40042,7 +40043,7 @@ function $49b47840967a495a$var$actualFill(buf, offset, size, cb) {
     return buf;
 }
 function $49b47840967a495a$var$randomFillSync(buf, offset, size) {
-    if (typeof offset === 'undefined') offset = 0;
+    if (typeof offset === "undefined") offset = 0;
     if (!$49b47840967a495a$var$Buffer.isBuffer(buf) && !(buf instanceof $parcel$global.Uint8Array)) throw new TypeError('"buf" argument must be a Buffer or Uint8Array');
     $49b47840967a495a$var$assertOffset(offset, buf.length);
     if (size === undefined) size = buf.length - offset;
@@ -40056,7 +40057,7 @@ function $49b47840967a495a$var$randomFillSync(buf, offset, size) {
 
 
 parcelRequire.register("8V1uF", function(module, exports) {
-'use strict';
+"use strict";
 
 
 // STARTED TOP nodejs/browser hack
@@ -40087,28 +40088,28 @@ parcelRequire.register("8V1uF", function(module, exports) {
             const body = JSON.stringify(formData);
             //        console.log( 'sendRequest request', body );
             const options = {
-                method: 'POST',
+                method: "POST",
                 hostname: apiUrl.hostname,
                 path: apiUrl.pathname,
                 port: apiUrl.port,
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Content-Length': body.length
+                    "Content-Type": "application/json",
+                    "Content-Length": body.length
                 },
                 timeout: 30000
             };
-            if (!!auth) options.headers['Authorization'] = auth;
+            if (!!auth) options.headers["Authorization"] = auth;
             // console.log('url', url);
             // console.log('apiUrl.protocol', apiUrl.protocol);
             const req = moduleRef.request(options, (res)=>{
                 // console.log('res.statusCode', res.statusCode);
                 if (res.statusCode < 200 || res.statusCode > 299) {
                     // console.trace('error', res.statusCode);
-                    let chunks = '';
-                    res.on('data', (chunk)=>{
+                    let chunks = "";
+                    res.on("data", (chunk)=>{
                         chunks += chunk;
                     });
-                    res.on('end', ()=>{
+                    res.on("end", ()=>{
                         // console.trace('error', res.statusCode);
                         reject(Error(JSON.stringify({
                             body: chunks,
@@ -40117,11 +40118,11 @@ parcelRequire.register("8V1uF", function(module, exports) {
                     });
                 } else {
                     // console.log(`statusCode: ${res.statusCode}`);
-                    let chunks = '';
-                    res.on('data', (chunk)=>{
+                    let chunks = "";
+                    res.on("data", (chunk)=>{
                         chunks += chunk;
                     });
-                    res.on('end', ()=>{
+                    res.on("end", ()=>{
                         if (chunks.length == 0) resolve(undefined);
                         else try {
                             const json = JSON.parse(chunks);
@@ -40132,8 +40133,8 @@ parcelRequire.register("8V1uF", function(module, exports) {
                     });
                 }
             });
-            req.on('error', (error)=>{
-                /* istanbul ignore if */ if (logRequestErrors) console.log('sendRequest error', error, body);
+            req.on("error", (error)=>{
+                /* istanbul ignore if */ if (logRequestErrors) console.log("sendRequest error", error, body);
                 reject(Error(error));
             });
             req.write(body);
@@ -40147,7 +40148,7 @@ parcelRequire.register("8V1uF", function(module, exports) {
     const getAccountBalanceAndPendingRaw = async (account)=>{
         /* istanbul ignore if */ if (account == undefined) throw Error(`'account' is a required parameter.`);
         const formData = {
-            action: 'accounts_balances',
+            action: "accounts_balances",
             accounts: [
                 account
             ]
@@ -40177,7 +40178,7 @@ parcelRequire.register("8V1uF", function(module, exports) {
     const getAccountsBalances = async (accounts)=>{
         /* istanbul ignore if */ if (accounts == undefined || !Array.isArray(accounts)) throw Error(`'accounts' is a required parameter.`);
         const formData = {
-            action: 'accounts_balances',
+            action: "accounts_balances",
             accounts: accounts
         };
         return new Promise((resolve, reject)=>{
@@ -40198,7 +40199,7 @@ parcelRequire.register("8V1uF", function(module, exports) {
         /* istanbul ignore if */ if (account == undefined) throw Error(`'account' is a required parameter.`);
         // https://docs.nano.org/commands/rpc-protocol#account-representative
         const formData = {
-            action: 'account_representative',
+            action: "account_representative",
             account: account
         };
         return new Promise((resolve, reject)=>{
@@ -40206,7 +40207,7 @@ parcelRequire.register("8V1uF", function(module, exports) {
                 // console.log( `account_representative error '${error.message}'` );
                 reject(error);
             }).then((json)=>{
-                if (json === undefined) resolve('');
+                if (json === undefined) resolve("");
                 else {
                     const representative = json.representative;
                     resolve(representative);
@@ -40218,7 +40219,7 @@ parcelRequire.register("8V1uF", function(module, exports) {
         /* istanbul ignore if */ if (account == undefined) throw Error(`'account' is a required parameter.`);
         // https://docs.nano.org/commands/rpc-protocol#frontiers
         const formData = {
-            action: 'accounts_frontiers',
+            action: "accounts_frontiers",
             accounts: [
                 account
             ],
@@ -40231,11 +40232,11 @@ parcelRequire.register("8V1uF", function(module, exports) {
                 reject(error);
             }).then((json)=>{
                 // console.log( `accounts_frontiers response ${JSON.stringify( json )}` );
-                if (json === undefined) resolve('');
+                if (json === undefined) resolve("");
                 else if (json.frontiers == undefined) // console.log( `accounts_frontiers response ${account}` );
-                resolve('');
-                else if (json.frontiers == '') // console.log( `accounts_frontiers response ${account}` );
-                resolve('');
+                resolve("");
+                else if (json.frontiers == "") // console.log( `accounts_frontiers response ${account}` );
+                resolve("");
                 else {
                     const previous = json.frontiers[account];
                     // console.log( `accounts_frontiers response ${account} ${previous}` );
@@ -40249,7 +40250,7 @@ parcelRequire.register("8V1uF", function(module, exports) {
         /* istanbul ignore if */ if (count === undefined) throw Error(`'count' is a required parameter.`);
         // https://docs.nano.org/commands/rpc-protocol/#account_history
         const formData = {
-            action: 'account_history',
+            action: "account_history",
             account: account,
             count: count
         };
@@ -40270,12 +40271,12 @@ parcelRequire.register("8V1uF", function(module, exports) {
         /* istanbul ignore if */ if (account === undefined) throw Error(`'account' is a required parameter.`);
         // https://docs.nano.org/commands/rpc-protocol/#account_info
         const formData = {
-            action: 'account_info',
+            action: "account_info",
             account: account
         };
         if (representativeFlag !== undefined) {
-            if (representativeFlag) formData.representative = 'true';
-            else formData.representative = 'false';
+            if (representativeFlag) formData.representative = "true";
+            else formData.representative = "false";
         }
         // console.log( `account_info request ${JSON.stringify( formData )}` );
         return new Promise((resolve, reject)=>{
@@ -40292,7 +40293,7 @@ parcelRequire.register("8V1uF", function(module, exports) {
         /* istanbul ignore if */ if (hashes === undefined) throw Error(`'hashes' is a required parameter.`);
         // https://github.com/nanocurrency/nano-node/wiki/RPC-protocol#retrieve-multiple-blocks
         const formData = {
-            action: 'blocks',
+            action: "blocks",
             hashes: hashes
         };
         if (jsonBlock !== undefined) formData.json_block = jsonBlock;
@@ -40312,8 +40313,8 @@ parcelRequire.register("8V1uF", function(module, exports) {
         /* istanbul ignore if */ if (subtype == undefined) throw Error(`'subtype' is a required parameter.'`);
         // https://docs.nano.org/commands/rpc-protocol/#process
         const formData = {
-            action: 'process',
-            json_block: 'true',
+            action: "process",
+            json_block: "true",
             subtype: subtype,
             block: block
         };
@@ -40326,7 +40327,7 @@ parcelRequire.register("8V1uF", function(module, exports) {
                 reject(error);
             }).then((json)=>{
                 // console.log( `process response ${JSON.stringify( json )}` );
-                if (json === undefined) resolve('');
+                if (json === undefined) resolve("");
                 else if (json.hash === undefined) {
                     // console.log(`process hash undefined`);
                     if (json.error === undefined) {
@@ -40345,7 +40346,7 @@ parcelRequire.register("8V1uF", function(module, exports) {
     const getGeneratedWork = async (hash)=>{
         // https://docs.nano.org/commands/rpc-protocol#work-generate
         const formData = {
-            action: 'work_generate',
+            action: "work_generate",
             hash: hash
         };
         /* istanbul ignore if */ if (LOG_GET_GENERATED_WORK) console.log(`STARTED getGeneratedWork request ${JSON.stringify(formData)}`);
@@ -40354,7 +40355,7 @@ parcelRequire.register("8V1uF", function(module, exports) {
                 // console.log( `getGeneratedWork error '${error.message}'` );
                 reject(error);
             }).then((json)=>{
-                if (json === undefined) resolve('');
+                if (json === undefined) resolve("");
                 else {
                     /* istanbul ignore if */ if (LOG_GET_GENERATED_WORK) console.log(`SUCCESS getGeneratedWork response ${JSON.stringify(json)}`);
                     const work = json.work;
@@ -40364,18 +40365,18 @@ parcelRequire.register("8V1uF", function(module, exports) {
         });
     };
     const getAccountsPending = async (accounts, count, source)=>{
-        /* istanbul ignore if */ if (accounts === undefined) throw Error('accounts is a required parameter.');
-        /* istanbul ignore if */ if (count === undefined) throw Error('count is a required parameter.');
+        /* istanbul ignore if */ if (accounts === undefined) throw Error("accounts is a required parameter.");
+        /* istanbul ignore if */ if (count === undefined) throw Error("count is a required parameter.");
         // https://docs.nano.org/commands/rpc-protocol/#accounts_pending
         const formData = {
-            action: 'accounts_pending',
+            action: "accounts_pending",
             accounts: accounts,
             count: count,
             threshold: 1
         };
         if (source !== undefined) {
-            if (source) formData.source = 'true';
-            else formData.source = 'false';
+            if (source) formData.source = "true";
+            else formData.source = "false";
         }
         // console.log( `accounts_pending request ${JSON.stringify( formData )}` );
         return new Promise((resolve, reject)=>{
@@ -40389,10 +40390,10 @@ parcelRequire.register("8V1uF", function(module, exports) {
         });
     };
     const getBlockAccount = async (hash)=>{
-        /* istanbul ignore if */ if (hash === undefined) throw Error('hash is a required parameter.');
+        /* istanbul ignore if */ if (hash === undefined) throw Error("hash is a required parameter.");
         // https://github.com/nanocurrency/nano-node/wiki/RPC-protocol#block-account
         const formData = {
-            action: 'block_account',
+            action: "block_account",
             hash: hash
         };
         // console.log( `block_account request ${JSON.stringify( formData )}` );
@@ -40407,11 +40408,11 @@ parcelRequire.register("8V1uF", function(module, exports) {
         });
     };
     const getFrontiers = async (account, count)=>{
-        /* istanbul ignore if */ if (account === undefined) throw Error('account is a required parameter.');
-        /* istanbul ignore if */ if (count === undefined) throw Error('count is a required parameter.');
+        /* istanbul ignore if */ if (account === undefined) throw Error("account is a required parameter.");
+        /* istanbul ignore if */ if (count === undefined) throw Error("count is a required parameter.");
         // https://github.com/nanocurrency/nano-node/wiki/RPC-protocol#frontiers
         const formData = {
-            action: 'frontiers',
+            action: "frontiers",
             account: account,
             count: count
         };
@@ -40429,7 +40430,7 @@ parcelRequire.register("8V1uF", function(module, exports) {
     const getBlockCount = async ()=>{
         // https://docs.nano.org/commands/rpc-protocol/#block_count
         const formData = {
-            action: 'block_count'
+            action: "block_count"
         };
         // console.log( `block_count request ${JSON.stringify( formData )}` );
         return new Promise((resolve, reject)=>{
@@ -40446,8 +40447,8 @@ parcelRequire.register("8V1uF", function(module, exports) {
         // console.log('started serUrl', newUrl);
         url = newUrl;
         if (url !== undefined) {
-            if (url.startsWith('https')) moduleRef = https;
-            else if (url.startsWith('http')) moduleRef = http;
+            if (url.startsWith("https")) moduleRef = https;
+            else if (url.startsWith("http")) moduleRef = http;
         }
     // console.log('success serUrl', newUrl, url);
     };
@@ -40484,7 +40485,7 @@ parcelRequire.register("8V1uF", function(module, exports) {
         return exports;
     })();
     // istanbul ignore else
-    if (typeof module.exports !== 'undefined') module.exports = exports1;
+    if (typeof module.exports !== "undefined") module.exports = exports1;
     else window.bananocoin.bananojs.bananodeApi = exports1;
 })(); // FINISHED BOTTOM nodejs/browser hack
 
@@ -40505,9 +40506,9 @@ $e3b97a67e10dd6ec$var$https.get = function(params, cb) {
     return $hiRx5.get.call(this, params, cb);
 };
 function $e3b97a67e10dd6ec$var$validateParams(params) {
-    if (typeof params === 'string') params = $gc5oM.parse(params);
-    if (!params.protocol) params.protocol = 'https:';
-    if (params.protocol !== 'https:') throw new Error('Protocol "' + params.protocol + '" not supported. Expected "https:"');
+    if (typeof params === "string") params = $gc5oM.parse(params);
+    if (!params.protocol) params.protocol = "https:";
+    if (params.protocol !== "https:") throw new Error('Protocol "' + params.protocol + '" not supported. Expected "https:"');
     return params;
 }
 
@@ -40525,25 +40526,25 @@ var $dwYHo = parcelRequire("dwYHo");
 var $gc5oM = parcelRequire("gc5oM");
 var $c98da48f90f27fb3$var$http = module.exports;
 $c98da48f90f27fb3$var$http.request = function(opts, cb) {
-    if (typeof opts === 'string') opts = $gc5oM.parse(opts);
+    if (typeof opts === "string") opts = $gc5oM.parse(opts);
     else opts = $lenvT(opts);
     // Normally, the page is loaded from http or https, so not specifying a protocol
     // will result in a (valid) protocol-relative url. However, this won't work if
     // the protocol is something else, like 'file:'
-    var defaultProtocol = $parcel$global.location.protocol.search(/^https?:$/) === -1 ? 'http:' : '';
+    var defaultProtocol = $parcel$global.location.protocol.search(/^https?:$/) === -1 ? "http:" : "";
     var protocol = opts.protocol || defaultProtocol;
     var host = opts.hostname || opts.host;
     var port = opts.port;
-    var path = opts.path || '/';
+    var path = opts.path || "/";
     // Necessary for IPv6 addresses
-    if (host && host.indexOf(':') !== -1) host = '[' + host + ']';
+    if (host && host.indexOf(":") !== -1) host = "[" + host + "]";
     // This may be a relative url. The browser should always be able to interpret it correctly.
-    opts.url = (host ? protocol + '//' + host : '') + (port ? ':' + port : '') + path;
-    opts.method = (opts.method || 'GET').toUpperCase();
+    opts.url = (host ? protocol + "//" + host : "") + (port ? ":" + port : "") + path;
+    opts.method = (opts.method || "GET").toUpperCase();
     opts.headers = opts.headers || {};
     // Also valid opts.auth, opts.mode
     var req = new $aPRWx(opts);
-    if (cb) req.on('response', cb);
+    if (cb) req.on("response", cb);
     return req;
 };
 $c98da48f90f27fb3$var$http.get = function get(opts, cb) {
@@ -40558,41 +40559,41 @@ $c98da48f90f27fb3$var$http.Agent.defaultMaxSockets = 4;
 $c98da48f90f27fb3$var$http.globalAgent = new $c98da48f90f27fb3$var$http.Agent();
 $c98da48f90f27fb3$var$http.STATUS_CODES = $dwYHo;
 $c98da48f90f27fb3$var$http.METHODS = [
-    'CHECKOUT',
-    'CONNECT',
-    'COPY',
-    'DELETE',
-    'GET',
-    'HEAD',
-    'LOCK',
-    'M-SEARCH',
-    'MERGE',
-    'MKACTIVITY',
-    'MKCOL',
-    'MOVE',
-    'NOTIFY',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PROPFIND',
-    'PROPPATCH',
-    'PURGE',
-    'PUT',
-    'REPORT',
-    'SEARCH',
-    'SUBSCRIBE',
-    'TRACE',
-    'UNLOCK',
-    'UNSUBSCRIBE'
+    "CHECKOUT",
+    "CONNECT",
+    "COPY",
+    "DELETE",
+    "GET",
+    "HEAD",
+    "LOCK",
+    "M-SEARCH",
+    "MERGE",
+    "MKACTIVITY",
+    "MKCOL",
+    "MOVE",
+    "NOTIFY",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PROPFIND",
+    "PROPPATCH",
+    "PURGE",
+    "PUT",
+    "REPORT",
+    "SEARCH",
+    "SUBSCRIBE",
+    "TRACE",
+    "UNLOCK",
+    "UNSUBSCRIBE"
 ];
 
 });
 parcelRequire.register("aPRWx", function(module, exports) {
 
-var $36zFS = parcelRequire("36zFS");
-
 var $gGU47 = parcelRequire("gGU47");
 var $7e3882cb56e3e1fe$require$Buffer = $gGU47.Buffer;
+
+var $36zFS = parcelRequire("36zFS");
 
 var $cihaj = parcelRequire("cihaj");
 
@@ -40604,11 +40605,11 @@ var $8jMh9 = parcelRequire("8jMh9");
 var $7e3882cb56e3e1fe$var$IncomingMessage = $bQT6e.IncomingMessage;
 var $7e3882cb56e3e1fe$var$rStates = $bQT6e.readyStates;
 function $7e3882cb56e3e1fe$var$decideMode(preferBinary, useFetch) {
-    if ($cihaj.fetch && useFetch) return 'fetch';
-    else if ($cihaj.mozchunkedarraybuffer) return 'moz-chunked-arraybuffer';
-    else if ($cihaj.msstream) return 'ms-stream';
-    else if ($cihaj.arraybuffer && preferBinary) return 'arraybuffer';
-    else return 'text';
+    if ($cihaj.fetch && useFetch) return "fetch";
+    else if ($cihaj.mozchunkedarraybuffer) return "moz-chunked-arraybuffer";
+    else if ($cihaj.msstream) return "ms-stream";
+    else if ($cihaj.arraybuffer && preferBinary) return "arraybuffer";
+    else return "text";
 }
 var $7e3882cb56e3e1fe$var$ClientRequest = module.exports = function(opts) {
     var self = this;
@@ -40616,29 +40617,29 @@ var $7e3882cb56e3e1fe$var$ClientRequest = module.exports = function(opts) {
     self._opts = opts;
     self._body = [];
     self._headers = {};
-    if (opts.auth) self.setHeader('Authorization', 'Basic ' + $7e3882cb56e3e1fe$require$Buffer.from(opts.auth).toString('base64'));
+    if (opts.auth) self.setHeader("Authorization", "Basic " + $7e3882cb56e3e1fe$require$Buffer.from(opts.auth).toString("base64"));
     Object.keys(opts.headers).forEach(function(name) {
         self.setHeader(name, opts.headers[name]);
     });
     var preferBinary;
     var useFetch = true;
-    if (opts.mode === 'disable-fetch' || 'requestTimeout' in opts && !$cihaj.abortController) {
+    if (opts.mode === "disable-fetch" || "requestTimeout" in opts && !$cihaj.abortController) {
         // If the use of XHR should be preferred. Not typically needed.
         useFetch = false;
         preferBinary = true;
-    } else if (opts.mode === 'prefer-streaming') // If streaming is a high priority but binary compatibility and
+    } else if (opts.mode === "prefer-streaming") // If streaming is a high priority but binary compatibility and
     // the accuracy of the 'content-type' header aren't
     preferBinary = false;
-    else if (opts.mode === 'allow-wrong-content-type') // If streaming is more important than preserving the 'content-type' header
+    else if (opts.mode === "allow-wrong-content-type") // If streaming is more important than preserving the 'content-type' header
     preferBinary = !$cihaj.overrideMimeType;
-    else if (!opts.mode || opts.mode === 'default' || opts.mode === 'prefer-fast') // Use binary if text streaming may corrupt data or the content-type header, or for speed
+    else if (!opts.mode || opts.mode === "default" || opts.mode === "prefer-fast") // Use binary if text streaming may corrupt data or the content-type header, or for speed
     preferBinary = true;
-    else throw new Error('Invalid value for opts.mode');
+    else throw new Error("Invalid value for opts.mode");
     self._mode = $7e3882cb56e3e1fe$var$decideMode(preferBinary, useFetch);
     self._fetchTimer = null;
     self._socketTimeout = null;
     self._socketTimer = null;
-    self.on('finish', function() {
+    self.on("finish", function() {
         self._onFinish();
     });
 };
@@ -40668,11 +40669,11 @@ $7e3882cb56e3e1fe$var$ClientRequest.prototype._onFinish = function() {
     var self = this;
     if (self._destroyed) return;
     var opts = self._opts;
-    if ('timeout' in opts && opts.timeout !== 0) self.setTimeout(opts.timeout);
+    if ("timeout" in opts && opts.timeout !== 0) self.setTimeout(opts.timeout);
     var headersObj = self._headers;
     var body = null;
-    if (opts.method !== 'GET' && opts.method !== 'HEAD') body = new Blob(self._body, {
-        type: (headersObj['content-type'] || {}).value || ''
+    if (opts.method !== "GET" && opts.method !== "HEAD") body = new Blob(self._body, {
+        type: (headersObj["content-type"] || {}).value || ""
     });
     // create flattened list of headers
     var headersList = [];
@@ -40690,14 +40691,14 @@ $7e3882cb56e3e1fe$var$ClientRequest.prototype._onFinish = function() {
             value
         ]);
     });
-    if (self._mode === 'fetch') {
+    if (self._mode === "fetch") {
         var signal = null;
         if ($cihaj.abortController) {
             var controller = new AbortController();
             signal = controller.signal;
             self._fetchAbortController = controller;
-            if ('requestTimeout' in opts && opts.requestTimeout !== 0) self._fetchTimer = $parcel$global.setTimeout(function() {
-                self.emit('requestTimeout');
+            if ("requestTimeout" in opts && opts.requestTimeout !== 0) self._fetchTimer = $parcel$global.setTimeout(function() {
+                self.emit("requestTimeout");
                 if (self._fetchAbortController) self._fetchAbortController.abort();
             }, opts.requestTimeout);
         }
@@ -40705,16 +40706,16 @@ $7e3882cb56e3e1fe$var$ClientRequest.prototype._onFinish = function() {
             method: self._opts.method,
             headers: headersList,
             body: body || undefined,
-            mode: 'cors',
-            credentials: opts.withCredentials ? 'include' : 'same-origin',
+            mode: "cors",
+            credentials: opts.withCredentials ? "include" : "same-origin",
             signal: signal
-        }).then(function(response) {
-            self._fetchResponse = response;
+        }).then(function(response1) {
+            self._fetchResponse = response1;
             self._resetTimers(false);
             self._connect();
         }, function(reason) {
             self._resetTimers(true);
-            if (!self._destroyed) self.emit('error', reason);
+            if (!self._destroyed) self.emit("error", reason);
         });
     } else {
         var xhr = self._xhr = new $parcel$global.XMLHttpRequest();
@@ -40722,18 +40723,18 @@ $7e3882cb56e3e1fe$var$ClientRequest.prototype._onFinish = function() {
             xhr.open(self._opts.method, self._opts.url, true);
         } catch (err) {
             $36zFS.nextTick(function() {
-                self.emit('error', err);
+                self.emit("error", err);
             });
             return;
         }
         // Can't set responseType on really old browsers
-        if ('responseType' in xhr) xhr.responseType = self._mode;
-        if ('withCredentials' in xhr) xhr.withCredentials = !!opts.withCredentials;
-        if (self._mode === 'text' && 'overrideMimeType' in xhr) xhr.overrideMimeType('text/plain; charset=x-user-defined');
-        if ('requestTimeout' in opts) {
+        if ("responseType" in xhr) xhr.responseType = self._mode;
+        if ("withCredentials" in xhr) xhr.withCredentials = !!opts.withCredentials;
+        if (self._mode === "text" && "overrideMimeType" in xhr) xhr.overrideMimeType("text/plain; charset=x-user-defined");
+        if ("requestTimeout" in opts) {
             xhr.timeout = opts.requestTimeout;
             xhr.ontimeout = function() {
-                self.emit('requestTimeout');
+                self.emit("requestTimeout");
             };
         }
         headersList.forEach(function(header) {
@@ -40750,19 +40751,19 @@ $7e3882cb56e3e1fe$var$ClientRequest.prototype._onFinish = function() {
         };
         // Necessary for streaming in Firefox, since xhr.response is ONLY defined
         // in onprogress, not in onreadystatechange with xhr.readyState = 3
-        if (self._mode === 'moz-chunked-arraybuffer') xhr.onprogress = function() {
+        if (self._mode === "moz-chunked-arraybuffer") xhr.onprogress = function() {
             self._onXHRProgress();
         };
         xhr.onerror = function() {
             if (self._destroyed) return;
             self._resetTimers(true);
-            self.emit('error', new Error('XHR error'));
+            self.emit("error", new Error("XHR error"));
         };
         try {
             xhr.send(body);
         } catch (err1) {
             $36zFS.nextTick(function() {
-                self.emit('error', err1);
+                self.emit("error", err1);
             });
             return;
         }
@@ -40791,10 +40792,10 @@ $7e3882cb56e3e1fe$var$ClientRequest.prototype._connect = function() {
     var self = this;
     if (self._destroyed) return;
     self._response = new $7e3882cb56e3e1fe$var$IncomingMessage(self._xhr, self._fetchResponse, self._mode, self._resetTimers.bind(self));
-    self._response.on('error', function(err) {
-        self.emit('error', err);
+    self._response.on("error", function(err) {
+        self.emit("error", err);
     });
-    self.emit('response', self._response);
+    self.emit("response", self._response);
 };
 $7e3882cb56e3e1fe$var$ClientRequest.prototype._write = function(chunk, encoding, cb) {
     var self = this;
@@ -40809,7 +40810,7 @@ $7e3882cb56e3e1fe$var$ClientRequest.prototype._resetTimers = function(done) {
         $parcel$global.clearTimeout(self._fetchTimer);
         self._fetchTimer = null;
     } else if (self._socketTimeout) self._socketTimer = $parcel$global.setTimeout(function() {
-        self.emit('timeout');
+        self.emit("timeout");
     }, self._socketTimeout);
 };
 $7e3882cb56e3e1fe$var$ClientRequest.prototype.abort = $7e3882cb56e3e1fe$var$ClientRequest.prototype.destroy = function(err) {
@@ -40819,11 +40820,11 @@ $7e3882cb56e3e1fe$var$ClientRequest.prototype.abort = $7e3882cb56e3e1fe$var$Clie
     if (self._response) self._response._destroyed = true;
     if (self._xhr) self._xhr.abort();
     else if (self._fetchAbortController) self._fetchAbortController.abort();
-    if (err) self.emit('error', err);
+    if (err) self.emit("error", err);
 };
 $7e3882cb56e3e1fe$var$ClientRequest.prototype.end = function(data, encoding, cb) {
     var self = this;
-    if (typeof data === 'function') {
+    if (typeof data === "function") {
         cb = data;
         data = undefined;
     }
@@ -40831,7 +40832,7 @@ $7e3882cb56e3e1fe$var$ClientRequest.prototype.end = function(data, encoding, cb)
 };
 $7e3882cb56e3e1fe$var$ClientRequest.prototype.setTimeout = function(timeout, cb) {
     var self = this;
-    if (cb) self.once('timeout', cb);
+    if (cb) self.once("timeout", cb);
     self._socketTimeout = timeout;
     self._resetTimers(false);
 };
@@ -40840,26 +40841,26 @@ $7e3882cb56e3e1fe$var$ClientRequest.prototype.setNoDelay = function() {};
 $7e3882cb56e3e1fe$var$ClientRequest.prototype.setSocketKeepAlive = function() {};
 // Taken from http://www.w3.org/TR/XMLHttpRequest/#the-setrequestheader%28%29-method
 var $7e3882cb56e3e1fe$var$unsafeHeaders = [
-    'accept-charset',
-    'accept-encoding',
-    'access-control-request-headers',
-    'access-control-request-method',
-    'connection',
-    'content-length',
-    'cookie',
-    'cookie2',
-    'date',
-    'dnt',
-    'expect',
-    'host',
-    'keep-alive',
-    'origin',
-    'referer',
-    'te',
-    'trailer',
-    'transfer-encoding',
-    'upgrade',
-    'via'
+    "accept-charset",
+    "accept-encoding",
+    "access-control-request-headers",
+    "access-control-request-method",
+    "connection",
+    "content-length",
+    "cookie",
+    "cookie2",
+    "date",
+    "dnt",
+    "expect",
+    "host",
+    "keep-alive",
+    "origin",
+    "referer",
+    "te",
+    "trailer",
+    "transfer-encoding",
+    "upgrade",
+    "via"
 ];
 
 });
@@ -40901,7 +40902,7 @@ function $8f347b2c38a8a9de$var$getXHR() {
         // cross domain), use the page location. Otherwise use example.com
         // Note: this doesn't actually make an http request.
         try {
-            $8f347b2c38a8a9de$var$xhr.open('GET', $parcel$global.XDomainRequest ? '/' : 'https://example.com');
+            $8f347b2c38a8a9de$var$xhr.open("GET", $parcel$global.XDomainRequest ? "/" : "https://example.com");
         } catch (e) {
             $8f347b2c38a8a9de$var$xhr = null;
         }
@@ -40910,20 +40911,20 @@ function $8f347b2c38a8a9de$var$getXHR() {
     return $8f347b2c38a8a9de$var$xhr;
 }
 function $8f347b2c38a8a9de$var$checkTypeSupport(type) {
-    var xhr = $8f347b2c38a8a9de$var$getXHR();
-    if (!xhr) return false;
+    var xhr1 = $8f347b2c38a8a9de$var$getXHR();
+    if (!xhr1) return false;
     try {
-        xhr.responseType = type;
-        return xhr.responseType === type;
+        xhr1.responseType = type;
+        return xhr1.responseType === type;
     } catch (e) {}
     return false;
 }
-$8f347b2c38a8a9de$export$724c4efdc2b90612 = $8f347b2c38a8a9de$export$e7aa7bc5c1b3cfb3 || $8f347b2c38a8a9de$var$checkTypeSupport('arraybuffer');
-$8f347b2c38a8a9de$export$a9aa1e45c4448986 = !$8f347b2c38a8a9de$export$e7aa7bc5c1b3cfb3 && $8f347b2c38a8a9de$var$checkTypeSupport('ms-stream');
-$8f347b2c38a8a9de$export$4c3c163e941f6ba3 = !$8f347b2c38a8a9de$export$e7aa7bc5c1b3cfb3 && $8f347b2c38a8a9de$var$checkTypeSupport('moz-chunked-arraybuffer');
+$8f347b2c38a8a9de$export$724c4efdc2b90612 = $8f347b2c38a8a9de$export$e7aa7bc5c1b3cfb3 || $8f347b2c38a8a9de$var$checkTypeSupport("arraybuffer");
+$8f347b2c38a8a9de$export$a9aa1e45c4448986 = !$8f347b2c38a8a9de$export$e7aa7bc5c1b3cfb3 && $8f347b2c38a8a9de$var$checkTypeSupport("ms-stream");
+$8f347b2c38a8a9de$export$4c3c163e941f6ba3 = !$8f347b2c38a8a9de$export$e7aa7bc5c1b3cfb3 && $8f347b2c38a8a9de$var$checkTypeSupport("moz-chunked-arraybuffer");
 $8f347b2c38a8a9de$export$8f1269d6d73f87ef = $8f347b2c38a8a9de$export$e7aa7bc5c1b3cfb3 || ($8f347b2c38a8a9de$var$getXHR() ? $8f347b2c38a8a9de$var$isFunction($8f347b2c38a8a9de$var$getXHR().overrideMimeType) : false);
 function $8f347b2c38a8a9de$var$isFunction(value) {
-    return typeof value === 'function';
+    return typeof value === "function";
 }
 $8f347b2c38a8a9de$var$xhr = null // Help gc
 ;
@@ -40963,13 +40964,13 @@ var $8a0f4aa787c3ef50$var$IncomingMessage = $8a0f4aa787c3ef50$export$9d4333345ff
     self.trailers = {};
     self.rawTrailers = [];
     // Fake the 'close' event, but only once 'end' fires
-    self.on('end', function() {
+    self.on("end", function() {
         // The nextTick is necessary to prevent the 'request' module from causing an infinite loop
         $36zFS.nextTick(function() {
-            self.emit('close');
+            self.emit("close");
         });
     });
-    if (mode === 'fetch') {
+    if (mode === "fetch") {
         self._fetchResponse = response;
         self.url = response.url;
         self.statusCode = response.status;
@@ -40994,13 +40995,13 @@ var $8a0f4aa787c3ef50$var$IncomingMessage = $8a0f4aa787c3ef50$export$9d4333345ff
                 },
                 abort: function(err) {
                     resetTimers(true);
-                    if (!self._destroyed) self.emit('error', err);
+                    if (!self._destroyed) self.emit("error", err);
                 }
             });
             try {
                 response.body.pipeTo(writable).catch(function(err) {
                     resetTimers(true);
-                    if (!self._destroyed) self.emit('error', err);
+                    if (!self._destroyed) self.emit("error", err);
                 });
                 return;
             } catch (e) {} // pipeTo method isn't defined. Can't find a better way to feature test this
@@ -41019,7 +41020,7 @@ var $8a0f4aa787c3ef50$var$IncomingMessage = $8a0f4aa787c3ef50$export$9d4333345ff
                 read();
             }).catch(function(err) {
                 resetTimers(true);
-                if (!self._destroyed) self.emit('error', err);
+                if (!self._destroyed) self.emit("error", err);
             });
         }
         read();
@@ -41034,22 +41035,22 @@ var $8a0f4aa787c3ef50$var$IncomingMessage = $8a0f4aa787c3ef50$export$9d4333345ff
             var matches = header.match(/^([^:]+):\s*(.*)/);
             if (matches) {
                 var key = matches[1].toLowerCase();
-                if (key === 'set-cookie') {
+                if (key === "set-cookie") {
                     if (self.headers[key] === undefined) self.headers[key] = [];
                     self.headers[key].push(matches[2]);
-                } else if (self.headers[key] !== undefined) self.headers[key] += ', ' + matches[2];
+                } else if (self.headers[key] !== undefined) self.headers[key] += ", " + matches[2];
                 else self.headers[key] = matches[2];
                 self.rawHeaders.push(matches[1], matches[2]);
             }
         });
-        self._charset = 'x-user-defined';
+        self._charset = "x-user-defined";
         if (!$cihaj.overrideMimeType) {
-            var mimeType = self.rawHeaders['mime-type'];
+            var mimeType = self.rawHeaders["mime-type"];
             if (mimeType) {
                 var charsetMatch = mimeType.match(/;\s*charset=([^;])(;|$)/);
                 if (charsetMatch) self._charset = charsetMatch[1].toLowerCase();
             }
-            if (!self._charset) self._charset = 'utf-8' // best guess
+            if (!self._charset) self._charset = "utf-8" // best guess
             ;
         }
     }
@@ -41068,11 +41069,11 @@ $8a0f4aa787c3ef50$var$IncomingMessage.prototype._onXHRProgress = function(resetT
     var xhr = self._xhr;
     var response = null;
     switch(self._mode){
-        case 'text':
+        case "text":
             response = xhr.responseText;
             if (response.length > self._pos) {
                 var newData = response.substr(self._pos);
-                if (self._charset === 'x-user-defined') {
+                if (self._charset === "x-user-defined") {
                     var buffer = $8a0f4aa787c3ef50$require$Buffer.alloc(newData.length);
                     for(var i = 0; i < newData.length; i++)buffer[i] = newData.charCodeAt(i) & 0xff;
                     self.push(buffer);
@@ -41080,17 +41081,17 @@ $8a0f4aa787c3ef50$var$IncomingMessage.prototype._onXHRProgress = function(resetT
                 self._pos = response.length;
             }
             break;
-        case 'arraybuffer':
+        case "arraybuffer":
             if (xhr.readyState !== $8a0f4aa787c3ef50$var$rStates.DONE || !xhr.response) break;
             response = xhr.response;
             self.push($8a0f4aa787c3ef50$require$Buffer.from(new Uint8Array(response)));
             break;
-        case 'moz-chunked-arraybuffer':
+        case "moz-chunked-arraybuffer":
             response = xhr.response;
             if (xhr.readyState !== $8a0f4aa787c3ef50$var$rStates.LOADING || !response) break;
             self.push($8a0f4aa787c3ef50$require$Buffer.from(new Uint8Array(response)));
             break;
-        case 'ms-stream':
+        case "ms-stream":
             response = xhr.response;
             if (xhr.readyState !== $8a0f4aa787c3ef50$var$rStates.LOADING) break;
             var reader = new $parcel$global.MSStreamReader();
@@ -41109,7 +41110,7 @@ $8a0f4aa787c3ef50$var$IncomingMessage.prototype._onXHRProgress = function(resetT
             break;
     }
     // The ms-stream case handles end separately in reader.onload()
-    if (self._xhr.readyState === $8a0f4aa787c3ef50$var$rStates.DONE && self._mode !== 'ms-stream') {
+    if (self._xhr.readyState === $8a0f4aa787c3ef50$var$rStates.DONE && self._mode !== "ms-stream") {
         resetTimers(true);
         self.push(null);
     }
@@ -41228,7 +41229,7 @@ var $bca1f46183471e6b$export$59d795186a5d3f58;
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
-'use strict';
+"use strict";
 
 var $27m14 = parcelRequire("27m14");
 
@@ -41259,59 +41260,59 @@ var $bca1f46183471e6b$var$protocolPattern = /^([a-z0-9.+-]+:)/i, $bca1f46183471e
 $bca1f46183471e6b$var$simplePathPattern = /^(\/\/?(?!\/)[^\?\s]*)(\?[^\s]*)?$/, // RFC 2396: characters reserved for delimiting URLs.
 // We actually just auto-escape these.
 $bca1f46183471e6b$var$delims = [
-    '<',
-    '>',
+    "<",
+    ">",
     '"',
-    '`',
-    ' ',
-    '\r',
-    '\n',
-    '\t'
+    "`",
+    " ",
+    "\r",
+    "\n",
+    "	"
 ], // RFC 2396: characters not allowed for various reasons.
 $bca1f46183471e6b$var$unwise = [
-    '{',
-    '}',
-    '|',
-    '\\',
-    '^',
-    '`'
+    "{",
+    "}",
+    "|",
+    "\\",
+    "^",
+    "`"
 ].concat($bca1f46183471e6b$var$delims), // Allowed by RFCs, but cause of XSS attacks.  Always escape these.
 $bca1f46183471e6b$var$autoEscape = [
-    '\''
+    "'"
 ].concat($bca1f46183471e6b$var$unwise), // Characters that are never ever allowed in a hostname.
 // Note that any invalid chars are also handled, but these
 // are the ones that are *expected* to be seen, so we fast-path
 // them.
 $bca1f46183471e6b$var$nonHostChars = [
-    '%',
-    '/',
-    '?',
-    ';',
-    '#'
+    "%",
+    "/",
+    "?",
+    ";",
+    "#"
 ].concat($bca1f46183471e6b$var$autoEscape), $bca1f46183471e6b$var$hostEndingChars = [
-    '/',
-    '?',
-    '#'
+    "/",
+    "?",
+    "#"
 ], $bca1f46183471e6b$var$hostnameMaxLen = 255, $bca1f46183471e6b$var$hostnamePartPattern = /^[+a-z0-9A-Z_-]{0,63}$/, $bca1f46183471e6b$var$hostnamePartStart = /^([+a-z0-9A-Z_-]{0,63})(.*)$/, // protocols that can allow "unsafe" and "unwise" chars.
 $bca1f46183471e6b$var$unsafeProtocol = {
-    'javascript': true,
-    'javascript:': true
+    "javascript": true,
+    "javascript:": true
 }, // protocols that never have a hostname.
 $bca1f46183471e6b$var$hostlessProtocol = {
-    'javascript': true,
-    'javascript:': true
+    "javascript": true,
+    "javascript:": true
 }, // protocols that always contain a // bit.
 $bca1f46183471e6b$var$slashedProtocol = {
-    'http': true,
-    'https': true,
-    'ftp': true,
-    'gopher': true,
-    'file': true,
-    'http:': true,
-    'https:': true,
-    'ftp:': true,
-    'gopher:': true,
-    'file:': true
+    "http": true,
+    "https": true,
+    "ftp": true,
+    "gopher": true,
+    "file": true,
+    "http:": true,
+    "https:": true,
+    "ftp:": true,
+    "gopher:": true,
+    "file:": true
 };
 
 var $fZNLP = parcelRequire("fZNLP");
@@ -41326,14 +41327,14 @@ $bca1f46183471e6b$var$Url.prototype.parse = function(url, parseQueryString, slas
     // Copy chrome, IE, opera backslash-handling behavior.
     // Back slashes before the query string get converted to forward slashes
     // See: https://code.google.com/p/chromium/issues/detail?id=25916
-    var queryIndex = url.indexOf('?'), splitter = queryIndex !== -1 && queryIndex < url.indexOf('#') ? '?' : '#', uSplit = url.split(splitter), slashRegex = /\\/g;
-    uSplit[0] = uSplit[0].replace(slashRegex, '/');
+    var queryIndex = url.indexOf("?"), splitter = queryIndex !== -1 && queryIndex < url.indexOf("#") ? "?" : "#", uSplit = url.split(splitter), slashRegex = /\\/g;
+    uSplit[0] = uSplit[0].replace(slashRegex, "/");
     url = uSplit.join(splitter);
     var rest = url;
     // trim before proceeding.
     // This is to support parse stuff like "  http://foo.com  \n"
     rest = rest.trim();
-    if (!slashesDenoteHost && url.split('#').length === 1) {
+    if (!slashesDenoteHost && url.split("#").length === 1) {
         // Try fast path regexp
         var simplePath = $bca1f46183471e6b$var$simplePathPattern.exec(rest);
         if (simplePath) {
@@ -41345,7 +41346,7 @@ $bca1f46183471e6b$var$Url.prototype.parse = function(url, parseQueryString, slas
                 if (parseQueryString) this.query = $fZNLP.parse(this.search.substr(1));
                 else this.query = this.search.substr(1);
             } else if (parseQueryString) {
-                this.search = '';
+                this.search = "";
                 this.query = {};
             }
             return this;
@@ -41363,7 +41364,7 @@ $bca1f46183471e6b$var$Url.prototype.parse = function(url, parseQueryString, slas
     // resolution will treat //foo/bar as host=foo,path=bar because that's
     // how the browser resolves relative URLs.
     if (slashesDenoteHost || proto || rest.match(/^\/\/[^@\/]+@[^@\/]+/)) {
-        var slashes = rest.substr(0, 2) === '//';
+        var slashes = rest.substr(0, 2) === "//";
         if (slashes && !(proto && $bca1f46183471e6b$var$hostlessProtocol[proto])) {
             rest = rest.substr(2);
             this.slashes = true;
@@ -41393,10 +41394,10 @@ $bca1f46183471e6b$var$Url.prototype.parse = function(url, parseQueryString, slas
         // auth portion cannot go past, or the last @ char is the decider.
         var auth, atSign;
         if (hostEnd === -1) // atSign can be anywhere.
-        atSign = rest.lastIndexOf('@');
+        atSign = rest.lastIndexOf("@");
         else // atSign must be in auth portion.
         // http://a@b/c@d => host:b auth:a path:/c@d
-        atSign = rest.lastIndexOf('@', hostEnd);
+        atSign = rest.lastIndexOf("@", hostEnd);
         // Now we have a portion which is definitely the auth.
         // Pull that off.
         if (atSign !== -1) {
@@ -41418,10 +41419,10 @@ $bca1f46183471e6b$var$Url.prototype.parse = function(url, parseQueryString, slas
         this.parseHost();
         // we've indicated that there is a hostname,
         // so even if it's empty, it has to be present.
-        this.hostname = this.hostname || '';
+        this.hostname = this.hostname || "";
         // if hostname begins with [ and ends with ]
         // assume that it's an IPv6 address.
-        var ipv6Hostname = this.hostname[0] === '[' && this.hostname[this.hostname.length - 1] === ']';
+        var ipv6Hostname = this.hostname[0] === "[" && this.hostname[this.hostname.length - 1] === "]";
         // validate a little.
         if (!ipv6Hostname) {
             var hostparts = this.hostname.split(/\./);
@@ -41429,11 +41430,11 @@ $bca1f46183471e6b$var$Url.prototype.parse = function(url, parseQueryString, slas
                 var part = hostparts[i];
                 if (!part) continue;
                 if (!part.match($bca1f46183471e6b$var$hostnamePartPattern)) {
-                    var newpart = '';
+                    var newpart = "";
                     for(var j = 0, k = part.length; j < k; j++)if (part.charCodeAt(j) > 127) // we replace non-ASCII char with a temporary placeholder
                     // we need this to make sure size of hostname is not
                     // broken by replacing non-ASCII by nothing
-                    newpart += 'x';
+                    newpart += "x";
                     else newpart += part[j];
                     // we test again with ASCII char only
                     if (!newpart.match($bca1f46183471e6b$var$hostnamePartPattern)) {
@@ -41444,14 +41445,14 @@ $bca1f46183471e6b$var$Url.prototype.parse = function(url, parseQueryString, slas
                             validParts.push(bit[1]);
                             notHost.unshift(bit[2]);
                         }
-                        if (notHost.length) rest = '/' + notHost.join('.') + rest;
-                        this.hostname = validParts.join('.');
+                        if (notHost.length) rest = "/" + notHost.join(".") + rest;
+                        this.hostname = validParts.join(".");
                         break;
                     }
                 }
             }
         }
-        if (this.hostname.length > $bca1f46183471e6b$var$hostnameMaxLen) this.hostname = '';
+        if (this.hostname.length > $bca1f46183471e6b$var$hostnameMaxLen) this.hostname = "";
         else // hostnames are always lower case.
         this.hostname = this.hostname.toLowerCase();
         if (!ipv6Hostname) // IDNA Support: Returns a punycoded representation of "domain".
@@ -41459,15 +41460,15 @@ $bca1f46183471e6b$var$Url.prototype.parse = function(url, parseQueryString, slas
         // have non-ASCII characters, i.e. it doesn't matter if
         // you call it with a domain that already is ASCII-only.
         this.hostname = $27m14.toASCII(this.hostname);
-        var p = this.port ? ':' + this.port : '';
-        var h = this.hostname || '';
+        var p = this.port ? ":" + this.port : "";
+        var h = this.hostname || "";
         this.host = h + p;
         this.href += this.host;
         // strip [ and ] from the hostname
         // the host field still retains them, though
         if (ipv6Hostname) {
             this.hostname = this.hostname.substr(1, this.hostname.length - 2);
-            if (rest[0] !== '/') rest = '/' + rest;
+            if (rest[0] !== "/") rest = "/" + rest;
         }
     }
     // now rest is set to the post-host stuff.
@@ -41483,13 +41484,13 @@ $bca1f46183471e6b$var$Url.prototype.parse = function(url, parseQueryString, slas
         rest = rest.split(ae).join(esc);
     }
     // chop off from the tail first.
-    var hash = rest.indexOf('#');
+    var hash = rest.indexOf("#");
     if (hash !== -1) {
         // got a fragment string.
         this.hash = rest.substr(hash);
         rest = rest.slice(0, hash);
     }
-    var qm = rest.indexOf('?');
+    var qm = rest.indexOf("?");
     if (qm !== -1) {
         this.search = rest.substr(qm);
         this.query = rest.substr(qm + 1);
@@ -41497,15 +41498,15 @@ $bca1f46183471e6b$var$Url.prototype.parse = function(url, parseQueryString, slas
         rest = rest.slice(0, qm);
     } else if (parseQueryString) {
         // no query string, but parseQueryString still requested
-        this.search = '';
+        this.search = "";
         this.query = {};
     }
     if (rest) this.pathname = rest;
-    if ($bca1f46183471e6b$var$slashedProtocol[lowerProto] && this.hostname && !this.pathname) this.pathname = '/';
+    if ($bca1f46183471e6b$var$slashedProtocol[lowerProto] && this.hostname && !this.pathname) this.pathname = "/";
     //to support http.request
     if (this.pathname || this.search) {
-        var p = this.pathname || '';
-        var s = this.search || '';
+        var p = this.pathname || "";
+        var s = this.search || "";
         this.path = p + s;
     }
     // finally, reconstruct the href based on what has been validated.
@@ -41523,33 +41524,33 @@ function $bca1f46183471e6b$var$urlFormat(obj) {
     return obj.format();
 }
 $bca1f46183471e6b$var$Url.prototype.format = function() {
-    var auth = this.auth || '';
+    var auth = this.auth || "";
     if (auth) {
         auth = encodeURIComponent(auth);
-        auth = auth.replace(/%3A/i, ':');
-        auth += '@';
+        auth = auth.replace(/%3A/i, ":");
+        auth += "@";
     }
-    var protocol = this.protocol || '', pathname = this.pathname || '', hash = this.hash || '', host = false, query = '';
+    var protocol = this.protocol || "", pathname = this.pathname || "", hash = this.hash || "", host = false, query = "";
     if (this.host) host = auth + this.host;
     else if (this.hostname) {
-        host = auth + (this.hostname.indexOf(':') === -1 ? this.hostname : '[' + this.hostname + ']');
-        if (this.port) host += ':' + this.port;
+        host = auth + (this.hostname.indexOf(":") === -1 ? this.hostname : "[" + this.hostname + "]");
+        if (this.port) host += ":" + this.port;
     }
     if (this.query && $86BhX.isObject(this.query) && Object.keys(this.query).length) query = $fZNLP.stringify(this.query);
-    var search = this.search || query && '?' + query || '';
-    if (protocol && protocol.substr(-1) !== ':') protocol += ':';
+    var search = this.search || query && "?" + query || "";
+    if (protocol && protocol.substr(-1) !== ":") protocol += ":";
     // only the slashedProtocols get the //.  Not mailto:, xmpp:, etc.
     // unless they had them to begin with.
     if (this.slashes || (!protocol || $bca1f46183471e6b$var$slashedProtocol[protocol]) && host !== false) {
-        host = '//' + (host || '');
-        if (pathname && pathname.charAt(0) !== '/') pathname = '/' + pathname;
-    } else if (!host) host = '';
-    if (hash && hash.charAt(0) !== '#') hash = '#' + hash;
-    if (search && search.charAt(0) !== '?') search = '?' + search;
+        host = "//" + (host || "");
+        if (pathname && pathname.charAt(0) !== "/") pathname = "/" + pathname;
+    } else if (!host) host = "";
+    if (hash && hash.charAt(0) !== "#") hash = "#" + hash;
+    if (search && search.charAt(0) !== "?") search = "?" + search;
     pathname = pathname.replace(/[?#]/g, function(match) {
         return encodeURIComponent(match);
     });
-    search = search.replace('#', '%23');
+    search = search.replace("#", "%23");
     return protocol + host + pathname + search + hash;
 };
 function $bca1f46183471e6b$var$urlResolve(source, relative) {
@@ -41578,7 +41579,7 @@ $bca1f46183471e6b$var$Url.prototype.resolveObject = function(relative) {
     // even href="" will remove it.
     result.hash = relative.hash;
     // if the relative url is empty, then there's nothing left to do here.
-    if (relative.href === '') {
+    if (relative.href === "") {
         result.href = result.format();
         return result;
     }
@@ -41588,10 +41589,10 @@ $bca1f46183471e6b$var$Url.prototype.resolveObject = function(relative) {
         var rkeys = Object.keys(relative);
         for(var rk = 0; rk < rkeys.length; rk++){
             var rkey = rkeys[rk];
-            if (rkey !== 'protocol') result[rkey] = relative[rkey];
+            if (rkey !== "protocol") result[rkey] = relative[rkey];
         }
         //urlParse appends trailing / to urls like http://www.example.com
-        if ($bca1f46183471e6b$var$slashedProtocol[result.protocol] && result.hostname && !result.pathname) result.path = result.pathname = '/';
+        if ($bca1f46183471e6b$var$slashedProtocol[result.protocol] && result.hostname && !result.pathname) result.path = result.pathname = "/";
         result.href = result.format();
         return result;
     }
@@ -41615,59 +41616,59 @@ $bca1f46183471e6b$var$Url.prototype.resolveObject = function(relative) {
         }
         result.protocol = relative.protocol;
         if (!relative.host && !$bca1f46183471e6b$var$hostlessProtocol[relative.protocol]) {
-            var relPath = (relative.pathname || '').split('/');
+            var relPath = (relative.pathname || "").split("/");
             while(relPath.length && !(relative.host = relPath.shift()));
-            if (!relative.host) relative.host = '';
-            if (!relative.hostname) relative.hostname = '';
-            if (relPath[0] !== '') relPath.unshift('');
-            if (relPath.length < 2) relPath.unshift('');
-            result.pathname = relPath.join('/');
+            if (!relative.host) relative.host = "";
+            if (!relative.hostname) relative.hostname = "";
+            if (relPath[0] !== "") relPath.unshift("");
+            if (relPath.length < 2) relPath.unshift("");
+            result.pathname = relPath.join("/");
         } else result.pathname = relative.pathname;
         result.search = relative.search;
         result.query = relative.query;
-        result.host = relative.host || '';
+        result.host = relative.host || "";
         result.auth = relative.auth;
         result.hostname = relative.hostname || relative.host;
         result.port = relative.port;
         // to support http.request
         if (result.pathname || result.search) {
-            var p = result.pathname || '';
-            var s = result.search || '';
+            var p = result.pathname || "";
+            var s = result.search || "";
             result.path = p + s;
         }
         result.slashes = result.slashes || relative.slashes;
         result.href = result.format();
         return result;
     }
-    var isSourceAbs = result.pathname && result.pathname.charAt(0) === '/', isRelAbs = relative.host || relative.pathname && relative.pathname.charAt(0) === '/', mustEndAbs = isRelAbs || isSourceAbs || result.host && relative.pathname, removeAllDots = mustEndAbs, srcPath = result.pathname && result.pathname.split('/') || [], relPath = relative.pathname && relative.pathname.split('/') || [], psychotic = result.protocol && !$bca1f46183471e6b$var$slashedProtocol[result.protocol];
+    var isSourceAbs = result.pathname && result.pathname.charAt(0) === "/", isRelAbs = relative.host || relative.pathname && relative.pathname.charAt(0) === "/", mustEndAbs = isRelAbs || isSourceAbs || result.host && relative.pathname, removeAllDots = mustEndAbs, srcPath = result.pathname && result.pathname.split("/") || [], relPath = relative.pathname && relative.pathname.split("/") || [], psychotic = result.protocol && !$bca1f46183471e6b$var$slashedProtocol[result.protocol];
     // if the url is a non-slashed url, then relative
     // links like ../.. should be able
     // to crawl up to the hostname, as well.  This is strange.
     // result.protocol has already been set by now.
     // Later on, put the first path part into the host field.
     if (psychotic) {
-        result.hostname = '';
+        result.hostname = "";
         result.port = null;
         if (result.host) {
-            if (srcPath[0] === '') srcPath[0] = result.host;
+            if (srcPath[0] === "") srcPath[0] = result.host;
             else srcPath.unshift(result.host);
         }
-        result.host = '';
+        result.host = "";
         if (relative.protocol) {
             relative.hostname = null;
             relative.port = null;
             if (relative.host) {
-                if (relPath[0] === '') relPath[0] = relative.host;
+                if (relPath[0] === "") relPath[0] = relative.host;
                 else relPath.unshift(relative.host);
             }
             relative.host = null;
         }
-        mustEndAbs = mustEndAbs && (relPath[0] === '' || srcPath[0] === '');
+        mustEndAbs = mustEndAbs && (relPath[0] === "" || srcPath[0] === "");
     }
     if (isRelAbs) {
         // it's absolute.
-        result.host = relative.host || relative.host === '' ? relative.host : result.host;
-        result.hostname = relative.hostname || relative.hostname === '' ? relative.hostname : result.hostname;
+        result.host = relative.host || relative.host === "" ? relative.host : result.host;
+        result.hostname = relative.hostname || relative.hostname === "" ? relative.hostname : result.hostname;
         result.search = relative.search;
         result.query = relative.query;
         srcPath = relPath;
@@ -41689,7 +41690,7 @@ $bca1f46183471e6b$var$Url.prototype.resolveObject = function(relative) {
             //occationaly the auth can get stuck only in host
             //this especially happens in cases like
             //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
-            var authInHost = result.host && result.host.indexOf('@') > 0 ? result.host.split('@') : false;
+            var authInHost = result.host && result.host.indexOf("@") > 0 ? result.host.split("@") : false;
             if (authInHost) {
                 result.auth = authInHost.shift();
                 result.host = result.hostname = authInHost.shift();
@@ -41698,7 +41699,7 @@ $bca1f46183471e6b$var$Url.prototype.resolveObject = function(relative) {
         result.search = relative.search;
         result.query = relative.query;
         //to support http.request
-        if (!$86BhX.isNull(result.pathname) || !$86BhX.isNull(result.search)) result.path = (result.pathname ? result.pathname : '') + (result.search ? result.search : '');
+        if (!$86BhX.isNull(result.pathname) || !$86BhX.isNull(result.search)) result.path = (result.pathname ? result.pathname : "") + (result.search ? result.search : "");
         result.href = result.format();
         return result;
     }
@@ -41707,7 +41708,7 @@ $bca1f46183471e6b$var$Url.prototype.resolveObject = function(relative) {
         // we've already handled the other stuff above.
         result.pathname = null;
         //to support http.request
-        if (result.search) result.path = '/' + result.search;
+        if (result.search) result.path = "/" + result.search;
         else result.path = null;
         result.href = result.format();
         return result;
@@ -41716,14 +41717,14 @@ $bca1f46183471e6b$var$Url.prototype.resolveObject = function(relative) {
     // however, if it ends in anything else non-slashy,
     // then it must NOT get a trailing slash.
     var last = srcPath.slice(-1)[0];
-    var hasTrailingSlash = (result.host || relative.host || srcPath.length > 1) && (last === '.' || last === '..') || last === '';
+    var hasTrailingSlash = (result.host || relative.host || srcPath.length > 1) && (last === "." || last === "..") || last === "";
     // strip single dots, resolve double dots to parent dir
     // if the path tries to go above the root, `up` ends up > 0
     var up = 0;
     for(var i = srcPath.length; i >= 0; i--){
         last = srcPath[i];
-        if (last === '.') srcPath.splice(i, 1);
-        else if (last === '..') {
+        if (last === ".") srcPath.splice(i, 1);
+        else if (last === "..") {
             srcPath.splice(i, 1);
             up++;
         } else if (up) {
@@ -41732,30 +41733,30 @@ $bca1f46183471e6b$var$Url.prototype.resolveObject = function(relative) {
         }
     }
     // if the path is allowed to go above the root, restore leading ..s
-    if (!mustEndAbs && !removeAllDots) for(; up--;)srcPath.unshift('..');
-    if (mustEndAbs && srcPath[0] !== '' && (!srcPath[0] || srcPath[0].charAt(0) !== '/')) srcPath.unshift('');
-    if (hasTrailingSlash && srcPath.join('/').substr(-1) !== '/') srcPath.push('');
-    var isAbsolute = srcPath[0] === '' || srcPath[0] && srcPath[0].charAt(0) === '/';
+    if (!mustEndAbs && !removeAllDots) for(; up--; up)srcPath.unshift("..");
+    if (mustEndAbs && srcPath[0] !== "" && (!srcPath[0] || srcPath[0].charAt(0) !== "/")) srcPath.unshift("");
+    if (hasTrailingSlash && srcPath.join("/").substr(-1) !== "/") srcPath.push("");
+    var isAbsolute = srcPath[0] === "" || srcPath[0] && srcPath[0].charAt(0) === "/";
     // put the host back
     if (psychotic) {
-        result.hostname = result.host = isAbsolute ? '' : srcPath.length ? srcPath.shift() : '';
+        result.hostname = result.host = isAbsolute ? "" : srcPath.length ? srcPath.shift() : "";
         //occationaly the auth can get stuck only in host
         //this especially happens in cases like
         //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
-        var authInHost = result.host && result.host.indexOf('@') > 0 ? result.host.split('@') : false;
+        var authInHost = result.host && result.host.indexOf("@") > 0 ? result.host.split("@") : false;
         if (authInHost) {
             result.auth = authInHost.shift();
             result.host = result.hostname = authInHost.shift();
         }
     }
     mustEndAbs = mustEndAbs || result.host && srcPath.length;
-    if (mustEndAbs && !isAbsolute) srcPath.unshift('');
+    if (mustEndAbs && !isAbsolute) srcPath.unshift("");
     if (!srcPath.length) {
         result.pathname = null;
         result.path = null;
-    } else result.pathname = srcPath.join('/');
+    } else result.pathname = srcPath.join("/");
     //to support request.http
-    if (!$86BhX.isNull(result.pathname) || !$86BhX.isNull(result.search)) result.path = (result.pathname ? result.pathname : '') + (result.search ? result.search : '');
+    if (!$86BhX.isNull(result.pathname) || !$86BhX.isNull(result.search)) result.path = (result.pathname ? result.pathname : "") + (result.search ? result.search : "");
     result.auth = relative.auth || result.auth;
     result.slashes = result.slashes || relative.slashes;
     result.href = result.format();
@@ -41766,7 +41767,7 @@ $bca1f46183471e6b$var$Url.prototype.parseHost = function() {
     var port = $bca1f46183471e6b$var$portPattern.exec(host);
     if (port) {
         port = port[0];
-        if (port !== ':') this.port = port.substr(1);
+        if (port !== ":") this.port = port.substr(1);
         host = host.substr(0, host.length - port.length);
     }
     if (host) this.hostname = host;
@@ -41777,16 +41778,16 @@ parcelRequire.register("27m14", function(module, exports) {
 (function(root) {
     /** Detect free variables */ var freeExports = exports && !exports.nodeType && exports;
     var freeModule = module && !module.nodeType && module;
-    var freeGlobal = typeof $parcel$global == 'object' && $parcel$global;
+    var freeGlobal = typeof $parcel$global == "object" && $parcel$global;
     if (freeGlobal.global === freeGlobal || freeGlobal.window === freeGlobal || freeGlobal.self === freeGlobal) root = freeGlobal;
     /**
 	 * The `punycode` object.
 	 * @name punycode
 	 * @type Object
-	 */ var punycode, /** Highest positive signed 32-bit float value */ maxInt = 2147483647, /** Bootstring parameters */ base = 36, tMin = 1, tMax = 26, skew = 38, damp = 700, initialBias = 72, initialN = 128, delimiter = '-', /** Regular expressions */ regexPunycode = /^xn--/, regexNonASCII = /[^\x20-\x7E]/, regexSeparators = /[\x2E\u3002\uFF0E\uFF61]/g, /** Error messages */ errors = {
-        'overflow': 'Overflow: input needs wider integers to process',
-        'not-basic': 'Illegal input >= 0x80 (not a basic code point)',
-        'invalid-input': 'Invalid input'
+	 */ var punycode, /** Highest positive signed 32-bit float value */ maxInt = 2147483647, /** Bootstring parameters */ base = 36, tMin = 1, tMax = 26, skew = 38, damp = 700, initialBias = 72, initialN = 128, delimiter = "-", /** Regular expressions */ regexPunycode = /^xn--/, regexNonASCII = /[^\x20-\x7E]/, regexSeparators = /[\x2E\u3002\uFF0E\uFF61]/g, /** Error messages */ errors = {
+        "overflow": "Overflow: input needs wider integers to process",
+        "not-basic": "Illegal input >= 0x80 (not a basic code point)",
+        "invalid-input": "Invalid input"
     }, /** Convenience shortcuts */ baseMinusTMin = base - tMin, floor = Math.floor, stringFromCharCode = String.fromCharCode, /** Temporary variable */ key;
     /*--------------------------------------------------------------------------*/ /**
 	 * A generic error utility function.
@@ -41819,18 +41820,18 @@ parcelRequire.register("27m14", function(module, exports) {
 	 * @returns {Array} A new string of characters returned by the callback
 	 * function.
 	 */ function mapDomain(string, fn) {
-        var parts = string.split('@');
-        var result = '';
+        var parts = string.split("@");
+        var result = "";
         if (parts.length > 1) {
             // In email addresses, only the domain name should be punycoded. Leave
             // the local part (i.e. everything up to `@`) intact.
-            result = parts[0] + '@';
+            result = parts[0] + "@";
             string = parts[1];
         }
         // Avoid `split(regex)` for IE8 compatibility. See #17.
-        string = string.replace(regexSeparators, '\x2E');
-        var labels = string.split('.');
-        var encoded = map(labels, fn).join('.');
+        string = string.replace(regexSeparators, ".");
+        var labels = string.split(".");
+        var encoded = map(labels, fn).join(".");
         return result + encoded;
     }
     /**
@@ -41872,7 +41873,7 @@ parcelRequire.register("27m14", function(module, exports) {
 	 * @returns {String} The new Unicode string (UCS-2).
 	 */ function ucs2encode(array) {
         return map(array, function(value) {
-            var output = '';
+            var output = "";
             if (value > 0xFFFF) {
                 value -= 0x10000;
                 output += stringFromCharCode(value >>> 10 & 0x3FF | 0xD800);
@@ -41880,7 +41881,7 @@ parcelRequire.register("27m14", function(module, exports) {
             }
             output += stringFromCharCode(value);
             return output;
-        }).join('');
+        }).join("");
     }
     /**
 	 * Converts a basic code point into a digit/integer.
@@ -41938,7 +41939,7 @@ parcelRequire.register("27m14", function(module, exports) {
         if (basic < 0) basic = 0;
         for(j = 0; j < basic; ++j){
             // if it's not a basic code point
-            if (input.charCodeAt(j) >= 0x80) error('not-basic');
+            if (input.charCodeAt(j) >= 0x80) error("not-basic");
             output.push(input.charCodeAt(j));
         }
         // Main decoding loop: start just after the last delimiter if any basic code
@@ -41950,21 +41951,21 @@ parcelRequire.register("27m14", function(module, exports) {
             // if we increase `i` as we go, then subtract off its starting
             // value at the end to obtain `delta`.
             for(oldi = i, w = 1, k = base;; k += base){
-                if (index >= inputLength) error('invalid-input');
+                if (index >= inputLength) error("invalid-input");
                 digit = basicToDigit(input.charCodeAt(index++));
-                if (digit >= base || digit > floor((maxInt - i) / w)) error('overflow');
+                if (digit >= base || digit > floor((maxInt - i) / w)) error("overflow");
                 i += digit * w;
                 t = k <= bias ? tMin : k >= bias + tMax ? tMax : k - bias;
                 if (digit < t) break;
                 baseMinusT = base - t;
-                if (w > floor(maxInt / baseMinusT)) error('overflow');
+                if (w > floor(maxInt / baseMinusT)) error("overflow");
                 w *= baseMinusT;
             }
             out = output.length + 1;
             bias = adapt(i - oldi, out, oldi == 0);
             // `i` was supposed to wrap around from `out` to `0`,
             // incrementing `n` each time, so we'll fix that now:
-            if (floor(i / out) > maxInt - n) error('overflow');
+            if (floor(i / out) > maxInt - n) error("overflow");
             n += floor(i / out);
             i %= out;
             // Insert `n` at position `i` of the output
@@ -42009,12 +42010,12 @@ parcelRequire.register("27m14", function(module, exports) {
             // Increase `delta` enough to advance the decoder's <n,i> state to <m,0>,
             // but guard against overflow
             handledCPCountPlusOne = handledCPCount + 1;
-            if (m - n > floor((maxInt - delta) / handledCPCountPlusOne)) error('overflow');
+            if (m - n > floor((maxInt - delta) / handledCPCountPlusOne)) error("overflow");
             delta += (m - n) * handledCPCountPlusOne;
             n = m;
             for(j = 0; j < inputLength; ++j){
                 currentValue = input[j];
-                if (currentValue < n && ++delta > maxInt) error('overflow');
+                if (currentValue < n && ++delta > maxInt) error("overflow");
                 if (currentValue == n) {
                     // Represent delta as a generalized variable-length integer
                     for(q = delta, k = base;; k += base){
@@ -42034,7 +42035,7 @@ parcelRequire.register("27m14", function(module, exports) {
             ++delta;
             ++n;
         }
-        return output.join('');
+        return output.join("");
     }
     /**
 	 * Converts a Punycode string representing a domain name or an email address
@@ -42063,7 +42064,7 @@ parcelRequire.register("27m14", function(module, exports) {
 	 * email address.
 	 */ function toASCII(input) {
         return mapDomain(input, function(string) {
-            return regexNonASCII.test(string) ? 'xn--' + encode(string) : string;
+            return regexNonASCII.test(string) ? "xn--" + encode(string) : string;
         });
     }
     /*--------------------------------------------------------------------------*/ /** Define the public API */ punycode = {
@@ -42071,25 +42072,25 @@ parcelRequire.register("27m14", function(module, exports) {
 		 * A string representing the current Punycode.js version number.
 		 * @memberOf punycode
 		 * @type String
-		 */ 'version': '1.3.2',
+		 */ "version": "1.3.2",
         /**
 		 * An object of methods to convert from JavaScript's internal character
 		 * representation (UCS-2) to Unicode code points, and back.
 		 * @see <https://mathiasbynens.be/notes/javascript-encoding>
 		 * @memberOf punycode
 		 * @type Object
-		 */ 'ucs2': {
-            'decode': ucs2decode,
-            'encode': ucs2encode
+		 */ "ucs2": {
+            "decode": ucs2decode,
+            "encode": ucs2encode
         },
-        'decode': decode,
-        'encode': encode,
-        'toASCII': toASCII,
-        'toUnicode': toUnicode
+        "decode": decode,
+        "encode": encode,
+        "toASCII": toASCII,
+        "toUnicode": toUnicode
     };
     /** Expose `punycode` */ // Some AMD build optimizers, like r.js, check for specific condition patterns
     // like the following:
-    if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) define('punycode', function() {
+    if (typeof define == "function" && typeof define.amd == "object" && define.amd) define("punycode", function() {
         return punycode;
     });
     else if (freeExports && freeModule) {
@@ -42101,13 +42102,13 @@ parcelRequire.register("27m14", function(module, exports) {
 });
 
 parcelRequire.register("86BhX", function(module, exports) {
-'use strict';
+"use strict";
 module.exports = {
     isString: function(arg) {
-        return typeof arg === 'string';
+        return typeof arg === "string";
     },
     isObject: function(arg) {
-        return typeof arg === 'object' && arg !== null;
+        return typeof arg === "object" && arg !== null;
     },
     isNull: function(arg) {
         return arg === null;
@@ -42127,7 +42128,7 @@ var $ba5328e9a0694f7d$export$2f872c0f2117be69;
 var $ba5328e9a0694f7d$export$98e6a39c04603d36;
 var $ba5328e9a0694f7d$export$c564cdbbe6da493;
 var $ba5328e9a0694f7d$export$fac44ee5b035f737;
-'use strict';
+"use strict";
 
 $ba5328e9a0694f7d$export$2f872c0f2117be69 = $ba5328e9a0694f7d$export$98e6a39c04603d36 = (parcelRequire("fkHjw"));
 
@@ -42155,7 +42156,7 @@ parcelRequire.register("fkHjw", function(module, exports) {
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
-'use strict';
+"use strict";
 // If obj.hasOwnProperty has been overridden, then calling
 // obj.hasOwnProperty(prop) will break.
 // See: https://github.com/joyent/node/issues/1707
@@ -42163,25 +42164,25 @@ function $b29a527f58a5cd3e$var$hasOwnProperty(obj, prop) {
     return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 module.exports = function(qs, sep, eq, options) {
-    sep = sep || '&';
-    eq = eq || '=';
+    sep = sep || "&";
+    eq = eq || "=";
     var obj = {};
-    if (typeof qs !== 'string' || qs.length === 0) return obj;
+    if (typeof qs !== "string" || qs.length === 0) return obj;
     var regexp = /\+/g;
     qs = qs.split(sep);
     var maxKeys = 1000;
-    if (options && typeof options.maxKeys === 'number') maxKeys = options.maxKeys;
+    if (options && typeof options.maxKeys === "number") maxKeys = options.maxKeys;
     var len = qs.length;
     // maxKeys <= 0 means that we should not limit keys count
     if (maxKeys > 0 && len > maxKeys) len = maxKeys;
     for(var i = 0; i < len; ++i){
-        var x = qs[i].replace(regexp, '%20'), idx = x.indexOf(eq), kstr, vstr, k, v;
+        var x = qs[i].replace(regexp, "%20"), idx = x.indexOf(eq), kstr, vstr, k, v;
         if (idx >= 0) {
             kstr = x.substr(0, idx);
             vstr = x.substr(idx + 1);
         } else {
             kstr = x;
-            vstr = '';
+            vstr = "";
         }
         k = decodeURIComponent(kstr);
         v = decodeURIComponent(vstr);
@@ -42195,7 +42196,7 @@ module.exports = function(qs, sep, eq, options) {
     return obj;
 };
 var $b29a527f58a5cd3e$var$isArray = Array.isArray || function(xs) {
-    return Object.prototype.toString.call(xs) === '[object Array]';
+    return Object.prototype.toString.call(xs) === "[object Array]";
 };
 
 });
@@ -42221,35 +42222,35 @@ parcelRequire.register("g5lyZ", function(module, exports) {
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
-'use strict';
+"use strict";
 var $bb5dd6ff6910a976$var$stringifyPrimitive = function(v) {
     switch(typeof v){
-        case 'string':
+        case "string":
             return v;
-        case 'boolean':
-            return v ? 'true' : 'false';
-        case 'number':
-            return isFinite(v) ? v : '';
+        case "boolean":
+            return v ? "true" : "false";
+        case "number":
+            return isFinite(v) ? v : "";
         default:
-            return '';
+            return "";
     }
 };
 module.exports = function(obj, sep, eq, name) {
-    sep = sep || '&';
-    eq = eq || '=';
+    sep = sep || "&";
+    eq = eq || "=";
     if (obj === null) obj = undefined;
-    if (typeof obj === 'object') return $bb5dd6ff6910a976$var$map($bb5dd6ff6910a976$var$objectKeys(obj), function(k) {
+    if (typeof obj === "object") return $bb5dd6ff6910a976$var$map($bb5dd6ff6910a976$var$objectKeys(obj), function(k) {
         var ks = encodeURIComponent($bb5dd6ff6910a976$var$stringifyPrimitive(k)) + eq;
         if ($bb5dd6ff6910a976$var$isArray(obj[k])) return $bb5dd6ff6910a976$var$map(obj[k], function(v) {
             return ks + encodeURIComponent($bb5dd6ff6910a976$var$stringifyPrimitive(v));
         }).join(sep);
         else return ks + encodeURIComponent($bb5dd6ff6910a976$var$stringifyPrimitive(obj[k]));
     }).join(sep);
-    if (!name) return '';
+    if (!name) return "";
     return encodeURIComponent($bb5dd6ff6910a976$var$stringifyPrimitive(name)) + eq + encodeURIComponent($bb5dd6ff6910a976$var$stringifyPrimitive(obj));
 };
 var $bb5dd6ff6910a976$var$isArray = Array.isArray || function(xs) {
-    return Object.prototype.toString.call(xs) === '[object Array]';
+    return Object.prototype.toString.call(xs) === "[object Array]";
 };
 function $bb5dd6ff6910a976$var$map(xs, f) {
     if (xs.map) return xs.map(f);
@@ -42271,7 +42272,7 @@ var $bb5dd6ff6910a976$var$objectKeys = Object.keys || function(obj) {
 
 
 parcelRequire.register("5H3z6", function(module, exports) {
-'use strict';
+"use strict";
 
 
 
@@ -42331,12 +42332,12 @@ parcelRequire.register("5H3z6", function(module, exports) {
         return secret;
     };
     const isUnopenedPrivateKeyInSeed = async (bananodeApi, seed, seedIx, amountPrefix)=>{
-        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error('amountPrefix is a required parameter.');
+        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error("amountPrefix is a required parameter.");
         const privateKey = bananoUtil.getPrivateKey(seed, seedIx);
         return await isUnopenedPrivateKey(bananodeApi, privateKey, amountPrefix);
     };
     const isUnopenedPrivateKey = async (bananodeApi, privateKey, amountPrefix)=>{
-        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error('amountPrefix is a required parameter.');
+        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error("amountPrefix is a required parameter.");
         const publicKey = await bananoUtil.getPublicKey(privateKey);
         const account = bananoUtil.getAccount(publicKey, amountPrefix);
         // console.log( 'account', account );
@@ -42351,9 +42352,9 @@ parcelRequire.register("5H3z6", function(module, exports) {
         return historyHistoryLengthIsZero;
     };
     const getFirstUnopenedPrivateKey = async (bananodeApi, seed, amountPrefix)=>{
-        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error('bananodeApi is a required parameter.');
-        /* istanbul ignore if */ if (seed === undefined) throw Error('seed is a required parameter.');
-        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error('amountPrefix is a required parameter.');
+        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error("bananodeApi is a required parameter.");
+        /* istanbul ignore if */ if (seed === undefined) throw Error("seed is a required parameter.");
+        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error("amountPrefix is a required parameter.");
         let seedIx = 0;
         let isUnopenedPrivateKeyFlag = await isUnopenedPrivateKeyInSeed(bananodeApi, seed, seedIx, amountPrefix);
         while(!isUnopenedPrivateKeyFlag){
@@ -42364,9 +42365,9 @@ parcelRequire.register("5H3z6", function(module, exports) {
         return bananoUtil.getPrivateKey(seed, seedIx);
     };
     const receiveSeed = async (bananodeApi, seed1, amountPrefix)=>{
-        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error('amountPrefix is a required parameter.');
-        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error('bananodeApi is a required parameter.');
-        /* istanbul ignore if */ if (seed1 === undefined) throw Error('seed is a required parameter.');
+        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error("amountPrefix is a required parameter.");
+        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error("bananodeApi is a required parameter.");
+        /* istanbul ignore if */ if (seed1 === undefined) throw Error("seed is a required parameter.");
         const unopenedAccounts = [];
         const privateKeyByAccount = {};
         const publicKeyByAccount = {};
@@ -42386,14 +42387,14 @@ parcelRequire.register("5H3z6", function(module, exports) {
         let isUnopenedPrivateKeyFlag = await isUnopenedPrivateKeyInSeed(bananodeApi, seed1, seedIx1, amountPrefix);
         unopenedAccounts.push(await getAccount(seed1, seedIx1, amountPrefix));
         while(!isUnopenedPrivateKeyFlag){
-            /* istanbul ignore if */ if (LOG_RECEIVE) console.log('INTERIM camo.receiveSeed', 'unopenedAccounts', 'seedIx', seedIx1);
+            /* istanbul ignore if */ if (LOG_RECEIVE) console.log("INTERIM camo.receiveSeed", "unopenedAccounts", "seedIx", seedIx1);
             seedIx1++;
             unopenedAccounts.push(await getAccount(seed1, seedIx1));
             isUnopenedPrivateKeyFlag = await isUnopenedPrivateKeyInSeed(bananodeApi, seed1, seedIx1, amountPrefix);
         }
-        /* istanbul ignore if */ if (LOG_RECEIVE) console.log('accountsPending request', unopenedAccounts);
+        /* istanbul ignore if */ if (LOG_RECEIVE) console.log("accountsPending request", unopenedAccounts);
         const accountsPending = await bananodeApi.getAccountsPending(unopenedAccounts, -1);
-        /* istanbul ignore if */ if (LOG_RECEIVE) console.log('accountsPending response', accountsPending);
+        /* istanbul ignore if */ if (LOG_RECEIVE) console.log("accountsPending response", accountsPending);
         const accounts = Object.keys(accountsPending.blocks);
         const accountOpenAndReceiveBlocks = [];
         for(let accountIx = 0; accountIx < accounts.length; accountIx++){
@@ -42414,15 +42415,15 @@ parcelRequire.register("5H3z6", function(module, exports) {
         return accountOpenAndReceiveBlocks;
     };
     const receiveBlock = async (bananodeApi, isAccountOpenFlag, account, privateKey, publicKey, representative, pendingBlockHash, pendingValueRaw, amountPrefix)=>{
-        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error('bananodeApi is a required parameter.');
-        /* istanbul ignore if */ if (isAccountOpenFlag === undefined) throw Error('isAccountOpenFlag is a required parameter.');
-        /* istanbul ignore if */ if (account === undefined) throw Error('account is a required parameter.');
-        /* istanbul ignore if */ if (privateKey === undefined) throw Error('privateKey is a required parameter.');
-        /* istanbul ignore if */ if (publicKey === undefined) throw Error('publicKey is a required parameter.');
-        /* istanbul ignore if */ if (representative === undefined) throw Error('representative is a required parameter.');
-        /* istanbul ignore if */ if (pendingBlockHash === undefined) throw Error('pendingBlockHash is a required parameter.');
-        /* istanbul ignore if */ if (pendingValueRaw === undefined) throw Error('pendingValueRaw is a required parameter.');
-        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error('amountPrefix is a required parameter.');
+        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error("bananodeApi is a required parameter.");
+        /* istanbul ignore if */ if (isAccountOpenFlag === undefined) throw Error("isAccountOpenFlag is a required parameter.");
+        /* istanbul ignore if */ if (account === undefined) throw Error("account is a required parameter.");
+        /* istanbul ignore if */ if (privateKey === undefined) throw Error("privateKey is a required parameter.");
+        /* istanbul ignore if */ if (publicKey === undefined) throw Error("publicKey is a required parameter.");
+        /* istanbul ignore if */ if (representative === undefined) throw Error("representative is a required parameter.");
+        /* istanbul ignore if */ if (pendingBlockHash === undefined) throw Error("pendingBlockHash is a required parameter.");
+        /* istanbul ignore if */ if (pendingValueRaw === undefined) throw Error("pendingValueRaw is a required parameter.");
+        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error("amountPrefix is a required parameter.");
         const frontiers = await bananodeApi.getFrontiers(account, 1);
         if (isAccountOpenFlag) {
             const previous = frontiers.frontiers[account];
@@ -42439,10 +42440,10 @@ parcelRequire.register("5H3z6", function(module, exports) {
         }
     };
     const getSharedSecretFromRepresentative = async (bananodeApi, toPrivateKey, fromPublicKey, amountPrefix)=>{
-        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error('bananodeApi is a required parameter.');
-        /* istanbul ignore if */ if (toPrivateKey === undefined) throw Error('toPrivateKey is a required parameter.');
-        /* istanbul ignore if */ if (fromPublicKey === undefined) throw Error('fromPublicKey is a required parameter.');
-        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error('amountPrefix is a required parameter.');
+        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error("bananodeApi is a required parameter.");
+        /* istanbul ignore if */ if (toPrivateKey === undefined) throw Error("toPrivateKey is a required parameter.");
+        /* istanbul ignore if */ if (fromPublicKey === undefined) throw Error("fromPublicKey is a required parameter.");
+        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error("amountPrefix is a required parameter.");
         const fromAccount = bananoUtil.getAccount(fromPublicKey, amountPrefix);
         const fromRepresentative = await bananodeApi.getAccountRepresentative(fromAccount);
         if (fromRepresentative) {
@@ -42452,7 +42453,7 @@ parcelRequire.register("5H3z6", function(module, exports) {
         } else return undefined;
     };
     const getBalanceRaw = async (bananodeApi, toPrivateKey, fromPublicKey, amountPrefix)=>{
-        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error('amountPrefix is a required parameter.');
+        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error("amountPrefix is a required parameter.");
         const sharedSecret = await getSharedSecretFromRepresentative(bananodeApi, toPrivateKey, fromPublicKey, amountPrefix);
         const seed = sharedSecret;
         const ZERO = BigInt(0);
@@ -42485,43 +42486,43 @@ parcelRequire.register("5H3z6", function(module, exports) {
     const splitBigIntIntoPowersOfTwo = (value)=>{
         // const ZERO = BigInt( 0 );
         const ONE = BigInt(1);
-        /* istanbul ignore if */ if (LOG_SPLIT_BIG_INT_INTO_POWERS_OF_TWO) console.log('STARTED splitBigIntIntoPowersOfTwo', 'value', value);
+        /* istanbul ignore if */ if (LOG_SPLIT_BIG_INT_INTO_POWERS_OF_TWO) console.log("STARTED splitBigIntIntoPowersOfTwo", "value", value);
         const powersOfTwo = [];
         let divisor = ONE;
-        /* istanbul ignore if */ if (LOG_SPLIT_BIG_INT_INTO_POWERS_OF_TWO) console.log(`INTERIM splitBigIntIntoPowersOfTwo`, 'value', value, 'divisor', divisor);
+        /* istanbul ignore if */ if (LOG_SPLIT_BIG_INT_INTO_POWERS_OF_TWO) console.log(`INTERIM splitBigIntIntoPowersOfTwo`, "value", value, "divisor", divisor);
         while(divisor <= value){
-            /* istanbul ignore if */ if (LOG_SPLIT_BIG_INT_INTO_POWERS_OF_TWO) console.log(`INTERIM splitBigIntIntoPowersOfTwo`, 'while ( divisor <= value )', 'value', value, 'divisor', divisor);
+            /* istanbul ignore if */ if (LOG_SPLIT_BIG_INT_INTO_POWERS_OF_TWO) console.log(`INTERIM splitBigIntIntoPowersOfTwo`, "while ( divisor <= value )", "value", value, "divisor", divisor);
             if (divisor & value) {
-                /* istanbul ignore if */ if (LOG_SPLIT_BIG_INT_INTO_POWERS_OF_TWO) console.log(`INTERIM splitBigIntIntoPowersOfTwo`, '(divisor & value)=true', 'value', value, 'divisor', divisor);
+                /* istanbul ignore if */ if (LOG_SPLIT_BIG_INT_INTO_POWERS_OF_TWO) console.log(`INTERIM splitBigIntIntoPowersOfTwo`, "(divisor & value)=true", "value", value, "divisor", divisor);
                 powersOfTwo.push(divisor);
-            } else /* istanbul ignore if */ if (LOG_SPLIT_BIG_INT_INTO_POWERS_OF_TWO) console.log(`INTERIM splitBigIntIntoPowersOfTwo`, '(divisor & value)=false', 'value', value, 'divisor', divisor);
+            } else /* istanbul ignore if */ if (LOG_SPLIT_BIG_INT_INTO_POWERS_OF_TWO) console.log(`INTERIM splitBigIntIntoPowersOfTwo`, "(divisor & value)=false", "value", value, "divisor", divisor);
             divisor <<= ONE;
             /* istanbul ignore if */ if (LOG_SPLIT_BIG_INT_INTO_POWERS_OF_TWO) console.log(`INTERIM splitBigIntIntoPowersOfTwo`, value, divisor);
         }
-        /* istanbul ignore if */ if (LOG_SPLIT_BIG_INT_INTO_POWERS_OF_TWO) console.log('SUCCESS splitBigIntIntoPowersOfTwo', value, powersOfTwo);
+        /* istanbul ignore if */ if (LOG_SPLIT_BIG_INT_INTO_POWERS_OF_TWO) console.log("SUCCESS splitBigIntIntoPowersOfTwo", value, powersOfTwo);
         return powersOfTwo;
     };
     const send = async (bananodeApi, fundingPrivateKey, fromPrivateKey, toPublicKey, amountRaw, amountPrefix)=>{
-        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error('bananodeApi is a required parameter.');
-        /* istanbul ignore if */ if (fundingPrivateKey === undefined) throw Error('fundingPrivateKey is a required parameter.');
-        /* istanbul ignore if */ if (fromPrivateKey === undefined) throw Error('fromPrivateKey is a required parameter.');
-        /* istanbul ignore if */ if (toPublicKey === undefined) throw Error('toPublicKey is a required parameter.');
-        /* istanbul ignore if */ if (amountRaw === undefined) throw Error('amountRaw is a required parameter.');
-        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error('amountPrefix is a required parameter.');
-        /* istanbul ignore if */ if (LOG_SEND) console.log('camo.send.amountRaw', amountRaw);
+        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error("bananodeApi is a required parameter.");
+        /* istanbul ignore if */ if (fundingPrivateKey === undefined) throw Error("fundingPrivateKey is a required parameter.");
+        /* istanbul ignore if */ if (fromPrivateKey === undefined) throw Error("fromPrivateKey is a required parameter.");
+        /* istanbul ignore if */ if (toPublicKey === undefined) throw Error("toPublicKey is a required parameter.");
+        /* istanbul ignore if */ if (amountRaw === undefined) throw Error("amountRaw is a required parameter.");
+        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error("amountPrefix is a required parameter.");
+        /* istanbul ignore if */ if (LOG_SEND) console.log("camo.send.amountRaw", amountRaw);
         const bananoParts = bananoUtil.getAmountPartsFromRaw(amountRaw, amountPrefix);
-        /* istanbul ignore if */ if (LOG_SEND) console.log('camo.send.bananoParts', bananoParts);
+        /* istanbul ignore if */ if (LOG_SEND) console.log("camo.send.bananoParts", bananoParts);
         const powersOfTwoBigInts = splitBigIntIntoPowersOfTwo(BigInt(bananoParts[bananoParts.majorName]));
-        /* istanbul ignore if */ if (LOG_SEND) console.log('camo.send.powersOfTwoBigInts', powersOfTwoBigInts);
+        /* istanbul ignore if */ if (LOG_SEND) console.log("camo.send.powersOfTwoBigInts", powersOfTwoBigInts);
         const amounts = [];
-        if (bananoParts[bananoParts.minorName] !== '0') {
-            /* istanbul ignore if */ if (LOG_SEND) console.log('camo.send.bananoParts[bananoParts.minorName]', bananoParts[bananoParts.minorName]);
+        if (bananoParts[bananoParts.minorName] !== "0") {
+            /* istanbul ignore if */ if (LOG_SEND) console.log("camo.send.bananoParts[bananoParts.minorName]", bananoParts[bananoParts.minorName]);
             const banoshiRaw = bananoUtil.getRawStrFromMinorAmountStr(bananoParts[bananoParts.minorName], amountPrefix);
-            /* istanbul ignore if */ if (LOG_SEND) console.log('camo.send.banoshiRaw', banoshiRaw);
+            /* istanbul ignore if */ if (LOG_SEND) console.log("camo.send.banoshiRaw", banoshiRaw);
             amounts.push(banoshiRaw);
         }
-        if (bananoParts.raw !== '0') {
-            /* istanbul ignore if */ if (LOG_SEND) console.log('camo.send.raw', bananoParts.raw);
+        if (bananoParts.raw !== "0") {
+            /* istanbul ignore if */ if (LOG_SEND) console.log("camo.send.raw", bananoParts.raw);
             amounts.push(bananoParts.raw);
         }
         for(let powersOfTwoBigIntIx = 0; powersOfTwoBigIntIx < powersOfTwoBigInts.length; powersOfTwoBigIntIx++){
@@ -42531,7 +42532,7 @@ parcelRequire.register("5H3z6", function(module, exports) {
             amounts.push(powersOfTwoRaw);
         }
         const sharedSecret = await getSharedSecretFromRepresentative(bananodeApi, fromPrivateKey, toPublicKey, amountPrefix);
-        /* istanbul ignore if */ if (LOG_SEND) console.log('camo.send.sharedSecret', sharedSecret);
+        /* istanbul ignore if */ if (LOG_SEND) console.log("camo.send.sharedSecret", sharedSecret);
         const destSeed = sharedSecret;
         const hashes = [];
         let previous;
@@ -42544,23 +42545,23 @@ parcelRequire.register("5H3z6", function(module, exports) {
             const destAccount = bananoUtil.getAccount(destPublicKey, amountPrefix);
             /* istanbul ignore if */ if (LOG_SEND) console.log(`STARTED camo.send[${destSeedIx}]`, fundingPrivateKey, destAccount, amountRaw);
             const hash = await bananoUtil.sendFromPrivateKeyWithRepresentativeAndPrevious(bananodeApi, fundingPrivateKey, destAccount, amountRaw, undefined, previous, amountPrefix);
-            /* istanbul ignore if */ if (LOG_SEND) console.log(`SUCCESS camo.send[${destSeedIx}]`, 'destPrivateKey', destPrivateKey, 'hash', hash);
+            /* istanbul ignore if */ if (LOG_SEND) console.log(`SUCCESS camo.send[${destSeedIx}]`, "destPrivateKey", destPrivateKey, "hash", hash);
             previous = hash;
             hashes.push(hash);
         }
         return hashes;
     };
     const receive = async (bananodeApi, toPrivateKey, fromPublicKey, amountPrefix)=>{
-        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error('bananodeApi is a required parameter.');
-        /* istanbul ignore if */ if (toPrivateKey === undefined) throw Error('toPrivateKey is a required parameter.');
-        /* istanbul ignore if */ if (fromPublicKey === undefined) throw Error('fromPublicKey is a required parameter.');
-        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error('amountPrefix is a required parameter.');
-        /* istanbul ignore if */ if (LOG_RECEIVE) console.log('STARTED camo.receive', toPrivateKey, fromPublicKey);
+        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error("bananodeApi is a required parameter.");
+        /* istanbul ignore if */ if (toPrivateKey === undefined) throw Error("toPrivateKey is a required parameter.");
+        /* istanbul ignore if */ if (fromPublicKey === undefined) throw Error("fromPublicKey is a required parameter.");
+        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error("amountPrefix is a required parameter.");
+        /* istanbul ignore if */ if (LOG_RECEIVE) console.log("STARTED camo.receive", toPrivateKey, fromPublicKey);
         const sharedSecret = await getSharedSecretFromRepresentative(bananodeApi, toPrivateKey, fromPublicKey, amountPrefix);
-        /* istanbul ignore if */ if (LOG_RECEIVE) console.log('INTERIM camo.receive', 'sharedSecret', sharedSecret);
+        /* istanbul ignore if */ if (LOG_RECEIVE) console.log("INTERIM camo.receive", "sharedSecret", sharedSecret);
         const seed = sharedSecret;
         const returnValue = await receiveSeed(bananodeApi, seed, amountPrefix);
-        /* istanbul ignore if */ if (LOG_RECEIVE) console.log('SUCCESS camo.receive', returnValue);
+        /* istanbul ignore if */ if (LOG_RECEIVE) console.log("SUCCESS camo.receive", returnValue);
         return returnValue;
     };
     /**
@@ -42579,7 +42580,7 @@ parcelRequire.register("5H3z6", function(module, exports) {
    * @param {string} camoAccount the camo account.
    * @return {boolean} true if the camo account is valid.
    */ const isCamoAccountValid = (camoAccount)=>{
-        if (!camoAccount.startsWith('camo_1') && !camoAccount.startsWith('camo_3')) {
+        if (!camoAccount.startsWith("camo_1") && !camoAccount.startsWith("camo_3")) {
             const retval = {};
             retval.valid = false;
             retval.message = `Invalid CAMO BANANO Account prefix '${camoAccount}'`;
@@ -42601,15 +42602,15 @@ parcelRequire.register("5H3z6", function(module, exports) {
         }
         const retval = {};
         retval.valid = true;
-        retval.message = '';
+        retval.message = "";
         return retval;
     };
     const getSharedAccountData = async (bananodeApi, privateKey, publicKey, sharedSeedIx, amountPrefix)=>{
-        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error('bananodeApi is a required parameter.');
-        /* istanbul ignore if */ if (privateKey === undefined) throw Error('privateKey is a required parameter.');
-        /* istanbul ignore if */ if (publicKey === undefined) throw Error('publicKey is a required parameter.');
-        /* istanbul ignore if */ if (sharedSeedIx === undefined) throw Error('sharedSeedIx is a required parameter.');
-        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error('amountPrefix is a required parameter.');
+        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error("bananodeApi is a required parameter.");
+        /* istanbul ignore if */ if (privateKey === undefined) throw Error("privateKey is a required parameter.");
+        /* istanbul ignore if */ if (publicKey === undefined) throw Error("publicKey is a required parameter.");
+        /* istanbul ignore if */ if (sharedSeedIx === undefined) throw Error("sharedSeedIx is a required parameter.");
+        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error("amountPrefix is a required parameter.");
         const sharedSecret = await getSharedSecretFromRepresentative(bananodeApi, privateKey, publicKey, amountPrefix);
         if (sharedSecret) {
             const sharedSeed = sharedSecret;
@@ -42625,12 +42626,12 @@ parcelRequire.register("5H3z6", function(module, exports) {
         } else return undefined;
     };
     const getAccountsPending = async (bananodeApi, toPrivateKey, fromPublicKey, sharedSeedIx, count, amountPrefix)=>{
-        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error('bananodeApi is a required parameter.');
-        /* istanbul ignore if */ if (toPrivateKey === undefined) throw Error('toPrivateKey is a required parameter.');
-        /* istanbul ignore if */ if (fromPublicKey === undefined) throw Error('fromPublicKey is a required parameter.');
-        /* istanbul ignore if */ if (sharedSeedIx === undefined) throw Error('sharedSeedIx is a required parameter.');
-        /* istanbul ignore if */ if (count === undefined) throw Error('count is a required parameter.');
-        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error('amountPrefix is a required parameter.');
+        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error("bananodeApi is a required parameter.");
+        /* istanbul ignore if */ if (toPrivateKey === undefined) throw Error("toPrivateKey is a required parameter.");
+        /* istanbul ignore if */ if (fromPublicKey === undefined) throw Error("fromPublicKey is a required parameter.");
+        /* istanbul ignore if */ if (sharedSeedIx === undefined) throw Error("sharedSeedIx is a required parameter.");
+        /* istanbul ignore if */ if (count === undefined) throw Error("count is a required parameter.");
+        /* istanbul ignore if */ if (amountPrefix == undefined) throw Error("amountPrefix is a required parameter.");
         const accountData = await getSharedAccountData(bananodeApi, toPrivateKey, fromPublicKey, sharedSeedIx, amountPrefix);
         if (accountData) {
             const accounts = [
@@ -42664,14 +42665,14 @@ parcelRequire.register("5H3z6", function(module, exports) {
         return exports;
     })();
     // istanbul ignore else
-    if (typeof module.exports !== 'undefined') module.exports = exports1;
+    if (typeof module.exports !== "undefined") module.exports = exports1;
     else window.bananocoin.bananojs.camoUtil = exports1;
 })(); // FINISHED BOTTOM nodejs/browser hack
 
 });
 
 parcelRequire.register("1fcyF", function(module, exports) {
-'use strict';
+"use strict";
 
 // STARTED TOP nodejs/browser hack
 (function() {
@@ -42680,13 +42681,13 @@ parcelRequire.register("1fcyF", function(module, exports) {
     const MAX_ACCOUNTS_PENDING = 10;
     const LOG_SWEEP = false;
     const receive = async (loggingUtil, bananodeApi, account, privateKey, representative, specificPendingBlockHash, accountPrefix)=>{
-        /* istanbul ignore if */ if (loggingUtil === undefined) throw Error('loggingUtil is required.');
-        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error('bananodeApi is required.');
-        /* istanbul ignore if */ if (account === undefined) throw Error('account is required.');
-        /* istanbul ignore if */ if (privateKey === undefined) throw Error('privateKey is required.');
-        /* istanbul ignore if */ if (representative === undefined) throw Error('representative is required.');
-        /* istanbul ignore if */ if (accountPrefix === undefined) throw Error('accountPrefix is required.');
-        /* istanbul ignore if */ if (LOG_SWEEP) loggingUtil.log('STARTED receive account', account);
+        /* istanbul ignore if */ if (loggingUtil === undefined) throw Error("loggingUtil is required.");
+        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error("bananodeApi is required.");
+        /* istanbul ignore if */ if (account === undefined) throw Error("account is required.");
+        /* istanbul ignore if */ if (privateKey === undefined) throw Error("privateKey is required.");
+        /* istanbul ignore if */ if (representative === undefined) throw Error("representative is required.");
+        /* istanbul ignore if */ if (accountPrefix === undefined) throw Error("accountPrefix is required.");
+        /* istanbul ignore if */ if (LOG_SWEEP) loggingUtil.log("STARTED receive account", account);
         const pending = await bananodeApi.getAccountsPending([
             account
         ], MAX_ACCOUNTS_PENDING);
@@ -42695,14 +42696,14 @@ parcelRequire.register("1fcyF", function(module, exports) {
         response.pendingBlocks = [];
         response.receiveCount = 0;
         response.receiveBlocks = [];
-        response.pendingMessage = '';
-        response.receiveMessage = '';
+        response.pendingMessage = "";
+        response.receiveMessage = "";
         if (pending !== undefined && pending.blocks !== undefined && pending.blocks[account] !== undefined) {
             const pendingHashes = Object.keys(pending.blocks[account]);
             response.pendingMessage = `pending ${pendingHashes.length} blocks, of max ${MAX_ACCOUNTS_PENDING}.`;
             response.pendingCount = pendingHashes.length;
             response.pendingBlocks = pendingHashes;
-            /* istanbul ignore if */ if (LOG_SWEEP) loggingUtil.log('INTERIM receive pendingHashes', pendingHashes);
+            /* istanbul ignore if */ if (LOG_SWEEP) loggingUtil.log("INTERIM receive pendingHashes", pendingHashes);
             if (pendingHashes.length > 0) {
                 const sweepBlocks = await sweep(loggingUtil, bananodeApi, privateKey, representative, specificPendingBlockHash, accountPrefix);
                 response.receiveMessage = `received ${sweepBlocks.length} blocks.`;
@@ -42710,11 +42711,11 @@ parcelRequire.register("1fcyF", function(module, exports) {
                 response.receiveBlocks = sweepBlocks;
             }
         } else response.pendingMessage = `pending unknown blocks, of max ${MAX_ACCOUNTS_PENDING}.`;
-        /* istanbul ignore if */ if (LOG_SWEEP) loggingUtil.log('SUCCESS receive account', account);
+        /* istanbul ignore if */ if (LOG_SWEEP) loggingUtil.log("SUCCESS receive account", account);
         return response;
     };
     const sweep = async (loggingUtil, bananodeApi, privateKey, representative, specificPendingBlockHash, accountPrefix)=>{
-        /* istanbul ignore if */ if (LOG_SWEEP) loggingUtil.log('STARTED sweep');
+        /* istanbul ignore if */ if (LOG_SWEEP) loggingUtil.log("STARTED sweep");
         const publicKey = await bananoUtil.getPublicKey(privateKey);
         const account = bananoUtil.getAccount(publicKey, accountPrefix);
         const accountsPending = await bananodeApi.getAccountsPending([
@@ -42770,7 +42771,7 @@ parcelRequire.register("1fcyF", function(module, exports) {
             }
             /* istanbul ignore if */ if (LOG_SWEEP) loggingUtil.log(`INTERIM sweep hasHistory`, account, historyHistory.length, accountsPending.blocks[account]);
         }
-        /* istanbul ignore if */ if (LOG_SWEEP) loggingUtil.log('SUCCESS sweep', accountOpenAndReceiveBlocks);
+        /* istanbul ignore if */ if (LOG_SWEEP) loggingUtil.log("SUCCESS sweep", accountOpenAndReceiveBlocks);
         return accountOpenAndReceiveBlocks;
     };
     // STARTED BOTTOM nodejs/browser hack
@@ -42780,14 +42781,14 @@ parcelRequire.register("1fcyF", function(module, exports) {
         return exports;
     })();
     // istanbul ignore else
-    if (typeof module.exports !== 'undefined') module.exports = exports1;
+    if (typeof module.exports !== "undefined") module.exports = exports1;
     else window.bananocoin.bananojs.depositUtil = exports1;
 })(); // FINISHED BOTTOM nodejs/browser hack
 
 });
 
 parcelRequire.register("9hjWP", function(module, exports) {
-'use strict';
+"use strict";
 
 // STARTED TOP nodejs/browser hack
 (function() {
@@ -42795,18 +42796,18 @@ parcelRequire.register("9hjWP", function(module, exports) {
     const bananoUtil = (parcelRequire("5GmJx"));
     const LOG_WITHDRAW = false;
     const withdraw = async (loggingUtil, bananodeApi, privateKey, toAccount, amountBananos, accountPrefix, representative, previous)=>{
-        /* istanbul ignore if */ if (loggingUtil === undefined) throw Error('loggingUtil is required.');
-        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error('bananodeApi is required.');
-        /* istanbul ignore if */ if (privateKey === undefined) throw Error('privateKey is required.');
-        /* istanbul ignore if */ if (toAccount === undefined) throw Error('toAccount is required.');
-        /* istanbul ignore if */ if (amountBananos === undefined) throw Error('amountBananos is required.');
-        /* istanbul ignore if */ if (accountPrefix === undefined) throw Error('accountPrefix is required.');
+        /* istanbul ignore if */ if (loggingUtil === undefined) throw Error("loggingUtil is required.");
+        /* istanbul ignore if */ if (bananodeApi === undefined) throw Error("bananodeApi is required.");
+        /* istanbul ignore if */ if (privateKey === undefined) throw Error("privateKey is required.");
+        /* istanbul ignore if */ if (toAccount === undefined) throw Error("toAccount is required.");
+        /* istanbul ignore if */ if (amountBananos === undefined) throw Error("amountBananos is required.");
+        /* istanbul ignore if */ if (accountPrefix === undefined) throw Error("accountPrefix is required.");
         const publicKey = await bananoUtil.getPublicKey(privateKey);
         const fromAccount = bananoUtil.getAccount(publicKey, accountPrefix);
         const amountRaw = bananoUtil.getRawStrFromMajorAmountStr(amountBananos.toString(), accountPrefix);
-        /* istanbul ignore if */ if (LOG_WITHDRAW) loggingUtil.log('STARTED withdraw fromAccount', fromAccount, 'toAccount', toAccount, 'amountRaw', amountRaw);
+        /* istanbul ignore if */ if (LOG_WITHDRAW) loggingUtil.log("STARTED withdraw fromAccount", fromAccount, "toAccount", toAccount, "amountRaw", amountRaw);
         const response = await bananoUtil.sendFromPrivateKeyWithRepresentativeAndPrevious(bananodeApi, privateKey, toAccount, amountRaw, representative, previous, accountPrefix);
-        /* istanbul ignore if */ if (LOG_WITHDRAW) loggingUtil.log('SUCCESS withdraw fromAccount', fromAccount, 'toAccount', toAccount, 'amountRaw', amountRaw, 'response', response);
+        /* istanbul ignore if */ if (LOG_WITHDRAW) loggingUtil.log("SUCCESS withdraw fromAccount", fromAccount, "toAccount", toAccount, "amountRaw", amountRaw, "response", response);
         return response;
     };
     // STARTED BOTTOM nodejs/browser hack
@@ -42816,14 +42817,14 @@ parcelRequire.register("9hjWP", function(module, exports) {
         return exports;
     })();
     // istanbul ignore else
-    if (typeof module.exports !== 'undefined') module.exports = exports1;
+    if (typeof module.exports !== "undefined") module.exports = exports1;
     else window.bananocoin.bananojs.withdrawUtil = exports1;
 })(); // FINISHED BOTTOM nodejs/browser hack
 
 });
 
 parcelRequire.register("4V3Fj", function(module, exports) {
-'use strict';
+"use strict";
 // STARTED TOP nodejs/browser hack
 (function() {
     // FINISHED TOP nodejs/browser hack
@@ -42835,7 +42836,7 @@ parcelRequire.register("4V3Fj", function(module, exports) {
         return exports;
     })();
     // istanbul ignore else
-    if (typeof module.exports !== 'undefined') module.exports = exports1;
+    if (typeof module.exports !== "undefined") module.exports = exports1;
     else window.bananocoin.bananojs.loggingUtil = exports1;
 })(); // FINISHED BOTTOM nodejs/browser hack
 
@@ -42853,11 +42854,10 @@ var $bbc0b920ee7945e8$exports = {};
   */ (function(global, factory) {
     $bbc0b920ee7945e8$exports = factory((parcelRequire("jXMeB")), (parcelRequire("fuvDV")), (parcelRequire("3QEeg")), (parcelRequire("hGOAQ")));
 })($bbc0b920ee7945e8$exports, function(EventHandler, Manipulator, SelectorEngine, BaseComponent) {
-    'use strict';
-    const _interopDefaultLegacy = (e)=>e && typeof e === 'object' && 'default' in e ? e : {
+    "use strict";
+    const _interopDefaultLegacy = (e)=>e && typeof e === "object" && "default" in e ? e : {
             default: e
-        }
-    ;
+        };
     const EventHandler__default = /*#__PURE__*/ _interopDefaultLegacy(EventHandler);
     const Manipulator__default = /*#__PURE__*/ _interopDefaultLegacy(Manipulator);
     const SelectorEngine__default = /*#__PURE__*/ _interopDefaultLegacy(SelectorEngine);
@@ -42868,22 +42868,22 @@ var $bbc0b920ee7945e8$exports = {};
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */ const MILLISECONDS_MULTIPLIER = 1000;
-    const TRANSITION_END = 'transitionend'; // Shoutout AngusCroll (https://goo.gl/pxwQGp)
+    const TRANSITION_END = "transitionend"; // Shoutout AngusCroll (https://goo.gl/pxwQGp)
     const toType = (obj)=>{
         if (obj === null || obj === undefined) return `${obj}`;
         return ({}).toString.call(obj).match(/\s([a-z]+)/i)[1].toLowerCase();
     };
     const getSelector = (element)=>{
-        let selector = element.getAttribute('data-bs-target');
-        if (!selector || selector === '#') {
-            let hrefAttr = element.getAttribute('href'); // The only valid content that could double as a selector are IDs or classes,
+        let selector = element.getAttribute("data-bs-target");
+        if (!selector || selector === "#") {
+            let hrefAttr = element.getAttribute("href"); // The only valid content that could double as a selector are IDs or classes,
             // so everything starting with `#` or `.`. If a "real" URL is used as the selector,
             // `document.querySelector` will rightfully complain it is invalid.
             // See https://github.com/twbs/bootstrap/issues/32273
-            if (!hrefAttr || !hrefAttr.includes('#') && !hrefAttr.startsWith('.')) return null;
+            if (!hrefAttr || !hrefAttr.includes("#") && !hrefAttr.startsWith(".")) return null;
              // Just in case some CMS puts out a full URL with the anchor appended
-            if (hrefAttr.includes('#') && !hrefAttr.startsWith('#')) hrefAttr = `#${hrefAttr.split('#')[1]}`;
-            selector = hrefAttr && hrefAttr !== '#' ? hrefAttr.trim() : null;
+            if (hrefAttr.includes("#") && !hrefAttr.startsWith("#")) hrefAttr = `#${hrefAttr.split("#")[1]}`;
+            selector = hrefAttr && hrefAttr !== "#" ? hrefAttr.trim() : null;
         }
         return selector;
     };
@@ -42899,41 +42899,41 @@ var $bbc0b920ee7945e8$exports = {};
         const floatTransitionDelay = Number.parseFloat(transitionDelay); // Return 0 if element or transition duration is not found
         if (!floatTransitionDuration && !floatTransitionDelay) return 0;
          // If multiple durations are defined, take the first
-        transitionDuration = transitionDuration.split(',')[0];
-        transitionDelay = transitionDelay.split(',')[0];
+        transitionDuration = transitionDuration.split(",")[0];
+        transitionDelay = transitionDelay.split(",")[0];
         return (Number.parseFloat(transitionDuration) + Number.parseFloat(transitionDelay)) * MILLISECONDS_MULTIPLIER;
     };
     const triggerTransitionEnd = (element)=>{
         element.dispatchEvent(new Event(TRANSITION_END));
     };
     const isElement = (obj)=>{
-        if (!obj || typeof obj !== 'object') return false;
-        if (typeof obj.jquery !== 'undefined') obj = obj[0];
-        return typeof obj.nodeType !== 'undefined';
+        if (!obj || typeof obj !== "object") return false;
+        if (typeof obj.jquery !== "undefined") obj = obj[0];
+        return typeof obj.nodeType !== "undefined";
     };
     const getElement = (obj)=>{
         if (isElement(obj)) // it's a jQuery object or a node element
         return obj.jquery ? obj[0] : obj;
-        if (typeof obj === 'string' && obj.length > 0) return document.querySelector(obj);
+        if (typeof obj === "string" && obj.length > 0) return document.querySelector(obj);
         return null;
     };
     const typeCheckConfig = (componentName, config, configTypes)=>{
         Object.keys(configTypes).forEach((property)=>{
             const expectedTypes = configTypes[property];
             const value = config[property];
-            const valueType = value && isElement(value) ? 'element' : toType(value);
+            const valueType = value && isElement(value) ? "element" : toType(value);
             if (!new RegExp(expectedTypes).test(valueType)) throw new TypeError(`${componentName.toUpperCase()}: Option "${property}" provided type "${valueType}" but expected type "${expectedTypes}".`);
         });
     };
     const isVisible = (element)=>{
         if (!isElement(element) || element.getClientRects().length === 0) return false;
-        return getComputedStyle(element).getPropertyValue('visibility') === 'visible';
+        return getComputedStyle(element).getPropertyValue("visibility") === "visible";
     };
     const isDisabled = (element)=>{
         if (!element || element.nodeType !== Node.ELEMENT_NODE) return true;
-        if (element.classList.contains('disabled')) return true;
-        if (typeof element.disabled !== 'undefined') return element.disabled;
-        return element.hasAttribute('disabled') && element.getAttribute('disabled') !== 'false';
+        if (element.classList.contains("disabled")) return true;
+        if (typeof element.disabled !== "undefined") return element.disabled;
+        return element.hasAttribute("disabled") && element.getAttribute("disabled") !== "false";
     };
     /**
    * Trick to restart an element's animation
@@ -42948,22 +42948,20 @@ var $bbc0b920ee7945e8$exports = {};
     };
     const getjQuery = ()=>{
         const { jQuery: jQuery  } = window;
-        if (jQuery && !document.body.hasAttribute('data-bs-no-jquery')) return jQuery;
+        if (jQuery && !document.body.hasAttribute("data-bs-no-jquery")) return jQuery;
         return null;
     };
     const DOMContentLoadedCallbacks = [];
     const onDOMContentLoaded = (callback1)=>{
-        if (document.readyState === 'loading') {
+        if (document.readyState === "loading") {
             // add listener on the first call when the document is in loading state
-            if (!DOMContentLoadedCallbacks.length) document.addEventListener('DOMContentLoaded', ()=>{
-                DOMContentLoadedCallbacks.forEach((callback)=>callback()
-                );
+            if (!DOMContentLoadedCallbacks.length) document.addEventListener("DOMContentLoaded", ()=>{
+                DOMContentLoadedCallbacks.forEach((callback)=>callback());
             });
             DOMContentLoadedCallbacks.push(callback1);
         } else callback1();
     };
-    const isRTL = ()=>document.documentElement.dir === 'rtl'
-    ;
+    const isRTL = ()=>document.documentElement.dir === "rtl";
     const defineJQueryPlugin = (plugin)=>{
         onDOMContentLoaded(()=>{
             const $ = getjQuery();
@@ -42980,7 +42978,7 @@ var $bbc0b920ee7945e8$exports = {};
         });
     };
     const execute = (callback)=>{
-        if (typeof callback === 'function') callback();
+        if (typeof callback === "function") callback();
     };
     const executeAfterTransition = (callback, transitionElement, waitForTransition = true)=>{
         if (!waitForTransition) {
@@ -43006,8 +43004,8 @@ var $bbc0b920ee7945e8$exports = {};
    * Bootstrap (v5.1.3): util/scrollBar.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
-   */ const SELECTOR_FIXED_CONTENT = '.fixed-top, .fixed-bottom, .is-fixed, .sticky-top';
-    const SELECTOR_STICKY_CONTENT = '.sticky-top';
+   */ const SELECTOR_FIXED_CONTENT = ".fixed-top, .fixed-bottom, .is-fixed, .sticky-top";
+    const SELECTOR_STICKY_CONTENT = ".sticky-top";
     class ScrollBarHelper {
         getWidth() {
             // https://developer.mozilla.org/en-US/docs/Web/API/Window/innerWidth#usage_notes
@@ -43017,16 +43015,13 @@ var $bbc0b920ee7945e8$exports = {};
         hide() {
             const width = this.getWidth();
             this._disableOverFlow(); // give padding to element to balance the hidden scrollbar width
-            this._setElementAttributes(this._element, 'paddingRight', (calculatedValue)=>calculatedValue + width
-            ); // trick: We adjust positive paddingRight and negative marginRight to sticky-top elements to keep showing fullwidth
-            this._setElementAttributes(SELECTOR_FIXED_CONTENT, 'paddingRight', (calculatedValue)=>calculatedValue + width
-            );
-            this._setElementAttributes(SELECTOR_STICKY_CONTENT, 'marginRight', (calculatedValue)=>calculatedValue - width
-            );
+            this._setElementAttributes(this._element, "paddingRight", (calculatedValue)=>calculatedValue + width); // trick: We adjust positive paddingRight and negative marginRight to sticky-top elements to keep showing fullwidth
+            this._setElementAttributes(SELECTOR_FIXED_CONTENT, "paddingRight", (calculatedValue)=>calculatedValue + width);
+            this._setElementAttributes(SELECTOR_STICKY_CONTENT, "marginRight", (calculatedValue)=>calculatedValue - width);
         }
         _disableOverFlow() {
-            this._saveInitialAttribute(this._element, 'overflow');
-            this._element.style.overflow = 'hidden';
+            this._saveInitialAttribute(this._element, "overflow");
+            this._element.style.overflow = "hidden";
         }
         _setElementAttributes(selector, styleProp, callback) {
             const scrollbarWidth = this.getWidth();
@@ -43039,10 +43034,10 @@ var $bbc0b920ee7945e8$exports = {};
             this._applyManipulationCallback(selector, manipulationCallBack);
         }
         reset() {
-            this._resetElementAttributes(this._element, 'overflow');
-            this._resetElementAttributes(this._element, 'paddingRight');
-            this._resetElementAttributes(SELECTOR_FIXED_CONTENT, 'paddingRight');
-            this._resetElementAttributes(SELECTOR_STICKY_CONTENT, 'marginRight');
+            this._resetElementAttributes(this._element, "overflow");
+            this._resetElementAttributes(this._element, "paddingRight");
+            this._resetElementAttributes(SELECTOR_FIXED_CONTENT, "paddingRight");
+            this._resetElementAttributes(SELECTOR_STICKY_CONTENT, "marginRight");
         }
         _saveInitialAttribute(element, styleProp) {
             const actualValue = element.style[styleProp];
@@ -43051,7 +43046,7 @@ var $bbc0b920ee7945e8$exports = {};
         _resetElementAttributes(selector, styleProp) {
             const manipulationCallBack = (element)=>{
                 const value = Manipulator__default.default.getDataAttribute(element, styleProp);
-                if (typeof value === 'undefined') element.style.removeProperty(styleProp);
+                if (typeof value === "undefined") element.style.removeProperty(styleProp);
                 else {
                     Manipulator__default.default.removeDataAttribute(element, styleProp);
                     element.style[styleProp] = value;
@@ -43076,24 +43071,24 @@ var $bbc0b920ee7945e8$exports = {};
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */ const Default$2 = {
-        className: 'modal-backdrop',
+        className: "modal-backdrop",
         isVisible: true,
         // if false, we use the backdrop helper without adding any element to the dom
         isAnimated: false,
-        rootElement: 'body',
+        rootElement: "body",
         // give the choice to place backdrop under different elements
         clickCallback: null
     };
     const DefaultType$2 = {
-        className: 'string',
-        isVisible: 'boolean',
-        isAnimated: 'boolean',
-        rootElement: '(element|string)',
-        clickCallback: '(function|null)'
+        className: "string",
+        isVisible: "boolean",
+        isAnimated: "boolean",
+        rootElement: "(element|string)",
+        clickCallback: "(function|null)"
     };
-    const NAME$2 = 'backdrop';
-    const CLASS_NAME_FADE$1 = 'fade';
-    const CLASS_NAME_SHOW$1 = 'show';
+    const NAME$2 = "backdrop";
+    const CLASS_NAME_FADE$1 = "fade";
+    const CLASS_NAME_SHOW$1 = "show";
     const EVENT_MOUSEDOWN = `mousedown.bs.${NAME$2}`;
     class Backdrop {
         show(callback) {
@@ -43121,7 +43116,7 @@ var $bbc0b920ee7945e8$exports = {};
         }
         _getElement() {
             if (!this._element) {
-                const backdrop = document.createElement('div');
+                const backdrop = document.createElement("div");
                 backdrop.className = this._config.className;
                 if (this._config.isAnimated) backdrop.classList.add(CLASS_NAME_FADE$1);
                 this._element = backdrop;
@@ -43131,7 +43126,7 @@ var $bbc0b920ee7945e8$exports = {};
         _getConfig(config) {
             config = {
                 ...Default$2,
-                ...typeof config === 'object' ? config : {}
+                ...typeof config === "object" ? config : {}
             }; // use getElement() with the default "body" to get a fresh Element on each instantiation
             config.rootElement = getElement(config.rootElement);
             typeCheckConfig(NAME$2, config, DefaultType$2);
@@ -43171,27 +43166,25 @@ var $bbc0b920ee7945e8$exports = {};
         autofocus: true
     };
     const DefaultType$1 = {
-        trapElement: 'element',
-        autofocus: 'boolean'
+        trapElement: "element",
+        autofocus: "boolean"
     };
-    const NAME$1 = 'focustrap';
-    const DATA_KEY$1 = 'bs.focustrap';
+    const NAME$1 = "focustrap";
+    const DATA_KEY$1 = "bs.focustrap";
     const EVENT_KEY$1 = `.${DATA_KEY$1}`;
     const EVENT_FOCUSIN = `focusin${EVENT_KEY$1}`;
     const EVENT_KEYDOWN_TAB = `keydown.tab${EVENT_KEY$1}`;
-    const TAB_KEY = 'Tab';
-    const TAB_NAV_FORWARD = 'forward';
-    const TAB_NAV_BACKWARD = 'backward';
+    const TAB_KEY = "Tab";
+    const TAB_NAV_FORWARD = "forward";
+    const TAB_NAV_BACKWARD = "backward";
     class FocusTrap {
         activate() {
             const { trapElement: trapElement , autofocus: autofocus  } = this._config;
             if (this._isActive) return;
             if (autofocus) trapElement.focus();
             EventHandler__default.default.off(document, EVENT_KEY$1); // guard against infinite focus loop
-            EventHandler__default.default.on(document, EVENT_FOCUSIN, (event)=>this._handleFocusin(event)
-            );
-            EventHandler__default.default.on(document, EVENT_KEYDOWN_TAB, (event)=>this._handleKeydown(event)
-            );
+            EventHandler__default.default.on(document, EVENT_FOCUSIN, (event)=>this._handleFocusin(event));
+            EventHandler__default.default.on(document, EVENT_KEYDOWN_TAB, (event)=>this._handleKeydown(event));
             this._isActive = true;
         }
         deactivate() {
@@ -43215,7 +43208,7 @@ var $bbc0b920ee7945e8$exports = {};
         _getConfig(config) {
             config = {
                 ...Default$1,
-                ...typeof config === 'object' ? config : {}
+                ...typeof config === "object" ? config : {}
             };
             typeCheckConfig(NAME$1, config, DefaultType$1);
             return config;
@@ -43231,13 +43224,13 @@ var $bbc0b920ee7945e8$exports = {};
    * Bootstrap (v5.1.3): util/component-functions.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
-   */ const enableDismissTrigger = (component, method = 'hide')=>{
+   */ const enableDismissTrigger = (component, method = "hide")=>{
         const clickEvent = `click.dismiss${component.EVENT_KEY}`;
         const name = component.NAME;
         EventHandler__default.default.on(document, clickEvent, `[data-bs-dismiss="${name}"]`, function(event) {
             if ([
-                'A',
-                'AREA'
+                "A",
+                "AREA"
             ].includes(this.tagName)) event.preventDefault();
             if (isDisabled(this)) return;
             const target = getElementFromSelector(this) || this.closest(`.${name}`);
@@ -43254,20 +43247,20 @@ var $bbc0b920ee7945e8$exports = {};
    * ------------------------------------------------------------------------
    * Constants
    * ------------------------------------------------------------------------
-   */ const NAME = 'modal';
-    const DATA_KEY = 'bs.modal';
+   */ const NAME = "modal";
+    const DATA_KEY = "bs.modal";
     const EVENT_KEY = `.${DATA_KEY}`;
-    const DATA_API_KEY = '.data-api';
-    const ESCAPE_KEY = 'Escape';
+    const DATA_API_KEY = ".data-api";
+    const ESCAPE_KEY = "Escape";
     const Default = {
         backdrop: true,
         keyboard: true,
         focus: true
     };
     const DefaultType = {
-        backdrop: '(boolean|string)',
-        keyboard: 'boolean',
-        focus: 'boolean'
+        backdrop: "(boolean|string)",
+        keyboard: "boolean",
+        focus: "boolean"
     };
     const EVENT_HIDE = `hide${EVENT_KEY}`;
     const EVENT_HIDE_PREVENTED = `hidePrevented${EVENT_KEY}`;
@@ -43280,13 +43273,13 @@ var $bbc0b920ee7945e8$exports = {};
     const EVENT_MOUSEUP_DISMISS = `mouseup.dismiss${EVENT_KEY}`;
     const EVENT_MOUSEDOWN_DISMISS = `mousedown.dismiss${EVENT_KEY}`;
     const EVENT_CLICK_DATA_API = `click${EVENT_KEY}${DATA_API_KEY}`;
-    const CLASS_NAME_OPEN = 'modal-open';
-    const CLASS_NAME_FADE = 'fade';
-    const CLASS_NAME_SHOW = 'show';
-    const CLASS_NAME_STATIC = 'modal-static';
-    const OPEN_SELECTOR = '.modal.show';
-    const SELECTOR_DIALOG = '.modal-dialog';
-    const SELECTOR_MODAL_BODY = '.modal-body';
+    const CLASS_NAME_OPEN = "modal-open";
+    const CLASS_NAME_FADE = "fade";
+    const CLASS_NAME_SHOW = "show";
+    const CLASS_NAME_STATIC = "modal-static";
+    const OPEN_SELECTOR = ".modal.show";
+    const SELECTOR_DIALOG = ".modal-dialog";
+    const SELECTOR_MODAL_BODY = ".modal-body";
     const SELECTOR_DATA_TOGGLE = '[data-bs-toggle="modal"]';
     /**
    * ------------------------------------------------------------------------
@@ -43320,8 +43313,7 @@ var $bbc0b920ee7945e8$exports = {};
                     if (event.target === this._element) this._ignoreBackdropClick = true;
                 });
             });
-            this._showBackdrop(()=>this._showElement(relatedTarget)
-            );
+            this._showBackdrop(()=>this._showElement(relatedTarget));
         }
         hide() {
             if (!this._isShown || this._isTransitioning) return;
@@ -43336,15 +43328,13 @@ var $bbc0b920ee7945e8$exports = {};
             this._element.classList.remove(CLASS_NAME_SHOW);
             EventHandler__default.default.off(this._element, EVENT_CLICK_DISMISS);
             EventHandler__default.default.off(this._dialog, EVENT_MOUSEDOWN_DISMISS);
-            this._queueCallback(()=>this._hideModal()
-            , this._element, isAnimated);
+            this._queueCallback(()=>this._hideModal(), this._element, isAnimated);
         }
         dispose() {
             [
                 window,
                 this._dialog
-            ].forEach((htmlElement)=>EventHandler__default.default.off(htmlElement, EVENT_KEY)
-            );
+            ].forEach((htmlElement)=>EventHandler__default.default.off(htmlElement, EVENT_KEY));
             this._backdrop.dispose();
             this._focustrap.deactivate();
             super.dispose();
@@ -43368,7 +43358,7 @@ var $bbc0b920ee7945e8$exports = {};
             config = {
                 ...Default,
                 ...Manipulator__default.default.getDataAttributes(this._element),
-                ...typeof config === 'object' ? config : {}
+                ...typeof config === "object" ? config : {}
             };
             typeCheckConfig(NAME, config, DefaultType);
             return config;
@@ -43378,10 +43368,10 @@ var $bbc0b920ee7945e8$exports = {};
             const modalBody = SelectorEngine__default.default.findOne(SELECTOR_MODAL_BODY, this._dialog);
             if (!this._element.parentNode || this._element.parentNode.nodeType !== Node.ELEMENT_NODE) // Don't move modal's DOM position
             document.body.append(this._element);
-            this._element.style.display = 'block';
-            this._element.removeAttribute('aria-hidden');
-            this._element.setAttribute('aria-modal', true);
-            this._element.setAttribute('role', 'dialog');
+            this._element.style.display = "block";
+            this._element.removeAttribute("aria-hidden");
+            this._element.setAttribute("aria-modal", true);
+            this._element.setAttribute("role", "dialog");
             this._element.scrollTop = 0;
             if (modalBody) modalBody.scrollTop = 0;
             if (isAnimated) reflow(this._element);
@@ -43405,15 +43395,14 @@ var $bbc0b920ee7945e8$exports = {};
             else EventHandler__default.default.off(this._element, EVENT_KEYDOWN_DISMISS);
         }
         _setResizeEvent() {
-            if (this._isShown) EventHandler__default.default.on(window, EVENT_RESIZE, ()=>this._adjustDialog()
-            );
+            if (this._isShown) EventHandler__default.default.on(window, EVENT_RESIZE, ()=>this._adjustDialog());
             else EventHandler__default.default.off(window, EVENT_RESIZE);
         }
         _hideModal() {
-            this._element.style.display = 'none';
-            this._element.setAttribute('aria-hidden', true);
-            this._element.removeAttribute('aria-modal');
-            this._element.removeAttribute('role');
+            this._element.style.display = "none";
+            this._element.setAttribute("aria-hidden", true);
+            this._element.removeAttribute("aria-modal");
+            this._element.removeAttribute("role");
             this._isTransitioning = false;
             this._backdrop.hide(()=>{
                 document.body.classList.remove(CLASS_NAME_OPEN);
@@ -43430,7 +43419,7 @@ var $bbc0b920ee7945e8$exports = {};
                 }
                 if (event.target !== event.currentTarget) return;
                 if (this._config.backdrop === true) this.hide();
-                else if (this._config.backdrop === 'static') this._triggerBackdropTransition();
+                else if (this._config.backdrop === "static") this._triggerBackdropTransition();
             });
             this._backdrop.show(callback);
         }
@@ -43442,13 +43431,13 @@ var $bbc0b920ee7945e8$exports = {};
             if (hideEvent.defaultPrevented) return;
             const { classList: classList , scrollHeight: scrollHeight , style: style  } = this._element;
             const isModalOverflowing = scrollHeight > document.documentElement.clientHeight; // return if the following background transition hasn't yet completed
-            if (!isModalOverflowing && style.overflowY === 'hidden' || classList.contains(CLASS_NAME_STATIC)) return;
-            if (!isModalOverflowing) style.overflowY = 'hidden';
+            if (!isModalOverflowing && style.overflowY === "hidden" || classList.contains(CLASS_NAME_STATIC)) return;
+            if (!isModalOverflowing) style.overflowY = "hidden";
             classList.add(CLASS_NAME_STATIC);
             this._queueCallback(()=>{
                 classList.remove(CLASS_NAME_STATIC);
                 if (!isModalOverflowing) this._queueCallback(()=>{
-                    style.overflowY = '';
+                    style.overflowY = "";
                 }, this._dialog);
             }, this._dialog);
             this._element.focus();
@@ -43463,14 +43452,14 @@ var $bbc0b920ee7945e8$exports = {};
             if (isBodyOverflowing && !isModalOverflowing && !isRTL() || !isBodyOverflowing && isModalOverflowing && isRTL()) this._element.style.paddingRight = `${scrollbarWidth}px`;
         }
         _resetAdjustments() {
-            this._element.style.paddingLeft = '';
-            this._element.style.paddingRight = '';
+            this._element.style.paddingLeft = "";
+            this._element.style.paddingRight = "";
         }
         static jQueryInterface(config, relatedTarget) {
             return this.each(function() {
                 const data = Modal.getOrCreateInstance(this, config);
-                if (typeof config !== 'string') return;
-                if (typeof data[config] === 'undefined') throw new TypeError(`No method named "${config}"`);
+                if (typeof config !== "string") return;
+                if (typeof data[config] === "undefined") throw new TypeError(`No method named "${config}"`);
                 data[config](relatedTarget);
             });
         }
@@ -43493,8 +43482,8 @@ var $bbc0b920ee7945e8$exports = {};
    */ EventHandler__default.default.on(document, EVENT_CLICK_DATA_API, SELECTOR_DATA_TOGGLE, function(event) {
         const target = getElementFromSelector(this);
         if ([
-            'A',
-            'AREA'
+            "A",
+            "AREA"
         ].includes(this.tagName)) event.preventDefault();
         EventHandler__default.default.one(target, EVENT_SHOW, (showEvent)=>{
             if (showEvent.defaultPrevented) // only register focus restorer if modal will actually get shown
@@ -43519,6 +43508,161 @@ var $bbc0b920ee7945e8$exports = {};
 });
 
 
+var $672dca6e75734b95$exports = {};
+
+
+/*!
+  * Bootstrap alert.js v5.1.3 (https://getbootstrap.com/)
+  * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+  */ (function(global, factory) {
+    $672dca6e75734b95$exports = factory((parcelRequire("jXMeB")), (parcelRequire("hGOAQ")));
+})($672dca6e75734b95$exports, function(EventHandler, BaseComponent) {
+    "use strict";
+    const _interopDefaultLegacy = (e)=>e && typeof e === "object" && "default" in e ? e : {
+            default: e
+        };
+    const EventHandler__default = /*#__PURE__*/ _interopDefaultLegacy(EventHandler);
+    const BaseComponent__default = /*#__PURE__*/ _interopDefaultLegacy(BaseComponent);
+    /**
+   * --------------------------------------------------------------------------
+   * Bootstrap (v5.1.3): util/index.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */ const getSelector = (element)=>{
+        let selector = element.getAttribute("data-bs-target");
+        if (!selector || selector === "#") {
+            let hrefAttr = element.getAttribute("href"); // The only valid content that could double as a selector are IDs or classes,
+            // so everything starting with `#` or `.`. If a "real" URL is used as the selector,
+            // `document.querySelector` will rightfully complain it is invalid.
+            // See https://github.com/twbs/bootstrap/issues/32273
+            if (!hrefAttr || !hrefAttr.includes("#") && !hrefAttr.startsWith(".")) return null;
+             // Just in case some CMS puts out a full URL with the anchor appended
+            if (hrefAttr.includes("#") && !hrefAttr.startsWith("#")) hrefAttr = `#${hrefAttr.split("#")[1]}`;
+            selector = hrefAttr && hrefAttr !== "#" ? hrefAttr.trim() : null;
+        }
+        return selector;
+    };
+    const getElementFromSelector = (element)=>{
+        const selector = getSelector(element);
+        return selector ? document.querySelector(selector) : null;
+    };
+    const isDisabled = (element)=>{
+        if (!element || element.nodeType !== Node.ELEMENT_NODE) return true;
+        if (element.classList.contains("disabled")) return true;
+        if (typeof element.disabled !== "undefined") return element.disabled;
+        return element.hasAttribute("disabled") && element.getAttribute("disabled") !== "false";
+    };
+    const getjQuery = ()=>{
+        const { jQuery: jQuery  } = window;
+        if (jQuery && !document.body.hasAttribute("data-bs-no-jquery")) return jQuery;
+        return null;
+    };
+    const DOMContentLoadedCallbacks = [];
+    const onDOMContentLoaded = (callback1)=>{
+        if (document.readyState === "loading") {
+            // add listener on the first call when the document is in loading state
+            if (!DOMContentLoadedCallbacks.length) document.addEventListener("DOMContentLoaded", ()=>{
+                DOMContentLoadedCallbacks.forEach((callback)=>callback());
+            });
+            DOMContentLoadedCallbacks.push(callback1);
+        } else callback1();
+    };
+    const defineJQueryPlugin = (plugin)=>{
+        onDOMContentLoaded(()=>{
+            const $ = getjQuery();
+            /* istanbul ignore if */ if ($) {
+                const name = plugin.NAME;
+                const JQUERY_NO_CONFLICT = $.fn[name];
+                $.fn[name] = plugin.jQueryInterface;
+                $.fn[name].Constructor = plugin;
+                $.fn[name].noConflict = ()=>{
+                    $.fn[name] = JQUERY_NO_CONFLICT;
+                    return plugin.jQueryInterface;
+                };
+            }
+        });
+    };
+    /**
+   * --------------------------------------------------------------------------
+   * Bootstrap (v5.1.3): util/component-functions.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */ const enableDismissTrigger = (component, method = "hide")=>{
+        const clickEvent = `click.dismiss${component.EVENT_KEY}`;
+        const name = component.NAME;
+        EventHandler__default.default.on(document, clickEvent, `[data-bs-dismiss="${name}"]`, function(event) {
+            if ([
+                "A",
+                "AREA"
+            ].includes(this.tagName)) event.preventDefault();
+            if (isDisabled(this)) return;
+            const target = getElementFromSelector(this) || this.closest(`.${name}`);
+            const instance = component.getOrCreateInstance(target); // Method argument is left, for Alert and only, as it doesn't implement the 'hide' method
+            instance[method]();
+        });
+    };
+    /**
+   * --------------------------------------------------------------------------
+   * Bootstrap (v5.1.3): alert.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */ /**
+   * ------------------------------------------------------------------------
+   * Constants
+   * ------------------------------------------------------------------------
+   */ const NAME = "alert";
+    const DATA_KEY = "bs.alert";
+    const EVENT_KEY = `.${DATA_KEY}`;
+    const EVENT_CLOSE = `close${EVENT_KEY}`;
+    const EVENT_CLOSED = `closed${EVENT_KEY}`;
+    const CLASS_NAME_FADE = "fade";
+    const CLASS_NAME_SHOW = "show";
+    /**
+   * ------------------------------------------------------------------------
+   * Class Definition
+   * ------------------------------------------------------------------------
+   */ class Alert extends BaseComponent__default.default {
+        // Getters
+        static get NAME() {
+            return NAME;
+        }
+        close() {
+            const closeEvent = EventHandler__default.default.trigger(this._element, EVENT_CLOSE);
+            if (closeEvent.defaultPrevented) return;
+            this._element.classList.remove(CLASS_NAME_SHOW);
+            const isAnimated = this._element.classList.contains(CLASS_NAME_FADE);
+            this._queueCallback(()=>this._destroyElement(), this._element, isAnimated);
+        }
+        _destroyElement() {
+            this._element.remove();
+            EventHandler__default.default.trigger(this._element, EVENT_CLOSED);
+            this.dispose();
+        }
+        static jQueryInterface(config) {
+            return this.each(function() {
+                const data = Alert.getOrCreateInstance(this);
+                if (typeof config !== "string") return;
+                if (data[config] === undefined || config.startsWith("_") || config === "constructor") throw new TypeError(`No method named "${config}"`);
+                data[config](this);
+            });
+        }
+    }
+    /**
+   * ------------------------------------------------------------------------
+   * Data Api implementation
+   * ------------------------------------------------------------------------
+   */ enableDismissTrigger(Alert, "close");
+    /**
+   * ------------------------------------------------------------------------
+   * jQuery
+   * ------------------------------------------------------------------------
+   * add .Alert to jQuery only if jQuery is present
+   */ defineJQueryPlugin(Alert);
+    return Alert;
+});
+
+
 var $9ef67ba6cdecd106$exports = {};
 
 
@@ -43529,11 +43673,10 @@ var $9ef67ba6cdecd106$exports = {};
   */ (function(global, factory) {
     $9ef67ba6cdecd106$exports = factory((parcelRequire("jXMeB")), (parcelRequire("hGOAQ")));
 })($9ef67ba6cdecd106$exports, function(EventHandler, BaseComponent) {
-    'use strict';
-    const _interopDefaultLegacy = (e)=>e && typeof e === 'object' && 'default' in e ? e : {
+    "use strict";
+    const _interopDefaultLegacy = (e)=>e && typeof e === "object" && "default" in e ? e : {
             default: e
-        }
-    ;
+        };
     const EventHandler__default = /*#__PURE__*/ _interopDefaultLegacy(EventHandler);
     const BaseComponent__default = /*#__PURE__*/ _interopDefaultLegacy(BaseComponent);
     /**
@@ -43543,16 +43686,15 @@ var $9ef67ba6cdecd106$exports = {};
    * --------------------------------------------------------------------------
    */ const getjQuery = ()=>{
         const { jQuery: jQuery  } = window;
-        if (jQuery && !document.body.hasAttribute('data-bs-no-jquery')) return jQuery;
+        if (jQuery && !document.body.hasAttribute("data-bs-no-jquery")) return jQuery;
         return null;
     };
     const DOMContentLoadedCallbacks = [];
     const onDOMContentLoaded = (callback1)=>{
-        if (document.readyState === 'loading') {
+        if (document.readyState === "loading") {
             // add listener on the first call when the document is in loading state
-            if (!DOMContentLoadedCallbacks.length) document.addEventListener('DOMContentLoaded', ()=>{
-                DOMContentLoadedCallbacks.forEach((callback)=>callback()
-                );
+            if (!DOMContentLoadedCallbacks.length) document.addEventListener("DOMContentLoaded", ()=>{
+                DOMContentLoadedCallbacks.forEach((callback)=>callback());
             });
             DOMContentLoadedCallbacks.push(callback1);
         } else callback1();
@@ -43581,11 +43723,11 @@ var $9ef67ba6cdecd106$exports = {};
    * ------------------------------------------------------------------------
    * Constants
    * ------------------------------------------------------------------------
-   */ const NAME = 'button';
-    const DATA_KEY = 'bs.button';
+   */ const NAME = "button";
+    const DATA_KEY = "bs.button";
     const EVENT_KEY = `.${DATA_KEY}`;
-    const DATA_API_KEY = '.data-api';
-    const CLASS_NAME_ACTIVE = 'active';
+    const DATA_API_KEY = ".data-api";
+    const CLASS_NAME_ACTIVE = "active";
     const SELECTOR_DATA_TOGGLE = '[data-bs-toggle="button"]';
     const EVENT_CLICK_DATA_API = `click${EVENT_KEY}${DATA_API_KEY}`;
     /**
@@ -43599,12 +43741,12 @@ var $9ef67ba6cdecd106$exports = {};
         }
         toggle() {
             // Toggle class and sync the `aria-pressed` attribute with the return value of the `.toggle()` method
-            this._element.setAttribute('aria-pressed', this._element.classList.toggle(CLASS_NAME_ACTIVE));
+            this._element.setAttribute("aria-pressed", this._element.classList.toggle(CLASS_NAME_ACTIVE));
         }
         static jQueryInterface(config) {
             return this.each(function() {
                 const data = Button.getOrCreateInstance(this);
-                if (config === 'toggle') data[config]();
+                if (config === "toggle") data[config]();
             });
         }
     }
@@ -43632,7 +43774,7 @@ var $9ef67ba6cdecd106$exports = {};
 // Import just what we need
 "use strict";
 var $1aee3c8d4d72086d$exports = {};
-'use strict';
+"use strict";
 
 
 
@@ -43648,8 +43790,8 @@ var $1aee3c8d4d72086d$exports = {};
     const depositUtil = (parcelRequire("1fcyF"));
     const withdrawUtil = (parcelRequire("9hjWP"));
     const loggingUtil = (parcelRequire("4V3Fj"));
-    const BANANO_PREFIX = 'ban_';
-    const NANO_PREFIX = 'nano_';
+    const BANANO_PREFIX = "ban_";
+    const NANO_PREFIX = "nano_";
     let bananodeApi = realBananodeApi;
     /**
    * Sets the Bananode Api (useful for overriding some methods)
@@ -43683,21 +43825,21 @@ var $1aee3c8d4d72086d$exports = {};
    * @param {BananoParts} bananoParts the banano parts to describe.
    * @return {string} returns the decimal amount of bananos.
    */ const getBananoPartsAsDecimal = (bananoParts)=>{
-        let bananoDecimal = '';
+        let bananoDecimal = "";
         const banano = bananoParts[bananoParts.majorName];
         if (banano !== undefined) bananoDecimal += banano;
-        else bananoDecimal += '0';
+        else bananoDecimal += "0";
         const banoshi = bananoParts[bananoParts.minorName];
-        if (banoshi !== undefined || bananoParts.raw !== undefined) bananoDecimal += '.';
+        if (banoshi !== undefined || bananoParts.raw !== undefined) bananoDecimal += ".";
         if (banoshi !== undefined) {
-            if (banoshi.length == 1) bananoDecimal += '0';
+            if (banoshi.length == 1) bananoDecimal += "0";
             bananoDecimal += banoshi;
         }
         if (bananoParts.raw !== undefined) {
-            if (banoshi === undefined) bananoDecimal += '00';
+            if (banoshi === undefined) bananoDecimal += "00";
             const count = 27 - bananoParts.raw.length;
             if (count < 0) throw Error(`too many numbers in bananoParts.raw '${bananoParts.raw}', remove ${-count} of them.`);
-            bananoDecimal += '0'.repeat(count);
+            bananoDecimal += "0".repeat(count);
             bananoDecimal += bananoParts.raw;
         }
         return bananoDecimal;
@@ -43709,7 +43851,7 @@ var $1aee3c8d4d72086d$exports = {};
    * @return {string} returns amount in raw.
    */ const getBananoDecimalAmountAsRaw = (amount)=>{
         const amountStr = amount.toString();
-        const decimal = amountStr.indexOf('.');
+        const decimal = amountStr.indexOf(".");
         let bananoBigInt;
         if (decimal < 0) bananoBigInt = BigInt(getRawStrFromBananoStr(amountStr));
         else bananoBigInt = BigInt(getRawStrFromBananoStr(amountStr.substring(0, decimal)));
@@ -43721,7 +43863,7 @@ var $1aee3c8d4d72086d$exports = {};
             // console.log('banoshiRaw.length', banoshiRaw.length);
             const count = 29 - banoshiRaw.length;
             if (count < 0) throw Error(`too many numbers past the decimal in '${amountStr}', remove ${-count} of them.`);
-            banoshiRaw += '0'.repeat(count);
+            banoshiRaw += "0".repeat(count);
             banoshiBigInt = BigInt(banoshiRaw);
         }
         const rawBigInt = banoshiBigInt + bananoBigInt;
@@ -43735,27 +43877,27 @@ var $1aee3c8d4d72086d$exports = {};
    * @return {string} returns the description of the banano parts.
    */ const getBananoPartsDescription = (bananoParts)=>{
         const numberWithCommas = (x)=>{
-            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         };
-        let bananoAmountDesc = '';
-        if (bananoParts[bananoParts.majorName] !== '0') {
+        let bananoAmountDesc = "";
+        if (bananoParts[bananoParts.majorName] !== "0") {
             bananoAmountDesc += numberWithCommas(bananoParts[bananoParts.majorName]);
-            bananoAmountDesc += ' ';
+            bananoAmountDesc += " ";
             bananoAmountDesc += bananoParts.majorName;
         }
-        if (bananoParts[bananoParts.minorName] !== '0') {
-            if (bananoAmountDesc.length > 0) bananoAmountDesc += ' ';
+        if (bananoParts[bananoParts.minorName] !== "0") {
+            if (bananoAmountDesc.length > 0) bananoAmountDesc += " ";
             bananoAmountDesc += bananoParts[bananoParts.minorName];
-            bananoAmountDesc += ' ';
+            bananoAmountDesc += " ";
             bananoAmountDesc += bananoParts.minorName;
         }
-        if (bananoParts.raw !== '0') {
-            if (bananoAmountDesc.length > 0) bananoAmountDesc += ' ';
+        if (bananoParts.raw !== "0") {
+            if (bananoAmountDesc.length > 0) bananoAmountDesc += " ";
             bananoAmountDesc += numberWithCommas(bananoParts.raw);
-            bananoAmountDesc += ' raw';
+            bananoAmountDesc += " raw";
         }
         if (bananoAmountDesc.length === 0) {
-            bananoAmountDesc = '0 ';
+            bananoAmountDesc = "0 ";
             bananoAmountDesc += bananoParts.majorName;
         }
         return bananoAmountDesc;
@@ -44443,7 +44585,7 @@ var $1aee3c8d4d72086d$exports = {};
     // STARTED BOTTOM nodejs/browser hack
     const exports1 = (()=>{
         // istanbul ignore if
-        if (typeof BigInt === 'undefined') return;
+        if (typeof BigInt === "undefined") return;
         const exports = {};
         exports.BANANO_PREFIX = BANANO_PREFIX;
         exports.NANO_PREFIX = NANO_PREFIX;
@@ -44532,27 +44674,44 @@ var $1aee3c8d4d72086d$exports = {};
         return exports;
     })();
     // istanbul ignore else
-    if (typeof $1aee3c8d4d72086d$exports !== 'undefined') $1aee3c8d4d72086d$exports = exports1;
+    if (typeof $1aee3c8d4d72086d$exports !== "undefined") $1aee3c8d4d72086d$exports = exports1;
     else window.bananocoinBananojs = exports1;
 })(); // FINISHED BOTTOM nodejs/browser hack
 
 
 $1aee3c8d4d72086d$exports.setBananodeApiUrl("https://kaliumapi.appditto.com/api");
 async function $0d2e77df16cef4ac$var$formHandler() {
-    let [account, balance] = await $0d2e77df16cef4ac$var$getAccountDetails();
+    let [account, banano, raw, pending, history] = await $0d2e77df16cef4ac$var$getAccountDetails();
     document.getElementById("infoModalHeaderH5").innerHTML = account;
-    document.getElementById("infoModalBody").innerHTML = "<p>" + balance + "</p>";
-    new (/*@__PURE__*/$parcel$interopDefault($bbc0b920ee7945e8$exports))(document.getElementById("infoModal")).show();
+    document.getElementById("infoModalBody").innerHTML = "<p>" + banano + " ban</p>\n" + "<small>+" + raw + " raw</small>\n" + "<p>" + pending + " ban pending</p>" + $0d2e77df16cef4ac$var$historyGenerator(history);
+    new (0, (/*@__PURE__*/$parcel$interopDefault($bbc0b920ee7945e8$exports)))(document.getElementById("infoModal")).show();
+}
+function $0d2e77df16cef4ac$var$historyGenerator(history) {
+    let string = "";
+    for (const [_, transaction] of Object.entries(history.history))string += "<div class='card mb-2 bg-dark " + (transaction.type == "send" ? "sent" : "received") + "'><div class='card-body text-truncate'>" + (transaction.type == "send" ? "Sent " : "Received ") + $1aee3c8d4d72086d$exports.getBananoPartsFromRaw(transaction.amount).banano + " ban " + (transaction.type == "send" ? "to" : "from") + ": " + transaction.account + "</div></div>\n";
+    return string;
 }
 document.getElementById("submitButton").onclick = function() {
     $0d2e77df16cef4ac$var$formHandler();
 };
 async function $0d2e77df16cef4ac$var$getAccountDetails() {
     let account = document.getElementById("textAreaInput").value;
-    let balance = Math.round(await $1aee3c8d4d72086d$exports.getAccountBalanceRaw(account) / 1000000000000000000000000000) / 100;
+    let accountBalance = await $1aee3c8d4d72086d$exports.getAccountBalanceAndPendingRaw(account);
+    let balance = accountBalance.balance;
+    let pending = accountBalance.pending;
+    let bananoParts = $1aee3c8d4d72086d$exports.getBananoPartsFromRaw(balance);
+    [banano, raw] = [
+        bananoParts.banano,
+        bananoParts.raw
+    ];
+    let bananoPending = $1aee3c8d4d72086d$exports.getBananoPartsFromRaw(pending).banano;
+    let history = await $1aee3c8d4d72086d$exports.getAccountHistory(account, 100);
     return [
         account,
-        balance
+        banano,
+        raw,
+        bananoPending,
+        history
     ];
 }
 

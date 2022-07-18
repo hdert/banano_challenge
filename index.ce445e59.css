@@ -724,6 +724,36 @@ textarea.form-control-lg {
   opacity: 0;
 }
 
+.card {
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid #00000020;
+  border-radius: .25rem;
+  flex-direction: column;
+  display: flex;
+  position: relative;
+}
+
+.card > hr {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.card-body {
+  flex: auto;
+  padding: 1rem;
+}
+
+.alert {
+  border: 1px solid #0000;
+  border-radius: .25rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  position: relative;
+}
+
 .btn-close {
   box-sizing: content-box;
   width: 1em;
@@ -883,6 +913,12 @@ textarea.form-control-lg {
   top: 0;
 }
 
+.text-truncate {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 .overflow-auto {
   overflow: auto !important;
 }
@@ -942,9 +978,19 @@ textarea.form-control-lg {
   color: rgba(var(--bs-primary-rgb), var(--bs-text-opacity)) !important;
 }
 
+.text-light {
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-light-rgb), var(--bs-text-opacity)) !important;
+}
+
 .bg-primary {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.bg-dark {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-gradient {
@@ -961,6 +1007,16 @@ textarea.form-control-lg {
 
 #or {
   font-family: Patua One, cursive;
+}
+
+.sent {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.received {
+  color: #1aca95;
+  border-color: #1aca95;
 }
 
 /*# sourceMappingURL=index.ce445e59.css.map */
