@@ -64,7 +64,7 @@ async function getAccountDetails() {
   let balance = accountBalance.balance;
   let pending = accountBalance.pending;
   let bananoParts = bananojs.getBananoPartsFromRaw(balance);
-  [banano, raw] = [bananoParts.banano, bananoParts.raw];
+  let [banano, raw] = [bananoParts.banano, bananoParts.raw];
   let bananoPending = bananojs.getBananoPartsFromRaw(pending).banano;
   let history = await bananojs.getAccountHistory(account, 100);
   return [account, banano, raw, bananoPending, history];
