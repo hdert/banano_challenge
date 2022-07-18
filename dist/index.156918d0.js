@@ -44700,7 +44700,7 @@ async function $0d2e77df16cef4ac$var$getAccountDetails() {
     let balance = accountBalance.balance;
     let pending = accountBalance.pending;
     let bananoParts = $1aee3c8d4d72086d$exports.getBananoPartsFromRaw(balance);
-    [banano, raw] = [
+    let [banano, raw] = [
         bananoParts.banano,
         bananoParts.raw
     ];
