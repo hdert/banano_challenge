@@ -6,9 +6,9 @@ html(lang="en")
   include ../includes/head.pug
   +head("Banano Challenge", "A website for the Banano Challenge", "../img/bananaCropped.png", "true", "index", "A Cartoon Banana")
   body.min-vh-100.d-flex.flex-column
-    #infoModal.modal.fade 
+    #infoModal.modal.fade
       .modal-dialog
-        .modal-content
+        .modal-content.bg-dark.text-light
           #infoModalHeader.modal-header.text-break
             h5#infoModalHeaderH5.modal-title Account here
             button.btn-close(data-bs-dismiss="modal", aria-label="Close")
