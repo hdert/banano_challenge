@@ -79,16 +79,39 @@ function getTime() {
   let birthdayEnd = dayjs.utc(dayjs.utc().year() + "-04-02T00:00:00-1200");
   let birthdayStart = dayjs.utc(dayjs.utc().year() + "-04-01T00:00:00+1400");
   let message = "placeholder text";
-  if (dayjs.utc() > birthdayEnd) {
+  if (dayjs.utc() > birthdayEnd.utc()) {
     birthdayStart = birthdayStart.utc().year(birthdayStart.utc().year() + 1);
-    message = "Banano's birthday starts " + dayjs.utc().to(birthdayStart);
-  } else if (dayjs.utc() < birthdayStart) {
-    message = "Banano's birthday starts " + dayjs.utc().to(birthdayStart);
+  }
+  if (dayjs.utc() > birthdayEnd.utc() || dayjs.utc() < birthdayStart.utc()) {
+    let days_to_birthday = birthdayStart.utc().diff(dayjs.utc(), "day");
+    let message_inner = "Something's gone wrong";
+    if (!days_to_birthday) {
+      message_inner = "in ";
+    } else {
+      message_inner =
+        "in " + birthdayStart.utc().diff(dayjs.utc(), "day") + " days, ";
+    }
+    message =
+      "Banano's birthday starts " +
+      message_inner +
+      (birthdayStart.utc().diff(dayjs.utc(), "hour") % 24) +
+      " hours, " +
+      (birthdayStart.utc().diff(dayjs.utc(), "minute") % 60) +
+      " minutes, and " +
+      (birthdayStart.utc().diff(dayjs.utc(), "second") % 60) +
+      " seconds!";
   } else {
-    message = "It's Banano's birthday! It ends " + dayjs.utc().to(birthdayEnd);
+    message =
+      "It's Banano's birthday! It ends in " +
+      birthdayEnd.utc().diff(dayjs.utc(), "hour") +
+      " hours, " +
+      (birthdayEnd.utc().diff(dayjs.utc(), "minute") % 60) +
+      " minutes, and " +
+      (birthdayEnd.utc().diff(dayjs.utc(), "second") % 60) +
+      " seconds!";
   }
   document.getElementById("bananoBirthday").innerHTML =
     "<p>" + message + "</p>";
 }
 
-getTime();
+let nIntervId = setInterval(getTime, 1000);
