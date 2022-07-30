@@ -45203,14 +45203,17 @@ function $0d2e77df16cef4ac$var$getTime() {
     let birthdayEnd = (0, (/*@__PURE__*/$parcel$interopDefault($b43e34b233036920$exports))).utc((0, (/*@__PURE__*/$parcel$interopDefault($b43e34b233036920$exports))).utc().year() + "-04-02T00:00:00-1200");
     let birthdayStart = (0, (/*@__PURE__*/$parcel$interopDefault($b43e34b233036920$exports))).utc((0, (/*@__PURE__*/$parcel$interopDefault($b43e34b233036920$exports))).utc().year() + "-04-01T00:00:00+1400");
     let message = "placeholder text";
-    if ((0, (/*@__PURE__*/$parcel$interopDefault($b43e34b233036920$exports))).utc() > birthdayEnd) {
-        birthdayStart = birthdayStart.utc().year(birthdayStart.utc().year() + 1);
-        message = "Banano's birthday starts " + (0, (/*@__PURE__*/$parcel$interopDefault($b43e34b233036920$exports))).utc().to(birthdayStart);
-    } else if ((0, (/*@__PURE__*/$parcel$interopDefault($b43e34b233036920$exports))).utc() < birthdayStart) message = "Banano's birthday starts " + (0, (/*@__PURE__*/$parcel$interopDefault($b43e34b233036920$exports))).utc().to(birthdayStart);
-    else message = "It's Banano's birthday! It ends " + (0, (/*@__PURE__*/$parcel$interopDefault($b43e34b233036920$exports))).utc().to(birthdayEnd);
+    if ((0, (/*@__PURE__*/$parcel$interopDefault($b43e34b233036920$exports))).utc() > birthdayEnd.utc()) birthdayStart = birthdayStart.utc().year(birthdayStart.utc().year() + 1);
+    if ((0, (/*@__PURE__*/$parcel$interopDefault($b43e34b233036920$exports))).utc() > birthdayEnd.utc() || (0, (/*@__PURE__*/$parcel$interopDefault($b43e34b233036920$exports))).utc() < birthdayStart.utc()) {
+        let days_to_birthday = birthdayStart.utc().diff((0, (/*@__PURE__*/$parcel$interopDefault($b43e34b233036920$exports))).utc(), "day");
+        let message_inner = "Something's gone wrong";
+        if (!days_to_birthday) message_inner = "in ";
+        else message_inner = "in " + birthdayStart.utc().diff((0, (/*@__PURE__*/$parcel$interopDefault($b43e34b233036920$exports))).utc(), "day") + " days, ";
+        message = "Banano's birthday starts " + message_inner + birthdayStart.utc().diff((0, (/*@__PURE__*/$parcel$interopDefault($b43e34b233036920$exports))).utc(), "hour") % 24 + " hours, " + birthdayStart.utc().diff((0, (/*@__PURE__*/$parcel$interopDefault($b43e34b233036920$exports))).utc(), "minute") % 60 + " minutes, and " + birthdayStart.utc().diff((0, (/*@__PURE__*/$parcel$interopDefault($b43e34b233036920$exports))).utc(), "second") % 60 + " seconds!";
+    } else message = "It's Banano's birthday! It ends in " + birthdayEnd.utc().diff((0, (/*@__PURE__*/$parcel$interopDefault($b43e34b233036920$exports))).utc(), "hour") + " hours, " + birthdayEnd.utc().diff((0, (/*@__PURE__*/$parcel$interopDefault($b43e34b233036920$exports))).utc(), "minute") % 60 + " minutes, and " + birthdayEnd.utc().diff((0, (/*@__PURE__*/$parcel$interopDefault($b43e34b233036920$exports))).utc(), "second") % 60 + " seconds!";
     document.getElementById("bananoBirthday").innerHTML = "<p>" + message + "</p>";
 }
-$0d2e77df16cef4ac$var$getTime();
+let $0d2e77df16cef4ac$var$nIntervId = setInterval($0d2e77df16cef4ac$var$getTime, 1000);
 
 })();
 //# sourceMappingURL=index.156918d0.js.map
