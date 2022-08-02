@@ -114,4 +114,46 @@ function getTime() {
     "<p>" + message + "</p>";
 }
 
-let nIntervId = setInterval(getTime, 1000);
+function generateSeed() {
+  let uint8 = new Uint8Array(32);
+  let hex_string = "";
+  window.crypto.getRandomValues(uint8);
+  for (let i = 0; i < uint8.length; i++) {
+    let hex = uint8[i].toString(16);
+    if (hex.length === 1) {
+      hex = "0" + hex;
+    }
+    hex_string += hex;
+  }
+  return hex_string;
+}
+
+async function displaySeedAndAccounts() {
+  let seed = generateSeed();
+  let accounts = await getAccounts(seed);
+  let message =
+    "<table class='table table-responsive table-dark mb-0 rounded text-break'><tbody>";
+  message += "<thead><tr><th scope='col'>#</th><th>Account</th></tr></thead>";
+  accounts.forEach(function (item, index) {
+    message +=
+      "<tr><th scope='row'>" + (index + 1) + "</td><td>" + item + "</td></tr>";
+  });
+  message += "</tbody></table>";
+  document.getElementById("infoModalHeaderH5").innerHTML = "Seed: " + seed;
+  document.getElementById("infoModalBody").innerHTML = message;
+
+  new Modal(document.getElementById("infoModal")).show();
+}
+
+async function getAccounts(seed) {
+  let accounts = [];
+  for (let i = 0; i < 5; i++) {
+    accounts.push(await bananojs.getBananoAccountFromSeed(seed, i));
+  }
+  return accounts;
+}
+
+setInterval(getTime, 1000);
+document
+  .getElementById("bananoSeedAndAccounts")
+  .addEventListener("click", displaySeedAndAccounts);
