@@ -40938,10 +40938,10 @@ $parcel$export(module.exports, "IncomingMessage", function () { return $8a0f4aa7
 var $8a0f4aa787c3ef50$export$8e4da25483e314e6;
 var $8a0f4aa787c3ef50$export$9d4333345ffa4fd6;
 
+var $36zFS = parcelRequire("36zFS");
+
 var $gGU47 = parcelRequire("gGU47");
 var $8a0f4aa787c3ef50$require$Buffer = $gGU47.Buffer;
-
-var $36zFS = parcelRequire("36zFS");
 
 var $cihaj = parcelRequire("cihaj");
 
@@ -45213,7 +45213,37 @@ function $0d2e77df16cef4ac$var$getTime() {
     } else message = "It's Banano's birthday! It ends in " + birthdayEnd.utc().diff((0, (/*@__PURE__*/$parcel$interopDefault($b43e34b233036920$exports))).utc(), "hour") + " hours, " + birthdayEnd.utc().diff((0, (/*@__PURE__*/$parcel$interopDefault($b43e34b233036920$exports))).utc(), "minute") % 60 + " minutes, and " + birthdayEnd.utc().diff((0, (/*@__PURE__*/$parcel$interopDefault($b43e34b233036920$exports))).utc(), "second") % 60 + " seconds!";
     document.getElementById("bananoBirthday").innerHTML = "<p>" + message + "</p>";
 }
-let $0d2e77df16cef4ac$var$nIntervId = setInterval($0d2e77df16cef4ac$var$getTime, 1000);
+function $0d2e77df16cef4ac$var$generateSeed() {
+    let uint8 = new Uint8Array(32);
+    let hex_string = "";
+    window.crypto.getRandomValues(uint8);
+    for(let i = 0; i < uint8.length; i++){
+        let hex = uint8[i].toString(16);
+        if (hex.length === 1) hex = "0" + hex;
+        hex_string += hex;
+    }
+    return hex_string;
+}
+async function $0d2e77df16cef4ac$var$displaySeedAndAccounts() {
+    let seed = $0d2e77df16cef4ac$var$generateSeed();
+    let accounts = await $0d2e77df16cef4ac$var$getAccounts(seed);
+    let message = "<table class='table table-responsive table-dark mb-0 rounded text-break'><tbody>";
+    message += "<thead><tr><th scope='col'>#</th><th>Account</th></tr></thead>";
+    accounts.forEach(function(item, index) {
+        message += "<tr><th scope='row'>" + (index + 1) + "</td><td>" + item + "</td></tr>";
+    });
+    message += "</tbody></table>";
+    document.getElementById("infoModalHeaderH5").innerHTML = "Seed: " + seed;
+    document.getElementById("infoModalBody").innerHTML = message;
+    new (0, (/*@__PURE__*/$parcel$interopDefault($bbc0b920ee7945e8$exports)))(document.getElementById("infoModal")).show();
+}
+async function $0d2e77df16cef4ac$var$getAccounts(seed) {
+    let accounts = [];
+    for(let i = 0; i < 5; i++)accounts.push(await $1aee3c8d4d72086d$exports.getBananoAccountFromSeed(seed, i));
+    return accounts;
+}
+setInterval($0d2e77df16cef4ac$var$getTime, 1000);
+document.getElementById("bananoSeedAndAccounts").addEventListener("click", $0d2e77df16cef4ac$var$displaySeedAndAccounts);
 
 })();
 //# sourceMappingURL=index.156918d0.js.map

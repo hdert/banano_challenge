@@ -40589,10 +40589,10 @@ $7a9bf2bb2f842366$var$http.METHODS = [
 });
 parcelRequire.register("dglJV", function(module, exports) {
 
-var $bpTvk = parcelRequire("bpTvk");
-
 var $aimqm = parcelRequire("aimqm");
 var $9a7da206aaf453d1$require$Buffer = $aimqm.Buffer;
+
+var $bpTvk = parcelRequire("bpTvk");
 
 var $25GWf = parcelRequire("25GWf");
 
@@ -40937,10 +40937,10 @@ $parcel$export(module.exports, "IncomingMessage", function () { return $8a7aa23e
 var $8a7aa23ec4b129bd$export$8e4da25483e314e6;
 var $8a7aa23ec4b129bd$export$9d4333345ffa4fd6;
 
-var $bpTvk = parcelRequire("bpTvk");
-
 var $aimqm = parcelRequire("aimqm");
 var $8a7aa23ec4b129bd$require$Buffer = $aimqm.Buffer;
+
+var $bpTvk = parcelRequire("bpTvk");
 
 var $25GWf = parcelRequire("25GWf");
 
@@ -45212,7 +45212,37 @@ function $20b690834064e5ca$var$getTime() {
     } else message = "It's Banano's birthday! It ends in " + birthdayEnd.utc().diff((0, (/*@__PURE__*/$parcel$interopDefault($79983f351c57b2d3$exports))).utc(), "hour") + " hours, " + birthdayEnd.utc().diff((0, (/*@__PURE__*/$parcel$interopDefault($79983f351c57b2d3$exports))).utc(), "minute") % 60 + " minutes, and " + birthdayEnd.utc().diff((0, (/*@__PURE__*/$parcel$interopDefault($79983f351c57b2d3$exports))).utc(), "second") % 60 + " seconds!";
     document.getElementById("bananoBirthday").innerHTML = "<p>" + message + "</p>";
 }
-let $20b690834064e5ca$var$nIntervId = setInterval($20b690834064e5ca$var$getTime, 1000);
+function $20b690834064e5ca$var$generateSeed() {
+    let uint8 = new Uint8Array(32);
+    let hex_string = "";
+    window.crypto.getRandomValues(uint8);
+    for(let i = 0; i < uint8.length; i++){
+        let hex = uint8[i].toString(16);
+        if (hex.length === 1) hex = "0" + hex;
+        hex_string += hex;
+    }
+    return hex_string;
+}
+async function $20b690834064e5ca$var$displaySeedAndAccounts() {
+    let seed = $20b690834064e5ca$var$generateSeed();
+    let accounts = await $20b690834064e5ca$var$getAccounts(seed);
+    let message = "<table class='table table-responsive table-dark mb-0 rounded text-break'><tbody>";
+    message += "<thead><tr><th scope='col'>#</th><th>Account</th></tr></thead>";
+    accounts.forEach(function(item, index) {
+        message += "<tr><th scope='row'>" + (index + 1) + "</td><td>" + item + "</td></tr>";
+    });
+    message += "</tbody></table>";
+    document.getElementById("infoModalHeaderH5").innerHTML = "Seed: " + seed;
+    document.getElementById("infoModalBody").innerHTML = message;
+    new (0, (/*@__PURE__*/$parcel$interopDefault($6113053a03963448$exports)))(document.getElementById("infoModal")).show();
+}
+async function $20b690834064e5ca$var$getAccounts(seed) {
+    let accounts = [];
+    for(let i = 0; i < 5; i++)accounts.push(await $52cba5f557d8a2d6$exports.getBananoAccountFromSeed(seed, i));
+    return accounts;
+}
+setInterval($20b690834064e5ca$var$getTime, 1000);
+document.getElementById("bananoSeedAndAccounts").addEventListener("click", $20b690834064e5ca$var$displaySeedAndAccounts);
 
 
 //# sourceMappingURL=index.b1b7f826.js.map
