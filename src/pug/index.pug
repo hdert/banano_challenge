@@ -39,31 +39,31 @@ html(lang="en")
               onsubmit="return formHandler()"
             ) Submit
           h1.text-wrap.w-100.text-center.text-primary OR
-          p.text-primary.text-center Guess the price of banano at specific point in time!
+          p.text-primary.text-center Guess the price of banano on a specific day!
           .input-group.mb-2.d-none.d-sm-flex
-            input#datetimeInput.form-control.col-12(
-              type="datetime-local",
-              onblur="document.getElementById('datetimeInputSmall').value = this.value",
-              aria-label="Date and Time Guess"
+            input#dateInput.form-control.col-12(
+              type="date",
+              onblur="document.getElementById('dateInputSmall').value = this.value",
+              aria-label="Date Time Guess"
             )
-            span.input-group-text $
+            span.input-group-text ¢
             input#priceGuessInput.form-control(
               type="number",
               onblur="document.getElementById('priceGuessInputSmall').value = this.value",
-              placeholder="0.00",
+              placeholder="0",
               aria-label="Guess in USD"
             )
             button#guessSubmitButton.btn.btn-outline-primary(
               type="button",
               onsubmit="return checkGuess()"
             ) Submit
-          input#datetimeInputSmall.form-control.col-12.d-flex.d-sm-none(
-            type="datetime-local",
-            onblur="document.getElementById('datetimeInput').value = this.value",
-            aria-label="Date and Time Guess"
+          input#dateInputSmall.form-control.col-12.d-flex.d-sm-none(
+            type="date",
+            onblur="document.getElementById('dateInput').value = this.value",
+            aria-label="Date Guess"
           )
           .input-group.mb-2.d-flex.d-sm-none
-            span.input-group-text $
+            span.input-group-text ¢
             input#priceGuessInputSmall.form-control(
               type="number",
               onblur="document.getElementById('priceGuessInput').value = this.value",
@@ -74,6 +74,7 @@ html(lang="en")
               type="button",
               onsubmit="return checkGuess()"
             ) Submit
+          #priceGuess.text-primary.text-center.w-100
           h1.text-primary OR
           #bananoSeedAndAccounts.text-primary.mt-3.col-12.text-center.col-12
             button.btn.btn-outline-primary Click here for a banano account
