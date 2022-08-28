@@ -424,9 +424,9 @@ progress {
   flex: none;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 768px) {
 
-  .col-sm-8 {
+  .col-md-8 {
     width: 66.6667%;
     flex: none;
   }
@@ -626,40 +626,8 @@ progress {
   background-color: #dde0e3;
 }
 
-.form-control-lg {
-  min-height: calc(1.5em + 1rem + 2px);
-  border-radius: .3rem;
-  padding: .5rem 1rem;
-  font-size: 1.25rem;
-}
-
-.form-control-lg::-webkit-file-upload-button {
-  margin: -.5rem -1rem;
-  -webkit-margin-end: 1rem;
-          margin-inline-end: 1rem;
-  padding: .5rem 1rem;
-}
-
-.form-control-lg::file-selector-button {
-  margin: -.5rem -1rem;
-  -webkit-margin-end: 1rem;
-          margin-inline-end: 1rem;
-  padding: .5rem 1rem;
-}
-
-.form-control-lg::-webkit-file-upload-button {
-  margin: -.5rem -1rem;
-  -webkit-margin-end: 1rem;
-          margin-inline-end: 1rem;
-  padding: .5rem 1rem;
-}
-
 textarea.form-control {
   min-height: calc(1.5em + .75rem + 2px);
-}
-
-textarea.form-control-lg {
-  min-height: calc(1.5em + 1rem + 2px);
 }
 
 .input-group {
@@ -688,6 +656,21 @@ textarea.form-control-lg {
 
 .input-group .btn:focus {
   z-index: 3;
+}
+
+.input-group-text {
+  color: #212529;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #e9ecef;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  align-items: center;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  display: flex;
 }
 
 .input-group:not(.has-validation) > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu) {
@@ -988,6 +971,14 @@ textarea.form-control-lg {
   display: flex !important;
 }
 
+.d-none {
+  display: none !important;
+}
+
+.w-100 {
+  width: 100% !important;
+}
+
 .h-100 {
   height: 100% !important;
 }
@@ -1037,6 +1028,10 @@ textarea.form-control-lg {
   text-align: center !important;
 }
 
+.text-wrap {
+  white-space: normal !important;
+}
+
 .text-break {
   word-wrap: break-word !important;
   word-break: break-word !important;
@@ -1072,6 +1067,17 @@ textarea.form-control-lg {
 
 .visible {
   visibility: visible !important;
+}
+
+@media (min-width: 576px) {
+
+  .d-sm-flex {
+    display: flex !important;
+  }
+
+  .d-sm-none {
+    display: none !important;
+  }
 }
 
 #mainContainer {

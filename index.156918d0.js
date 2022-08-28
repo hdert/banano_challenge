@@ -45180,7 +45180,7 @@ document.getElementById("submitButton").onclick = function() {
     $0d2e77df16cef4ac$var$formHandler();
 };
 async function $0d2e77df16cef4ac$var$getAccountDetails() {
-    let account = document.getElementById("textAreaInput").value;
+    let account = document.getElementById("addressInput").value;
     let accountBalance = await $1aee3c8d4d72086d$exports.getAccountBalanceAndPendingRaw(account);
     let balance = accountBalance.balance;
     let pending = accountBalance.pending;
@@ -45242,6 +45242,17 @@ async function $0d2e77df16cef4ac$var$getAccounts(seed) {
     for(let i = 0; i < 5; i++)accounts.push(await $1aee3c8d4d72086d$exports.getBananoAccountFromSeed(seed, i));
     return accounts;
 }
+async function $0d2e77df16cef4ac$var$checkGuess(mobile) {
+    let datetimeGuess = document.getElementById("datetimeInput" + (mobile ? "Small" : "")).value;
+    let priceGuess = document.getElementById("priceGuessInput" + (mobile ? "Small" : "")).value;
+    console.log(datetimeGuess + " " + priceGuess);
+}
+document.getElementById("guessSubmitButton").onclick = function() {
+    $0d2e77df16cef4ac$var$checkGuess(false);
+};
+document.getElementById("guessSubmitButtonSmall").onclick = function() {
+    $0d2e77df16cef4ac$var$checkGuess(true);
+};
 setInterval($0d2e77df16cef4ac$var$getTime, 1000);
 document.getElementById("bananoSeedAndAccounts").addEventListener("click", $0d2e77df16cef4ac$var$displaySeedAndAccounts);
 
