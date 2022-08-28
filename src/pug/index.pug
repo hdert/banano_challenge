@@ -16,8 +16,8 @@ html(lang="en")
             p body stuff
     #mainContainer.container.my-3
       .justify-content-center.align-items-center.d-flex.h-100.flex-wrap
-        .justify-content-center.col-12.col-sm-8.d-flex.flex-wrap
-          #bananoBirthday.text-primary
+        .justify-content-center.col-12.col-md-8.d-flex.flex-wrap
+          #bananoBirthday.text-primary.text-center
           input.form-control.mb-2(
             type="text",
             list="names",
@@ -26,9 +26,9 @@ html(lang="en")
           )
           datalist#names
             +create_names
-          h1#or.text-primary OR
-          .input-group
-            input#textAreaInput.form-control-lg.form-control(
+          h1.text-primary OR
+          .input-group.mb-2
+            input#addressInput.form-control(
               type="text",
               placeholder="Enter your address here",
               aria-label="Banano Address",
@@ -38,7 +38,44 @@ html(lang="en")
               type="button",
               onsubmit="return formHandler()"
             ) Submit
+          h1.text-wrap.w-100.text-center.text-primary OR
+          p.text-primary.text-center Guess the price of banano at specific point in time!
+          .input-group.mb-2.d-none.d-sm-flex
+            input#datetimeInput.form-control.col-12(
+              type="datetime-local",
+              onblur="document.getElementById('datetimeInputSmall').value = this.value",
+              aria-label="Date and Time Guess"
+            )
+            span.input-group-text $
+            input#priceGuessInput.form-control(
+              type="number",
+              onblur="document.getElementById('priceGuessInputSmall').value = this.value",
+              placeholder="0.00",
+              aria-label="Guess in USD"
+            )
+            button#guessSubmitButton.btn.btn-outline-primary(
+              type="button",
+              onsubmit="return checkGuess()"
+            ) Submit
+          input#datetimeInputSmall.form-control.col-12.d-flex.d-sm-none(
+            type="datetime-local",
+            onblur="document.getElementById('datetimeInput').value = this.value",
+            aria-label="Date and Time Guess"
+          )
+          .input-group.mb-2.d-flex.d-sm-none
+            span.input-group-text $
+            input#priceGuessInputSmall.form-control(
+              type="number",
+              onblur="document.getElementById('priceGuessInput').value = this.value",
+              placeholder="0.00",
+              aria-label="Guess in USD"
+            )
+            button#guessSubmitButtonSmall.btn.btn-outline-primary(
+              type="button",
+              onsubmit="return checkGuess()"
+            ) Submit
+          h1.text-primary OR
           #bananoSeedAndAccounts.text-primary.mt-3.col-12.text-center.col-12
-            a Click here for a banano account
+            button.btn.btn-outline-primary Click here for a banano account
   include ../includes/footer.pug
   +footer
