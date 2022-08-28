@@ -5,8 +5,12 @@ import Modal from "bootstrap/js/dist/modal";
 import dayjs from "dayjs";
 var utc = require("dayjs/plugin/utc");
 var relativeTime = require("dayjs/plugin/relativeTime");
+var isSameOrAfter = require("dayjs/plugin/isSameOrAfter");
 dayjs.extend(utc);
 dayjs.extend(relativeTime);
+dayjs.extend(isSameOrAfter);
+const CoinGecko = require("coingecko-api");
+const CoinGeckoClient = new CoinGecko();
 
 import "bootstrap/js/dist/alert";
 import "bootstrap/js/dist/button";
@@ -154,13 +158,66 @@ async function getAccounts(seed) {
 }
 
 async function checkGuess(mobile) {
-  let datetimeGuess = document.getElementById(
-    "datetimeInput" + (mobile ? "Small" : "")
+  let textBox = document.getElementById("priceGuess");
+
+  let dateGuess = document.getElementById(
+    "dateInput" + (mobile ? "Small" : "")
   ).value;
+  if (!dateGuess) {
+    textBox.innerHTML = "Please enter a date";
+    return;
+  }
+  dateGuess = dayjs(dateGuess);
+  dateGuess = dateGuess.add(1, "d");
+  if (dateGuess.isSameOrAfter(dayjs())) {
+    textBox.innerHTML = "Please enter a date that is in the past";
+    return;
+  }
+
   let priceGuess = document.getElementById(
     "priceGuessInput" + (mobile ? "Small" : "")
   ).value;
-  console.log(datetimeGuess + " " + priceGuess);
+  if (priceGuess <= 0) {
+    textBox.innerHTML = "Please enter a guess higher than zero";
+    return;
+  }
+  priceGuess = Math.round(priceGuess * Math.pow(10, 5)) / Math.pow(10, 5);
+
+  let data = await CoinGeckoClient.coins.fetchHistory("banano", {
+    date: dateGuess.format("DD-MM-YYYY"),
+    localization: false,
+  });
+  if (!data.data.market_data) {
+    textBox.innerHTML =
+      "Error: No Data: Date too old, please enter a newer date";
+    return;
+  }
+  let price =
+    Math.round(
+      data.data.market_data.current_price.usd * 100 * Math.pow(10, 5)
+    ) / Math.pow(10, 5);
+
+  if (priceGuess > price) {
+    textBox.innerHTML =
+      "Your guess of ¢" +
+      priceGuess +
+      " was ¢" +
+      Math.round((priceGuess - price) * Math.pow(10, 5)) / Math.pow(10, 5) +
+      " higher than the actual price of ¢" +
+      price;
+  } else if (priceGuess < price) {
+    textBox.innerHTML =
+      "Your guess of ¢" +
+      priceGuess +
+      " was ¢" +
+      Math.round((price - priceGuess) * Math.pow(10, 5)) / Math.pow(10, 5) +
+      " lower than the actual price of ¢" +
+      price;
+  } else if (priceGuess == price) {
+    textBox.innerHTML = "Your guess of $" + priceGuess + " was correct!";
+  } else {
+    textBox.innerHTML = "Your guess was invalid";
+  }
 }
 
 document.getElementById("guessSubmitButton").onclick = function () {
