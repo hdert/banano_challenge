@@ -44,13 +44,13 @@ html(lang="en")
             input#dateInput.form-control.col-12(
               type="date",
               onblur="document.getElementById('dateInputSmall').value = this.value",
-              aria-label="Date Time Guess"
+              aria-label="Date Guess"
             )
             span.input-group-text ¢
             input#priceGuessInput.form-control(
               type="number",
               onblur="document.getElementById('priceGuessInputSmall').value = this.value",
-              placeholder="0",
+              placeholder="0.00",
               aria-label="Guess in USD"
             )
             button#guessSubmitButton.btn.btn-outline-primary(
