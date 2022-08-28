@@ -1024,6 +1024,10 @@ textarea.form-control {
   margin-bottom: .5rem !important;
 }
 
+.text-end {
+  text-align: right !important;
+}
+
 .text-center {
   text-align: center !important;
 }
@@ -1077,6 +1081,13 @@ textarea.form-control {
 
   .d-sm-none {
     display: none !important;
+  }
+}
+
+@media (min-width: 992px) {
+
+  .justify-content-lg-between {
+    justify-content: space-between !important;
   }
 }
 
