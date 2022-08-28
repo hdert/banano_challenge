@@ -9,8 +9,6 @@ var isSameOrAfter = require("dayjs/plugin/isSameOrAfter");
 dayjs.extend(utc);
 dayjs.extend(relativeTime);
 dayjs.extend(isSameOrAfter);
-const CoinGecko = require("coingecko-api");
-const CoinGeckoClient = new CoinGecko();
 
 import "bootstrap/js/dist/alert";
 import "bootstrap/js/dist/button";
@@ -183,19 +181,20 @@ async function checkGuess(mobile) {
   }
   priceGuess = Math.round(priceGuess * Math.pow(10, 5)) / Math.pow(10, 5);
 
-  let data = await CoinGeckoClient.coins.fetchHistory("banano", {
-    date: dateGuess.format("DD-MM-YYYY"),
-    localization: false,
-  });
-  if (!data.data.market_data) {
+  const response = await fetch(
+    "https://api.coingecko.com/api/v3/coins/banano/history?date=" +
+      dateGuess.format("DD-MM-YYYY") +
+      "&localization=false"
+  );
+  let data = await response.json();
+  if (!data.market_data) {
     textBox.innerHTML =
       "Error: No Data: Date too old, please enter a newer date";
     return;
   }
   let price =
-    Math.round(
-      data.data.market_data.current_price.usd * 100 * Math.pow(10, 5)
-    ) / Math.pow(10, 5);
+    Math.round(data.market_data.current_price.usd * 100 * Math.pow(10, 5)) /
+    Math.pow(10, 5);
 
   if (priceGuess > price) {
     textBox.innerHTML =
