@@ -64,7 +64,7 @@ document.getElementById("submitButton").onclick = function () {
 };
 
 async function getAccountDetails() {
-  let account = document.getElementById("textAreaInput").value;
+  let account = document.getElementById("addressInput").value;
   let accountBalance = await bananojs.getAccountBalanceAndPendingRaw(account);
   let balance = accountBalance.balance;
   let pending = accountBalance.pending;
@@ -152,6 +152,23 @@ async function getAccounts(seed) {
   }
   return accounts;
 }
+
+async function checkGuess(mobile) {
+  let datetimeGuess = document.getElementById(
+    "datetimeInput" + (mobile ? "Small" : "")
+  ).value;
+  let priceGuess = document.getElementById(
+    "priceGuessInput" + (mobile ? "Small" : "")
+  ).value;
+  console.log(datetimeGuess + " " + priceGuess);
+}
+
+document.getElementById("guessSubmitButton").onclick = function () {
+  checkGuess(false);
+};
+document.getElementById("guessSubmitButtonSmall").onclick = function () {
+  checkGuess(true);
+};
 
 setInterval(getTime, 1000);
 document
